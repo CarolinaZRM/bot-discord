@@ -10,13 +10,12 @@ def readToken():
 
 def validateAdmins():
     admins = []
-    file = open("counselors","r")
-    lines = file.readlines()
-    for counselor in lines:
-        admins.append(counselor)
+    file = open("counselors.txt","r")
+    for counselor in file:
+        admins.append(counselor.rstrip())
     return admins
 
-valid_users = validateAdmins()  # list with the counselors to mamage the server
+valid_users = validateAdmins()  # list with the counselors to manage the server
 token = readToken()
 client = discord.Client()
 
@@ -39,10 +38,10 @@ async def update_stats():
 
 @client.event
 async def on_message(message):
-    global messages
+    global messages, valid_users
     messages += 1
     id = client.get_guild(id_num)
-    channels = ["test"]
+    channels = ["test","general"]
     bad_words = ["cabron","cabrona","mamabicho","puta","puto","pendejo","pendeja","fuck","shit","motherfucker","bellaco","bellaca","wlb","bicho","cb"]
 
 
@@ -54,10 +53,22 @@ async def on_message(message):
             await message.channel.send(f"""{author} said a bad word, deleting message""")
 
     if str(message.channel) in channels and str(message.author) in valid_users:  #commands for admins and student counselors
+        #ADD if message.content == !COMMAND: to add new commands
         if message.content == "!users":
             await message.channel.send(f"""Number of Members: {id.member_count}""")
 
-    elif "/" in message.content and ("admin" not in message.author.roles or "studentCounselor" not in message.author.roles):  #commands for prepas
+        if message.content == "!help":
+            embed = discord.Embed(title="Bot Commands for Prepas",description="Useful commands for prepas to ask the bot")
+            embed.add_field(name="/curriculo YOUR_DEPT", value="Gives the prepa the curriculum they request (INEL/ICOM/INSO/CIIC)")
+            embed.add_field(name="/map", value="Gives the prepa a map of UPRM")
+            embed.add_field(name="/links", value="Gives the prepa a PDF with all the important links of UPRM")
+            embed.add_field(name="/emails", value="Gives prepa a PDF with some important emails they can use")
+            embed.add_field(name="/office YOUR_DEPT", value="Tells the prepa what their dept office number is (INEL/ICOM or INSO/CIIC)")
+            await message.author.send(content=None, embed=embed)
+
+
+    elif "/" in message.content and str(message.author) not in valid_users:  #commands for prepas
+        #ADD if /COMMAND in message.content: to add new commands
         if "/help" in message.content:
             embed = discord.Embed(title="Bot Commands for Prepas",description="Useful commands for prepas to ask the bot")
             embed.add_field(name="/curriculo YOUR_DEPT",value="Gives the prepa the curriculum they request (INEL/ICOM/INSO/CIIC)")
@@ -73,6 +84,7 @@ async def on_message(message):
         if "!" in message.content:
             print(f"""User: {message.author.nick} tried to do command {message.content}, in channel {message.channel}""")
             await message.channel.send("No eres Made ni un Estudiante Orientador para realizar estos comandos")
+
 
 
 @client.event
