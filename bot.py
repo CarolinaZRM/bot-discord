@@ -24,36 +24,35 @@ client = discord.Client()
 async def on_message(message):
     id = client.get_guild(id_num)
     channels = ["test"]
-    if str(message.channel) in channels and str(message.author) in valid_users:
-        # if message.content.find("!ping") != -1: TEST COMMAND
-        #     await message.channel.send("pong!")
+    if str(message.channel) in channels and str(message.author) in valid_users:  #commands for admins and student counselors
         if message.content == "!users":
             await message.channel.send(f"""Number of Members: {id.member_count}""")
-    else:
-        print(f"""User: {message.author} tired to do command {message.content}, in channel {message.channel}""")
 
-@client.event
-async def on_member_update(before, after):
-    nickname = after.nick
-    if nickname:
-        if nickname.lower().count("tim") > 0:
-            last = before.nick
-            if last:
-                await after.edit(nick=last)
-            else:
-                await after.edit(nick="Invalid Nickname Change")
+    elif "/" in message.content and ("admin" not in message.author.roles or "studentCounselor" not in message.author.roles):  #commands for prepas
+        print(f"""{message.author.nick} requested something""")
+        await message.channel.send("Prepa Requested Something")
+
+    else:  #Prepa tried and admin command
+        if "!" in message.content:
+            print(f"""User: {message.author.nick} tried to do command {message.content}, in channel {message.channel}""")
+            await message.channel.send("No eres Made ni un Estudiante Orientador para realizar estos comandos")
 
 
 @client.event
 async def on_member_join(member: discord.Member):
-    await member.send(f"""Welcome to the server {member.name}!""")
-    await member.send("Please enter your full name: ")
+    #Greets you to server
+    await member.send(f"""Welcome to URPM {member.name}!""")
+    await member.send("Please give me your full name so we know who you are in the server!")
 
     def check(m):  # checks if message was sent by someone other than the bot
             return m.author != client.user
 
-    name = await client.wait_for("message",check=check)
+    #Extracts the name of the student from the DM
+    name = await client.wait_for("message", check=check)
+    #Replacses their old name to the one they provided in the DM to the bot
+    print(f"""{name.author}'s nickname was changed to {name.content}""")
     await member.edit(nick=str(name.content))
+
 
 
 client.run(token)
