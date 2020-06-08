@@ -32,12 +32,33 @@ async def on_message(message):
     else:
         print(f"""User: {message.author} tired to do command {message.content}, in channel {message.channel}""")
 
+# @client.event
+# async def on_member_update(before, after):
+#     nickname = after.nick
+#     if nickname:
+#         if nickname.lower().count("tim") > 0:
+#             last = before.nick
+#             if last:
+#                 await after.edit(nick=last)
+#             else:
+#                 await after.edit(nick="Invalid Nickname Change")
+
+
+
 @client.event
 async def on_member_join(member):
-    for channel in member.guild.channels:
-        if str(channel) == "general":
-            await channel.send(f"""Welcome to he server {member.mention}!""")
+        await member.send(f"""Welcome to the server {member.name}!""")
+        await member.send("Please enter your full name: ")
+        @client.event
+        async def on_message(msg):
+            await client.user.edit(nick=msg.content)
+
+
 client.run(token)
 
-
+#every time a prepa joins the server, we ask the prepa for his name
+#this name will be stored in a map that will hold all of our prepa's info
+#map<K,V>; K=USERNAME, V=NAME
+#iterate thru every prepa in map as tuple:
+#    await msg.author.edit(nick=f"""{prepa.get_value()}""")
 
