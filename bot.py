@@ -23,7 +23,7 @@ client = discord.Client()
 async def on_message(message):
     id = client.get_guild(id_num)
     channels = ["test","general"]
-    bad_words = ["cabron","cabrona","mamabicho","puta","puto","pendejo","pendeja","fuck","shit","motherfucker","bellaco","bellaca","wlb","bicho","cb"]
+    bad_words = ["cabron","cabrona","mamabicho","puta","puto","pendejo","pendeja","fuck","shit","motherfucker","bellaco","bellaca","wlb","bicho","cb","beber"]
 
 
     for word in bad_words: #If someone says a profanity, remove it and expose who it was
