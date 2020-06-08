@@ -1,7 +1,6 @@
-import discord, time, asyncio
-id_num = 718911269813485568
-messages = joined = 0
+import discord, os
 
+id_num = 718911269813485568
 
 def readToken():
     f = open("token.txt", "r")
@@ -19,27 +18,9 @@ valid_users = validateAdmins()  # list with the counselors to manage the server
 token = readToken()
 client = discord.Client()
 
-async def update_stats():
-    await client.wait_until_ready()
-    global messages, joined
-
-    while not client.is_closed(): #while bot is running
-        try:
-           with open("stats.txt","a") as stats:
-               stats.write(f"""Time: {int(time.time())}, Messages: {messages}, Members Joined: {joined}\n""")
-           messages = 0
-           joined = 0
-
-           await asyncio.sleep(60)
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(60)
-
 
 @client.event
 async def on_message(message):
-    global messages, valid_users
-    messages += 1
     id = client.get_guild(id_num)
     channels = ["test","general"]
     bad_words = ["cabron","cabrona","mamabicho","puta","puto","pendejo","pendeja","fuck","shit","motherfucker","bellaco","bellaca","wlb","bicho","cb"]
@@ -52,7 +33,7 @@ async def on_message(message):
             print(f"""{author} said a bad word, deleting message""")
             await message.channel.send(f"""{author} said a bad word, deleting message""")
 
-    if str(message.channel) in channels and str(message.author) in valid_users:  #commands for admins and student counselors
+    if "!" in message.content and str(message.channel) in channels and str(message.author) in valid_users:  #commands for admins and student counselors
         #ADD if message.content == !COMMAND: to add new commands
         if message.content == "!users":
             await message.channel.send(f"""Number of Members: {id.member_count}""")
@@ -69,7 +50,7 @@ async def on_message(message):
 
     elif "/" in message.content and str(message.author) not in valid_users:  #commands for prepas
         #ADD if /COMMAND in message.content: to add new commands
-        if "/help" in message.content:
+        if "/help" in message.content.lower():
             embed = discord.Embed(title="Bot Commands for Prepas",description="Useful commands for prepas to ask the bot")
             embed.add_field(name="/curriculo YOUR_DEPT",value="Gives the prepa the curriculum they request (INEL/ICOM/INSO/CIIC)")
             embed.add_field(name="/map",value="Gives the prepa a map of UPRM")
@@ -77,20 +58,32 @@ async def on_message(message):
             embed.add_field(name="/emails", value="Gives prepa a PDF with some important emails they can use")
             embed.add_field(name="/office YOUR_DEPT", value="Tells the prepa what their dept office number is (INEL/ICOM or INSO/CIIC)")
             await message.channel.send(content=None, embed=embed)
+
+        if "/curriculo" in message.content.lower(): #Asked for curriculum
+            split = message.content.split(" ")
+            if not split[1]:
+                message.channel.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
+            else:
+                if split[1].upper() == "INEL":
+                    await message.channel.send("Electrical Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/INEL.pdf"))
+                if split[1].upper() == "ICOM":
+                    await message.channel.send("Computer Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/ICOM.pdf"))
+                if split[1].upper() == "INSO":
+                    await message.channel.send("Software Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/INSO.pdf"))
+                if split[1].upper() == "CIIC":
+                    await message.channel.send("Computer Science & Engineering Curriculum:")
+                    #await message.channel.send(file=discord.File("res/curriculos/CIIC.pdf")) for when CIIC curriculum is updated
+                    await message.channel.send("https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/")
+
         print(f"""{message.author.nick} requested something""")
         await message.channel.send("Prepa Requested Something")
-
-    else:  #Prepa tried and admin command
-        if "!" in message.content:
-            print(f"""User: {message.author.nick} tried to do command {message.content}, in channel {message.channel}""")
-            await message.channel.send("No eres Made ni un Estudiante Orientador para realizar estos comandos")
-
 
 
 @client.event
 async def on_member_join(member: discord.Member):
-    global joined
-    joined += 1
     #Greets you to server
     await member.send(f"""Welcome to URPM {member.name}!""")
     await member.send("Please give me your full name so we know who you are in the server!")
@@ -100,11 +93,12 @@ async def on_member_join(member: discord.Member):
 
     #Extracts the name of the student from the DM
     name = await client.wait_for("message", check=check)
-    #Replacses their old name to the one they provided in the DM to the bot
+    #Replaces their old name to the one they provided in the DM to the bot
     print(f"""{name.author}'s nickname was changed to {name.content}""")
     await member.edit(nick=str(name.content))
 
-client.loop.create_task(update_stats())
+
+
 client.run(token)
 
 
