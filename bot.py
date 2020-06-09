@@ -47,6 +47,25 @@ async def on_message(message):
             embed.add_field(name="/office YOUR_DEPT", value="Tells the prepa what their dept office number is (INEL/ICOM or INSO/CIIC)")
             await message.author.send(content=None, embed=embed)
 
+        if "!curriculo" in message.content.lower(): #Asked for curriculum
+            split = message.content.split(" ")
+            if not split[1]:
+                message.channel.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
+            else:
+                if split[1].upper() == "INEL":
+                    await message.channel.send("Electrical Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/INEL.pdf"))
+                if split[1].upper() == "ICOM":
+                    await message.channel.send("Computer Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/ICOM.pdf"))
+                if split[1].upper() == "INSO":
+                    await message.channel.send("Software Engineering Curriculum:")
+                    await message.channel.send(file=discord.File("res/curriculos/INSO.pdf"))
+                if split[1].upper() == "CIIC":
+                    await message.channel.send("Computer Science & Engineering Curriculum:")
+                    #await message.channel.send(file=discord.File("res/curriculos/CIIC.pdf")) for when CIIC curriculum is updated
+                    await message.channel.send("https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/")
+
 
     elif "/" in message.content and str(message.author) not in valid_users:  #commands for prepas
         #ADD if /COMMAND in message.content: to add new commands
