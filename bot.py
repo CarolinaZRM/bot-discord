@@ -1,28 +1,44 @@
-import discord, os
+import discord
+client = discord.Client()
+client_id_num = 718911269813485568
+guild_id_num = 718624993470316554
 
-id_num = 718911269813485568
+
 
 def readToken():
     f = open("token.txt", "r")
     lines = f.readlines()
     return lines[0].strip()
 
+def extractAdmins():
+    f = open("counselors.txt", "w")
+    guild = client.get_guild(718624993470316554)
+    for member in guild.members:
+        for role in member.roles:
+            if role.name == "@EstudianteOrientador":
+                f.write(str(member) + '\n')
+
+    f.close()
+
+
 def validateAdmins():
     admins = []
     file = open("counselors.txt","r")
     for counselor in file:
-        admins.append(counselor.rstrip())
+         admins.append(counselor.rstrip())
+    file.close()
     return admins
 
-valid_users = validateAdmins()  # list with the counselors to manage the server
 token = readToken()
-client = discord.Client()
-
+client.run(token)
+extractAdmins()
+valid_users = validateAdmins()  # list with the counselors to manage the server
 
 @client.event
 async def on_message(message):
-    id = client.get_guild(id_num)
-    channels = ["test","general"]
+    id = client.get_guild(guild_id_num)
+    admin_channels = ["counselors","admins","general"]
+    prepa_channels = ["general"]
     bad_words = ["cabron","cabrona","mamabicho","puta","puto","pendejo","pendeja","fuck","shit","motherfucker","bellaco","bellaca","wlb","bicho","cb","beber"]
 
 
@@ -33,7 +49,7 @@ async def on_message(message):
             print(f"""{author} said a bad word, deleting message""")
             await message.channel.send(f"""{author} said a bad word, deleting message""")
 
-    if "!" in message.content and str(message.channel) in channels and str(message.author) in valid_users:  #commands for admins and student counselors
+    if "!" in message.content and str(message.channel) in admin_channels and str(message.author) in valid_users:  #commands for admins and student counselors
         #ADD if message.content == !COMMAND: to add new commands
         if message.content == "!users":
             await message.channel.send(f"""Number of Members: {id.member_count}""")
@@ -67,7 +83,7 @@ async def on_message(message):
                     await message.channel.send("https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/")
 
 
-    elif "/" in message.content and str(message.author) not in valid_users:  #commands for prepas
+    elif "/" in message.content and str(message.channel) in prepa_channels and str(message.author) not in valid_users:  #commands for prepas
         #ADD if /COMMAND in message.content: to add new commands
         if "/help" in message.content.lower():
             embed = discord.Embed(title="Bot Commands for Prepas",description="Useful commands for prepas to ask the bot")
@@ -118,6 +134,7 @@ async def on_member_join(member: discord.Member):
 
 
 
-client.run(token)
+
+
 
 
