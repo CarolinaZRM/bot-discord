@@ -2,6 +2,8 @@ import discord
 import os
 import asyncio
 from datetime import datetime
+from event_handlers import fun_games
+
 client = discord.Client()
 client_id_num = 718911269813485568
 guild_id_num = 718624993470316554
@@ -79,6 +81,13 @@ def handle_exit():
 while True:        
     @client.event
     async def on_message(message):
+        # event_handlers.logic_for_event1(message)
+        # event_handlers.logic_for_event2(message)
+        # event_handlers.logic_for_event3(message)
+
+        # Created event passed Message object to use for response of bot to discord client
+        await fun_games.event_ping_pong(message)
+
         log(f'[INFO] [Func: on_message] MessageObj: {message}')
 
         if (message.author.bot):
