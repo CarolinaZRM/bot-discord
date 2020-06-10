@@ -42,11 +42,11 @@ def update_admin_list(client: discord.Client):
 
 def is_sender_admin(message: discord.Message):
     global VALIDATED_USERS
-    return str(message.channel).lower() in ADMIN_CHANNELS and str(message.author) in VALIDATED_USERS
+    return str(message.author) in VALIDATED_USERS
 
 
 def is_sender_prepa(message: discord.Message):
-    return "/" in message.content and str(message.channel) in PREPA_CHANNELS and str(message.author) not in VALIDATED_USERS
+    return str(message.author) not in VALIDATED_USERS
 
 
 def is_from_a_channel(message: discord.Message) -> bool:
