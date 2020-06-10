@@ -30,10 +30,11 @@ async def event_guessing_game(message, client):
             
             print('wut ?')
             print(response)
+            print(f'Conver to int: {convert_to_int(response)}')
 
-            if convert_to_int(response):
-                if  convert_to_int(response) > 100 or convert_to_int(response) < 0:
-                    await message.channel.send(f"""Heyyy?? That is not between 0 and 100 Hahaha\nTry again {user_name}! :)""")
+            if convert_to_int(response) is not False:
+                if  (convert_to_int(response) > 100) or (convert_to_int(response) <= 0):
+                    await message.channel.send(f"""Heyyy?? That is not between 1 and 100 Hahaha\nTry again {user_name}! :)""")
                     continue
                 elif convert_to_int(response) > correct_answer:
                     await message.channel.send(f"""Guess a bit lower {user_name}!""")
