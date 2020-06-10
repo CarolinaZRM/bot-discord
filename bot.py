@@ -50,7 +50,9 @@ def is_sender_prepa(message: discord.Message):
 
 
 def is_from_a_channel(message: discord.Message) -> bool:
-    if message.channel.type == ChannelType.group:
+    log.debug(f'advad {message.channel.type}')
+    log.debug(f'advad {ChannelType.group}')
+    if message.channel.type != ChannelType.private:
         log.debug('[DEBUG] Is from a chanel')
         return True
     return False
