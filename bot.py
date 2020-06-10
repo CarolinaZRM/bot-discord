@@ -1,6 +1,4 @@
-import discord
-import os
-import asyncio
+import discord, os, asyncio, better_profanity
 from datetime import datetime
 from event_handlers import fun_games
 
