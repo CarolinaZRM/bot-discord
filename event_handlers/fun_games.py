@@ -41,9 +41,8 @@ async def event_guessing_game(message, client):
                 elif convert_to_int(response) < correct_answer:
                     await message.channel.send(f"""Guess a bit higher {user_name}!""")
                     continue
-                
-                elif response == "GiveUp":
-                    break
+            elif response == "GiveUp":
+                break
 
         if response != "GiveUp":
             await message.channel.send(f"""You win {user_name}! Congrats !""")
