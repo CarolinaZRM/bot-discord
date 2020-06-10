@@ -87,7 +87,7 @@ while True:
 
         # Created event passed Message object to use for response of bot to discord client
         await fun_games.event_ping_pong(message)
-        await fun_games.event_guessing_game(message)
+        await fun_games.event_guessing_game(message, client)
 
 
         log(f'[INFO] [Func: on_message] MessageObj: {message}')
