@@ -6,6 +6,7 @@ async def event_ping_pong(message):
         await message.channel.send('Pong :)')
 
 async def event_guessing_game(message, client):
+    print(message.content)
     def convert_to_int(value):
         try:
             return int(value)
@@ -26,14 +27,16 @@ async def event_guessing_game(message, client):
         while convert_to_int(response) != correct_answer:
             response = await client.wait_for("message", check=lambda response_message : response_message.author == message.author)
             response = response.content
+            print('wut ?')
+            print(response)
             
-            if  response.isdigit() and (convert_to_int(response) > 100 or convert_to_int(response) < 0):
+            if  convert_to_int(response) > 100 or convert_to_int(response) < 0:
                 await message.channel.send(f"""Heyyy?? That is not between 0 and 100 Hahaha\nTry again {user_name}! :)""")
                 continue
-            elif response.isdigit() and convert_to_int(response) > correct_answer:
+            elif convert_to_int(response) > correct_answer:
                 await message.channel.send(f"""Guess a bit lower {user_name}!""")
                 continue
-            elif response.isdigit() and convert_to_int(response) < correct_answer:
+            elif convert_to_int(response) < correct_answer:
                 await message.channel.send(f"""Guess a bit higher {user_name}!""")
                 continue
             
