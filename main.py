@@ -71,7 +71,6 @@ while True:
         elif bot.is_sender_prepa(message):
             # commands for prepas
             await prepa.event_help_menu(message)
-            await message.channel.send("Prepa Requested Something")
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
@@ -79,7 +78,7 @@ while True:
 
     @client.event
     async def on_member_join(member: discord.Member):
-        await join.greet_new_member(client, member)
+        await join.event_greet_new_member(client, member)
 
     @client.event
     async def on_member_update(before, after):
