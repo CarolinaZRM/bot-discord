@@ -11,15 +11,15 @@ client = discord.Client()
 
 
 async def task():
-    print(f'[INFO] [Time: {datetime.utcnow()}] Starting.')
+    log.debug(f'[INFO] [Time: {datetime.utcnow()}] Starting.')
     await client.wait_until_ready()
-    print(f'[INFO] [Time: {datetime.utcnow()}] Started.')
+    log.debug(f'[INFO] [Time: {datetime.utcnow()}] Started.')
     while True:
         await asyncio.sleep(1)
 
 
 def handle_exit():
-    print("Handling")
+    log.debug(f"[DEBUG] Handling")
     client.loop.run_until_complete(client.logout())
     for t in asyncio.Task.all_tasks(loop=client.loop):
         if t.done():
@@ -44,11 +44,11 @@ while True:
         log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
 
         if (message.author.bot):
+            # Events related to bot response
             log.debug(f'[DEBUG] Message from bot. Message: {message.content}')
             return
 
         has_profanity = await sanitize.profanity_filter(message)
-
         if has_profanity:
             log.debug('[DEBGU Has profanity')
             return
@@ -60,21 +60,15 @@ while True:
         await fun_games.event_guessing_game(message, client)
         await actions.get_curriculum(message)
 
-        # Events related to bot response
-
-        # commands for admins and student counselors
         if bot.is_sender_admin(message):
+            # commands for admins and student counselors
             log.debug('[DEBUG] Entered Counselor Auth Zone')
-            # command test
             await channel.event_user_count(message)
             await counselor.event_help_menu(message)
-
-        # commands for prepas
         elif bot.is_sender_prepa(message):
+            # commands for prepas
             await prepa.event_help_menu(message)
-
             await message.channel.send("Prepa Requested Something")
-            print(f"""{message.author.nick} requested something""")
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
@@ -87,12 +81,12 @@ while True:
     @client.event
     async def on_member_update(before, after):
         if before.roles != after.roles:
-            print(f'[DEBUG] before: {before} After: {after}')
+            log.debug(f'[DEBUG] before: {before} After: {after}')
             bot.update_admin_list(client)
 
     @client.event
     async def on_ready():
-        print(client.guilds)
+        log.debug(f'[DEBUG] Guild Obj: {client.guilds}')
         bot.update_admin_list(client)
         log.debug('[VERBOSE] On Ready Finished.')
 
@@ -105,8 +99,8 @@ while True:
     except KeyboardInterrupt:
         handle_exit()
         client.loop.close()
-        print("Program ended")
+        log.debug("[DEBUG] Program ended")
         break
 
-    print("Bot restarting")
+    log.debug("[DEBUG] Bot restarting")
     client = discord.Client(loop=client.loop)
