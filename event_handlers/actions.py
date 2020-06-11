@@ -1,6 +1,7 @@
 import discord
 import log
 import os
+from handlers import telephone_guide
 
 CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -12,7 +13,7 @@ CURRICULO_ICOM = os.path.join(CURRENT_DIR, "res", "curriculos", "ICOM.pdf")
 CURRICULO_CIIC_LINK = "https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/"
 
 
-async def get_curriculum(message: discord.Message):
+async def event_get_curriculum(message: discord.Message):
     log.debug('[DEBUG] Entered Curriculum')
     user_message = message.content
     if "!curriculo" in user_message.lower():  # Asked for curriculum
@@ -35,3 +36,15 @@ async def get_curriculum(message: discord.Message):
                 # for when CIIC curriculum is updated
                 # await message.author.send(file=discord.File(CURRICULO_CIIC))
                 await message.author.send(CURRICULO_CIIC_LINK)
+
+
+async def event_telephone_guide(message: discord.Message):
+    log.debug('[DEBUG] Entered telephone guide')
+    client_message: str = message.content
+    sections = client_message.split(':')
+
+    if telephone_guide.is_command(sections):
+        function_call = telephone_guide.get_guide_handler(sections)
+        if function_call:
+            response = function_call(sections)
+            await message.author.send(response)

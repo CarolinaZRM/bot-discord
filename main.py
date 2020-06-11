@@ -1,11 +1,14 @@
-import discord
-import os
 import asyncio
-import better_profanity
+import os
 from datetime import datetime
-from event_handlers import channel, fun_games, counselor, actions, sanitize, prepa, join
-import log
+
+import better_profanity
+import discord
+
 import bot
+import log
+from event_handlers import (channel, counselor, fun_games, join,
+                            prepa, sanitize, actions)
 
 client = discord.Client()
 
@@ -45,7 +48,6 @@ while True:
 
         if (message.author.bot):
             # Events related to bot response
-            log.debug(f'[DEBUG] Message from bot. Message: {message.content}')
             return
 
         has_profanity = await sanitize.profanity_filter(message)
@@ -58,7 +60,8 @@ while True:
         # Created event passed Message object to use for response of bot to discord client
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
-        await actions.get_curriculum(message)
+        await actions.event_get_curriculum(message)
+        await actions.event_telephone_guide(message)
 
         if bot.is_sender_admin(message):
             # commands for admins and student counselors
