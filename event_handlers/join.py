@@ -1,4 +1,5 @@
 import discord
+import log
 
 
 async def greet_new_member(client: discord.Client, member: discord.Member):

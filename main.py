@@ -3,7 +3,7 @@ import os
 import asyncio
 import better_profanity
 from datetime import datetime
-from event_handlers import channel, fun_games, counselor, actions, sanitize
+from event_handlers import channel, fun_games, counselor, actions, sanitize, prepa, join
 
 import log
 import bot
@@ -67,22 +67,6 @@ while True:
             log.debug(f'[DEBUG] Message from bot. Message: {message.content}')
             return
 
-        # user_message = message.content
-        # bad_words = ["cabron", "cabrona", "mamabicho", "puta", "puto", "pendejo", "pendeja",
-        #              "fuck", "shit", "motherfucker", "bellaco", "bellaca", "wlb", "bicho", "cb", "beber"]
-
-        # sanitized = user_message.replace(',', '').replace(
-        #     ' ', '').replace('-', '').lower()
-        # log.debug(f'Sanitized String: {sanitized}')
-
-        # for bad_word in bad_words:
-        #     if bad_word in sanitized:
-        #         log.debug(f'Containes a bad word: {user_message}')
-        #         author = message.author.nick
-        #         await message.channel.purge(limit=1)
-        #         print(f"""{author} said a bad word, deleting message""")
-        #         await message.channel.send(f"""{author} said a bad word, deleting message""")
-
         has_profanity = await sanitize.profanity_filter(message)
 
         if has_profanity:
@@ -107,59 +91,14 @@ while True:
 
         # commands for prepas
         elif bot.is_sender_prepa(message):
-            # ADD if /COMMAND in message.content: to add new commands
-            if "/help" in message.content.lower():
-                embed = discord.Embed(title="Bot Commands for Prepas",
-                                      description="Useful commands for prepas to ask the bot")
-                embed.add_field(name="/curriculo YOUR_DEPT",
-                                value="Gives the prepa the curriculum they request (INEL/ICOM/INSO/CIIC)")
-                embed.add_field(
-                    name="/map", value="Gives the prepa a map of UPRM")
-                embed.add_field(
-                    name="/links", value="Gives the prepa a PDF with all the important links of UPRM")
-                embed.add_field(
-                    name="/emails", value="Gives prepa a PDF with some important emails they can use")
-                embed.add_field(
-                    name="/office YOUR_DEPT", value="Tells the prepa what their dept office number is (INEL/ICOM or INSO/CIIC)")
-                await message.channel.send(content=None, embed=embed)
-
-            if "/curriculo" in message.content.lower():  # Asked for curriculum
-                split = message.content.split(" ")
-                if len(split) == 1:
-                    await message.channel.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
-                else:
-                    if split[1].upper() == "INEL":
-                        await message.channel.send("Electrical Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_INEL))
-                    if split[1].upper() == "ICOM":
-                        await message.channel.send("Computer Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_ICOM))
-                    if split[1].upper() == "INSO":
-                        await message.channel.send("Software Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_INSO))
-                    if split[1].upper() == "CIIC":
-                        await message.channel.send("Computer Science & Engineering Curriculum:")
-                        # for when CIIC curriculum is updated
-                        # await message.channel.send(file=discord.File(CURRICULO_CIIC))
-                        await message.channel.send(CURRICULO_CIIC_LINK)
+            await prepa.event_help_menu(message)
 
             await message.channel.send("Prepa Requested Something")
             print(f"""{message.author.nick} requested something""")
 
     @client.event
     async def on_member_join(member: discord.Member):
-        # Greets you to server
-        await member.send(f"""Welcome to URPM {member.name}!""")
-        await member.send("Please give me your full name so we know who you are in the server!")
-
-        def check(m):  # checks if message was sent by someone other than the bot
-            return m.author != client.user
-
-        # Extracts the name of the student from the DM
-        name = await client.wait_for("message", check=check)
-        # Replaces their old name to the one they provided in the DM to the bot
-        print(f"""{name.author}'s nickname was changed to {name.content}""")
-        await member.edit(nick=str(name.content))
+        await join.event_welcome_member(client, member)
 
     @client.event
     async def on_member_update(before, after):
