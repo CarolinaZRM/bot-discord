@@ -52,7 +52,7 @@ while True:
 
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
-            log.debug('[DEBGU Has profanity')
+            log.debug('[DEBUG] Has profanity')
             return
 
         log.debug('[INFO] passed the filter')
@@ -79,7 +79,7 @@ while True:
 
     @client.event
     async def on_member_join(member: discord.Member):
-        await join.event_welcome_member(client, member)
+        await join.greet_new_member(client, member)
 
     @client.event
     async def on_member_update(before, after):
