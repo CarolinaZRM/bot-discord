@@ -94,7 +94,8 @@ while True:
     try:
         TOKEN = bot.readToken()
         client.loop.run_until_complete(client.start(TOKEN))
-    except SystemExit:
+    except SystemExit as e:
+        log.debug(f'[DEBUG] Error {e}')
         handle_exit()
     except KeyboardInterrupt:
         handle_exit()
