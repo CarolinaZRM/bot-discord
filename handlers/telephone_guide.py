@@ -13,9 +13,9 @@ def get_dept_info(sections):
     return_message = f"Aqui esta la informacion de '{departartment_name.upper()}':\n\n"
 
     if departartment_name in ('inso', 'ciic'):
-        return_message = f'{return_message}\n\n1. {departamentos.InsoDepartment()}'
+        return_message = f'{return_message}\n\n1. {departamentos.CSEDepartment()}'
     elif departartment_name in ('icom', 'inel'):
-        return_message = f'{return_message}1. {departamentos.IcomDepartment()}'
+        return_message = f'{return_message}1. {departamentos.ECEDepartment()}'
     else:
         return_message = f'Departamento invalido.'
 
@@ -43,7 +43,8 @@ _telephone_guide_list = dict(
         '!rectoria': {'func': None, 'description': 'Informacion de Contacto de Rectoria'},
         '!dept': {'func': get_dept_info, 'description': 'Obtener informacion de contacto de los departamentos de INEL/ICOM/INCO/CIIC'},
         '!contactos': {'func': get_telephone_guide_help, 'description': 'Obtener lista completa de contactos disponibles'},
-        '!aecon': {'func': get_asistecia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'}
+        '!aecon': {'func': get_asistecia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'},
+
     }
 )
 
