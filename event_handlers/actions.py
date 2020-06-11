@@ -46,5 +46,11 @@ async def event_telephone_guide(message: discord.Message):
     if telephone_guide.is_command(sections):
         function_call = telephone_guide.get_guide_handler(sections)
         if function_call:
+            #reponse = embed
             response = function_call(sections)
-            await message.author.send(response)
+
+            #message.author.send(embed)
+            if isinstance(response,str):
+                await message.author.send(response)
+            else:
+                await message.author.send(content=None, embed=response)

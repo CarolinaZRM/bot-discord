@@ -1,4 +1,5 @@
 # from typing import List
+import discord
 
 class Contact():
     """
@@ -28,11 +29,16 @@ class Contact():
         self.gmaps_location = gmaps_location
 
     def __str__(self):
+        #embed.add_field(name='',value="")
+
+
         email_txt = ', '.join(self.emails)
         phone_txt = ', '.join(self.phone_number)
         extensions_txt = ' \u2022 '.join(self.extensions)
 
         extensions_bullet_list = ''
+
+
 
         return_string = f'''Contact Name: {self.contact_name}
     \u2022 Contact description: {self.contact_description}
