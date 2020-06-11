@@ -4,27 +4,10 @@ import asyncio
 import better_profanity
 from datetime import datetime
 from event_handlers import channel, fun_games, counselor, actions, sanitize, prepa, join
-
 import log
 import bot
 
 client = discord.Client()
-
-CURRENT_DIR = os.path.dirname(__file__)
-TOKEN_FILE = os.path.join(CURRENT_DIR, "res", "textfiles", 'token.txt')
-
-# PDF Files
-CURRICULO_INEL = os.path.join(CURRENT_DIR, "res", "curriculos", "INEL.pdf")
-CURRICULO_INSO = os.path.join(CURRENT_DIR, "res", "curriculos", "INSO.pdf")
-CURRICULO_CIIC = os.path.join(CURRENT_DIR, "res", "curriculos", "CIIC.pdf")
-CURRICULO_ICOM = os.path.join(CURRENT_DIR, "res", "curriculos", "ICOM.pdf")
-CURRICULO_CIIC_LINK = "https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/"
-
-
-def readToken():
-    f = open(os.path.join(CURRENT_DIR, TOKEN_FILE), "r")
-    lines = f.readlines()
-    return lines[0].strip()
 
 
 async def task():
@@ -58,9 +41,6 @@ def handle_exit():
 while True:
     @client.event
     async def on_message(message):
-        # event_handlers.logic_for_event1(message)
-        # event_handlers.logic_for_event2(message)
-        # event_handlers.logic_for_event3(message)
         log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
 
         if (message.author.bot):
@@ -70,6 +50,7 @@ while True:
         has_profanity = await sanitize.profanity_filter(message)
 
         if has_profanity:
+            log.debug('[DEBGU Has profanity')
             return
 
         log.debug('[INFO] passed the filter')
@@ -80,7 +61,6 @@ while True:
         await actions.get_curriculum(message)
 
         # Events related to bot response
-        #
 
         # commands for admins and student counselors
         if bot.is_sender_admin(message):
@@ -95,6 +75,10 @@ while True:
 
             await message.channel.send("Prepa Requested Something")
             print(f"""{message.author.nick} requested something""")
+
+    @client.event
+    async def on_message_edit(before: discord.Message, after: discord.Message):
+        has_profanity = await sanitize.profanity_filter(after)
 
     @client.event
     async def on_member_join(member: discord.Member):
@@ -114,7 +98,7 @@ while True:
 
     client.loop.create_task(task())
     try:
-        TOKEN = readToken()
+        TOKEN = bot.readToken()
         client.loop.run_until_complete(client.start(TOKEN))
     except SystemExit:
         handle_exit()

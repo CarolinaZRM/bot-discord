@@ -7,13 +7,19 @@ ADMIN_CHANNELS = ["counselors", "admins", "general"]
 PREPA_CHANNELS = ["general"]
 
 CURRENT_DIR = os.path.dirname(__file__)
+TOKEN_FILE = os.path.join(CURRENT_DIR, "res", "textfiles", 'token.txt')
 ADMINS_FILE = os.path.join(CURRENT_DIR, "res", "textfiles", 'counselors.txt')
 VALIDATED_USERS = []
 DEBUG = True
 
-
 CLIENT_ID_NUM = 718911269813485568
 GUILD_ID_NUM = 718624993470316554
+
+
+def readToken():
+    f = open(os.path.join(CURRENT_DIR, TOKEN_FILE), "r")
+    lines = f.readlines()
+    return lines[0].strip()
 
 
 def extractAdmins(client):

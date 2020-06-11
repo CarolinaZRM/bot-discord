@@ -1,4 +1,5 @@
 import random
+import log
 
 
 async def event_ping_pong(message):
@@ -8,6 +9,7 @@ async def event_ping_pong(message):
 
 
 async def event_guessing_game(message, client):
+    log.debug('[DEBUG] Entered guessing game')
     print(message.content)
 
     if message.content == "?guess":
