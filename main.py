@@ -3,7 +3,7 @@ import os
 import asyncio
 import better_profanity
 from datetime import datetime
-from event_handlers import channel, fun_games, counselor
+from event_handlers import channel, fun_games, counselor, actions, sanitize
 
 import log
 import bot
@@ -67,29 +67,36 @@ while True:
             log.debug(f'[DEBUG] Message from bot. Message: {message.content}')
             return
 
+        # user_message = message.content
+        # bad_words = ["cabron", "cabrona", "mamabicho", "puta", "puto", "pendejo", "pendeja",
+        #              "fuck", "shit", "motherfucker", "bellaco", "bellaca", "wlb", "bicho", "cb", "beber"]
+
+        # sanitized = user_message.replace(',', '').replace(
+        #     ' ', '').replace('-', '').lower()
+        # log.debug(f'Sanitized String: {sanitized}')
+
+        # for bad_word in bad_words:
+        #     if bad_word in sanitized:
+        #         log.debug(f'Containes a bad word: {user_message}')
+        #         author = message.author.nick
+        #         await message.channel.purge(limit=1)
+        #         print(f"""{author} said a bad word, deleting message""")
+        #         await message.channel.send(f"""{author} said a bad word, deleting message""")
+
+        has_profanity = await sanitize.profanity_filter(message)
+
+        if has_profanity:
+            return
+
+        log.debug('[INFO] passed the filter')
+
         # Created event passed Message object to use for response of bot to discord client
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
+        await actions.get_curriculum(message)
 
         # Events related to bot response
-
-        user_message = message.content
-        bad_words = ["cabron", "cabrona", "mamabicho", "puta", "puto", "pendejo", "pendeja",
-                     "fuck", "shit", "motherfucker", "bellaco", "bellaca", "wlb", "bicho", "cb", "beber"]
-
-        sanitized = user_message.replace(',', '').replace(
-            ' ', '').replace('-', '').lower()
-        log.debug(f'Sanitized String: {sanitized}')
-
-        for bad_word in bad_words:
-            if bad_word in sanitized:
-                log.debug(f'Containes a bad word: {user_message}')
-                author = message.author.nick
-                await message.channel.purge(limit=1)
-                print(f"""{author} said a bad word, deleting message""")
-                await message.channel.send(f"""{author} said a bad word, deleting message""")
-
-        log.debug('[INFO] passed the filter')
+        #
 
         # commands for admins and student counselors
         if bot.is_sender_admin(message):
@@ -98,25 +105,6 @@ while True:
             await channel.event_user_count(message)
             await counselor.event_help_menu(message)
 
-            if "!curriculo" in user_message.lower():  # Asked for curriculum
-                split = user_message.split(" ")
-                if len(split) == 1:
-                    await message.channel.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
-                else:
-                    if split[1].upper() == "INEL":
-                        await message.channel.send("Electrical Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_INEL))
-                    if split[1].upper() == "ICOM":
-                        await message.channel.send("Computer Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_ICOM))
-                    if split[1].upper() == "INSO":
-                        await message.channel.send("Software Engineering Curriculum:")
-                        await message.channel.send(file=discord.File(CURRICULO_INSO))
-                    if split[1].upper() == "CIIC":
-                        await message.channel.send("Computer Science & Engineering Curriculum:")
-                        # for when CIIC curriculum is updated
-                        # await message.channel.send(file=discord.File(CURRICULO_CIIC))
-                        await message.channel.send(CURRICULO_CIIC_LINK)
         # commands for prepas
         elif bot.is_sender_prepa(message):
             # ADD if /COMMAND in message.content: to add new commands
