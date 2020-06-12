@@ -18,7 +18,7 @@ class ECEDepartment(Contact):
         emails = ["director.inec@uprm.edu"]
         office_number = "Stefani Building - Office 125A"
         owner = None
-        work_hours = '7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
+        work_hours = 'Lunes-Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
         gmaps_location = 'https://goo.gl/maps/Jb43w1iy2VfjMeSR6'
         super().__init__(contact_name, contact_description, services_provided,
                          phone_number, extensions=extensions,
@@ -48,7 +48,7 @@ class CSEDepartment(Contact):
                   "celines.alfaro@upr.edu", "gedyeliz.valle@upr.edu"]
         office_number = "S-220 (Stefani Building)"
         owner = None
-        work_hours = '7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
+        work_hours = 'Lunes-Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
         super().__init__(contact_name, contact_description, services_provided,
                          phone_number, extensions=extensions,
                          emails=emails, office_number=office_number,
