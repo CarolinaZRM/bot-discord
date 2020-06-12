@@ -1,7 +1,8 @@
 import discord
 import log
 import os
-from handlers import telephone_guide, building_parser
+from handlers import telephone_guide, building_parser, help_menu
+import bot
 
 CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -17,7 +18,7 @@ async def event_get_curriculum(message: discord.Message):
     log.debug('[DEBUG] Entered Curriculum')
     user_message = message.content
     if "!curriculo" in user_message.lower():  # Asked for curriculum
-        split = user_message.split(" ")
+        split = user_message.split(":")
         log.debug('[DEBUG] Contains Curriculum')
         if len(split) == 1:
             await message.author.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
@@ -88,3 +89,37 @@ async def event_parse_university_building(message: discord.Message):
         response_msg = f'No me especificaste cual salon quieres que busque.\nIntenta en este formato: !salon:*<codigo>*\n'\
             'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
         await message.channel.send(response_msg)
+
+
+async def event_help_menu(message: discord.Message):
+    if message.content.lower() == '!help':
+        msg_author: discord.User = message.author
+        if bot.is_sender_counselor(message):
+            help_menu_embed = help_menu.help_menu_for_counselor()
+        elif bot.is_sender_prepa(message):
+            help_menu_embed = help_menu.help_menu_for_prepa()
+        else:
+            help_menu_embed = help_menu.help_menu_base()
+
+        await msg_author.send(content=None, embed=help_menu_embed)
+
+
+async def event_help_menu_greeting(member: discord.Member):
+    if hasattr(member, 'nick'):
+        user_name = member.nick
+    else:
+        user_name = member.name
+
+    message_to_send = f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada::tada::tada:\n"\
+        "Yo sere tu *Bot* Consejero. :smiley:\n"\
+        "Estoy aqui para ayudarte con cualquier duda que tengas.\n"\
+        "Te puedo ayudar a:\n"\
+        "\u2022 Econtrar edificios\n"\
+        "\u2022 Información de contacto para algunas oficinas importantes\n"\
+        "\u2022 Proveer 'links' muy utiles para tu carrera universitaria.\n"\
+        "\u2022 Y muchas cosas más!!!\n\n"\
+        "Espero ser de mucha ayuda :thumbsup:\n\n"\
+        "Aqui te dejo la lista de commandos:"
+    help_menu_embed = help_menu.help_menu_join()
+
+    await member.send(content=message_to_send, embed=help_menu_embed)
