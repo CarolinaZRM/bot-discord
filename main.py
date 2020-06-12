@@ -1,11 +1,14 @@
-import discord
-import os
 import asyncio
-import better_profanity
+import os
 from datetime import datetime
-from event_handlers import channel, fun_games, counselor, actions, sanitize, prepa, join
-import log
+
+import better_profanity
+import discord
+
 import bot
+import log
+from event_handlers import (channel, counselor, fun_games, join,
+                            prepa, sanitize, actions)
 
 client = discord.Client()
 
@@ -45,12 +48,11 @@ while True:
 
         if (message.author.bot):
             # Events related to bot response
-            log.debug(f'[DEBUG] Message from bot. Message: {message.content}')
             return
 
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
-            log.debug('[DEBGU Has profanity')
+            log.debug('[DEBUG] Has profanity')
             return
 
         log.debug('[INFO] passed the filter')
@@ -58,7 +60,9 @@ while True:
         # Created event passed Message object to use for response of bot to discord client
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
-        await actions.get_curriculum(message)
+        await actions.event_get_curriculum(message)
+        await actions.event_telephone_guide(message)
+        await actions.event_parse_university_building(message)
 
         if bot.is_sender_admin(message):
             # commands for admins and student counselors
@@ -68,7 +72,6 @@ while True:
         elif bot.is_sender_prepa(message):
             # commands for prepas
             await prepa.event_help_menu(message)
-            await message.channel.send("Prepa Requested Something")
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
@@ -76,7 +79,7 @@ while True:
 
     @client.event
     async def on_member_join(member: discord.Member):
-        await join.event_welcome_member(client, member)
+        await join.event_greet_new_member(client, member)
 
     @client.event
     async def on_member_update(before, after):
