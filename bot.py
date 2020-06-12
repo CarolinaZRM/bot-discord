@@ -46,7 +46,7 @@ def update_admin_list(client: discord.Client):
     log.debug('[VERBOSE] Updated Admins.')
 
 
-def is_sender_admin(message: discord.Message):
+def is_sender_counselor(message: discord.Message):
     global VALIDATED_USERS
     return str(message.author) in VALIDATED_USERS
 
