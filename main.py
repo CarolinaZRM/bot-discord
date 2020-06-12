@@ -54,15 +54,24 @@ while True:
         if has_profanity:
             log.debug('[DEBUG] Has profanity')
             return
-        log.debug(f"[USER] {message.author.name}" + "#" + f"{message.author.id}")
+
+        log.debug(f"[USER] {message.author.name}#{message.author.id}")
         if message.content.startswith("!bulk_delete_admin") and (message.author.id == 539112744553676812 or message.author.id == 541298986535878677):
-            log.debug(f"[DEBUG DLT] BULK DELETE FILTER PASSED BY ADMIN {message.author}")
-            while len(await message.channel.purge(limit=1500)) > 0:
-                log.debug(f"[DEBUG DLT] BULK DELETE CALLED BY ADMIN {message.author}")
-        else :
-            log.debug(f"[DEBUG DLT] NON ADMIN {message.author} TRIED TO DO CLEAR OF CHAT WITHOUT ACCESS")
-
-
+            sections = message.content.split(':')
+            log.debug(f'[DEBUG] DELETE COMMAND SECTIONS: {sections}')
+            log.debug(
+                f"[DEBUG] BULK DELETE FILTER PASSED BY ADMIN {message.author}")
+            if len(sections) == 2 and sections[1].isdigit():
+                deleted = await message.channel.purge(limit=int(sections[1]))
+                log.debug(
+                    f'[DEBUG] Deleted {len(deleted)} messages. Selected by user {message.author}')
+            else:
+                while len(await message.channel.purge(limit=1500)) > 0:
+                    log.debug(
+                        f"[DEBUG DLT] BULK DELETE CALLED BY ADMIN {message.author}")
+        else:
+            log.debug(
+                f"[DEBUG DLT] NON ADMIN {message.author} TRIED TO DO CLEAR OF CHAT WITHOUT ACCESS")
 
         log.debug('[INFO] passed the filter')
 
