@@ -110,8 +110,9 @@ async def event_help_menu_greeting(member: discord.Member):
     else:
         user_name = member.name
 
-    message_to_send = f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada::tada::tada:\n"\
-        "Yo sere tu *Bot* Consejero. :smiley:\n"\
+    message_to_send = f'Ahora si me presento formalmente,\n'\
+        f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada::tada::tada:\n"\
+        "Yo soy *MADE Bot* y sere tu *Bot* Consejero. :smiley:\n"\
         "Estoy aqui para ayudarte con cualquier duda que tengas.\n"\
         "Te puedo ayudar a:\n"\
         "\u2022 Econtrar edificios\n"\

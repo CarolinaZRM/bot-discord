@@ -6,8 +6,10 @@ import log
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
     # Greets you to server
-    await member.send(f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :smiley: :raised_hands_tone3:")
-    await member.send("**Por favor, dime cual es tu nombre completeo para poder ponerte ese nombre en el servidor!**")
+    await member.send(
+        f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :smiley: :raised_hands_tone3:\n"
+        f"**Por favor, dime cual es tu nombre completeo para poder ponerte ese nombre en el servidor!**"
+    )
 
     # checks if message was sent by the user and in the DM
     def check_same_user(client_response):
@@ -25,5 +27,5 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     await member.send(
         f"Ya todos te veran como: '{name.content}'\n"
         f"Que facil, no? :thinking:\n"
-        "Te digo un secreto :eyes: ... Programar es super divertido y hasta tu puedes hacerlo! :hugging: "
+        "Te digo un secreto :eyes: ... Programar es super divertido y tu tambien puedes hacerlo! :hugging: "
     )
