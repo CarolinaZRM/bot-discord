@@ -71,7 +71,7 @@ async def event_parse_university_building(message: discord.Message):
     if len(sections) > 1 and sections[0] == '!salon' and len(sections[1]) > 0:
 
         if not building_parser.is_valid_room_number(sections):
-            await message.author.send('El codigo del salon no es valido.')
+            await message.channel.send('El codigo del salon no es valido.')
             return
 
         information = building_parser.get_building_information(sections)
@@ -80,11 +80,11 @@ async def event_parse_university_building(message: discord.Message):
             response_msg = f"Hola {user_name}! Es posible que este salon se encuentre en el edificio: **'{information['name']}'**\n"\
                 f"{information['gmaps_loc']}"
 
-            await message.author.send(response_msg)
+            await message.channel.send(response_msg)
         else:
             response_msg = f'{user_name}, no sé en que edificio está salón. :('
-            await message.author.send(response_msg)
+            await message.channel.send(response_msg)
     elif sections[0] == '!salon':
         response_msg = f'No me especificaste cual salon quieres que busque.\nIntenta en este formato: !salon:*<codigo>*\n'\
             'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
-        await message.author.send(response_msg)
+        await message.channel.send(response_msg)
