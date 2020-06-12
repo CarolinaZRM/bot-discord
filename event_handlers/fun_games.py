@@ -2,16 +2,13 @@ import random
 import log
 
 
-async def event_ping_pong(message):
-    print('hi im ping pong')
-    if message.content == 'ping':
+async def event_ping_pong(message: str):
+    if message.content.lower() == 'ping':
         await message.channel.send('Pong :)')
 
 
 async def event_guessing_game(message, client):
     log.debug('[DEBUG] Entered guessing game')
-    print(message.content)
-
     if message.content == "?guess":
         def convert_to_int(value):
             try:
