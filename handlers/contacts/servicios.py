@@ -46,7 +46,7 @@ class GuardiaUniversitaria(Contact):
                       "Sección de Tránsito – Exts. 3275,3597",
                       'Oficina Director – Exts. 2462, 3538, 2458']
         emails = ['transito@uprm.edu']
-        office_number = "Lobby Decanato de Estudiantes"
+        office_number = "Vagones al costado del Edificio del Dpto. de Enfermería"
         gmaps_location = "https://goo.gl/maps/q1poMfAh7rthfDah8"
         owner = None
         work_hours = "Lunes a Viernes | 7:45 A.M. a 11:45 A.M. | 1:00 P.M. a 4:30 P.M."
@@ -54,8 +54,8 @@ class GuardiaUniversitaria(Contact):
                          phone_number, extensions=extensions,
                          emails=emails, office_number=office_number,
                          owner=owner, work_hours=work_hours, gmaps_location=gmaps_location)
-        self.emergencias_medicas = 'Emergencias Médicas Municipal y Bomberos 787-834-8585 | Exts. 2061/2062'
-        self.linea_directa = 'Línea Directa: 787-265-1785/787-265-3872'
-        self.policia_estatal = "Policia Estatal 787-832-2020 (Linea Confidencial)/787-832-9696 (Comandancia Estatal)"
-        self.policia_municipal = "Policia Municipal 787-834-8585 Ext. 2025"
+        self.additional_helpful_info = ['Emergencias Médicas Municipal y Bomberos 787-834-8585 | Exts. 2061/2062',
+                                        'Línea Directa: 787-265-1785/787-265-3872',
+                                        "Policia Estatal 787-832-2020 (Linea Confidencial)/787-832-9696 (Comandancia Estatal)",
+                                        "Policia Municipal 787-834-8585 Ext. 2025"]
         self.more_info_link = 'https://www.uprm.edu/transitoyvigilancia/'

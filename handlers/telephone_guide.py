@@ -35,15 +35,13 @@ def get_dept_info(sections):
         embed = discord.Embed(title="CSE Department Info",
                               description="Useful CSE department information")
 
-        return generate_embed(cse,embed)
-
+        return generate_embed(cse, embed)
 
     elif department_name in ('icom', 'inel'):
         ece = departamentos.ECEDepartment()
         embed = discord.Embed(title="ECE Department Info",
                               description="Useful ECE department information")
-        return generate_embed(ece,embed)
-
+        return generate_embed(ece, embed)
 
     else:
         embed = "Departamento Invalido"
@@ -53,7 +51,22 @@ def get_dept_info(sections):
 
 def get_asistencia_econ(section):
     return_message = "Aqui esta la informacion de la Oficina de Asistencia Economica:\n\n"
+
     return f'{return_message}1. {servicios.AsistenciaEconomica()}'
+
+
+def get_guardia_universitaria(section):
+    guardia = servicios.GuardiaUniversitaria()
+    embed = discord.Embed(title='Info Guardia Universitaria',
+                          description='Informacion rapida')
+    ember = generate_embed(guardia, embed)
+
+    divisor = '\n\u2022 '
+    additional_info_list = f"\u2022 {divisor.join(guardia.additional_helpful_info)}"
+    embed.add_field(name="Additional Helpful Info", value=additional_info_list)
+    embed.add_field(name="More Info Link", value=guardia.more_info_link)
+
+    return embed
 
 
 def get_telephone_guide_help(sections):
@@ -104,7 +117,8 @@ def get_faculty(sections):
     if department_name in ('inso', 'ciic'):
         embed = discord.Embed(title="CSE Faculty",
                               description="")
-        embed.add_field(name="For more information visit this link", value="https://www.uprm.edu/cse/faculty/")
+        embed.add_field(name="For more information visit this link",
+                        value="https://www.uprm.edu/cse/faculty/")
         for name, role in cse_faculty.items():
             embed.add_field(name=name, value=role)
 
@@ -112,7 +126,8 @@ def get_faculty(sections):
         embed = discord.Embed(title="ECE Faculty",
                               description="")
 
-        embed.add_field(name="For more information visit this link", value="https://ece.uprm.edu/people/faculty/#cn-top")
+        embed.add_field(name="For more information visit this link",
+                        value="https://ece.uprm.edu/people/faculty/#cn-top")
         for name, role in ece_faculty.items():
             embed.add_field(name=name, value=role)
 
@@ -128,7 +143,7 @@ _telephone_guide_list = dict(
         '!contactos': {'func': get_telephone_guide_help, 'description': 'Obtener lista completa de contactos disponibles'},
         '!aecon': {'func': get_asistencia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'},
         '!facultad': {'func': get_faculty, 'description': 'Obtener informacion de contacto de la facltad de los departamentos de INEL/ICOM/INSO/CIIC'},
-
+        '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'}
     }
 )
 
