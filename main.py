@@ -62,6 +62,7 @@ while True:
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
         await actions.event_telephone_guide(message)
+        await actions.event_parse_university_building(message)
 
         if bot.is_sender_admin(message):
             # commands for admins and student counselors
