@@ -79,14 +79,24 @@ def get_guardia_universitaria(section):
 
 
 def get_telephone_guide_help(sections):
-    telephone_list_keys = set()
-    for key in _telephone_guide_list:
-        if _telephone_guide_list[key]['func']:
-            msg = f'{key}: {_telephone_guide_list[key]["description"]}'
-            telephone_list_keys.add(msg)
-    joiner = "\n\t\u2022 "
-    response = f'{_help_msg}\t\u2022 {joiner.join(telephone_list_keys)}'
-    return response
+    embed = discord.Embed(title='Lista de Contactos disponibles')
+    embed.add_field(
+        name='Uso',
+        value='!<CONTACTO> | Esto mostrara informacion revelante para el CONTACTO.'
+    )
+
+    for contact_name in _telephone_guide_list:
+        if _telephone_guide_list[contact_name]['func'] and contact_name != '!contactos':
+            cn_ts = contact_name
+            if contact_name == '!dept':
+                cn_ts = '!dept:DEPT'
+            elif contact_name == '!facultad':
+                cn_ts = '!facultad:DEPT'
+            embed.add_field(
+                name=cn_ts,
+                value=_telephone_guide_list[contact_name]['description']
+            )
+    return embed
 
 
 def get_faculty(sections):
