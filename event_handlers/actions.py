@@ -1,7 +1,7 @@
 import discord
 import log
 import os
-from handlers import telephone_guide
+from handlers import telephone_guide, building_parser
 
 CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -46,5 +46,45 @@ async def event_telephone_guide(message: discord.Message):
     if telephone_guide.is_command(sections):
         function_call = telephone_guide.get_guide_handler(sections)
         if function_call:
+            # reponse = embed
             response = function_call(sections)
-            await message.author.send(response)
+            # message.author.send(embed)
+            if isinstance(response, str):
+                await message.author.send(response)
+            else:
+                await message.author.send(content=None, embed=response)
+
+
+async def event_parse_university_building(message: discord.Message):
+    client_message: str = message.content
+    sections = client_message.split(':')
+
+    user_name = None
+
+    if hasattr(message.author, 'nick'):
+        user_name = message.author.nick
+    else:
+        user_name = message.author.name
+
+    # response = f'Hola {user_name}, Es posible que este salon se encuentre en el edificio:\n'
+    log.debug(f'avdadv {sections}')
+    if len(sections) > 1 and sections[0] == '!salon' and len(sections[1]) > 0:
+
+        if not building_parser.is_valid_room_number(sections):
+            await message.author.send('El codigo del salon no es valido.')
+            return
+
+        information = building_parser.get_building_information(sections)
+
+        if information:
+            response_msg = f"Hola {user_name}! Es posible que este salon se encuentre en el edificio: **'{information['name']}'**\n"\
+                f"{information['gmaps_loc']}"
+
+            await message.author.send(response_msg)
+        else:
+            response_msg = f'{user_name}, no sé en que edificio está salón. :('
+            await message.author.send(response_msg)
+    elif sections[0] == '!salon':
+        response_msg = f'No me especificaste cual salon quieres que busque.\nIntenta en este formato: !salon:*<codigo>*\n'\
+            'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
+        await message.author.send(response_msg)
