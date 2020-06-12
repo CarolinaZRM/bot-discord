@@ -13,7 +13,7 @@ class ECEDepartment(Contact):
         contact_description = "This is the Electrical and Computer Engineering Department (INEL/ICOM)"
         services_provided = "<Add services provided>"
         phone_number = ["(787) 832-4040"]
-        extensions = ["\u2022Ext. 3086", "Ext. 3821", "Ext. 3090",
+        extensions = ["Ext. 3086", "Ext. 3821", "Ext. 3090",
                       "Ext. 3094", "Ext. 3121", "Ext. 2170"]
         emails = ["director.inec@uprm.edu"]
         office_number = "Stefani Building - Office 125A"
@@ -39,12 +39,13 @@ class CSEDepartment(Contact):
         services_provided = "<Add services provided>"
         phone_number = ["(787) 832-4040"]
         extensions = [
-            "\u2022Ext. 5864\n \t\u2022(Acting Director – Dr. Pedro I. Rivera Vega)",
-            "Ext. 5864\n \t\u2022 (Associate Director – Dr. Manuel Rodriguez Martinez)",
-            "Ext. 5997\n \t\u2022 (Student Affairs Officer - Celines Alfaro Almeyda",
-            "Ext. 5864 & 6476\n \t\u2022 (Administrative Officer – Sarah Ferrer)",
-            "Ext. 5864\n \t\u2022 (Administrative Secretary – Gedyeliz Zoe Valle)"]
-        emails = ["p.rivera@upr.edu","manuel.rodriguez7@upr.edu","celines.alfaro@upr.edu","gedyeliz.valle@upr.edu"]
+            "Ext. 5864 (Acting Director – Dr. Pedro I. Rivera Vega)",
+            "Ext. 5864 (Associate Director – Dr. Manuel Rodriguez Martinez)",
+            "Ext. 5997 (Student Affairs Officer - Celines Alfaro Almeyda",
+            "Ext. 5864 & 6476 Administrative Officer – Sarah Ferrer)",
+            "Ext. 5864 (Administrative Secretary – Gedyeliz Zoe Valle)"]
+        emails = ["p.rivera@upr.edu", "manuel.rodriguez7@upr.edu",
+                  "celines.alfaro@upr.edu", "gedyeliz.valle@upr.edu"]
         office_number = "S-220 (Stefani Building)"
         owner = None
         work_hours = '7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
@@ -52,4 +53,3 @@ class CSEDepartment(Contact):
                          phone_number, extensions=extensions,
                          emails=emails, office_number=office_number,
                          owner=owner, work_hours=work_hours)
-

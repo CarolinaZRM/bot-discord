@@ -16,14 +16,22 @@ def get_dept_info(sections):
         cse = departamentos.CSEDepartment()
         embed = discord.Embed(title="CSE Department Info",
                               description="Useful CSE department information")
-        embed.add_field(name="Dept. Name",value=cse.contact_name)
-        embed.add_field(name="Dept. Description",value=cse.contact_description)
-        embed.add_field(name="Services Provided",value=cse.services_provided)
-        embed.add_field(name="Office",value=cse.office_number)
-        embed.add_field(name="Phones",value="\n\u2022".join(cse.phone_number))
-        embed.add_field(name="Extension",value="\n\u2022".join(cse.extensions))
-        embed.add_field(name="Work Hours",value=cse.work_hours)
-        embed.add_field(name="Google Maps Location",value=cse.gmaps_location)
+        embed.add_field(name="Dept. Name", value=cse.contact_name)
+        embed.add_field(name="Dept. Description",
+                        value=cse.contact_description)
+        embed.add_field(name="Services Provided", value=cse.services_provided)
+        embed.add_field(name="Office", value=cse.office_number)
+
+        divisor = '\n\u2022 '
+        phone_list = f"\u2022 {divisor.join(cse.phone_number)}"
+
+        embed.add_field(name="Phones", value=phone_list)
+
+        extension_list = f"\u2022 {divisor.join(cse.extensions)}"
+        embed.add_field(name="Extension", value=extension_list)
+
+        embed.add_field(name="Work Hours", value=cse.work_hours)
+        embed.add_field(name="Google Maps Location", value=cse.gmaps_location)
 
         return embed
         #return_message = f'{return_message}\n\n1. {departamentos.CSEDepartment()}'
@@ -34,11 +42,17 @@ def get_dept_info(sections):
         embed = discord.Embed(title="ECE Department Info",
                               description="Useful ECE department information")
         embed.add_field(name="Dept. Name", value=ece.contact_name)
-        embed.add_field(name="Dept. Description", value=ece.contact_description)
+        embed.add_field(name="Dept. Description",
+                        value=ece.contact_description)
         embed.add_field(name="Services Provided", value=ece.services_provided)
         embed.add_field(name="Office", value=ece.office_number)
-        embed.add_field(name="Phones", value="\n\u2022".join(ece.phone_number))
-        embed.add_field(name="Extension", value="\n\u2022".join(ece.extensions))
+
+        divisor = '\n\u2022 '
+        phone_list = f"\u2022 {divisor.join(ece.phone_number)}"
+        embed.add_field(name="Phones", value=phone_list)
+
+        extension_list = f"\u2022 {divisor.join(ece.extensions)}"
+        embed.add_field(name="Extension", value=extension_list)
         embed.add_field(name="Work Hours", value=ece.work_hours)
         embed.add_field(name="Google Maps Location", value=ece.gmaps_location)
 
@@ -64,6 +78,7 @@ def get_telephone_guide_help(sections):
     joiner = "\n\t\u2022 "
     response = f'{_help_msg}\t\u2022 {joiner.join(telefone_list_keys)}'
     return response
+
 
 def get_faculty(sections):
     pass
