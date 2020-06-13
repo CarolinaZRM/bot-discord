@@ -22,6 +22,10 @@ def help_menu_base():
         "Ejemplo: *!salon:F-B*, este es el Anfiteatro B del edificio de Física"
     )
     embed.add_field(
+        name='!calendario',
+        value="Provee un enlace rapido al Calendario Academico de UPRM."
+    )
+    embed.add_field(
         name='!contactos',
         value='Mostrara una lista de todos los contactos que tengo disponible para ofrecerte.'
     )

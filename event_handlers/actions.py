@@ -13,6 +13,29 @@ CURRICULO_CIIC = os.path.join(CURRENT_DIR, "res", "curriculos", "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(CURRENT_DIR, "res", "curriculos", "ICOM.pdf")
 CURRICULO_CIIC_LINK = "https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/"
 
+_GOOGLE_ADD_CALENDAR = os.path.join(
+    CURRENT_DIR, "res", "images", "google_add_calendar.png")
+
+
+async def event_get_calendar(message: discord.Message):
+    user_message = message.content
+
+    user_name = None
+
+    if hasattr(message.author, 'nick'):
+        user_name = message.author.nick
+    else:
+        user_name = message.author.name
+
+    if "!calendario" == user_message:
+        await message.author.send(
+            f"Hola {user_name}! Aqui adjunto el calendario academico de UPRM.\n"
+            "**Calendario Academico:** https://www.uprm.edu/decestu/calendario/"
+        )
+        await message.author.send("Tambien puedes anadir este calendario a tu calendario personal.\n"
+                                  "Presta atencion a la esquina inferior derecha del calendario.\nSe ve asi:")
+        await message.author.send(file=discord.File(_GOOGLE_ADD_CALENDAR))
+
 
 async def event_get_curriculum(message: discord.Message):
     log.debug('[DEBUG] Entered Curriculum')

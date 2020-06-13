@@ -80,6 +80,7 @@ while True:
         await actions.event_telephone_guide(message)
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
+        await actions.event_get_calendar(message)
 
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
