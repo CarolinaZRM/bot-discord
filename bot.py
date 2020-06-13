@@ -43,7 +43,6 @@ def _extractAdmins(client):
 
     current_counselors = list(current_counselors)
     current_counselors.sort()
-    print(current_counselors)
 
     lines2 = '\n'.join(current_counselors)
 

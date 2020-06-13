@@ -1,22 +1,24 @@
 import discord
-from handlers.contacts import departamentos, servicios
+from handlers.contacts import departamentos, servicios, consejeria_profesional
 
 
 def generate_embed(contact, embed):
-    embed.add_field(name="Dept. Name", value=contact.contact_name)
-    embed.add_field(name="Dept. Description",
+    embed.add_field(name="Nombre del Dept.", value=contact.contact_name)
+    embed.add_field(name="Descripción",
                     value=contact.contact_description)
-    embed.add_field(name="Services Provided", value=contact.services_provided)
-    embed.add_field(name="Office", value=contact.office_number)
+    embed.add_field(name="Servicios Provistos",
+                    value=contact.services_provided)
+    embed.add_field(name="Oficina", value=contact.office_number)
 
     divisor = '\n\u2022 '
     phone_list = f"\u2022 {divisor.join(contact.phone_number)}"
-    embed.add_field(name="Phones", value=phone_list)
+    embed.add_field(name="Teléfono(s)", value=phone_list)
 
     extension_list = f"\u2022 {divisor.join(contact.extensions)}"
-    embed.add_field(name="Extension", value=extension_list)
-    embed.add_field(name="Work Hours", value=contact.work_hours)
-    embed.add_field(name="Google Maps Location", value=contact.gmaps_location)
+    embed.add_field(name="Extención(es)", value=extension_list)
+    embed.add_field(name="Horas de Trabajo", value=contact.work_hours)
+    embed.add_field(name="Localización en Google Maps",
+                    value=contact.gmaps_location)
 
     return embed
 
@@ -24,7 +26,7 @@ def generate_embed(contact, embed):
 def get_dept_info(sections):
 
     if len(sections) <= 1:
-        return 'Porfavor especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
             'Ejemplo: "!dept:inso"'
 
     department_name: str = sections[1].lower()
@@ -88,10 +90,8 @@ def get_telephone_guide_help(sections):
     for contact_name in _telephone_guide_list:
         if _telephone_guide_list[contact_name]['func'] and contact_name != '!contactos':
             cn_ts = contact_name
-            if contact_name == '!dept':
-                cn_ts = '!dept:DEPT'
-            elif contact_name == '!facultad':
-                cn_ts = '!facultad:DEPT'
+            if contact_name.lower() in ('!dept', '!facultad', '!consejeroacad'):
+                cn_ts = f'{contact_name}:DEPT'
             embed.add_field(
                 name=cn_ts,
                 value=_telephone_guide_list[contact_name]['description']
@@ -128,7 +128,7 @@ def get_faculty(sections):
         "Guillermo Serrano": "Full Time Professor\nguillermo.serrano.@upr.edu"
     }
     if len(sections) <= 1:
-        return 'Porfavor especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
             'Ejemplo: "!dept:inso"'
 
     department_name: str = sections[1].lower()
@@ -155,6 +155,51 @@ def get_faculty(sections):
     return embed
 
 
+def get_consejeria_academica(sections):
+    if len(sections) <= 1:
+        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+            'Ejemplo: "!consejeroacad:inel"'
+
+    dept_name = sections[1]
+    embed: discord.Embed = None
+    if dept_name.lower() in ('inel', 'icom'):
+        embed = discord.Embed(
+            title='Consejeria Academica del Departamento de INEL/ICOM')
+        ece_cons = consejeria_profesional.ECEConsejerosProfesional()
+
+        generate_embed(ece_cons, embed)
+
+        embed.remove_field(0)
+        embed.insert_field_at(
+            index=0,
+            name='Servicio',
+            value=ece_cons.contact_name
+        )
+
+        embed.add_field(
+            name='Sistema de reserva de citas ECE',
+            value=ece_cons.appointment_system_link
+        )
+        divisor = '\n\u2022 '
+        brochure_list = f'\u2022 {divisor.join(ece_cons.brochures)}'
+        embed.add_field(
+            name='Folletos Informativos',
+            value=brochure_list
+        )
+
+        embed.add_field(
+            name='Más Información',
+            value=ece_cons.more_info
+        )
+    elif dept_name.lower() in ('inso', 'ciic'):
+        pass
+    else:
+        return 'Los siento, no reconozco ese departamento. :flushed:\n'\
+            'Intenta con: **INSO, INEL, CIIC o ICOM.**'
+
+    return embed
+
+
 _telephone_guide_list = dict(
     {
         '!rectoria': {'func': None, 'description': 'Informacion de Contacto de Rectoria'},
@@ -162,7 +207,8 @@ _telephone_guide_list = dict(
         '!contactos': {'func': get_telephone_guide_help, 'description': 'Obtener lista completa de contactos disponibles'},
         '!aecon': {'func': get_asistencia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'},
         '!facultad': {'func': get_faculty, 'description': 'Obtener informacion de contacto de la facltad de los departamentos de INEL/ICOM/INSO/CIIC'},
-        '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'}
+        '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'},
+        '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener informacion de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'}
     }
 )
 

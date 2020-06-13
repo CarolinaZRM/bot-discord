@@ -17,7 +17,7 @@ def help_menu_base():
     embed.add_field(
         name="!emails", value="Gives user a PDF with some important emails they can use")
     embed.add_field(
-        name="!salon:CODIGO_SALON", value="Provee información sobre el DEPT(INEL/ICOM or INSO/CIIC).\n"
+        name="!salon:SALON", value="Provee información sobre el edificio donde se puede encontrar ese salón.\n"
         "Ejemplo: *!salon:S123*.\tSi el salón comienza con una letra entonces debe dividir la letra que identifica al edificio y el numero del salón con un guión (-).\n"
         "Ejemplo: *!salon:F-B*, este es el Anfiteatro B del edificio de Física"
     )
@@ -45,7 +45,12 @@ def help_menu_for_prepa():
 
 
 def help_menu_for_counselor():
-    return help_menu_base()
+    embed = help_menu_base()
+    embed.add_field(
+        name="!user-count",
+        value="Provee la cantidad de mienbros en el canal/grupo actual.\n"
+    )
+    return embed
 
 
 def help_menu_join():
