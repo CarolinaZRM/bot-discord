@@ -44,11 +44,12 @@ def handle_exit():
 while True:
     @client.event
     async def on_message(message):
-        log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
 
         if (message.author.bot):
             # Events related to bot response
             return
+
+        log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
 
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
@@ -69,9 +70,6 @@ while True:
                 while len(await message.channel.purge(limit=1500)) > 0:
                     log.debug(
                         f"[DEBUG DLT] BULK DELETE CALLED BY ADMIN {message.author}")
-        else:
-            log.debug(
-                f"[DEBUG DLT] NON ADMIN {message.author} TRIED TO DO CLEAR OF CHAT WITHOUT ACCESS")
 
         log.debug('[INFO] passed the filter')
 
@@ -97,6 +95,7 @@ while True:
 
     @client.event
     async def on_member_join(member: discord.Member):
+        await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
         await actions.event_help_menu_greeting(member)
 
@@ -104,12 +103,12 @@ while True:
     async def on_member_update(before, after):
         if before.roles != after.roles:
             log.debug(f'[DEBUG] before: {before} After: {after}')
-            bot.update_admin_list(client)
+            await bot.update_admin_list(client)
 
     @client.event
     async def on_ready():
         log.debug(f'[DEBUG] Guild Obj: {client.guilds}')
-        bot.update_admin_list(client)
+        await bot.update_admin_list(client)
         log.debug('[VERBOSE] On Ready Finished.')
 
     client.loop.create_task(task())

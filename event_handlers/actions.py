@@ -68,7 +68,6 @@ async def event_parse_university_building(message: discord.Message):
         user_name = message.author.name
 
     # response = f'Hola {user_name}, Es posible que este salon se encuentre en el edificio:\n'
-    log.debug(f'avdadv {sections}')
     if len(sections) > 1 and sections[0] == '!salon' and len(sections[1]) > 0:
 
         if not building_parser.is_valid_room_number(sections):
