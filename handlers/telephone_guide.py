@@ -230,6 +230,26 @@ def get_dept_cons_picologicos(sections):
     }
 
 
+def get_decanato_estudiante(sections):
+    embed = discord.Embed(
+        title='Información de Departamento del Decanato de Estudiantes')
+    decanato = servicios.DecanatoEstudiantes()
+    generate_embed(decanato, embed)
+    embed.add_field(
+        name='Pagina Web',
+        value=decanato.website
+    )
+
+    divisor = "\n\u2022 "
+    social_media_list = f'\u2022 {divisor.join(decanato.social_media)}'
+    embed.add_field(
+        name="Redes Sociales",
+        value=social_media_list
+    )
+
+    return embed
+
+
 _telephone_guide_list = dict(
     {
         '!rectoria': {'func': None, 'description': 'Informacion de Contacto de Rectoria'},
@@ -239,12 +259,12 @@ _telephone_guide_list = dict(
         '!facultad': {'func': get_faculty, 'description': 'Obtener informacion de contacto de la facltad de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'},
         '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener informacion de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'},
-        '!dcsp': {'func': get_dept_cons_picologicos, 'description': 'Informacion del Departamento de Consejería y Servicios Psicológicos (DCSP)'}
+        '!dcsp': {'func': get_dept_cons_picologicos, 'description': 'Informacion del Departamento de Consejería y Servicios Psicológicos (DCSP)'},
+        '!dec_estudiantes': {'func': get_decanato_estudiante, 'description': 'Obtener infomacion del Decanato de Estudiantes'},
+        '!univa': {'func': None, 'description': 'Informacion sobre Univ Avanzado'},
+        '!rectoria': {'func': None, 'description': 'Obtener infomacion Rectoria'}
     }
 )
-
-
-_help_msg = 'Las listas de telefonos son:\n'
 
 
 def get_guide_handler(sections):
