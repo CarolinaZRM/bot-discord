@@ -14,8 +14,10 @@ def generate_embed(contact, embed):
     phone_list = f"\u2022 {divisor.join(contact.phone_number)}"
     embed.add_field(name="Teléfono(s)", value=phone_list)
 
-    extension_list = f"\u2022 {divisor.join(contact.extensions)}"
-    embed.add_field(name="Extención(es)", value=extension_list)
+    if contact.extensions:
+        extension_list = f"\u2022 {divisor.join(contact.extensions)}"
+        embed.add_field(name="Extensión(es)", value=extension_list)
+
     embed.add_field(name="Horas de Trabajo", value=contact.work_hours)
     embed.add_field(name="Localización en Google Maps",
                     value=contact.gmaps_location)
@@ -200,6 +202,27 @@ def get_consejeria_academica(sections):
     return embed
 
 
+def get_dept_cons_picologicos(sections):
+    embed = discord.Embed(
+        title='Información de Departamento de Consejería y Servicios Psicológicos (DCSP)')
+    dcsp = servicios.ConsejeriaServiciosPsicologicos()
+    generate_embed(dcsp, embed)
+    embed.add_field(
+        name='Pagina Oficial',
+        value=dcsp.official_website
+    )
+    embed.add_field(
+        name='Contactanos',
+        value=dcsp.contatanos
+    )
+
+    content_response = dcsp.mensaje_muy_importante
+    return {
+        'embed': embed,
+        'content': content_response
+    }
+
+
 _telephone_guide_list = dict(
     {
         '!rectoria': {'func': None, 'description': 'Informacion de Contacto de Rectoria'},
@@ -208,7 +231,8 @@ _telephone_guide_list = dict(
         '!aecon': {'func': get_asistencia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'},
         '!facultad': {'func': get_faculty, 'description': 'Obtener informacion de contacto de la facltad de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'},
-        '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener informacion de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'}
+        '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener informacion de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'},
+        '!dcsp': {'func': get_dept_cons_picologicos, 'description': 'Informacion del Departamento de Consejería y Servicios Psicológicos (DCSP)'}
     }
 )
 

@@ -52,8 +52,13 @@ async def event_telephone_guide(message: discord.Message):
             # message.author.send(embed)
             if isinstance(response, str):
                 await message.author.send(response)
-            else:
+            elif isinstance(response, discord.Embed):
                 await message.author.send(content=None, embed=response)
+            elif isinstance(response, dict):
+                if 'embed' in response:
+                    await message.author.send(content=None, embed=response['embed'])
+                if 'content' in response:
+                    await message.author.send(content=response['content'])
 
 
 async def event_parse_university_building(message: discord.Message):
