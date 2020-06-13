@@ -91,8 +91,8 @@ class ConsejeriaServiciosPsicologicos(Contact):
                                 "Servicios Psicológicos: https://www.uprm.edu/dcsp/servicios-psicologicos/"]
 
         self.mensaje_muy_importante = "**Fuera de horas laborables:**\n"\
-            "Nuestros profesionales de ayuda no están disponibles fuera de horas laborales. Si la situación es tal que "\
-            "no puede esperar a ser atendida el próximo día laboral, puedes usar los siguientes recursos en la "\
+            "Nuestros profesionales de ayuda no están disponibles fuera de horas laborales.\nSi la situación es tal que "\
+            "no puede esperar a ser atendida el próximo día laboral,\npuedes usar los siguientes recursos en la "\
             "comunidad que tienen líneas de ayuda 24 horas:\n\n"\
             "**Líneas de Ayuda**\n"\
             "\u2022 Línea PAS (Primera Ayuda Psicosocial): 1-800-981-0023\n"\
