@@ -211,6 +211,13 @@ def get_dept_cons_picologicos(sections):
         name='Pagina Oficial',
         value=dcsp.official_website
     )
+
+    divisor = '\n\u2022 '
+    links_list = f'\u2022 {divisor.join(dcsp.enlaces_rapidos)}'
+    embed.add_field(
+        name='Enlaces Rapidos',
+        value=links_list
+    )
     embed.add_field(
         name='Contactanos',
         value=dcsp.contatanos

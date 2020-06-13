@@ -85,6 +85,11 @@ class ConsejeriaServiciosPsicologicos(Contact):
         self.official_website = 'https://www.uprm.edu/dcsp/'
         self.contatanos = 'https://www.uprm.edu/dcsp/contactanos/'
 
+        self.enlaces_rapidos = ["Citas & Referidos: https://www.uprm.edu/dcsp/citas-referidos/",
+                                "Manejo de Crisis: https://www.uprm.edu/dcsp/manejo-de-crisis-2/",
+                                "Consejería Profesional: https://www.uprm.edu/dcsp/consejeria/",
+                                "Servicios Psicológicos: https://www.uprm.edu/dcsp/servicios-psicologicos/"]
+
         self.mensaje_muy_importante = "**Fuera de horas laborables:**\n"\
             "Nuestros profesionales de ayuda no están disponibles fuera de horas laborales. Si la situación es tal que "\
             "no puede esperar a ser atendida el próximo día laboral, puedes usar los siguientes recursos en la "\
