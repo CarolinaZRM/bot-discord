@@ -199,7 +199,34 @@ def get_consejeria_academica(sections):
             value=ece_cons.more_info
         )
     elif dept_name.lower() in ('inso', 'ciic'):
-        pass
+        embed = discord.Embed(
+            title='Consejeria Academica del Departamento de INSO/CIIC')
+        cse_cons = consejeria_profesional.CSEConsejerosProfesional()
+
+        generate_embed(cse_cons, embed)
+
+        embed.remove_field(0)
+        embed.insert_field_at(
+            index=0,
+            name='Servicio',
+            value=cse_cons.contact_name
+        )
+
+        embed.add_field(
+            name='Cuando Puedo Ir al Departamento?',
+            value="Cuando quieras! Siempre y cuando Celines o uno de los directores este para atenderte y no esten ocupados"
+        )
+        divisor = '\n\u2022 '
+        #CSE DOESNT HAVE BROCHURES
+        embed.add_field(
+            name='CSE Dept. Website',
+            value= cse_cons.brochures[0] #website link
+        )
+
+        embed.add_field(
+            name= 'Más Información',
+            value=cse_cons.more_info
+        )
     else:
         return 'Los siento, no reconozco ese departamento. :flushed:\n'\
             'Intenta con: **INSO, INEL, CIIC o ICOM.**'
