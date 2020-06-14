@@ -8,7 +8,7 @@ import os
 _CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 _profanity_filter = ProfanityFilter(
-    languages=['en'])
+    languages=['es_core_news_sm'])
 
 
 def __init_sanitize():
