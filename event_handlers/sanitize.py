@@ -8,13 +8,12 @@ import os
 _CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 _profanity_filter = ProfanityFilter(
-    languages=['en_core_web_sm', 'es_core_news_sm'])
+    languages=['en_core_web_sm'])
 
 
 def __init_sanitize():
     global _CURRENT_DIR
     log.debug('[VERBOSE] Initializing additional Spanish Profanities')
-    custom_ = ['pendejo', 'mierda']
 
     file_path = os.path.join(
         _CURRENT_DIR, "res", "textfiles", "spanish_profanities.txt")
