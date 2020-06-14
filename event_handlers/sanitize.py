@@ -17,7 +17,7 @@ async def profanity_filter(message: discord.Message) -> None:
         else:
             author = message.author.name
         await message.delete(delay=None)
-        print(f"""{author} said a bad word, deleting message""")
-        await message.channel.send(f"""{author} said a bad word, deleting message""")
+        print(f"""{author} dijo una profanidad, borré el mensaje""")
+        await message.channel.send(f"""{author} dijo una profanidad, borré el mensaje""")
         return True
     return False

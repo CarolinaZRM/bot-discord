@@ -26,7 +26,8 @@ async def event_guessing_game(message, client):
 
         if user_name is None:
             user_name = message.author.name
-        await message.channel.send("I have a number from 1-100, can you guess it?\nYou can only type integers, or if you give up type 'GiveUp'")
+        await message.channel.send("Tengo un numero secreto del 1 al 100 :upside_down: ¿Puedes adivinarlo?\nHint: Es un numero entero :eyes:\n"
+                                   "Si te rindes escribe 'MeRindo' y te diré el numero.")
         correct_answer = random.randint(1, 101)
 
         while convert_to_int(response) != correct_answer:
@@ -39,18 +40,18 @@ async def event_guessing_game(message, client):
 
             if convert_to_int(response) is not False:
                 if (convert_to_int(response) > 100) or (convert_to_int(response) <= 0):
-                    await message.channel.send(f"""Heyyy?? That is not between 1 and 100 Hahaha\nTry again {user_name}! :)""")
+                    await message.channel.send(f"""Heyyy?? ESe numero no está entre 1 y 100 Jajajaja\nIntenta otra vez {user_name}! :sweat_smile::joy:""")
                     continue
                 elif convert_to_int(response) > correct_answer:
-                    await message.channel.send(f"""Guess a bit lower {user_name}!""")
+                    await message.channel.send(f"""Más pequeño {user_name}!""")
                     continue
                 elif convert_to_int(response) < correct_answer:
-                    await message.channel.send(f"""Guess a bit higher {user_name}!""")
+                    await message.channel.send(f"""Más grande {user_name}!""")
                     continue
-            elif response == "GiveUp":
+            elif response == "MeRindo":
                 break
 
-        if response != "GiveUp":
-            await message.channel.send(f"""You win {user_name}! Congrats !""")
+        if response != "MeRindo":
+            await message.channel.send(f"""Lo adivinaste {user_name}! Yey!""")
         else:
-            await message.channel.send(f"""Gave up so soon {user_name}? The correct answer was {correct_answer}""")
+            await message.channel.send(f"""Te rendiste tan rapido {user_name}? El numero era {correct_answer}""")

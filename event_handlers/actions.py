@@ -44,7 +44,7 @@ async def event_get_curriculum(message: discord.Message):
         split = user_message.split(":")
         log.debug('[DEBUG] Contains Curriculum')
         if len(split) == 1:
-            await message.author.send("Tienes que decirme que curriculo quieres! (INEL/ICOM/INSO/CIIC)")
+            await message.author.send("No me dijiste que curriculo necesitas :slight_frown:\nIntenta con: INEL/ICOM/INSO/CIIC")
         else:
             if split[1].upper() == "INEL":
                 await message.author.send("Here is the Electrical Engineering Curriculum:")
@@ -78,6 +78,10 @@ async def event_telephone_guide(message: discord.Message):
             elif isinstance(response, discord.Embed):
                 await message.author.send(content=None, embed=response)
             elif isinstance(response, dict):
+                if 'content_first' in response:
+                    await message.author.send(content=response['content_first'])
+                    await message.author.send(content=None, embed=response['embed'])
+                    return
                 if 'embed' in response:
                     await message.author.send(content=None, embed=response['embed'])
                 if 'content' in response:
@@ -99,7 +103,7 @@ async def event_parse_university_building(message: discord.Message):
     if len(sections) > 1 and sections[0] == '!salon' and len(sections[1]) > 0:
 
         if not building_parser.is_valid_room_number(sections):
-            await message.channel.send('El codigo del salon no es valido.')
+            await message.channel.send('No entendi el codiog de ese salon.\nIntenta escribirlo con guión.')
             return
 
         information = building_parser.get_building_information(sections)
@@ -113,7 +117,7 @@ async def event_parse_university_building(message: discord.Message):
             response_msg = f'{user_name}, no sé en que edificio está salón. :('
             await message.channel.send(response_msg)
     elif sections[0] == '!salon':
-        response_msg = f'No me especificaste cual salon quieres que busque.\nIntenta en este formato: !salon:*<codigo>*\n'\
+        response_msg = f'No me especificaste cual salon quieres buscar.\nIntenta en este formato: !salon:*<codigo>*\n'\
             'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
         await message.channel.send(response_msg)
 
@@ -127,7 +131,6 @@ async def event_help_menu(message: discord.Message):
             help_menu_embed = help_menu.help_menu_for_prepa()
         else:
             help_menu_embed = help_menu.help_menu_base()
-
         await msg_author.send(content=None, embed=help_menu_embed)
 
 

@@ -36,19 +36,20 @@ def get_dept_info(sections):
     embed = None
     if department_name in ('inso', 'ciic'):
         cse = departamentos.CSEDepartment()
-        embed = discord.Embed(title="CSE Department Info",
-                              description="Useful CSE department information")
+        embed = discord.Embed(title="Información del departamento de CSE",
+                              description="Información Utíl de CSE")
 
         return generate_embed(cse, embed)
 
     elif department_name in ('icom', 'inel'):
         ece = departamentos.ECEDepartment()
-        embed = discord.Embed(title="ECE Department Info",
-                              description="Useful ECE department information")
+        embed = discord.Embed(title="Información del departamento de ECE",
+                              description="Información Utíl de ECE")
         return generate_embed(ece, embed)
 
     else:
-        embed = "Departamento Invalido"
+        embed = "No reconozco ese departamento :eyes: :confused:\n"\
+            "Intenta con: INEL, ICOM, INSO o CIIC"
 
     return embed
 
@@ -56,7 +57,7 @@ def get_dept_info(sections):
 def get_asistencia_econ(section):
     asis_econ = servicios.AsistenciaEconomica()
 
-    return_message = "Aqui esta la informacion de la Oficina de Asistencia Economica:\n\n"
+    return_message = "Esta es la informacion de la Oficina de Asistencia Economica:\n\n"
 
     embed = discord.Embed(title='Info Asistencia Economica',
                           description='Informacion Rapida')
@@ -65,19 +66,22 @@ def get_asistencia_econ(section):
     embed = embed.add_field(name='Fechas Importantes (Prestamos, Beca, etc.)',
                             value=asis_econ.important_dates_link, inline=True)
 
-    return embed
+    return {
+        'embed': embed,
+        'content_first': return_message
+    }
 
 
 def get_guardia_universitaria(section):
     guardia = servicios.GuardiaUniversitaria()
     embed = discord.Embed(title='Info Guardia Universitaria',
-                          description='Informacion rapida')
+                          description='Informacion Rapida')
     ember = generate_embed(guardia, embed)
 
     divisor = '\n\u2022 '
     additional_info_list = f"\u2022 {divisor.join(guardia.additional_helpful_info)}"
-    embed.add_field(name="Additional Helpful Info", value=additional_info_list)
-    embed.add_field(name="More Info Link", value=guardia.more_info_link)
+    embed.add_field(name="Más Información Utíl", value=additional_info_list)
+    embed.add_field(name="Enlaces Utíles", value=guardia.more_info_link)
 
     return embed
 
@@ -136,24 +140,25 @@ def get_faculty(sections):
     department_name: str = sections[1].lower()
     embed = None
     if department_name in ('inso', 'ciic'):
-        embed = discord.Embed(title="CSE Faculty",
+        embed = discord.Embed(title="Facultad CSE",
                               description="")
-        embed.add_field(name="For more information visit this link",
+        embed.add_field(name="Para más contacos de Facultad",
                         value="https://www.uprm.edu/cse/faculty/")
         for name, role in cse_faculty.items():
             embed.add_field(name=name, value=role)
 
     elif department_name in ('inel', 'icom'):
-        embed = discord.Embed(title="ECE Faculty",
+        embed = discord.Embed(title="Facultad ECE",
                               description="")
 
-        embed.add_field(name="For more information visit this link",
+        embed.add_field(name="Para más contacos de Facultad",
                         value="https://ece.uprm.edu/people/faculty/#cn-top")
         for name, role in ece_faculty.items():
             embed.add_field(name=name, value=role)
 
     else:
-        embed = "Departamento Invalido"
+        embed = "No reconozco ese departamento :eyes: :confused:\n"\
+            "Intenta con: INEL, ICOM, INSO o CIIC"
     return embed
 
 

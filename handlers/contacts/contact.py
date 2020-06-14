@@ -1,6 +1,7 @@
 # from typing import List
 import discord
 
+
 class Contact():
     """
     Anadir los numeros con descripcion de el contacto y/o la oficina
@@ -14,8 +15,8 @@ class Contact():
 
     def __init__(self, contact_name, contact_description, services_provided,
                  phone_number, extensions=[],
-                 emails=[], office_number='Unavailable',
-                 owner='Unavailable', work_hours: str = 'Unavailable', gmaps_location='Unavailable'):
+                 emails=[], office_number='No disponible',
+                 owner='No disponible', work_hours: str = 'No disponible', gmaps_location='No disponible'):
         super().__init__()
         self.contact_name = contact_name
         self.phone_number = phone_number
@@ -29,15 +30,13 @@ class Contact():
         self.gmaps_location = gmaps_location
 
     def __str__(self):
-        #embed.add_field(name='',value="")
-
+        # embed.add_field(name='',value="")
 
         email_txt = ', '.join(self.emails)
         phone_txt = ', '.join(self.phone_number)
         extensions_txt = ' \u2022 '.join(self.extensions)
 
         extensions_bullet_list = ''
-
 
 
         return_string = f'''Contact Name: {self.contact_name}

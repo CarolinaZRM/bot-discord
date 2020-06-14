@@ -9,16 +9,16 @@ class ECEDepartment(Contact):
     # """
 
     def __init__(self):
-        contact_name = "Electrical and Computer Engineering Department"
-        contact_description = "This is the Electrical and Computer Engineering Department (INEL/ICOM)"
-        services_provided = "<Add services provided>"
+        contact_name = "Departamento de Ingeniería Electricay y de Computadoras"
+        contact_description = "Información, contactos y horario del departamento de INEL-ICOM"
+        services_provided = "Multiples servicios para estudiantes en el departamento de INEL-ICOM"
         phone_number = ["(787) 832-4040"]
         extensions = ["Ext. 3086", "Ext. 3821", "Ext. 3090",
                       "Ext. 3094", "Ext. 3121", "Ext. 2170"]
         emails = ["director.inec@uprm.edu"]
-        office_number = "Stefani Building - Office 125A"
+        office_number = "Edificio Stefani - Oficina 125A"
         owner = None
-        work_hours = 'Lunes-Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
+        work_hours = 'Lunes - Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
         gmaps_location = 'https://goo.gl/maps/Jb43w1iy2VfjMeSR6'
         super().__init__(contact_name, contact_description, services_provided,
                          phone_number, extensions=extensions,
@@ -34,9 +34,9 @@ class CSEDepartment(Contact):
     # """
 
     def __init__(self):
-        contact_name = "Computer Science & Engineering Department"
-        contact_description = "This is the Computer Science & Engineering Department (INSO/CIIC)"
-        services_provided = "<Add services provided>"
+        contact_name = "Departamento de Ingenieria de Software & Ciencias de la Computación"
+        contact_description = "Información, contactos y horario del departamento de INSO-CIIC"
+        services_provided = "Multiples servicios para estudiantes en el departamento de INSO-CIIC"
         phone_number = ["(787) 832-4040"]
         extensions = [
             "Ext. 5864 (Acting Director – Dr. Pedro I. Rivera Vega)",
@@ -46,9 +46,9 @@ class CSEDepartment(Contact):
             "Ext. 5864 (Administrative Secretary – Gedyeliz Zoe Valle)"]
         emails = ["p.rivera@upr.edu", "manuel.rodriguez7@upr.edu",
                   "celines.alfaro@upr.edu", "gedyeliz.valle@upr.edu"]
-        office_number = "S-220 (Stefani Building)"
+        office_number = "Edificio Stefani - Oficina 220"
         owner = None
-        work_hours = 'Lunes-Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
+        work_hours = 'Lunes - Viernes | 7:30 AM - 11:30 AM & 1:30 PM - 4:30 PM'
         super().__init__(contact_name, contact_description, services_provided,
                          phone_number, extensions=extensions,
                          emails=emails, office_number=office_number,
