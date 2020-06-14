@@ -42,7 +42,7 @@ async def profanity_filter(message: discord.Message) -> None:
     If message contains a profanity return `True`, else return `False`
     """
     user_message = message.content
-    if _profanity_filter.is_profane(user_message) or profanity.contains_profanity(user_message):
+    if profanity.contains_profanity(user_message):
         # if better_profanity.profanity.contains_profanity(message.content):
         channel_sent = message.channel
         log.debug(f'Containes a bad word: {user_message}')
