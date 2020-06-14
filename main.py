@@ -2,7 +2,7 @@ import asyncio
 import os
 from datetime import datetime
 
-import better_profanity
+import event_handlers
 import discord
 
 import bot
@@ -13,12 +13,15 @@ from event_handlers import (channel, counselor, fun_games, join,
 client = discord.Client()
 
 
+
 async def task():
     log.debug(f'[INFO] [Time: {datetime.utcnow()}] Starting.')
     await client.wait_until_ready()
     log.debug(f'[INFO] [Time: {datetime.utcnow()}] Started.')
     while True:
         await asyncio.sleep(1)
+
+
 
 
 def handle_exit():
@@ -81,6 +84,7 @@ while True:
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
         await actions.event_get_calendar(message)
+        await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
@@ -110,6 +114,7 @@ while True:
     async def on_ready():
         log.debug(f'[DEBUG] Guild Obj: {client.guilds}')
         await bot.update_admin_list(client)
+        event_handlers.prepa.extract_counselors(client)
         log.debug('[VERBOSE] On Ready Finished.')
 
     client.loop.create_task(task())
