@@ -2,13 +2,9 @@
 from better_profanity import profanity
 import discord
 import log
-from profanity_filter import ProfanityFilter
 import os
 
 _CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
-
-_profanity_filter = ProfanityFilter(
-    languages=['es_core_news_sm'])
 
 
 def __init_sanitize():
