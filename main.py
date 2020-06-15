@@ -50,6 +50,12 @@ while True:
 
         log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
 
+        adding_profanity = await sanitize.add_profanity_to_list(message)
+
+        if adding_profanity:
+            log.debug(f'[DEBUG] {message.author} added new profanity.')
+            return
+
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
             log.debug('[DEBUG] Has profanity')

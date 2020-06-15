@@ -3,17 +3,17 @@ from better_profanity import profanity
 import discord
 import log
 import os
+from bot import is_sender_counselor, is_from_a_channel
 
 _CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
+_PROFANITY_FILE_PATH = os.path.join(
+    _CURRENT_DIR, "res", "textfiles", "profanities.txt")
 
 
 def __init_sanitize():
     global _CURRENT_DIR
     log.debug('[VERBOSE] Initializing additional Spanish Profanities')
-
-    file_path = os.path.join(
-        _CURRENT_DIR, "res", "textfiles", "spanish_profanities.txt")
-    censored_spanish_words = open(file_path, 'r')
+    censored_spanish_words = open(_PROFANITY_FILE_PATH, 'r')
 
     lines = censored_spanish_words.readlines()
     censored_spanish_words.close()
@@ -30,17 +30,58 @@ def __init_sanitize():
             set(profanity._generate_patterns_from_word(word)))
 
     profanity.add_censor_words(combinations)
-    print(combinations)
     log.debug('[VERBOSE] Finished adding additional Spanish Profanities')
 
 
 __init_sanitize()
 
 
+async def add_profanity_to_list(message: discord.Message):
+    sections = message.content.split(':')
+    if sections[0] == "!admin_add_profanity":
+        if len(sections) == 1:
+            await message.author.send("No me dijiste que palabra añado a la lista de profanidades")
+            return
+
+        if is_sender_counselor(message):
+            author = None
+            if hasattr(message.author, 'nick'):
+                author = message.author.nick
+            else:
+                author = message.author.name
+            log.debug('[DEBUG] Can add a profanity. Is ADMIN')
+
+            censored_words_file = open(_PROFANITY_FILE_PATH, 'r')
+            lines = censored_words_file.readlines()
+            censored_words_file.close()
+            censored_words = set(list(map(lambda x: x.strip().lower(), lines)))
+            censored_words_file.close()
+
+            profanity_to_add = sections[1].lower()
+
+            if profanity_to_add not in censored_words:
+                profanity_file = open(_PROFANITY_FILE_PATH, 'a+')
+                profanity_file.write(f'{profanity_to_add}\n')
+                profanity_file.close()
+
+                combinations = set()
+                combinations.update(
+                    profanity._generate_patterns_from_word(profanity_to_add)
+                )
+                profanity.add_censor_words(combinations)
+
+            await message.delete(delay=0)
+            await message.channel.send(f"""{author}, commando fue completado""")
+            return True
+
+
 async def profanity_filter(message: discord.Message) -> None:
     """
     If message contains a profanity return `True`, else return `False`
     """
+    if not is_from_a_channel(message):
+        return
+
     user_message = message.content
     if profanity.contains_profanity(user_message):
         # if better_profanity.profanity.contains_profanity(message.content):
