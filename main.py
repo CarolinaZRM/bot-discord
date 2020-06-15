@@ -2,7 +2,6 @@ import asyncio
 import os
 from datetime import datetime
 
-import event_handlers
 import discord
 
 import bot
@@ -13,15 +12,12 @@ from event_handlers import (channel, counselor, fun_games, join,
 client = discord.Client()
 
 
-
 async def task():
     log.debug(f'[INFO] [Time: {datetime.utcnow()}] Starting.')
     await client.wait_until_ready()
     log.debug(f'[INFO] [Time: {datetime.utcnow()}] Started.')
     while True:
         await asyncio.sleep(1)
-
-
 
 
 def handle_exit():
@@ -53,6 +49,12 @@ while True:
             return
 
         log.debug(f'[INFO] [Func: on_message] MessageObj: {message}')
+
+        adding_profanity = await sanitize.add_profanity_to_list(message)
+
+        if adding_profanity:
+            log.debug(f'[DEBUG] {message.author} added new profanity.')
+            return
 
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
@@ -114,7 +116,7 @@ while True:
     async def on_ready():
         log.debug(f'[DEBUG] Guild Obj: {client.guilds}')
         await bot.update_admin_list(client)
-        event_handlers.prepa.extract_counselors(client)
+        prepa.extract_counselors(client)
         log.debug('[VERBOSE] On Ready Finished.')
 
     client.loop.create_task(task())
