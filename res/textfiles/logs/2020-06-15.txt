@@ -1,0 +1,28 @@
+[2020-06-15 17:06:59.417521] Message: Test Log,  Type of Message: MSG,Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:07:23.098505] Message: Test Log 2, Type of Message: MSG, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:08:40.497301] Message: Test Log 3, Type of Message: MSG, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:08:49.783469] Message: !help,Type of Message: Command, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:09:34.490300] Message: /EO:INSO, Type of Message: Command, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:09:51.823227] Message: Aight itworks los logs, Type of Message: MSG, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:10:23.765884] Message: solo añade la fecha y hora en que se mando el msj, el tipo de mensjae que se envio (command o nromal msg), el author y los roles de ese user, Type of Message: MSG, Author: bermed28#8811, Roles: @everyone, studentCounselor, admin 
+[2020-06-15 17:14:03.510269] MESSAGE: Nice, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:14:16.967526] MESSAGE: En que formato guardas la fecha?, TYPE: command, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:14:20.405993] MESSAGE: Con timezone?, TYPE: command, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:14:28.496788] MESSAGE: [2020-06-15 17:14:03.510269], TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:14:29.952716] MESSAGE: asi, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:14:35.665697] MESSAGE: datetime.now(), TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:14:43.342622] MESSAGE: Sabes si es UTC o tiene algun tipo de timezone ?, TYPE: command, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:14:59.665206] MESSAGE: no se pero aja it's working porque mira la fecha, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:15:02.498026] MESSAGE: es las 17, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:15:04.398138] MESSAGE: que son las 5, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:15:08.824016] MESSAGE: en regular time, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:15:14.165827] MESSAGE: Weno, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:15:16.519200] MESSAGE: Por eso, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:15:23.689778] MESSAGE: Tienes que guardarlo en utc, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:15:27.785241] MESSAGE: Pq eso es tu compu, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:15:39.253472] MESSAGE: Pero no sabemos en que pais esta el Sever de heroku, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:15:56.150335] MESSAGE: Y despues vamos a tener Horas invalidas, UTC es universal donde sea, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:16:15.414740] MESSAGE: Also, sé me olvido especificar en el issue, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:16:25.121419] MESSAGE: Cuan facil es parse ese log?, TYPE: command, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 
+[2020-06-15 17:16:49.241443] MESSAGE: yo le doy push ahora para que you tweak it on your free time, TYPE: mesage, AUTHOR: bermed28#8811, ROLES: @everyone, studentCounselor, admin 
+[2020-06-15 17:16:52.778950] MESSAGE: Dale, TYPE: mesage, AUTHOR: Ghabeh#4359, ROLES: @everyone, studentCounselor 

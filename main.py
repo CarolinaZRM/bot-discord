@@ -8,6 +8,7 @@ import bot
 import log
 from event_handlers import (channel, counselor, fun_games, join,
                             prepa, sanitize, actions)
+from handlers import daily_logs as dl
 
 client = discord.Client()
 
@@ -85,7 +86,9 @@ while True:
         await actions.event_telephone_guide(message)
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
+        await dl.analytics(message)
         await actions.event_get_calendar(message)
+
         await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):
