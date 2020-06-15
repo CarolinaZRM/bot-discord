@@ -111,6 +111,7 @@ while True:
         if before.roles != after.roles:
             log.debug(f'[DEBUG] before: {before} After: {after}')
             await bot.update_admin_list(client)
+            prepa.extract_counselors(client)
 
     @client.event
     async def on_ready():
