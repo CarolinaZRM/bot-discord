@@ -62,6 +62,15 @@ def help_menu_for_counselor():
         name='!admin_add_profanity:PALABRA',
         value='Este comando solo para consejeros permite anadir una palabra nueva a la lista de profanidades. Utilice con cuidado.'
     )
+    embed.add_field(
+        name='!botstartstream',
+        value="Este comando es para hacer el *MADE Bot* se comporte como si estuviera 'Streaming' esto hara que aparezca un link en su perfil."
+        "Pregunta por nombre de la actividad y el URL del video. Tiene que ser un video publico. Utilice con cuidado"
+    )
+    embed.add_field(
+        name='!botstopstream',
+        value='Este comando Hace que el bot termine de "stream" un video y vuelva a un estado normal. Utilice con cuidado.'
+    )
     return embed
 
 
