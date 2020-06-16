@@ -11,7 +11,7 @@ _FILE_PATH = None
 def _init_logs():
     global _FILE_PATH
     now = datetime.utcnow()  # current date and time
-    current_time = now.strftime("%m-%d-%Y:%Hhr.%Mm.%Ss")
+    current_time = now.strftime("%m-%d-%Y")
     _FILE_PATH = os.path.join(_LOG_DIR, f"{current_time}.txt")
 
 
@@ -19,14 +19,16 @@ _init_logs()
 
 
 def getRoles(member: discord.Member):
+    if not hasattr(member, 'roles'):
+        return 'Received from DM'
     return [str(role.name) for role in member.roles]
 
 
 def analytics(message: discord.Message):
     user_message = message.content
     if len(user_message) > 0 and user_message[0] in ("/", '!', '?') and not message.author.bot:
-        now = datetime.utcnow()  # current date and time
-        current_time = now.strftime("%m-%d-%Y:%Hhr.%Mm.%Ss")
+        current_time = datetime.utcnow()  # current date and time
+        # current_time = now.strftime("%m-%d-%Y:%Hhr.%Mm.%Ss")
 
         log.debug(
             f"""[LOG] LOGGING MESSAGE SENT BY {message.author} ON {current_time} """)
@@ -36,7 +38,7 @@ def analytics(message: discord.Message):
         role_list = getRoles(message.author)
 
         log_data = {
-            'date': current_time,
+            'date_utc': str(current_time),
             'command': user_message,
             'roles': role_list,
             'author': str(message.author)
