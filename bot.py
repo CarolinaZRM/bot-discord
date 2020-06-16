@@ -17,6 +17,7 @@ _GUILD_ID_NUM = 718624993470316554
 
 
 def readToken():
+
     f = open(os.path.join(_CURRENT_DIR, _TOKEN_FILE), "r")
     lines = f.readlines()
     return lines[0].strip()

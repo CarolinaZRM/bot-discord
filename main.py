@@ -8,7 +8,7 @@ import bot
 import log
 from event_handlers import (channel, counselor, fun_games, join,
                             prepa, sanitize, actions)
-
+from handlers import daily_logs
 client = discord.Client()
 
 
@@ -79,6 +79,7 @@ while True:
         log.debug('[INFO] passed the filter')
 
         # Created event passed Message object to use for response of bot to discord client
+        daily_logs.analytics(message)
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
@@ -86,6 +87,7 @@ while True:
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
         await actions.event_get_calendar(message)
+
         await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):
@@ -104,7 +106,6 @@ while True:
     async def on_member_join(member: discord.Member):
         await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
-        await actions.event_help_menu_greeting(member)
 
     @client.event
     async def on_member_update(before, after):
