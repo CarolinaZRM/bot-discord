@@ -2,6 +2,7 @@ import discord
 import log
 import os
 from datetime import datetime
+import json
 
 _CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 _LOG_DIR = os.path.join(_CURRENT_DIR, "res", "textfiles", "logs")
@@ -28,6 +29,7 @@ def analytics(message: discord.Message):
     user_message = message.content
     if len(user_message) > 0 and user_message[0] in ("/", '!', '?') and not message.author.bot:
         current_time = datetime.utcnow()  # current date and time
+        current_time = str(current_time)
         # current_time = now.strftime("%m-%d-%Y:%Hhr.%Mm.%Ss")
 
         log.debug(
@@ -38,13 +40,13 @@ def analytics(message: discord.Message):
         role_list = getRoles(message.author)
 
         log_data = {
-            'date_utc': str(current_time),
+            'date_utc': current_time,
             'command': user_message,
             'roles': role_list,
             'author': str(message.author)
         }
 
-        log_file.write(f'{str(log_data)}\n')
+        log_file.write(f'{json.dumps(log_data)}\n')
         # log_file.write(
         #     f"""[{dt.now()}] MESSAGE: {message.content}, TYPE: command, AUTHOR: {message.author}, ROLES: {", ".join(roles)} \n""")
 
