@@ -13,6 +13,7 @@ def _init_logs():
     global _FILE_PATH
     now = datetime.utcnow()  # current date and time
     current_time = now.strftime("%m-%d-%Y")
+    os.makedirs(_LOG_DIR, exist_ok=True)
     _FILE_PATH = os.path.join(_LOG_DIR, f"{current_time}.txt")
 
 
