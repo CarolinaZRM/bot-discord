@@ -8,8 +8,7 @@ import bot
 import log
 from event_handlers import (channel, counselor, fun_games, join,
                             prepa, sanitize, actions)
-from handlers import daily_logs as dl
-
+from handlers import daily_logs
 client = discord.Client()
 
 
@@ -80,13 +79,13 @@ while True:
         log.debug('[INFO] passed the filter')
 
         # Created event passed Message object to use for response of bot to discord client
+        daily_logs.analytics(message)
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
         await actions.event_telephone_guide(message)
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
-        await dl.analytics(message)
         await actions.event_get_calendar(message)
 
         await prepa.get_counselor_names(message)
