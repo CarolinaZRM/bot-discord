@@ -290,6 +290,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
         print(f'[ERROR] {err}')
         await message.author.send(f'Me econtre con un error descargando el video.\n'
                                   f"Error:\n{str(err)}")
+        return
 
     name = ""
     for file in os.listdir(os.path.join(_CURRENT_DIR, "res", "audio")):
