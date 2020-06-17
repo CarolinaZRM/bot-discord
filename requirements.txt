@@ -1,4 +1,4 @@
-discord.py[voice]==1.3.3
+https://files.pythonhosted.org/packages/f6/12/a3cfceefd625c39a2d6f9f52ffad57f1b3fcb9906eaa0eeafd2392f10deb/discord.py-1.3.3-py3-none-any.whl
 PyNaCl==1.3.0
 dnspython==1.16.0
 async-timeout==3.0.1
