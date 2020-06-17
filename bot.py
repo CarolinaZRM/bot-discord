@@ -271,6 +271,10 @@ async def play_audio(client: discord.Client, message: discord.Message):
         await message.author.send(f"No estoy conectado a ningun canal de voz")
         return
 
+    if voice_client.is_playing():
+        await message.author.send(f'No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero')
+        return
+
     ydl_opts = {
         'format': 'bestaudio/best',
         'outtmpl': f"{os.path.join(_CURRENT_DIR, 'res', 'audio', '%(title)s.%(ext)s')}",
