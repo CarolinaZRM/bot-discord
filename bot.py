@@ -155,3 +155,56 @@ async def set_streaming(client: discord.Client, message: discord.Message):
         await client.wait_for('message', check=check_same_user)
 
         await client.change_presence(activity=None)
+
+
+async def join_voice_channel(message: discord.Message):
+    if message.content != '!join':
+        return
+
+    voice_state: discord.VoiceState = message.author.voice
+    log.debug(f'[DEBUG - Author Voice State] {voice_state}')
+    if not voice_state:
+        await message.author.send(f"Hola {message.author.name}, primero te tienes que conectar tu al canal de voz"
+                                  "para yo saber a cual quieres que me conecte")
+        return
+
+    voice_channel: discord.VoiceChannel = voice_state.channel
+
+    try:
+        voice_client: discord.VoiceClient = await voice_channel.connect()
+    except discord.ClientException:
+        await message.author.send(f'Ya estoy connectado al canal de voz: {voice_channel}')
+        return
+
+    if voice_client and voice_client.is_connected():
+        await voice_client.move_to(voice_channel)
+    else:
+        voice = await voice_client.connect()
+
+    await message.author.send(f'Ya me uni al canal de voz: {voice_channel}')
+
+
+async def leave_voice_channel(client: discord.Client, message: discord.Message):
+    if message.content != '!leave':
+        return
+
+    voice_state: discord.VoiceState = message.author.voice
+    log.debug(f'[DEBUG - Author Voice State] {voice_state}')
+    if not voice_state:
+        await message.author.send(f"Hola {message.author.name}, primero te tienes que conectar tu al canal de voz"
+                                  "para yo saber de cual quieres que me desconecte")
+        return
+
+    voice_channel: discord.VoiceChannel = voice_state.channel
+
+    log.debug(f"[DEBUG] {client.voice_clients}")
+
+    voice_client: discord.VoiceClient = discord.utils.get(
+        client.voice_clients, guild=message.guild)
+
+    if not voice_client:
+        await message.author.send(f"No estoy conectado al canal: {voice_channel}")
+
+    if voice_client and voice_client.is_connected():
+        await voice_client.disconnect()
+        await message.author.send(f'Ya me desconecté del canal de voz: {voice_channel}')
