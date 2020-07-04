@@ -58,8 +58,8 @@ async def event_get_curriculum(message: discord.Message):
             if split[1].upper() == "CIIC":
                 await message.author.send("Here is the Computer Science & Engineering Curriculum:")
                 # for when CIIC curriculum is updated
-                # await message.author.send(file=discord.File(CURRICULO_CIIC))
-                await message.author.send(CURRICULO_CIIC_LINK)
+                await message.author.send(file=discord.File(CURRICULO_CIIC))
+                #await message.author.send(CURRICULO_CIIC_LINK)
 
 
 async def event_telephone_guide(message: discord.Message):
