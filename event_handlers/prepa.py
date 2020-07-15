@@ -37,7 +37,7 @@ async def get_counselor_names(message: discord.Message):
         if split[0].upper() == "/EO":
             if split[1].upper() == "INEL":
                 embed = discord.Embed(title="Estudiantes Orientadores de INEL",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingeineria Electrica como tu!")
+                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria Electrica como tu!")
                 for counselor in inel_counselors:
                     if counselor is not None:
                         embed.add_field(
@@ -46,7 +46,7 @@ async def get_counselor_names(message: discord.Message):
 
             elif split[1].upper() == "ICOM":
                 embed = discord.Embed(title="Estudiantes Orientadores de ICOM",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingeineria de Computadora como tu!")
+                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria de Computadora como tu!")
                 for counselor in icom_counselors:
                     if counselor is not None:
                         embed.add_field(
@@ -55,7 +55,7 @@ async def get_counselor_names(message: discord.Message):
 
             elif split[1].upper() == "INSO" or split[1].upper() == "CIIC":
                 embed = discord.Embed(title="Estudiantes Orientadores de INSO/CIIC",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingeineria de Software/Ciencias e Ingenieria de Computacion como tu!")
+                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria de Software/Ciencias e Ingenieria de Computacion como tu!")
                 for counselor in cse_counselors:
                     if counselor is not None:
                         embed.add_field(
