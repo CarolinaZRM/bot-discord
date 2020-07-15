@@ -93,6 +93,10 @@ def is_sender_prepa(message: discord.Message):
     return str(message.author) not in _VALIDATED_COUNSELORS
 
 
+def is_sender_admin(message: discord.Message):
+    return message.author.id == 539112744553676812 or message.author.id == 541298986535878677
+
+
 def is_from_a_channel(message: discord.Message) -> bool:
     if message.channel.type != ChannelType.private:
         log.debug('[_TOKEN_FILE] Is from a chanel')
@@ -112,3 +116,42 @@ def is_from_channel(message: discord.Message, channel_name: str) -> bool:
         log.debug('[_TOKEN_FILE] Is from DM')
         return True
     return False
+
+
+async def set_streaming(client: discord.Client, message: discord.Message):
+    user_message = message.content
+
+    if user_message == '!botstartstream' and is_sender_counselor(message) and is_from_dm(message):
+        sender: discord.User = message.author
+
+        # checks if message was sent by the user and in the DM
+        def check_same_user(client_response: discord.Message):
+            sender_dm_id = sender.dm_channel.id
+            return client_response.author == sender and client_response.channel.id == sender_dm_id
+
+        await sender.send(content='Cual va a ser el nombre de la actividad?')
+        activity_name = await client.wait_for('message', check=check_same_user)
+        activity_name = activity_name.content
+
+        await sender.send(content="Escribe el link del video para 'stream':")
+        activity_url = await client.wait_for('message', check=check_same_user)
+        activity_url = activity_url.content
+
+        await client.change_presence(activity=discord.Activity(
+            name=activity_name,
+            url=activity_url,
+            type=discord.ActivityType.streaming,
+            state='Watching',
+            details=f'Viewing {activity_name}'
+        ))
+
+        # checks if message was sent by the user and in the DM
+        def check_same_user_stop_streaming(client_response: discord.Message):
+            sender_dm_id = sender.dm_channel.id
+            return client_response.author == sender \
+                and client_response.channel.id == sender_dm_id \
+                and client_response.content == '!botstopstream'
+
+        await client.wait_for('message', check=check_same_user)
+
+        await client.change_presence(activity=None)
