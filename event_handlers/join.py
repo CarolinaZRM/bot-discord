@@ -2,13 +2,15 @@
 """
 import discord
 import log
+import os
 
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu nombre completo para poder ponerte ese nombre en el servidor!**"
+        f"**Por favor, dime cual es tu nombre completo para poder ponerte ese nombre en el servidor y poder asignarte en el grupo que Made eligió para ti!**"
+        f"Ejemplo: Fernando J. Bermudez Medina"
     )
 
     # checks if message was sent by the user and in the DM
@@ -21,7 +23,7 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
 
     # Extracts the name of the student from the DM
     name = await client.wait_for("message", check=check_same_user)
-
+    assign_group(client,member,name)
     await member.send("**Gracias!**")
 
     # Replaces their old name to the one they provided in the DM to the bot
@@ -79,8 +81,28 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # finish waiting block
 
     closing = f"{user_name}, eso es todo por hoy. Ya conoces los dos comandos mas importantes: ***'!help'*** y  ***'!contactos'***\n"\
-        'Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n'\
-        '¡Hasta luego! Tambien te digo que los Estudiantes Orientadores de Team MADE estan para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'\
-        '¡¡¡Espero que tengas un buen día!!!'
+        'Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n' \
+        'Ahora se te asigno un grupo en especifico de un personaje de Super Smash Bros, lo puedes verificar en tu perfil\n' \
+        'El grupo que te toco tiene un canal de texto y de voz para que puedas compartir con los otros miembros de tu grupo\n'\
+        'Cualquier inconveniente le puedes escribir a Fernando Bermudez o Gabriel Santiago \n'\
+        '¡Hasta luego! Tambien te digo que los Estudiantes Orientadores de Team MADE estan para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'
 
     await member.send(content=closing)
+
+
+def assign_group(client, member, name):
+    """
+        When a new user enters the server we do the following:
+            1) First we iterate through all text files containing all users in all text files that divide users into groups
+            2) We try to find said user by their name they provided when they were greeted in each file
+            3) If found, we add the role of "prepa" and the role of the group they were assigned
+    """
+    directory = "directory/of/prepa/lists.txt" #os.fsencode(directory_in_str)
+
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        if filename.endswith(".txt"):
+            # print(os.path.join(directory, filename))
+            continue
+        else:
+            continue
