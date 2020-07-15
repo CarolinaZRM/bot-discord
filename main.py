@@ -81,6 +81,11 @@ while True:
         # Created event passed Message object to use for response of bot to discord client
         daily_logs.analytics(message)
         await bot.set_streaming(client, message)
+        await bot.join_voice_channel(client, message)
+        await bot.leave_voice_channel(client, message)
+        await bot.play_audio(client, message)
+        await bot.pause_audio(client, message)
+        await bot.resume_audio(client, message)
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
