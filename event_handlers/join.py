@@ -1,16 +1,29 @@
 """This file is supponsed to contain all the events and commands that are related to member join
 """
-import discord
-import log
+import csv
 import os
+from typing import Dict
+import discord
+try:
+    import log
+except:
+    pass
+
+# go up two dirs
+# at bot-discord/
+_CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# PDF Files
+_PREPA_FILE = os.path.join(
+    _CURRENT_DIR, "res", "prepas", "teams_prepa_list.csv")
 
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu nombre completo para poder ponerte ese nombre en el servidor y poder asignarte en el grupo que Made eligió para ti!**"
-        f"Ejemplo: Fernando J. Bermudez Medina"
+        f"**Por favor, dime cual es tu numero de estudiante para poder asignarte al grupo que Made eligió para ti!**"
+        f"Ejemplo: 802-20-####"
     )
 
     # checks if message was sent by the user and in the DM
@@ -21,22 +34,26 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
         # return true if message belongs to the same member and comes from DM
         return client_response.author == member and client_response.channel.id == member_dm_id
 
-    # Extracts the name of the student from the DM
-    name = await client.wait_for("message", check=check_same_user)
-    assign_group(client,member,name)
-    await member.send("**Gracias!**")
+    ##################
+    # ask for student number
+    student_name = await assign_group(client, member, check_same_user)
+
+    # # Extracts the name of the student from the DM
+    # name = await client.wait_for("message", check=check_same_user)
+
+    # await member.send("**Gracias!**")
 
     # Replaces their old name to the one they provided in the DM to the bot
     log.debug(
-        f"[VERBOSE - join.py | line.20] {name.author}'s nickname was changed to {name.content}")
-    await member.edit(nick=str(name.content))
+        f"[VERBOSE - join.py | line.20] {student_name.author}'s nickname was changed to {student_name.content}")
+    await member.edit(nick=str(student_name.content))
     await member.send(
-        f"Ya todos te veran como: '{name.content}'\n"
+        f"Ya todos te veran como: '{student_name.content}'\n"
         f"Que facil, no?\n"
         "Te digo un secreto :eyes: ... Programar es super divertido y tu tambien puedes hacerlo! :hugging: "
     )
 
-    user_name = name.content
+    user_name = student_name.content
 
     message_to_send = f'Ahora si me presento formalmente,\n'\
         f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada:\n"\
@@ -90,19 +107,37 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     await member.send(content=closing)
 
 
-def assign_group(client, member, name):
+async def assign_group(client: discord.Client, member: discord.Member, check_same_user):
     """
         When a new user enters the server we do the following:
             1) First we iterate through all text files containing all users in all text files that divide users into groups
             2) We try to find said user by their name they provided when they were greeted in each file
             3) If found, we add the role of "prepa" and the role of the group they were assigned
     """
-    directory = "directory/of/prepa/lists.txt" #os.fsencode(directory_in_str)
+    student_number = await client.wait_for('message', check=check_same_user)
 
-    for file in os.listdir(directory):
-        filename = os.fsdecode(file)
-        if filename.endswith(".txt"):
-            # print(os.path.join(directory, filename))
-            continue
-        else:
-            continue
+    student_obj = _get_student(student_number)
+
+    while student_obj is None:
+        await member.send("No encuentro ese numero de estudiante. Intenta de nuevo:")
+        student_number = await client.wait_for('message', check=check_same_user)
+        student_obj = _get_student(student_number)
+
+    # anadir la logica de roles
+    # el nombre del grupo esta en:
+    # student_obj['group id'] o student_obj.get('group id')
+
+    return '{} {} {}'.format(student_obj['first name'], student_obj['middle initial'], student_obj['last names'])
+
+
+def _get_student(student_number: str) -> Dict[str, str]:
+    with open(_PREPA_FILE) as teams_list_file:
+        rows = csv.DictReader(teams_list_file,  delimiter=',')
+        for row in rows:
+            if student_number.replace('-', '') == row['student id'].replace('-', ''):
+                return dict(row)
+    return None
+
+
+if __name__ == "__main__":
+    pass
