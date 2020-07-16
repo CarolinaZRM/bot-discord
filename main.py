@@ -62,7 +62,7 @@ while True:
             return
 
         log.debug(f"[USER] {message.author.name}#{message.author.id}")
-        if message.content.startswith("!bulk_delete_admin") and (message.author.id == 539112744553676812 or message.author.id == 541298986535878677):
+        if message.content.startswith("!bulk_delete_admin") and bot.is_sender_admin(message) and not bot.is_from_dm(message):
             sections = message.content.split(':')
             log.debug(f'[DEBUG] DELETE COMMAND SECTIONS: {sections}')
             log.debug(
@@ -80,6 +80,12 @@ while True:
 
         # Created event passed Message object to use for response of bot to discord client
         daily_logs.analytics(message)
+        await bot.set_streaming(client, message)
+        await bot.join_voice_channel(client, message)
+        await bot.leave_voice_channel(client, message)
+        await bot.play_audio(client, message)
+        await bot.pause_audio(client, message)
+        await bot.resume_audio(client, message)
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
