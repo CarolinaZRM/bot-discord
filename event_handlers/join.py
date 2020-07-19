@@ -1,14 +1,31 @@
 """This file is supponsed to contain all the events and commands that are related to member join
 """
+import csv
+import os
+from typing import Dict
 import discord
-import log
+from discord import utils
+from discord.errors import Forbidden
+try:
+    import log
+except:
+    pass
+
+# go up two dirs
+# at bot-discord/
+_CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# PDF Files
+_PREPA_FILE = os.path.join(
+    _CURRENT_DIR, "res", "prepas", "teams_prepa_list.csv")
 
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu nombre completo para poder ponerte ese nombre en el servidor!**"
+        f"**Por favor, dime cual es tu numero de estudiante para poder asignarte al grupo que Made eligió para ti!**"
+        f"Ejemplo: 802-20-####"
     )
 
     # checks if message was sent by the user and in the DM
@@ -19,22 +36,26 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
         # return true if message belongs to the same member and comes from DM
         return client_response.author == member and client_response.channel.id == member_dm_id
 
-    # Extracts the name of the student from the DM
-    name = await client.wait_for("message", check=check_same_user)
+    ##################
+    # ask for student number
+    student_name = await assign_group(client, member, check_same_user)
 
-    await member.send("**Gracias!**")
+    # # Extracts the name of the student from the DM
+    # name = await client.wait_for("message", check=check_same_user)
+
+    # await member.send("**Gracias!**")
 
     # Replaces their old name to the one they provided in the DM to the bot
     log.debug(
-        f"[VERBOSE - join.py | line.20] {name.author}'s nickname was changed to {name.content}")
-    await member.edit(nick=str(name.content))
+        f"[VERBOSE - join.py | line.20] {member.name}'s nickname was changed to {student_name}")
+    await member.edit(nick=str(student_name))
     await member.send(
-        f"Ya todos te veran como: '{name.content}'\n"
+        f"Ya todos te veran como: '{student_name}'\n"
         f"Que facil, no?\n"
         "Te digo un secreto :eyes: ... Programar es super divertido y tu tambien puedes hacerlo! :hugging: "
     )
 
-    user_name = name.content
+    user_name = student_name
 
     message_to_send = f'Ahora si me presento formalmente,\n'\
         f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada:\n"\
@@ -79,8 +100,62 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # finish waiting block
 
     closing = f"{user_name}, eso es todo por hoy. Ya conoces los dos comandos mas importantes: ***'!help'*** y  ***'!contactos'***\n"\
-        'Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n'\
-        '¡Hasta luego! Tambien te digo que los Estudiantes Orientadores de Team MADE estan para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'\
-        '¡¡¡Espero que tengas un buen día!!!'
+        'Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n' \
+        'Ahora se te asigno un grupo en especifico de un personaje de Super Smash Bros, lo puedes verificar en tu perfil\n' \
+        'El grupo que te toco tiene un canal de texto y de voz para que puedas compartir con los otros miembros de tu grupo\n'\
+        'Cualquier inconveniente le puedes escribir a Fernando Bermudez o Gabriel Santiago \n'\
+        '¡Hasta luego! Tambien te digo que los Estudiantes Orientadores de Team MADE estan para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'
 
     await member.send(content=closing)
+
+
+async def assign_group(client: discord.Client, member: discord.Member, check_same_user):
+    """
+        When a new user enters the server we do the following:
+            1) First we iterate through all text files containing all users in all text files that divide users into groups
+            2) We try to find said user by their name they provided when they were greeted in each file
+            3) If found, we add the role of "prepa" and the role of the group they were assigned
+    """
+    student_number = await client.wait_for('message', check=check_same_user)
+
+    student_obj = _get_student(student_number.content)
+
+    while student_obj is None:
+        await member.send("No encuentro ese numero de estudiante. Intenta de nuevo:")
+        student_number = await client.wait_for('message', check=check_same_user)
+        student_obj = _get_student(student_number.content)
+
+    # el nombre del grupo esta en:
+    # student_obj['group id'] o student_obj.get('group id')
+    student_group: str = student_obj['group id']
+    student_department: str = student_obj['department']
+
+    try:
+        log.debug('{}'.format(member.guild.roles))
+        group_role = utils.get(
+            member.guild.roles, name=student_group.capitalize())
+        dept_role = utils.get(member.guild.roles,
+                              name=student_department.upper())
+        prepa_role = utils.get(member.guild.roles, name='prepa')
+        log.debug(
+            f"Dept: {dept_role}, Group: {group_role}, Prepa: {prepa_role}")
+        await member.add_roles(group_role, dept_role, prepa_role)
+    except Forbidden:
+        log.debug(
+            '[ERROR] Bot does not have permision to add roles. Could not add student "{}" to group.'.format(student_obj))
+        await member.send('No pude asignarte a un grupo. Contacta a algun estudiante orientador e informale de este error.')
+
+    return '{} {} {}'.format(student_obj['first name'], student_obj['middle initial'], student_obj['last names'])
+
+
+def _get_student(student_number: str) -> Dict[str, str]:
+    with open(_PREPA_FILE) as teams_list_file:
+        rows = csv.DictReader(teams_list_file,  delimiter=',')
+        for row in rows:
+            if student_number.replace('-', '') == row['student id'].replace('-', ''):
+                return dict(row)
+    return None
+
+
+if __name__ == "__main__":
+    pass

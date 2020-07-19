@@ -4,6 +4,8 @@ import os
 from handlers import telephone_guide, building_parser, help_menu
 import bot
 
+# go up two dirs
+# at bot-discord/
 CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # PDF Files
@@ -59,7 +61,7 @@ async def event_get_curriculum(message: discord.Message):
                 await message.author.send("Here is the Computer Science & Engineering Curriculum:")
                 # for when CIIC curriculum is updated
                 await message.author.send(file=discord.File(CURRICULO_CIIC))
-                #await message.author.send(CURRICULO_CIIC_LINK)
+                # await message.author.send(CURRICULO_CIIC_LINK)
 
 
 async def event_telephone_guide(message: discord.Message):

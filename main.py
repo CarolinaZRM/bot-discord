@@ -113,6 +113,7 @@ while True:
         await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
 
+
     @client.event
     async def on_member_update(before, after):
         if before.roles != after.roles:
