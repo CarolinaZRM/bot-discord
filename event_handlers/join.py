@@ -46,15 +46,15 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
 
     # Replaces their old name to the one they provided in the DM to the bot
     log.debug(
-        f"[VERBOSE - join.py | line.20] {student_name.author}'s nickname was changed to {student_name.content}")
-    await member.edit(nick=str(student_name.content))
+        f"[VERBOSE - join.py | line.20] {member.name}'s nickname was changed to {student_name}")
+    await member.edit(nick=str(student_name))
     await member.send(
-        f"Ya todos te veran como: '{student_name.content}'\n"
+        f"Ya todos te veran como: '{student_name}'\n"
         f"Que facil, no?\n"
         "Te digo un secreto :eyes: ... Programar es super divertido y tu tambien puedes hacerlo! :hugging: "
     )
 
-    user_name = student_name.content
+    user_name = student_name
 
     message_to_send = f'Ahora si me presento formalmente,\n'\
         f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada:\n"\
@@ -117,12 +117,12 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     """
     student_number = await client.wait_for('message', check=check_same_user)
 
-    student_obj = _get_student(student_number)
+    student_obj = _get_student(student_number.content)
 
     while student_obj is None:
         await member.send("No encuentro ese numero de estudiante. Intenta de nuevo:")
         student_number = await client.wait_for('message', check=check_same_user)
-        student_obj = _get_student(student_number)
+        student_obj = _get_student(student_number.content)
 
     # el nombre del grupo esta en:
     # student_obj['group id'] o student_obj.get('group id')
