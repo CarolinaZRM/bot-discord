@@ -93,6 +93,7 @@ while True:
         await actions.event_parse_university_building(message)
         await actions.event_help_menu(message)
         await actions.event_get_calendar(message)
+        await actions.generate_server_rules(message)
 
         await prepa.get_counselor_names(message)
 

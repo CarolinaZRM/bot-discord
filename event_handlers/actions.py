@@ -8,6 +8,8 @@ import bot
 # at bot-discord/
 CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
+
+_RULE_FILE = os.path.join(CURRENT_DIR, "res", "textfiles","rules.txt")
 # PDF Files
 CURRICULO_INEL = os.path.join(CURRENT_DIR, "res", "curriculos", "INEL.pdf")
 CURRICULO_INSO = os.path.join(CURRENT_DIR, "res", "curriculos", "INSO.pdf")
@@ -134,3 +136,19 @@ async def event_help_menu(message: discord.Message):
         else:
             help_menu_embed = help_menu.help_menu_base()
         await msg_author.send(content=None, embed=help_menu_embed)
+
+
+async def generate_server_rules(message : discord.Message):
+    log.debug("[RULE-DBG] Entered Rule Generator")
+    log.debug(f"""[RULE-DBG] Command Requested was {message.content.lower()}""")
+    if message.content.lower() == "!reglas":
+        embed = discord.Embed(title="Reglas del Servidor de Discord Oficial de Team MADE",
+                              description="Aquí estan todas las reglas a seguir en el servidor en esta semana de orientación virtual 2020")
+        rules = open(_RULE_FILE,"r")
+        ruleCount = 1
+        for rule in rules:
+            embed.add_field(name=f"""Regla {ruleCount}""", value=rule)
+            ruleCount += 1
+        await message.channel.send(content=None, embed=embed)
+
+
