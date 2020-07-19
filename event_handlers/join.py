@@ -131,10 +131,15 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     student_department: str = student_obj['department']
 
     try:
-        group_role = utils.get(member.guild.roles, name=student_group)
-        dept_role = utils.get(member.guild.roles, name=student_department)
+        log.debug('{}'.format(member.guild.roles))
+        group_role = utils.get(
+            member.guild.roles, name=student_group.capitalize())
+        dept_role = utils.get(member.guild.roles,
+                              name=student_department.upper())
         prepa_role = utils.get(member.guild.roles, name='prepa')
-        await member.add_roles(group_role, dept_role, prepa_role)
+        await member.add_roles(group_role)
+        await member.add_roles(dept_role)
+        await member.add_roles(prepa_role)
     except Forbidden:
         log.debug(
             '[ERROR] Bot does not have permision to add roles. Could not add student "{}" to group.'.format(student_obj))
