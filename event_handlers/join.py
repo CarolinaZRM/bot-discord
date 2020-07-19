@@ -24,8 +24,8 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu numero de estudiante para poder asignarte al grupo que Made eligió para ti!**"
-        f"Ejemplo: 802-20-####"
+        f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**"
+        f"Ejemplo: fernando.bermudez1"
     )
 
     # checks if message was sent by the user and in the DM
@@ -116,9 +116,9 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
             2) We try to find said user by their name they provided when they were greeted in each file
             3) If found, we add the role of "prepa" and the role of the group they were assigned
     """
-    student_number = await client.wait_for('message', check=check_same_user)
+    student_email = await client.wait_for('message', check=check_same_user)
 
-    student_obj = _get_student(student_number.content)
+    student_obj = _get_student(student_email.content)
 
     while student_obj is None:
         await member.send("No encuentro ese numero de estudiante. Intenta de nuevo:")
@@ -152,7 +152,8 @@ def _get_student(student_number: str) -> Dict[str, str]:
     with open(_PREPA_FILE) as teams_list_file:
         rows = csv.DictReader(teams_list_file,  delimiter=',')
         for row in rows:
-            if student_number.replace('-', '') == row['student id'].replace('-', ''):
+            if student_number.split("@")[0].lower() == row['student email'].split("@")[0]:
+                log.debug(f"""[DEGUG-ASSIGN] Usename found: {row['student email'].split("@")[0]} for student {"{} {} {}".format(row["first name"], row["middle initial"], row["last names"])}""")
                 return dict(row)
     return None
 
