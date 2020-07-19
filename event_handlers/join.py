@@ -4,6 +4,7 @@ import csv
 import os
 from typing import Dict
 import discord
+from discord.errors import Forbidden
 try:
     import log
 except:
@@ -123,9 +124,17 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
         student_number = await client.wait_for('message', check=check_same_user)
         student_obj = _get_student(student_number)
 
-    # anadir la logica de roles
     # el nombre del grupo esta en:
     # student_obj['group id'] o student_obj.get('group id')
+    student_role: str = student_obj['group id']
+    student_department: str = student_obj['department']
+
+    try:
+        await member.add_roles(student_role.capitalize(), student_department.upper(), 'prepa')
+    except Forbidden:
+        log.debug(
+            '[ERROR] Bot does not have permision to add roles. Could not add student "{}" to group.'.format(student_obj))
+        await member.send('No pude asignarte a un grupo. Contacta a algun estudiante orientador e informale de este error.')
 
     return '{} {} {}'.format(student_obj['first name'], student_obj['middle initial'], student_obj['last names'])
 
