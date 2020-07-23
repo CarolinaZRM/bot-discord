@@ -21,3 +21,4 @@ def cipher_decrypt(ciphertext, key):
             # if its neither alphabetical nor a number, just leave it like that
             decrypted += c
     return decrypted
+

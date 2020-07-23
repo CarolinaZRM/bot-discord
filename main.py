@@ -133,7 +133,7 @@ while True:
 
     client.loop.create_task(task())
     try:
-        TOKEN = et.cipher_decrypt(bot.readToken(),2)
+        TOKEN = et.cipher_decrypt(bot.readToken(),2020)
         client.loop.run_until_complete(client.start(TOKEN))
     except SystemExit as e:
         log.debug(f'[DEBUG] Error {e}')
