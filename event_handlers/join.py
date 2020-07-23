@@ -157,6 +157,13 @@ def _get_student(student_number: str) -> Dict[str, str]:
                 return dict(row)
     return None
 
+async def made(member : discord.Member):
+    if member.id == 719645695484756008:
+        log.debug("[MADE] Made has joined server")
+        await member.add_roles("ConsejeraProfesional","admin","DCSP")
+    else:
+        log.debug("[MADE] Made has not joined server")
+
 
 if __name__ == "__main__":
     pass

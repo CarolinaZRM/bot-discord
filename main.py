@@ -113,6 +113,7 @@ while True:
     async def on_member_join(member: discord.Member):
         await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
+        await join.made(member)
 
 
     @client.event

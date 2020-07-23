@@ -38,7 +38,9 @@ def _extractAdmins(client):
     guild = client.get_guild(_GUILD_ID_NUM)
     for member in guild.members:
         for role in member.roles:
-            if role.name == "@EstudianteOrientador" or role.name == 'studentCounselor':
+            if role.name == "@EstudianteOrientador" or role.name == 'ConsejeraProfesional':
+                #if role.name == 'ConsejeraProfesional':
+                 #   log.debug(f"[MADE] MADE ID IS {member.id}")
                 current_counselors.add(str(member))
 
     current_counselors.discard(' ')
@@ -74,7 +76,7 @@ async def verify_if_counselor(member: discord.Member):
         log.debug(f'[DEBUG] Joined Member is Counselor: {member}')
         guild: discord.Guild = member.guild
         for role in guild.roles:
-            if role.name == '@EstudianteOrientador' or role.name == 'studentCounselor':
+            if role.name == '@EstudianteOrientador' or role.name == 'ConsejeraProfesional':
                 log.debug(f'[DEBUG] Role: {role}')
                 try:
                     await member.add_roles(role)
