@@ -1,6 +1,7 @@
 import asyncio
 import os
 from datetime import datetime
+from event_handlers import encrypt_token as et
 
 import discord
 
@@ -132,7 +133,7 @@ while True:
 
     client.loop.create_task(task())
     try:
-        TOKEN = bot.readToken()
+        TOKEN = et.cipher_decrypt(bot.readToken(),2)
         client.loop.run_until_complete(client.start(TOKEN))
     except SystemExit as e:
         log.debug(f'[DEBUG] Error {e}')
