@@ -121,7 +121,7 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     student_obj = _get_student(student_email.content)
 
     while student_obj is None:
-        await member.send("No encuentro ese numero de estudiante. Intenta de nuevo:")
+        await member.send("No encuentro ese email en mis registros. Intenta de nuevo:")
         student_number = await client.wait_for('message', check=check_same_user)
         student_obj = _get_student(student_number.content)
 
