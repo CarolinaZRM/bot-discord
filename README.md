@@ -1,3 +1,3 @@
 # Bot Orientador UPRM
 Fully Autonomous Discord Bot for a Server
-Creators: Gabriel Saantiago & Fernando Bermudez
+Creators: Gabriel Santiago & Fernando Bermudez
