@@ -1,3 +1,14 @@
+"""
+//
+//  encrypt.py
+//  py-bot-uprm
+//
+//  Created by Fernando Bermudez on 07/20/2019.
+//  Edited by Fernando Bermudez on July 20, 2020
+//  Copyright © 2020 bermedDev. All rights reserved.
+//  Copyright © 2020 teamMADE. All rights reserved.
+
+"""
 # The Decryption Function
 def cipher_decrypt(ciphertext, key):
     decrypted = ""
