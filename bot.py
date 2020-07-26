@@ -26,7 +26,7 @@ def readToken():
 
 """
 //
-//  log.py
+//  bot.py
 //  py-bot-uprm
 //
 //  Created by Fernando Bermudez on 06/10/2019.
