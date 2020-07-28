@@ -1,0 +1,9 @@
+num,question,answer
+1,¿Cómo puedo adiestrarme mejor en Discord? No entiendo muchas cosas sobre la plataforma,Puede ver los videos o leer el PDF que se le proveyó. Si todavía se siente incomodo con la plataforma, comuníquese con Fernando Bermudez
+2,¿Por qué no puedo ver otros canales de otros grupos?, Está diseñado de esa manera para tener una comunicación efectiva entre los integrantes de cada grupo individual y sus lideres, esto hace que los lideres puedan atender a todas sus dudas mas rápido
+3,Tengo una idea para el bot. ¿Con quién me puedo contactar?, Con Fernando Bermudez o Gabriel Santiago
+4,Me siento indeciso sobre mi departamento. ¿Con quién hablo?, Hable con su consejero de su departamento el dia de ajustes de matricula, con uno de sus lideres o con Madeline Rodriguez
+5,Tengo unas clases convalidadas por el CEEB ¿Con quién hablo?, Atienda bien a las orientaciones de la semana en como se convalidan esos cursos, sino hable con su departamento en ajustes
+6,¿A quién voy para conseguir mi curriculo?, Preguntale al bot! El te lo provee en PDF si escribes **!curriculo:DEPT**
+7,¿Cómo consigo los comandos para el bot?, Escribe **!help** en el chat de su preferencia
+8,¿Cómo crearon el bot?, El bot fue programado completamente por Fernando y Gabriel. Se utilizó el lenguaje de programación de Python. Cualquier pregunta le pueden escribir. Ellos les explican y les enseñan algunos detalles

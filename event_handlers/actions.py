@@ -12,7 +12,9 @@
 import discord
 import log
 import os
+import csv
 from handlers import telephone_guide, building_parser, help_menu
+from typing import Dict
 import bot
 
 # go up two dirs
@@ -27,6 +29,9 @@ CURRICULO_INSO = os.path.join(CURRENT_DIR, "res", "curriculos", "INSO.pdf")
 CURRICULO_CIIC = os.path.join(CURRENT_DIR, "res", "curriculos", "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(CURRENT_DIR, "res", "curriculos", "ICOM.pdf")
 CURRICULO_CIIC_LINK = "https://www.uprm.edu/cse/bs-computer-science-and-engineering-2/"
+
+_FAQ_FILE = os.path.join(
+    CURRENT_DIR, "res", "textfiles", "faq.csv")
 
 _GOOGLE_ADD_CALENDAR = os.path.join(
     CURRENT_DIR, "res", "images", "google_add_calendar.png")
@@ -161,5 +166,17 @@ async def generate_server_rules(message : discord.Message):
             embed.add_field(name=f"""Regla {ruleCount}""", value=rule)
             ruleCount += 1
         await message.channel.send(content=None, embed=embed)
+
+async def generate_faq(message : discord.Message):
+    if message.content == "!faq":
+        embed = discord.Embed(title= "Frequently Asked Questions", description="Aqui puedes encontrar ciertas preguntas que pueden surgirte durante la semana")
+        with open(_FAQ_FILE) as faq_file:
+            rows = csv.DictReader(faq_file,  delimiter=',')
+            for row in rows:
+                question = dict(row)
+                embed.add_field(name=f"{question['num']}) {question['question']}", value=question['answer'])
+
+        await message.channel.send(content=None, embed=embed)
+
 
 
