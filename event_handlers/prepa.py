@@ -21,18 +21,19 @@ cse_counselors = []
 
 def extract_counselors(client: discord.client):
     guild = client.get_guild(ID)
+    eo = discord.Role(data={'id':718625920805765171, 'name':"@EstudianteOrientador"},guild=guild,state=None)
     for member in guild.members:
         for role in member.roles:
-            if member is not None:
-                if 'INEL' in role.name:
-                    log.debug(f"[INEL] Role Found for {member.nick}")
-                    inel_counselors.append(member)
-                if 'ICOM' in role.name:
-                    log.debug(f"[ICOM] Role Found for {member.nick}")
-                    icom_counselors.append(member)
-                if 'INSO/CIIC' in role.name:
-                    log.debug(f"[INSO/CIIC] Role Found for {member.nick}")
-                    cse_counselors.append(member)
+                if member is not None and eo in member.roles:
+                    if 'INEL' in role.name:
+                        log.debug(f"[INEL] Role Found for {member.nick}")
+                        inel_counselors.append(member)
+                    if 'ICOM' in role.name:
+                        log.debug(f"[ICOM] Role Found for {member.nick}")
+                        icom_counselors.append(member)
+                    if 'INSO/CIIC' in role.name:
+                        log.debug(f"[INSO/CIIC] Role Found for {member.nick}")
+                        cse_counselors.append(member)
 
 
 async def get_counselor_names(message: discord.Message):
@@ -50,8 +51,10 @@ async def get_counselor_names(message: discord.Message):
                                       description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria Electrica como tu!")
                 for counselor in inel_counselors:
                     if counselor is not None:
-                        embed.add_field(
-                            name=f"Nombre: {counselor.nick}", value=f"Username: {counselor.name}")
+                        if counselor.name == "Arianys Martínez Fuentes": #harcode becasue Ariany's username is her actual name
+                            embed.add_field(name=f"Nombre: {counselor.display_name}", value=f"Username: {counselor.name}")
+                        else:
+                            embed.add_field(name=f"Nombre: {counselor.nick}", value=f"Username: {counselor.name}")
                 await message.channel.send(content=None, embed=embed)
 
             elif split[1].upper() == "ICOM":
