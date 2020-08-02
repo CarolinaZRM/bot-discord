@@ -33,8 +33,8 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**"
-        f"Ejemplo: fernando.bermudez1"
+        f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
+        f"Ejemplo: bienvenido.velez"
     )
 
     # checks if message was sent by the user and in the DM

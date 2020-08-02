@@ -319,7 +319,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
     name = name.replace('.mp3', '')
     nname = name.rsplit("-", 2)
 
-    await message.author.send(f"{user_name}, ya **'{nname[0]} - {nname[1]}'** esta en PLAY")
+    await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
 
 
 async def pause_audio(client: discord.Client, message: discord.Message):
