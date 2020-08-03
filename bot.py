@@ -1,3 +1,14 @@
+"""
+//
+//  bot.py
+//  py-bot-uprm
+//
+//  Created by Fernando Bermudez on 06/10/2019.
+//  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
+//  Copyright © 2020 bermedDev. All rights reserved.
+//  Copyright © 2020 teamMADE. All rights reserved.
+
+"""
 from discord.channel import ChannelType
 from discord.errors import Forbidden
 import discord
@@ -5,7 +16,7 @@ import log
 import os
 import youtube_dl
 
-_ADMIN_CHANNELS = ["counselors", "admins", "general"]
+_ADMIN_CHANNELS = ["estudiantes_orientadores", "admins", "general"]
 _PREPA_CHANNELS = ["general"]
 
 _CURRENT_DIR = os.path.dirname(__file__)
@@ -24,17 +35,7 @@ def readToken():
     lines = f.readlines()
     return lines[0].strip()
 
-"""
-//
-//  bot.py
-//  py-bot-uprm
-//
-//  Created by Fernando Bermudez on 06/10/2019.
-//  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
-//  Copyright © 2020 bermedDev. All rights reserved.
-//  Copyright © 2020 teamMADE. All rights reserved.
 
-"""
 def _extractAdmins(client):
     file_path = os.path.join(_CURRENT_DIR, _ADMINS_FILE)
 
@@ -172,209 +173,235 @@ async def set_streaming(client: discord.Client, message: discord.Message):
 
 
 async def join_voice_channel(client: discord.Client, message: discord.Message):
-    if message.content != '!join':
-        return
+    if message.content == "!join":
 
-    if not hasattr(message.author, 'voice'):
-        await message.author.send('No puedes unirme a un canal de voz desde el DM')
-        return
+        if not is_sender_counselor(message):
+            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+            return
 
-    user_name = None
+        if not hasattr(message.author, 'voice'):
+            await message.author.send('No puedes unirme a un canal de voz desde el DM')
+            return
 
-    if hasattr(message.author, 'nick'):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
+        user_name = None
 
-    voice_state: discord.VoiceState = message.author.voice
-    log.debug(f'[DEBUG - Author Voice State] {voice_state}')
-    if not voice_state:
-        await message.author.send(f"Hola {user_name}, primero te tienes que conectar tu al canal de voz"
-                                  "para yo saber a cual quieres que me conecte")
-        return
+        if hasattr(message.author, 'nick'):
+            user_name = message.author.nick
+        else:
+            user_name = message.author.name
 
-    voice_channel: discord.VoiceChannel = voice_state.channel
+        voice_state: discord.VoiceState = message.author.voice
+        log.debug(f'[DEBUG - Author Voice State] {voice_state}')
+        if not voice_state:
+            await message.author.send(f"Hola {user_name}, primero te tienes que conectar tu al canal de voz para yo saber a cual quieres que me conecte")
+            return
 
-    voice_client = discord.utils.get(client.voice_clients, guild=message.guild)
+        voice_channel: discord.VoiceChannel = voice_state.channel
 
-    if voice_client and voice_client.is_connected():
-        await voice_client.move_to(voice_channel)
-        print(f"The bot has moved to {voice_channel}")
-    else:
-        await voice_channel.connect()
+        voice_client = discord.utils.get(client.voice_clients, guild=message.guild)
 
-    await message.author.send(f'Ya me uni al canal de voz: {voice_channel}')
+        if voice_client and voice_client.is_connected():
+            await voice_client.move_to(voice_channel)
+            print(f"The bot has moved to {voice_channel}")
+        else:
+            await voice_channel.connect()
+
+        await message.author.send(f'Ya me uni al canal de voz: {voice_channel}')
+
 
 
 async def leave_voice_channel(client: discord.Client, message: discord.Message):
-    if message.content != '!leave':
-        return
+    if message.content == "!leave":
 
-    if not hasattr(message.author, 'voice'):
-        await message.author.send('No me puedes sacar a un canal de voz desde el DM')
-        return
+        if not is_sender_counselor(message):
+            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+            return
 
-    user_name = None
+        if not hasattr(message.author, 'voice'):
+            await message.author.send('No me puedes sacar a un canal de voz desde el DM')
+            return
 
-    if hasattr(message.author, 'nick'):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
+        user_name = None
 
-    voice_state: discord.VoiceState = message.author.voice
-    log.debug(f'[DEBUG - Author Voice State] {voice_state}')
-    if not voice_state:
-        await message.author.send(f"Hola {user_name}, primero te tienes que conectar tu al canal de voz"
-                                  "para yo saber de cual quieres que me desconecte")
-        return
+        if hasattr(message.author, 'nick'):
+            user_name = message.author.nick
+        else:
+            user_name = message.author.name
 
-    voice_channel: discord.VoiceChannel = voice_state.channel
+        voice_state: discord.VoiceState = message.author.voice
+        log.debug(f'[DEBUG - Author Voice State] {voice_state}')
+        if not voice_state:
+            await message.author.send(f"Hola {user_name}, primero te tienes que conectar tu al canal de voz"
+                                      "para yo saber de cual quieres que me desconecte")
+            return
 
-    log.debug(f"[DEBUG] {client.voice_clients}")
+        voice_channel: discord.VoiceChannel = voice_state.channel
 
-    voice_client: discord.VoiceClient = discord.utils.get(
-        client.voice_clients, guild=message.guild)
+        log.debug(f"[DEBUG] {client.voice_clients}")
 
-    if not voice_client or voice_client.channel != voice_channel:
-        await message.author.send(f"No estoy conectado al canal: {voice_channel}")
-        return
+        voice_client: discord.VoiceClient = discord.utils.get(
+            client.voice_clients, guild=message.guild)
 
-    if voice_client.is_connected():
-        await voice_client.disconnect()
-        await message.author.send(f'Ya me desconecté del canal de voz: {voice_channel}')
+        if not voice_client or voice_client.channel != voice_channel:
+            await message.author.send(f"No estoy conectado al canal: {voice_channel}")
+            return
+
+        if voice_client.is_connected():
+            await voice_client.disconnect()
+            await message.author.send(f'Ya me desconecté del canal de voz: {voice_channel}')
+
+
+
 
 
 async def play_audio(client: discord.Client, message: discord.Message):
+
+
     sections = message.content.split(' ')
 
-    if sections[0] != '!play':
-        return
+    if sections[0] == "!play":
 
-    if not hasattr(message.author, 'voice'):
-        await message.author.send('No puedes unirme a un canal de voz desde el DM')
-        return
+        if not is_sender_counselor(message):
+            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+            return
 
-    user_name = None
+        if not hasattr(message.author, 'voice'):
+            await message.author.send('No puedes unirme a un canal de voz desde el DM')
+            return
 
-    if hasattr(message.author, 'nick'):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
+        user_name = None
 
-    if len(sections) < 2:
-        await message.author.send(f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier website publico. (Youtube, Soundcloud, etc.)")
-        return
+        if hasattr(message.author, 'nick'):
+            user_name = message.author.nick
+        else:
+            user_name = message.author.name
 
-    url = sections[1]
+        if len(sections) < 2:
+            await message.author.send(f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier website publico. (Youtube, Soundcloud, etc.)")
+            return
 
-    global _MUSIC_FILE
+        url = sections[1]
 
-    try:
-        if os.path.isfile(_MUSIC_FILE):
-            os.remove(_MUSIC_FILE)
-    except PermissionError:
-        await message.author.send('No puedo dar play a otra cancion. Un audio esta en play.\nPonlo en pausa.')
-        return
+        global _MUSIC_FILE
 
-    voice_client: discord.VoiceClient = discord.utils.get(
-        client.voice_clients, guild=message.guild)
+        try:
+            if os.path.isfile(_MUSIC_FILE):
+                os.remove(_MUSIC_FILE)
+        except PermissionError:
+            await message.author.send('No puedo dar play a otra cancion. Un audio esta en play.\nPonlo en pausa.')
+            return
 
-    if not voice_client:
-        await message.author.send(f"No estoy conectado a ningun canal de voz")
-        return
+        voice_client: discord.VoiceClient = discord.utils.get(
+            client.voice_clients, guild=message.guild)
 
-    if voice_client.is_playing():
-        await message.author.send(f'No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero')
-        return
+        if not voice_client:
+            await message.author.send(f"No estoy conectado a ningun canal de voz")
+            return
 
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'outtmpl': f"{os.path.join(_CURRENT_DIR, 'res', 'audio', '%(title)s.%(ext)s')}",
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-    }
+        if voice_client.is_playing():
+            await message.author.send(f'No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero')
+            return
 
-    try:
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            print("Downloading audio now\n")
-            ydl.download([url])
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': f"{os.path.join(_CURRENT_DIR, 'res', 'audio', '%(title)s.%(ext)s')}",
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
 
-    except youtube_dl.DownloadError as err:
-        print(f'[ERROR] {err}')
-        await message.author.send(f'Me econtre con un error descargando el video.\n'
-                                  f"Error:\n{str(err)}")
-        return
+        try:
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                print("Downloading audio now\n")
+                ydl.download([url])
 
-    name = ""
-    for file in os.listdir(os.path.join(_CURRENT_DIR, "res", "audio")):
-        if file.endswith(".mp3"):
-            name = file
-            os.rename(os.path.join(_CURRENT_DIR, "res",
-                                   "audio", file), _MUSIC_FILE)
+        except youtube_dl.DownloadError as err:
+            print(f'[ERROR] {err}')
+            await message.author.send(f'Me econtre con un error descargando el video.\n'
+                                      f"Error:\n{str(err)}")
+            return
 
-    voice_client.play(discord.FFmpegPCMAudio(_MUSIC_FILE))
-    name = name.replace('.mp3', '')
-    nname = name.rsplit("-", 2)
+        name = ""
+        for file in os.listdir(os.path.join(_CURRENT_DIR, "res", "audio")):
+            if file.endswith(".mp3"):
+                name = file
+                os.rename(os.path.join(_CURRENT_DIR, "res",
+                                       "audio", file), _MUSIC_FILE)
 
-    await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
+        voice_client.play(discord.FFmpegPCMAudio(_MUSIC_FILE))
+        name = name.replace('.mp3', '')
+        nname = name.rsplit("-", 2)
+
+        await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
+
 
 
 async def pause_audio(client: discord.Client, message: discord.Message):
-    if message.content != '!pause':
-        return
+    if message.content == "!pause":
 
-    if not hasattr(message.author, 'voice'):
-        await message.author.send('No puedes pausar a un canal de voz desde el DM')
-        return
+        if not is_sender_counselor(message):
+            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+            return
 
-    user_name = None
+        if not hasattr(message.author, 'voice'):
+            await message.author.send('No puedes pausar a un canal de voz desde el DM')
+            return
 
-    if hasattr(message.author, 'nick'):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
+        user_name = None
 
-    voice_client: discord.VoiceClient = discord.utils.get(
-        client.voice_clients, guild=message.guild)
+        if hasattr(message.author, 'nick'):
+            user_name = message.author.nick
+        else:
+            user_name = message.author.name
 
-    if not voice_client:
-        await message.author.send(f"No estoy conectado a ningun canal de voz")
-        return
+        voice_client: discord.VoiceClient = discord.utils.get(
+            client.voice_clients, guild=message.guild)
 
-    voice_channel: discord.VoiceChannel = voice_client.channel
+        if not voice_client:
+            await message.author.send(f"No estoy conectado a ningun canal de voz")
+            return
 
-    if voice_client.is_playing():
-        voice_client.pause()
-        await message.author.send(f'Pausado en el canal {voice_channel}')
+        voice_channel: discord.VoiceChannel = voice_client.channel
+
+        if voice_client.is_playing():
+            voice_client.pause()
+            await message.author.send(f'Pausado en el canal {voice_channel}')
+
 
 
 async def resume_audio(client: discord.Client, message: discord.Message):
-    if message.content != '!resume':
-        return
+    if message.content == "!resume":
+        if not is_sender_counselor(message):
+            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+            return
 
-    if not hasattr(message.author, 'voice'):
-        await message.author.send('No puedes pausar a un canal de voz desde el DM')
-        return
+        if not hasattr(message.author, 'voice'):
+            await message.author.send('No puedes pausar a un canal de voz desde el DM')
+            return
 
-    user_name = None
+        user_name = None
 
-    if hasattr(message.author, 'nick'):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
+        if hasattr(message.author, 'nick'):
+            user_name = message.author.nick
+        else:
+            user_name = message.author.name
 
-    voice_client: discord.VoiceClient = discord.utils.get(
-        client.voice_clients, guild=message.guild)
+        voice_client: discord.VoiceClient = discord.utils.get(
+            client.voice_clients, guild=message.guild)
 
-    if not voice_client:
-        await message.author.send(f"No estoy conectado a ningun canal de voz")
-        return
+        if not voice_client:
+            await message.author.send(f"No estoy conectado a ningun canal de voz")
+            return
 
-    voice_channel: discord.VoiceChannel = voice_client.channel
+        voice_channel: discord.VoiceChannel = voice_client.channel
 
-    if voice_client.is_paused():
-        voice_client.resume()
-        await message.author.send(f'Resumido en el canal {voice_channel}')
+        if voice_client.is_paused():
+            voice_client.resume()
+            await message.author.send(f'Resumido en el canal {voice_channel}')
