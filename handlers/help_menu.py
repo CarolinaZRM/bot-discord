@@ -54,7 +54,7 @@ def help_menu_base():
         value='Provee informacion de la guardia universitaria, policia estatal y otros servicios de emergencia regionales.'
     )
     embed.add_field(
-        name='/eo:DEPT',
+        name='!eo:DEPT',
         value="Provee una lista los usernames (@'s) de los Estudiantes Orientadores de ese DEPT. Puedes escoger entre: INEL, ICOM, INSO o CIIC."
     )
     return embed
