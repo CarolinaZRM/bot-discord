@@ -9,6 +9,8 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
+from discord import member
+from discord import user
 from discord.channel import ChannelType
 from discord.errors import Forbidden
 import discord
@@ -28,6 +30,8 @@ os.makedirs(os.path.join(_CURRENT_DIR, "res", "audio"), exist_ok=True)
 
 _CLIENT_ID_NUM = 719199208166522881
 _GUILD_ID_NUM = 718624993470316554
+
+_USER_PLAYING_MUSIC = None
 
 
 def readToken():
@@ -50,8 +54,8 @@ def _extractAdmins(client):
     for member in guild.members:
         for role in member.roles:
             if role.name == "@EstudianteOrientador" or role.name == 'ConsejeraProfesional':
-                #if role.name == 'ConsejeraProfesional':
-                 #   log.debug(f"[MADE] MADE ID IS {member.id}")
+                # if role.name == 'ConsejeraProfesional':
+                #   log.debug(f"[MADE] MADE ID IS {member.id}")
                 current_counselors.add(str(member))
 
     current_counselors.discard(' ')
@@ -173,10 +177,12 @@ async def set_streaming(client: discord.Client, message: discord.Message):
 
 
 async def join_voice_channel(client: discord.Client, message: discord.Message):
-    if message.content == "!join":
+    global _USER_PLAYING_MUSIC
 
+    if message.content == "!join":
         if not is_sender_counselor(message):
-            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            log.debug(
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
             await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
@@ -199,7 +205,17 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
 
         voice_channel: discord.VoiceChannel = voice_state.channel
 
-        voice_client = discord.utils.get(client.voice_clients, guild=message.guild)
+        voice_client: discord.VoiceClient = discord.utils.get(
+            client.voice_clients, guild=message.guild)
+
+        # verify ownreship of music streaming
+        if _USER_PLAYING_MUSIC is None:
+            # add ownership is no one has it
+            _USER_PLAYING_MUSIC = user_name
+        elif _USER_PLAYING_MUSIC != user_name:
+            # no eres quien hizo el join original
+            await message.author.send(f"Hola {user_name}, no tienes la autorizacion para unirme a el canal **'{voice_channel}'**. **{_USER_PLAYING_MUSIC}** tiene control del bot streamer.")
+            return
 
         if voice_client and voice_client.is_connected():
             await voice_client.move_to(voice_channel)
@@ -210,12 +226,13 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
         await message.author.send(f'Ya me uni al canal de voz: {voice_channel}')
 
 
-
 async def leave_voice_channel(client: discord.Client, message: discord.Message):
-    if message.content == "!leave":
+    global _USER_PLAYING_MUSIC
 
+    if message.content == "!leave":
         if not is_sender_counselor(message):
-            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            log.debug(
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
             await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
@@ -248,23 +265,29 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
             await message.author.send(f"No estoy conectado al canal: {voice_channel}")
             return
 
+        # verify ownreship of music streaming
+        if _USER_PLAYING_MUSIC != user_name:
+            # no eres quien hizo el join oprignal
+            await message.author.send(f"Hola {user_name}, no tienes la autorizacion para removerme del canal **'{voice_channel}'**. **{_USER_PLAYING_MUSIC}** tiene control del bot streamer.")
+            return
+        else:
+            # clean ownership of music streaming
+            _USER_PLAYING_MUSIC = None
+
         if voice_client.is_connected():
             await voice_client.disconnect()
             await message.author.send(f'Ya me desconecté del canal de voz: {voice_channel}')
 
 
-
-
-
 async def play_audio(client: discord.Client, message: discord.Message):
-
 
     sections = message.content.split(' ')
 
     if sections[0] == "!play":
 
         if not is_sender_counselor(message):
-            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            log.debug(
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
             await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
@@ -340,12 +363,12 @@ async def play_audio(client: discord.Client, message: discord.Message):
         await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
 
 
-
 async def pause_audio(client: discord.Client, message: discord.Message):
     if message.content == "!pause":
 
         if not is_sender_counselor(message):
-            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            log.debug(
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
             await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
@@ -374,11 +397,11 @@ async def pause_audio(client: discord.Client, message: discord.Message):
             await message.author.send(f'Pausado en el canal {voice_channel}')
 
 
-
 async def resume_audio(client: discord.Client, message: discord.Message):
     if message.content == "!resume":
         if not is_sender_counselor(message):
-            log.debug(f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+            log.debug(
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
             await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
