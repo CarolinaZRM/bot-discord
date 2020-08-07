@@ -33,6 +33,8 @@ _GUILD_ID_NUM = 718624993470316554
 
 _USER_PLAYING_MUSIC = None
 
+_PLAYING = False
+_CURRENT_USER_PLAYING_MUSIC = None
 
 def readToken():
     f = open(os.path.join(_CURRENT_DIR, _TOKEN_FILE), "r")
@@ -284,6 +286,11 @@ async def play_audio(client: discord.Client, message: discord.Message):
     sections = message.content.split(' ')
 
     if sections[0] == "!play":
+
+        if _PLAYING:
+            if _CURRENT_USER_PLAYING_MUSIC != message.author:
+
+                return
 
         if not is_sender_counselor(message):
             log.debug(
