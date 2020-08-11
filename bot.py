@@ -115,7 +115,7 @@ def is_sender_prepa(message: discord.Message):
 
 
 def is_sender_admin(message: discord.Message):
-    return message.author.id == 539112744553676812 or message.author.id == 541298986535878677
+    return message.author.id == 539112744553676812 or message.author.id == 541298986535878677 or message.author.id == 719949050203603005
 
 
 def is_from_a_channel(message: discord.Message) -> bool:
