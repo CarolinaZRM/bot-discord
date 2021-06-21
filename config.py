@@ -8,9 +8,14 @@ CLIENT_ID_NUM = int(__config_values['CLIENT_ID_NUM'])
 
 GUILD_ID_NUM = int(__config_values['GUILD_ID_NUM'])
 
+__required_variables = [
+    BOT_TOKEN,
+    CLIENT_ID_NUM,
+    GUILD_ID_NUM
+]
 
 # Env variables validation
-for value in [BOT_TOKEN, CLIENT_ID_NUM, GUILD_ID_NUM]:
+for value in __required_variables:
     if value is None or len(str(value)) == 0:
         raise Exception(
             'Uninitialized value in .env file on the root of the project.')
