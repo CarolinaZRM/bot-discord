@@ -10,7 +10,6 @@
 This file is supposed to contain all the events and commands that are related to member join
 """
 import csv
-import os
 from typing import Dict
 
 import discord
@@ -24,7 +23,7 @@ except Exception:
     pass
 
 # Files
-_PREPA_FILE = os.path.join(paths.PREPAS.PREPA_LIST)
+_PREPA_FILE = paths.PREPAS.PREPA_LIST
 
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):

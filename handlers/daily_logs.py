@@ -11,10 +11,9 @@
 """
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 import discord
-import log
 from constants import paths
 
 _LOG_DIR = os.path.join(paths.TEXT_FILES, "logs")
@@ -23,10 +22,9 @@ _FILE_PATH = None
 
 def _init_logs():
     global _FILE_PATH
-    now = datetime.utcnow()  # current date and time
-    current_time = now.strftime("%m-%d-%Y")
+    current_time = datetime.now(timezone.utc).strftime("%Y%m%d")
     os.makedirs(_LOG_DIR, exist_ok=True)
-    _FILE_PATH = os.path.join(_LOG_DIR, f"{current_time}.txt")
+    _FILE_PATH = os.path.join(_LOG_DIR, f"{current_time}.log")
 
 
 _init_logs()
@@ -40,27 +38,14 @@ def getRoles(member: discord.Member):
 
 def analytics(message: discord.Message):
     user_message = message.content
-    if len(user_message) > 0 and user_message[0] in ("/", '!', '?') and not message.author.bot:
-        current_time = datetime.utcnow()  # current date and time
-        current_time = str(current_time)
-        # current_time = now.strftime("%m-%d-%Y:%Hhr.%Mm.%Ss")
-
-        log.debug(
-            f"""[LOG] LOGGING MESSAGE SENT BY {message.author} ON {current_time} """)
-
-        log_file = open(_FILE_PATH, 'a+')
-
-        role_list = getRoles(message.author)
-
-        log_data = {
-            'date_utc': current_time,
-            'command': user_message,
-            'roles': role_list,
-            'author': str(message.author)
-        }
-
-        log_file.write(f'{json.dumps(log_data)}\n')
-        # log_file.write(
-        #     f"""[{dt.now()}] MESSAGE: {message.content}, TYPE: command, AUTHOR: {message.author}, ROLES: {", ".join(roles)} \n""")
-
-        log_file.close()
+    if len(user_message) > 0 \
+            and user_message[0] in ("/", '!', '?') \
+            and not message.author.bot:
+        with open(_FILE_PATH, 'a+') as log_file:
+            log_data = {
+                'timestamp': datetime.now(timezone.utc).isoformat(timespec='seconds'),
+                'command': user_message,
+                'roles': getRoles(message.author),
+                'author': str(message.author)
+            }
+            log_file.write(f'{json.dumps(log_data)}\n')
