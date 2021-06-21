@@ -1,11 +1,7 @@
-# from typing import List
-import discord
-
-
 class Contact():
     """
     Anadir los numeros con descripcion de el contacto y/o la oficina
-    De aplicar el numero deberia tener la siguiente informacion:
+    De aplicar el numero deberia tener la siguiente información:
     - Nombre de la oficina
     - Numero de telefono
     - Extension: can be a list
@@ -30,20 +26,16 @@ class Contact():
         self.gmaps_location = gmaps_location
 
     def __str__(self):
-        # embed.add_field(name='',value="")
-
         email_txt = ', '.join(self.emails)
         phone_txt = ', '.join(self.phone_number)
         extensions_txt = ' \u2022 '.join(self.extensions)
-
-        extensions_bullet_list = ''
-
 
         return_string = f'''Contact Name: {self.contact_name}
     \u2022 Contact description: {self.contact_description}
     \u2022 Service Provided: {self.services_provided}
     \u2022 Office: {self.office_number}
     \u2022 Phones: {phone_txt}
+    \u2022 Emails: {email_txt}
     \u2022 Phone Extensions: {extensions_txt}
     \u2022 Work Hours: {self.work_hours}
     \u2022 Google Maps Location: {self.gmaps_location}'''

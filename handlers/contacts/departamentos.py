@@ -9,7 +9,7 @@ class ECEDepartment(Contact):
     # """
 
     def __init__(self):
-        contact_name = "Departamento de Ingeniería Electricay y de Computadoras"
+        contact_name = "Departamento de Ingeniería Electrica y de Computadoras"
         contact_description = "Información, contactos y horario del departamento de INEL-ICOM"
         services_provided = "Multiples servicios para estudiantes en el departamento de INEL-ICOM"
         phone_number = ["(787) 832-4040"]

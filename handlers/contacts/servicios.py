@@ -9,7 +9,7 @@ class AsistenciaEconomica(Contact):
     # """
 
     def __init__(self):
-        contact_name = "Oficina de Asistencia Economica"
+        contact_name = "Oficina de Asistencia Económica"
         contact_description = "<Add Description>"
         services_provided = "<Add services provided>"
         phone_number = ["(787) 832-4040"]
@@ -27,7 +27,7 @@ class AsistenciaEconomica(Contact):
 
     def __str__(self):
         return f'{super().__str__()}\n\n'\
-            f'Aqui puedes encontrar las fechas importantes de Asistencia Economica:\n{self.important_dates_link}'
+            f'Aquí puedes encontrar las fechas importantes de Asistencia Económica:\n{self.important_dates_link}'
 
 
 class GuardiaUniversitaria(Contact):
@@ -56,8 +56,8 @@ class GuardiaUniversitaria(Contact):
                          owner=owner, work_hours=work_hours, gmaps_location=gmaps_location)
         self.additional_helpful_info = ['Emergencias Médicas Municipal y Bomberos 787-834-8585 | Exts. 2061/2062',
                                         'Línea Directa: 787-265-1785/787-265-3872',
-                                        "Policia Estatal 787-832-2020 (Linea Confidencial)/787-832-9696 (Comandancia Estatal)",
-                                        "Policia Municipal 787-834-8585 Ext. 2025"]
+                                        "Policía Estatal 787-832-2020 (Linea Confidencial)/787-832-9696 (Comandancia Estatal)",
+                                        "Policía Municipal 787-834-8585 Ext. 2025"]
         self.more_info_link = 'https://www.uprm.edu/transitoyvigilancia/'
 
 
@@ -95,7 +95,7 @@ class ConsejeriaServiciosPsicologicos(Contact):
             "no puede esperar a ser atendida el próximo día laboral,\npuedes usar los siguientes recursos en la "\
             "comunidad que tienen líneas de ayuda 24 horas:\n\n"\
             "**Líneas de Ayuda**\n"\
-            "\u2022 Línea PAS (Primera Ayuda Psicosocial): 1-800-981-0023\n"\
+            "\u2022 Línea PAS (Primera Ayuda Psicológica): 1-800-981-0023\n"\
             "\u2022 Sistema 911\n"\
             "\u2022 Suicide Prevention Life Line 1-888-628-9454\n"\
             "\u2022 Centro de Ayuda a Víctimas de Violación 1-800-981-5721\n"\
@@ -103,7 +103,7 @@ class ConsejeriaServiciosPsicologicos(Contact):
             "**Clínicas de Salud Mental**\n"\
             "\u2022 Centro de Salud Conductual Menonita CIMA 1-800-981-1218\n"\
             "\u2022 Clínicas Ambulatorias de APS (Vital) 787-641-9133\n"\
-            "\u2022 Hospital Metro Pavia- Salud Conductual 787-851-0833\n"\
+            "\u2022 Hospital Metro Pavía- Salud Conductual 787-851-0833\n"\
             "\u2022 Hospital Panamericano: 1-800-981-1218\n"\
             "\u2022 Sistema San Juan Capestrano: 787-760-0222"
 

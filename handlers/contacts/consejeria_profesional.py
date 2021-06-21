@@ -26,6 +26,7 @@ class ECEConsejerosProfesional(Contact):
         self.more_info = 'https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/'
         self.consejeria_uprm = 'https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/'
 
+
 class CSEConsejerosProfesional(Contact):
     def __init__(self):
         contact_name = 'Consejeria Academica INSO/CIIC'
