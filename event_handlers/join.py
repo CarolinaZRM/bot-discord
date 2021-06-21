@@ -12,21 +12,19 @@ This file is supposed to contain all the events and commands that are related to
 import csv
 import os
 from typing import Dict
+
 import discord
 from discord import utils
 from discord.errors import Forbidden
+from constants import paths
+
 try:
     import log
-except:
+except Exception:
     pass
 
-# go up two dirs
-# at bot-discord/
-_CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
-
-# PDF Files
-_PREPA_FILE = os.path.join(
-    _CURRENT_DIR, "res", "prepas", "teams_prepa_list.csv")
+# Files
+_PREPA_FILE = os.path.join(paths.PREPAS.PREPA_LIST)
 
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
@@ -59,21 +57,21 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
         f"[VERBOSE - join.py | line.20] {member.name}'s nickname was changed to {student_name}")
     await member.edit(nick=str(student_name))
     await member.send(
-        f"Ya todos te veran como: '{student_name}'\n"
-        f"Que facil, no?\n"
-        "Te digo un secreto :eyes: ... Programar es super divertido y tu tambien puedes hacerlo! :hugging: "
+        f"Ya todos te verán como: '{student_name}'\n"
+        f"Que fácil, no?\n"
+        "Te digo un secreto :eyes: ... Programar es super divertido y tu también puedes hacerlo! :hugging: "
     )
 
     user_name = student_name
 
     message_to_send = f'Ahora si me presento formalmente,\n'\
-        f"Hola {user_name}!\nMe alegra mucho que estes aqui :tada:\n"\
+        f"Hola {user_name}!\nMe alegra mucho que estes aquí :tada:\n"\
         "Yo soy *MADE Bot* y sere tu *Bot* Consejero. :smiley:\n"\
         "Estoy aquí para ayudarte con cualquier duda que tengas.\n"\
         "Te puedo ayudar a:\n"\
-        "\u2022 Econtrar edificios\n"\
+        "\u2022 Encontrar edificios\n"\
         "\u2022 Información de contacto para algunas oficinas importantes\n"\
-        "\u2022 Proveer 'links' muy utiles para tu carrera universitaria.\n"\
+        "\u2022 Proveer 'links' muy útiles para tu carrera universitaria.\n"\
         "\u2022 Y muchas cosas más!!!\n\n"\
         "Espero ser de mucha ayuda :thumbsup:\n\n"\
         "Vamos a comenzar por escribir ***!help***.\nEste comando te mostrará la lista de algunas preguntas que me puedes hacer.\nEspero a que lo hagas..."
@@ -94,9 +92,9 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # starts waiting block for '!contactos'
     #
     message_to_send = f'Eso es {user_name}! :thumbsup: Ahí está la lista de algunos comandos rápidos.\n'\
-        'Todavía quedan más comandos con mucha informacion útil para ti :sweat_smile:'\
+        'Todavía quedan más comandos con mucha información útil para ti :sweat_smile:'\
         'Ahora intenta escribir ***!contactos***, este comando es mas específico y te proveéra una lista de todos los posibles contactos '\
-        'que tengo en mi banco de datos. Tratalo ahora :eyes:'
+        'que tengo en mi banco de datos. Trátalo ahora :eyes:'
     await member.send(content=message_to_send)
 
     def check_user_writes_help(client_response: discord.Message):
@@ -113,7 +111,7 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
         'Ahora se te asigno un grupo en especifico de un personaje de Super Smash Bros, lo puedes verificar en tu perfil\n' \
         'El grupo que te toco tiene un canal de texto y de voz para que puedas compartir con los otros miembros de tu grupo\n'\
         'Cualquier inconveniente le puedes escribir a Fernando Bermudez o Gabriel Santiago \n'\
-        '¡Hasta luego! Tambien te digo que los Estudiantes Orientadores de Team MADE estan para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'
+        '¡Hasta luego! También te digo que los Estudiantes Orientadores de Team MADE están para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'
 
     await member.send(content=closing)
 
@@ -152,24 +150,26 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     except Forbidden:
         log.debug(
             '[ERROR] Bot does not have permision to add roles. Could not add student "{}" to group.'.format(student_obj))
-        await member.send('No pude asignarte a un grupo. Contacta a algun estudiante orientador e informale de este error.')
+        await member.send('No pude asignarte a un grupo. Contacta a algún estudiante orientador e informale de este error.')
 
     return '{} {} {}'.format(student_obj['first name'], student_obj['middle initial'], student_obj['last names'])
 
 
 def _get_student(student_number: str) -> Dict[str, str]:
     with open(_PREPA_FILE) as teams_list_file:
-        rows = csv.DictReader(teams_list_file,  delimiter=',')
+        rows = csv.DictReader(teams_list_file, delimiter=',')
         for row in rows:
             if student_number.split("@")[0].lower() == row['student email'].split("@")[0]:
-                log.debug(f"""[DEGUG-ASSIGN] Usename found: {row['student email'].split("@")[0]} for student {"{} {} {}".format(row["first name"], row["middle initial"], row["last names"])}""")
+                log.debug(
+                    f"""[DEBUG-ASSIGN] Usename found: {row['student email'].split("@")[0]} for student {"{} {} {}".format(row["first name"], row["middle initial"], row["last names"])}""")
                 return dict(row)
     return None
 
-async def made(member : discord.Member):
+
+async def made(member: discord.Member):
     if member.id == 719645695484756008:
         log.debug("[MADE] Made has joined server")
-        await member.add_roles("ConsejeraProfesional","admin","DCSP")
+        await member.add_roles("ConsejeraProfesional", "admin", "DCSP")
     else:
         log.debug("[MADE] Made has not joined server")
 
