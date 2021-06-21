@@ -9,9 +9,6 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-
-import log
-import discord
 import re
 
 _buildings_list = dict(
@@ -81,7 +78,6 @@ def is_valid_room_number(sections):
 
 
 def get_building_information(sections):
-    information = None
     if len(sections) == 1:
         return False
 
@@ -95,8 +91,6 @@ def get_building_information(sections):
         return False
 
     text_part_of_code: str = regex_result[0].lower()
-
-    log.debug(f'avdv {text_part_of_code}')
 
     if text_part_of_code in _buildings_list:
         return _buildings_list[text_part_of_code]

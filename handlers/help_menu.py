@@ -35,7 +35,7 @@ def help_menu_base():
     )
     embed.add_field(
         name='!calendario',
-        value="Provee un enlace rapido al Calendario Academico de UPRM."
+        value="Provee un enlace rapido al Calendario Académico de UPRM."
     )
     embed.add_field(
         name='!contactos',
@@ -51,7 +51,7 @@ def help_menu_base():
     )
     embed.add_field(
         name='!guardia',
-        value='Provee informacion de la guardia universitaria, policia estatal y otros servicios de emergencia regionales.'
+        value='Provee información de la guardia universitaria, policía estatal y otros servicios de emergencia regionales.'
     )
     embed.add_field(
         name='!eo:DEPT',

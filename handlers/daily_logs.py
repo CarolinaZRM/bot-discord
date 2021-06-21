@@ -9,15 +9,15 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
+import json
+import os
+from datetime import datetime
 
 import discord
 import log
-import os
-from datetime import datetime
-import json
+from constants import paths
 
-_CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
-_LOG_DIR = os.path.join(_CURRENT_DIR, "res", "textfiles", "logs")
+_LOG_DIR = os.path.join(paths.TEXT_FILES, "logs")
 _FILE_PATH = None
 
 

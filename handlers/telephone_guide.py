@@ -9,9 +9,9 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-
 import discord
-from handlers.contacts import departamentos, servicios, consejeria_profesional
+
+from handlers.contacts import consejeria_profesional, departamentos, servicios
 
 
 def generate_embed(contact, embed):
@@ -40,7 +40,7 @@ def generate_embed(contact, embed):
 def get_dept_info(sections):
 
     if len(sections) <= 1:
-        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+        return 'Por favor, especifica abreviación del departamento: INSO, ICOM, CIIC, INEL\n'\
             'Ejemplo: "!dept:inso"'
 
     department_name: str = sections[1].lower()
@@ -69,10 +69,10 @@ def get_dept_info(sections):
 def get_asistencia_econ(section):
     asis_econ = servicios.AsistenciaEconomica()
 
-    return_message = "Esta es la informacion de la Oficina de Asistencia Economica:\n\n"
+    return_message = "Esta es la información de la Oficina de Asistencia Económica:\n\n"
 
-    embed = discord.Embed(title='Info Asistencia Economica',
-                          description='Informacion Rapida')
+    embed = discord.Embed(title='Info Asistencia Económica',
+                          description='Información Rapida')
 
     generate_embed(asis_econ, embed)
     embed = embed.add_field(name='Fechas Importantes (Prestamos, Beca, etc.)',
@@ -87,13 +87,14 @@ def get_asistencia_econ(section):
 def get_guardia_universitaria(section):
     guardia = servicios.GuardiaUniversitaria()
     embed = discord.Embed(title='Info Guardia Universitaria',
-                          description='Informacion Rapida')
-    ember = generate_embed(guardia, embed)
+                          description='Información Rapida')
+
+    embed = generate_embed(guardia, embed)
 
     divisor = '\n\u2022 '
     additional_info_list = f"\u2022 {divisor.join(guardia.additional_helpful_info)}"
     embed.add_field(name="Más Información Utíl", value=additional_info_list)
-    embed.add_field(name="Enlaces Utíles", value=guardia.more_info_link)
+    embed.add_field(name="Enlaces Útiles", value=guardia.more_info_link)
 
     return embed
 
@@ -102,7 +103,7 @@ def get_telephone_guide_help(sections):
     embed = discord.Embed(title='Lista de Contactos disponibles')
     embed.add_field(
         name='Uso',
-        value='!<CONTACTO> | Esto mostrara informacion revelante para el CONTACTO.'
+        value='!<CONTACTO> | Esto mostrara información revelante para el CONTACTO.'
     )
 
     for contact_name in _telephone_guide_list:
@@ -146,7 +147,7 @@ def get_faculty(sections):
         "Guillermo Serrano": "Full Time Professor\nguillermo.serrano.@upr.edu"
     }
     if len(sections) <= 1:
-        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+        return 'Por favor, especifica abreviación del departamento: INSO, ICOM, CIIC, INEL\n'\
             'Ejemplo: "!dept:inso"'
 
     department_name: str = sections[1].lower()
@@ -176,14 +177,14 @@ def get_faculty(sections):
 
 def get_consejeria_academica(sections):
     if len(sections) <= 1:
-        return 'Por favor, especifica abreviacion del departamento: INSO, ICOM, CIIC, INEL\n'\
+        return 'Por favor, especifica abreviación del departamento: INSO, ICOM, CIIC, INEL\n'\
             'Ejemplo: "!consejeroacad:inel"'
 
     dept_name = sections[1]
     embed: discord.Embed = None
     if dept_name.lower() in ('inel', 'icom'):
         embed = discord.Embed(
-            title='Consejeria Academica del Departamento de INEL/ICOM')
+            title='Consejeria Académica del Departamento de INEL/ICOM')
         ece_cons = consejeria_profesional.ECEConsejerosProfesional()
 
         generate_embed(ece_cons, embed)
@@ -212,7 +213,7 @@ def get_consejeria_academica(sections):
         )
     elif dept_name.lower() in ('inso', 'ciic'):
         embed = discord.Embed(
-            title='Consejeria Academica del Departamento de INSO/CIIC')
+            title='Consejeria Académica del Departamento de INSO/CIIC')
         cse_cons = consejeria_profesional.CSEConsejerosProfesional()
 
         generate_embed(cse_cons, embed)
@@ -226,17 +227,17 @@ def get_consejeria_academica(sections):
 
         embed.add_field(
             name='Cuando Puedo Ir al Departamento?',
-            value="Cuando quieras! Siempre y cuando Celines o uno de los directores este para atenderte y no esten ocupados"
+            value="Cuando quieras! Siempre y cuando Celines o uno de los directores este para atenderte y no estén ocupados"
         )
         divisor = '\n\u2022 '
-        #CSE DOESNT HAVE BROCHURES
+        # CSE DOESNT HAVE BROCHURES
         embed.add_field(
             name='CSE Dept. Website',
-            value= cse_cons.brochures[0] #website link
+            value=cse_cons.brochures[0]  # website link
         )
 
         embed.add_field(
-            name= 'Más Información',
+            name='Más Información',
             value=cse_cons.more_info
         )
     else:
@@ -246,7 +247,7 @@ def get_consejeria_academica(sections):
     return embed
 
 
-def get_dept_cons_picologicos(sections):
+def get_dept_cons_psicológicos(sections):
     embed = discord.Embed(
         title='Información de Departamento de Consejería y Servicios Psicológicos (DCSP)')
     dcsp = servicios.ConsejeriaServiciosPsicologicos()
@@ -259,7 +260,7 @@ def get_dept_cons_picologicos(sections):
     divisor = '\n\u2022 '
     links_list = f'\u2022 {divisor.join(dcsp.enlaces_rapidos)}'
     embed.add_field(
-        name='Enlaces Rapidos',
+        name='Enlaces Rápidos',
         value=links_list
     )
     embed.add_field(
@@ -296,17 +297,16 @@ def get_decanato_estudiante(sections):
 
 _telephone_guide_list = dict(
     {
-        '!rectoria': {'func': None, 'description': 'Informacion de Contacto de Rectoria'},
-        '!dept': {'func': get_dept_info, 'description': 'Obtener informacion de contacto de los departamentos de INEL/ICOM/INSO/CIIC'},
+        '!rectoria': {'func': None, 'description': 'Información de Contacto de Rectoria'},
+        '!dept': {'func': get_dept_info, 'description': 'Obtener Información de contacto de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!contactos': {'func': get_telephone_guide_help, 'description': 'Obtener lista completa de contactos disponibles'},
-        '!aecon': {'func': get_asistencia_econ, 'description': 'Informacion de Contacto de Asistencia Economica'},
-        '!facultad': {'func': get_faculty, 'description': 'Obtener informacion de contacto de la facltad de los departamentos de INEL/ICOM/INSO/CIIC'},
-        '!guardia': {'func': get_guardia_universitaria, 'description': 'Informacion de la guardia universitaria'},
-        '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener informacion de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'},
-        '!dcsp': {'func': get_dept_cons_picologicos, 'description': 'Informacion del Departamento de Consejería y Servicios Psicológicos (DCSP)'},
+        '!aecon': {'func': get_asistencia_econ, 'description': 'Información de Contacto de Asistencia Económica'},
+        '!facultad': {'func': get_faculty, 'description': 'Obtener información de contacto de la facultad de los departamentos de INEL/ICOM/INSO/CIIC'},
+        '!guardia': {'func': get_guardia_universitaria, 'description': 'Información de la guardia universitaria'},
+        '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener Información de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'},
+        '!dcsp': {'func': get_dept_cons_psicológicos, 'description': 'Información del Departamento de Consejería y Servicios Psicológicos (DCSP)'},
         '!dec_estudiantes': {'func': get_decanato_estudiante, 'description': 'Obtener infomacion del Decanato de Estudiantes'},
-        '!univa': {'func': None, 'description': 'Informacion sobre Univ Avanzado'},
-        '!rectoria': {'func': None, 'description': 'Obtener infomacion Rectoria'}
+        '!univa': {'func': None, 'description': 'Información sobre Univ Avanzado'},
     }
 )
 
