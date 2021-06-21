@@ -36,7 +36,7 @@ class __MusicPlayerState(object):
     CURRENT_USER_PLAYING_MUSIC = None
 
 
-def _extractAdmins(client):
+def _extractAdmins(client: discord.Client):
     counselor_file_ref = open(_COUNSELOR_USERS_FILE, "r")
 
     counselor_user_handles = set(
