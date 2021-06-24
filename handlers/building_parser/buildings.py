@@ -1,3 +1,12 @@
+"""
+//  buildings.py
+//  py-bot-uprm
+//
+//  Created by Gabriel S. Santiago on 06/23/2021.
+//  Copyright © 2021 bermedDev. All rights reserved.
+//  Copyright © 2021 teamMADE. All rights reserved.
+"""
+
 buildings_list = dict(
     {
         'ae': {'name': 'Administración de Empresas', 'gmaps_loc': 'https://goo.gl/maps/HfgdcA5krWJ1YNnw5'},

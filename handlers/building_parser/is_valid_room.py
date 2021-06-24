@@ -1,3 +1,12 @@
+"""
+//  is_valid_room.py
+//  py-bot-uprm
+//
+//  Created by Gabriel S. Santiago on 06/23/2021.
+//  Copyright © 2021 bermedDev. All rights reserved.
+//  Copyright © 2021 teamMADE. All rights reserved.
+"""
+
 import re
 
 
