@@ -1,4 +1,4 @@
-from handlers.contacts.contact import Contact
+from .contact import Contact
 
 
 class AsistenciaEconomica(Contact):
