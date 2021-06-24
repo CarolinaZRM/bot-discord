@@ -8,7 +8,7 @@
 //  Copyright © 2021 teamMADE. All rights reserved.
 '''
 
-import base_menu
+from . import base_menu
 
 
 def help_menu_join():
