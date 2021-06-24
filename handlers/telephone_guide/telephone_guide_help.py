@@ -11,6 +11,7 @@ import discord
 
 from .asistencia_econ import get_asistencia_econ
 from .consejeria_academica import get_consejeria_academica
+from .decanato_estudiantes import get_decanato_estudiante
 from .dept_cons_psicologicos import get_dept_cons_psicologicos
 from .dept_info import get_dept_info
 from .faculty import get_faculty
@@ -42,7 +43,7 @@ _TELEPHONE_GUIDE_LIST = dict(
         '!consejeroacad': {'func': get_consejeria_academica, 'description': 'Obtener Información de Asesoría Académica y Consejería Profesional de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!contactos': {'func': get_telephone_guide_help, 'description': 'Obtener lista completa de contactos disponibles'},
         '!dcsp': {'func': get_dept_cons_psicologicos, 'description': 'Información del Departamento de Consejería y Servicios Psicológicos (DCSP)'},
-        # '!dec_estudiantes': {'func': get_decanato_estudiante, 'description': 'Obtener infomacion del Decanato de Estudiantes'},
+        '!dec_estudiantes': {'func': get_decanato_estudiante, 'description': 'Obtener infomacion del Decanato de Estudiantes'},
         '!dept': {'func': get_dept_info, 'description': 'Obtener Información de contacto de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!facultad': {'func': get_faculty, 'description': 'Obtener información de contacto de la facultad de los departamentos de INEL/ICOM/INSO/CIIC'},
         '!guardia': {'func': get_guardia_universitaria, 'description': 'Información de la guardia universitaria'},
