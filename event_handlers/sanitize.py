@@ -108,3 +108,7 @@ async def profanity_filter(message: discord.Message) -> None:
         await channel_sent.send(f"""{author} dijo una profanidad, borré el mensaje""")
         return True
     return False
+
+
+
+# noice
