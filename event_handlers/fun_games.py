@@ -14,11 +14,13 @@ import random
 import log
 
 
+# This is a command method
 async def event_ping_pong(message: str):
     if message.content.lower() == 'ping':
         await message.channel.send('Pong :)')
 
 
+# This is a command method
 async def event_guessing_game(message, client):
     log.debug('[DEBUG] Entered guessing game')
     if message.content == "?guess":
