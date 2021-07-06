@@ -5,24 +5,24 @@
 //
 //  Created by Fernando Bermudez on 06/10/2019.
 //  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
+//  Edited by Gabriel Santiago on June 20, 2021
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-
-
+from handlers import daily_logs
 import asyncio
-import os
 from datetime import datetime
-from event_handlers import encrypt_token as et
 
 import discord
 
 import bot
+import config
 import log
-from event_handlers import (channel, counselor, fun_games, join,
-                            prepa, sanitize, actions)
-from handlers import daily_logs
+from event_handlers import actions, channel, fun_games, \
+    join, prepa, sanitize
+
+
 client = discord.Client()
 
 
@@ -35,7 +35,7 @@ async def task():
 
 
 def handle_exit():
-    log.debug(f"[DEBUG] Handling")
+    log.debug("[DEBUG] Handling")
     client.loop.run_until_complete(client.logout())
     for t in asyncio.Task.all_tasks(loop=client.loop):
         if t.done():
@@ -76,7 +76,9 @@ while True:
             return
 
         log.debug(f"[USER] {message.author.name}#{message.author.id}")
-        if message.content.startswith("!bulk_delete_admin") and bot.is_sender_admin(message) and not bot.is_from_dm(message):
+        if message.content.startswith("!bulk_delete_admin") \
+                and bot.is_sender_admin(message) \
+                and not bot.is_from_dm(message):
             sections = message.content.split(':')
             log.debug(f'[DEBUG] DELETE COMMAND SECTIONS: {sections}')
             log.debug(
@@ -84,15 +86,18 @@ while True:
             if len(sections) == 2 and sections[1].isdigit():
                 deleted = await message.channel.purge(limit=int(sections[1]))
                 log.debug(
-                    f'[DEBUG] Deleted {len(deleted)} messages. Selected by user {message.author}')
+                    f'[DEBUG] Deleted {len(deleted)} messages. " \
+                    " Selected by user {message.author}')
             else:
                 while len(await message.channel.purge(limit=1500)) > 0:
                     log.debug(
-                        f"[DEBUG DLT] BULK DELETE CALLED BY ADMIN {message.author}")
+                        f"[DEBUG DLT] BULK DELETE ' \
+                            'CALLED BY ADMIN {message.author}")
 
         log.debug('[INFO] passed the filter')
 
-        # Created event passed Message object to use for response of bot to discord client
+        # Created event passed Message object
+        # to use for response of bot to discord client
         daily_logs.analytics(message)
         await bot.set_streaming(client, message)
         await bot.join_voice_channel(client, message)
@@ -122,14 +127,13 @@ while True:
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
-        has_profanity = await sanitize.profanity_filter(after)
+        _ = await sanitize.profanity_filter(after)
 
     @client.event
     async def on_member_join(member: discord.Member):
         await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
         await join.made(member)
-
 
     @client.event
     async def on_member_update(before, after):
@@ -147,8 +151,9 @@ while True:
 
     client.loop.create_task(task())
     try:
-        TOKEN = et.cipher_decrypt(bot.readToken(),2020)
-        client.loop.run_until_complete(client.start(TOKEN))
+        client.loop.run_until_complete(
+            client.start(config.BOT_TOKEN)
+        )
     except SystemExit as e:
         log.debug(f'[DEBUG] Error {e}')
         handle_exit()

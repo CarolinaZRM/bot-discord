@@ -10,19 +10,18 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-from better_profanity import profanity
+import os
+
 import discord
 import log
-import os
-from bot import is_sender_counselor, is_from_a_channel
+from better_profanity import profanity
+from bot import is_from_a_channel, is_sender_counselor
+from constants import paths
 
-_CURRENT_DIR = os.path.dirname(os.path.dirname(__file__))
-_PROFANITY_FILE_PATH = os.path.join(
-    _CURRENT_DIR, "res", "textfiles", "profanities.txt")
+_PROFANITY_FILE_PATH = os.path.join(paths.TEXT_FILES, "profanities.txt")
 
 
 def __init_sanitize():
-    global _CURRENT_DIR
     log.debug('[VERBOSE] Initializing additional Spanish Profanities')
     censored_spanish_words = open(_PROFANITY_FILE_PATH, 'r')
 
@@ -97,7 +96,7 @@ async def profanity_filter(message: discord.Message) -> None:
     if profanity.contains_profanity(user_message):
         # if better_profanity.profanity.contains_profanity(message.content):
         channel_sent = message.channel
-        log.debug(f'Containes a bad word: {user_message}')
+        log.debug(f'Contains a bad word: {user_message}')
         author = None
         if hasattr(message.author, 'nick'):
             author = message.author.nick

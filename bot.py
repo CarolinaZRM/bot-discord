@@ -5,77 +5,69 @@
 //
 //  Created by Fernando Bermudez on 06/10/2019.
 //  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
+//  Edited by Gabriel Santiago on June 20, 2021
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-from discord import member
-from discord import user
+import discord
 from discord.channel import ChannelType
 from discord.errors import Forbidden
-import discord
+
+from constants import admins, paths
+import config
 import log
 import os
 import youtube_dl
 
-_ADMIN_CHANNELS = ["estudiantes_orientadores", "admins", "general"]
-_PREPA_CHANNELS = ["general"]
+os.makedirs(os.path.join(paths.AUDIO), exist_ok=True)
 
-_CURRENT_DIR = os.path.dirname(__file__)
-_TOKEN_FILE = os.path.join(_CURRENT_DIR, "res", "textfiles", 'token.txt')
-_ADMINS_FILE = os.path.join(_CURRENT_DIR, "res", "textfiles", 'counselors.txt')
+_COUNSELOR_USERS_FILE = os.path.join(paths.TEXT_FILES, 'counselors.txt')
+
 _VALIDATED_COUNSELORS = []
-_MUSIC_FILE = os.path.join(_CURRENT_DIR, "res", "audio", "song.mp3")
-os.makedirs(os.path.join(_CURRENT_DIR, "res", "audio"), exist_ok=True)
 
-_CLIENT_ID_NUM = 719199208166522881
-_GUILD_ID_NUM = 718624993470316554
-
-_USER_PLAYING_MUSIC = None
-
-_PLAYING = False
-_CURRENT_USER_PLAYING_MUSIC = None
-
-def readToken():
-    f = open(os.path.join(_CURRENT_DIR, _TOKEN_FILE), "r")
-    lines = f.readlines()
-    return lines[0].strip()
+_TMP_AUDIO_FILE = os.path.join(paths.AUDIO, "song.mp3")
 
 
-def _extractAdmins(client):
-    file_path = os.path.join(_CURRENT_DIR, _ADMINS_FILE)
+class __MusicPlayerState(object):
+    # Player state variables
+    USER_PLAYING_MUSIC = None
+    PLAYING = False
+    CURRENT_USER_PLAYING_MUSIC = None
 
-    file1 = open(file_path, "r")
-    f_lines = file1.readlines()
 
-    f_lines = list(map(lambda x: x.strip(), f_lines))
-    file1.close()
-    current_counselors = set(f_lines)
+def _extractAdmins(client: discord.Client):
+    counselor_file_ref = open(_COUNSELOR_USERS_FILE, "r")
 
-    guild = client.get_guild(_GUILD_ID_NUM)
+    counselor_user_handles = set(
+        map(lambda x: x.strip(),
+            counselor_file_ref.readlines()))
+
+    counselor_file_ref.close()
+
+    guild = client.get_guild(config.GUILD_ID_NUM)
     for member in guild.members:
         for role in member.roles:
-            if role.name == "@EstudianteOrientador" or role.name == 'ConsejeraProfesional':
-                # if role.name == 'ConsejeraProfesional':
-                #   log.debug(f"[MADE] MADE ID IS {member.id}")
-                current_counselors.add(str(member))
+            if role.name == "@EstudianteOrientador" \
+                    or role.name == 'ConsejeraProfesional':
+                counselor_user_handles.add(str(member))
 
-    current_counselors.discard(' ')
-    current_counselors.discard('')
+    counselor_user_handles.discard(' ')
+    counselor_user_handles.discard('')
 
-    current_counselors = list(current_counselors)
+    current_counselors = list(counselor_user_handles)
     current_counselors.sort()
 
-    lines2 = '\n'.join(current_counselors)
+    updated_handle_list = '\n'.join(current_counselors)
 
-    file2 = open(file_path, 'w')
-    file2.writelines(lines2)
+    file2 = open(_COUNSELOR_USERS_FILE, 'w')
+    file2.writelines(updated_handle_list)
     file2.close()
 
 
 def _uploadCounselors():
     global _VALIDATED_COUNSELORS
-    f = open(os.path.join(_CURRENT_DIR, _ADMINS_FILE), "r")
+    f = open(_COUNSELOR_USERS_FILE, "r")
     for counselor in f:
         _VALIDATED_COUNSELORS.append(counselor.strip())
     f.close()
@@ -93,7 +85,8 @@ async def verify_if_counselor(member: discord.Member):
         log.debug(f'[DEBUG] Joined Member is Counselor: {member}')
         guild: discord.Guild = member.guild
         for role in guild.roles:
-            if role.name == '@EstudianteOrientador' or role.name == 'ConsejeraProfesional':
+            if role.name == '@EstudianteOrientador' \
+                    or role.name == 'ConsejeraProfesional':
                 log.debug(f'[DEBUG] Role: {role}')
                 try:
                     await member.add_roles(role)
@@ -115,26 +108,26 @@ def is_sender_prepa(message: discord.Message):
 
 
 def is_sender_admin(message: discord.Message):
-    return message.author.id == 539112744553676812 or message.author.id == 541298986535878677 or message.author.id == 719949050203603005
+    return message.author.id in admins.ADMIN_IDS
 
 
 def is_from_a_channel(message: discord.Message) -> bool:
     if message.channel.type != ChannelType.private:
-        log.debug('[_TOKEN_FILE] Is from a chanel')
+        log.debug('[MESSAGE] Is from a chanel')
         return True
     return False
 
 
 def is_from_dm(message: discord.Message) -> bool:
     if message.channel.type == ChannelType.private:
-        log.debug('[_TOKEN_FILE] Is from DM')
+        log.debug('[MESSAGE] Is from DM')
         return True
     return False
 
 
 def is_from_channel(message: discord.Message, channel_name: str) -> bool:
     if message.channel.name == channel_name:
-        log.debug('[_TOKEN_FILE] Is from DM')
+        log.debug('[MESSAGE] Is from DM')
         return True
     return False
 
@@ -142,13 +135,16 @@ def is_from_channel(message: discord.Message, channel_name: str) -> bool:
 async def set_streaming(client: discord.Client, message: discord.Message):
     user_message = message.content
 
-    if user_message == '!botstartstream' and is_sender_counselor(message) and is_from_dm(message):
+    if user_message == '!botstartstream' \
+            and is_sender_counselor(message) \
+            and is_from_dm(message):
         sender: discord.User = message.author
 
         # checks if message was sent by the user and in the DM
         def check_same_user(client_response: discord.Message):
             sender_dm_id = sender.dm_channel.id
-            return client_response.author == sender and client_response.channel.id == sender_dm_id
+            return client_response.author == sender \
+                and client_response.channel.id == sender_dm_id
 
         await sender.send(content='Cual va a ser el nombre de la actividad?')
         activity_name = await client.wait_for('message', check=check_same_user)
@@ -166,21 +162,12 @@ async def set_streaming(client: discord.Client, message: discord.Message):
             details=f'Viewing {activity_name}'
         ))
 
-        # checks if message was sent by the user and in the DM
-        def check_same_user_stop_streaming(client_response: discord.Message):
-            sender_dm_id = sender.dm_channel.id
-            return client_response.author == sender \
-                and client_response.channel.id == sender_dm_id \
-                and client_response.content == '!botstopstream'
-
         await client.wait_for('message', check=check_same_user)
 
         await client.change_presence(activity=None)
 
 
 async def join_voice_channel(client: discord.Client, message: discord.Message):
-    global _USER_PLAYING_MUSIC
-
     if message.content == "!join":
         if not is_sender_counselor(message):
             log.debug(
@@ -211,12 +198,12 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
             client.voice_clients, guild=message.guild)
 
         # verify ownreship of music streaming
-        if _USER_PLAYING_MUSIC is None:
+        if __MusicPlayerState.USER_PLAYING_MUSIC is None:
             # add ownership is no one has it
-            _USER_PLAYING_MUSIC = user_name
-        elif _USER_PLAYING_MUSIC != user_name:
+            __MusicPlayerState.USER_PLAYING_MUSIC = user_name
+        elif __MusicPlayerState.USER_PLAYING_MUSIC != user_name:
             # no eres quien hizo el join original
-            await message.author.send(f"Hola {user_name}, no tienes la autorizacion para unirme a el canal **'{voice_channel}'**. **{_USER_PLAYING_MUSIC}** tiene control del bot streamer.")
+            await message.author.send(f"Hola {user_name}, no tienes la autorización para unirme a el canal **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}** tiene control del bot streamer.")
             return
 
         if voice_client and voice_client.is_connected():
@@ -229,8 +216,6 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
 
 
 async def leave_voice_channel(client: discord.Client, message: discord.Message):
-    global _USER_PLAYING_MUSIC
-
     if message.content == "!leave":
         if not is_sender_counselor(message):
             log.debug(
@@ -268,13 +253,13 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
             return
 
         # verify ownreship of music streaming
-        if _USER_PLAYING_MUSIC != user_name:
-            # no eres quien hizo el join oprignal
-            await message.author.send(f"Hola {user_name}, no tienes la autorizacion para removerme del canal **'{voice_channel}'**. **{_USER_PLAYING_MUSIC}** tiene control del bot streamer.")
+        if __MusicPlayerState.USER_PLAYING_MUSIC != user_name:
+            # no eres quien hizo el join original
+            await message.author.send(f"Hola {user_name}, no tienes la autorización para removerme del canal **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}** tiene control del bot streamer.")
             return
         else:
             # clean ownership of music streaming
-            _USER_PLAYING_MUSIC = None
+            __MusicPlayerState.USER_PLAYING_MUSIC = None
 
         if voice_client.is_connected():
             await voice_client.disconnect()
@@ -282,92 +267,92 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
 
 
 async def play_audio(client: discord.Client, message: discord.Message):
-
     sections = message.content.split(' ')
 
-    if sections[0] == "!play":
+    if sections[0] != "!play":
+        return
 
-        if _PLAYING:
-            if _CURRENT_USER_PLAYING_MUSIC != message.author:
+    if __MusicPlayerState.PLAYING:
+        if __MusicPlayerState.CURRENT_USER_PLAYING_MUSIC != message.author:
 
-                return
-
-        if not is_sender_counselor(message):
-            log.debug(
-                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
-            await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
             return
 
-        if not hasattr(message.author, 'voice'):
-            await message.author.send('No puedes unirme a un canal de voz desde el DM')
-            return
+    if not is_sender_counselor(message):
+        log.debug(
+            f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}")
+        await message.author.send(f"{message.author.nick}, no tienes los permisos para usar este comando")
+        return
 
-        user_name = None
+    if not hasattr(message.author, 'voice'):
+        await message.author.send('No puedes unirme a un canal de voz desde el DM')
+        return
 
-        if hasattr(message.author, 'nick'):
-            user_name = message.author.nick
-        else:
-            user_name = message.author.name
+    user_name = None
 
-        if len(sections) < 2:
-            await message.author.send(f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier website publico. (Youtube, Soundcloud, etc.)")
-            return
+    if hasattr(message.author, 'nick'):
+        user_name = message.author.nick
+    else:
+        user_name = message.author.name
 
-        url = sections[1]
+    if len(sections) < 2:
+        await message.author.send(f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier website publico. (Youtube, Soundcloud, etc.)")
+        return
 
-        global _MUSIC_FILE
+    url = sections[1]
 
-        try:
-            if os.path.isfile(_MUSIC_FILE):
-                os.remove(_MUSIC_FILE)
-        except PermissionError:
-            await message.author.send('No puedo dar play a otra cancion. Un audio esta en play.\nPonlo en pausa.')
-            return
+    global _TMP_AUDIO_FILE
 
-        voice_client: discord.VoiceClient = discord.utils.get(
-            client.voice_clients, guild=message.guild)
+    try:
+        if os.path.isfile(_TMP_AUDIO_FILE):
+            os.remove(_TMP_AUDIO_FILE)
+    except PermissionError:
+        await message.author.send('No puedo dar play a otra cancion. Un audio esta en play.\nPonlo en pausa.')
+        return
 
-        if not voice_client:
-            await message.author.send(f"No estoy conectado a ningun canal de voz")
-            return
+    voice_client: discord.VoiceClient = discord.utils.get(
+        client.voice_clients, guild=message.guild)
 
-        if voice_client.is_playing():
-            await message.author.send(f'No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero')
-            return
+    if not voice_client:
+        await message.author.send("No estoy conectado a ningún canal de voz")
+        return
 
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': f"{os.path.join(_CURRENT_DIR, 'res', 'audio', '%(title)s.%(ext)s')}",
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
+    if voice_client.is_playing():
+        await message.author.send('No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero')
+        return
 
-        try:
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                print("Downloading audio now\n")
-                ydl.download([url])
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'outtmpl': os.path.join(paths.AUDIO, '%(title)s.%(ext)s'),
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'mp3',
+            'preferredquality': '192',
+        }],
+    }
 
-        except youtube_dl.DownloadError as err:
-            print(f'[ERROR] {err}')
-            await message.author.send(f'Me econtre con un error descargando el video.\n'
-                                      f"Error:\n{str(err)}")
-            return
+    try:
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            print("Downloading audio now\n")
+            ydl.download([url])
 
-        name = ""
-        for file in os.listdir(os.path.join(_CURRENT_DIR, "res", "audio")):
-            if file.endswith(".mp3"):
-                name = file
-                os.rename(os.path.join(_CURRENT_DIR, "res",
-                                       "audio", file), _MUSIC_FILE)
+    except youtube_dl.DownloadError as err:
+        print(f'[ERROR] {err}')
+        await message.author.send(f'Me econtre con un error descargando el video.\n'
+                                  f"Error:\n{str(err)}")
+        return
 
-        voice_client.play(discord.FFmpegPCMAudio(_MUSIC_FILE))
-        name = name.replace('.mp3', '')
-        nname = name.rsplit("-", 2)
+    name = ""
+    for file in os.listdir(os.path.join(paths.AUDIO)):
+        if file.endswith(".mp3"):
+            name = file
+            os.rename(os.path.join(paths.AUDIO, file), _TMP_AUDIO_FILE)
 
-        await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
+    voice_client.play(discord.FFmpegPCMAudio(_TMP_AUDIO_FILE))
+    name = name \
+        .replace('.mp3', '') \
+        .rsplit('-', 2)
+
+    await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
 
 
 async def pause_audio(client: discord.Client, message: discord.Message):
@@ -394,7 +379,7 @@ async def pause_audio(client: discord.Client, message: discord.Message):
             client.voice_clients, guild=message.guild)
 
         if not voice_client:
-            await message.author.send(f"No estoy conectado a ningun canal de voz")
+            await message.author.send(f"{user_name}, No estoy conectado a ningún canal de voz")
             return
 
         voice_channel: discord.VoiceChannel = voice_client.channel
@@ -427,7 +412,7 @@ async def resume_audio(client: discord.Client, message: discord.Message):
             client.voice_clients, guild=message.guild)
 
         if not voice_client:
-            await message.author.send(f"No estoy conectado a ningun canal de voz")
+            await message.author.send(f"${user_name}, No estoy conectado a ningún canal de voz")
             return
 
         voice_channel: discord.VoiceChannel = voice_client.channel

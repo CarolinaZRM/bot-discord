@@ -9,7 +9,6 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-
 import random
 import log
 
@@ -25,7 +24,7 @@ async def event_guessing_game(message, client):
         def convert_to_int(value):
             try:
                 return int(value)
-            except Exception as _:
+            except Exception:
                 return False
 
         response = None
