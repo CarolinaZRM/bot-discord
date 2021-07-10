@@ -1,20 +1,13 @@
 """
-//
-//  building_parser.py
+//  buildings.py
 //  py-bot-uprm
 //
-//  Created by Fernando Bermudez on 06/10/2019.
-//  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
-//  Copyright © 2020 bermedDev. All rights reserved.
-//  Copyright © 2020 teamMADE. All rights reserved.
-
+//  Created by Gabriel S. Santiago on 06/23/2021.
+//  Copyright © 2021 bermedDev. All rights reserved.
+//  Copyright © 2021 teamMADE. All rights reserved.
 """
 
-import log
-import discord
-import re
-
-_buildings_list = dict(
+buildings_list = dict(
     {
         'ae': {'name': 'Administración de Empresas', 'gmaps_loc': 'https://goo.gl/maps/HfgdcA5krWJ1YNnw5'},
         'ai': {'name': 'Antiguo Instituto', 'gmaps_loc': ''},
@@ -64,41 +57,3 @@ _buildings_list = dict(
         'ta': {'name': 'Taller de Artes Gráficas', 'gmaps_loc': 'https://goo.gl/maps/DsqsGe5ezfaP6mBi7'}
     }
 )
-
-
-def is_valid_room_number(sections):
-    if len(sections) == 1:
-        return False
-
-    tmp = sections[1]
-
-    regex_result = re.findall("^\D+", tmp)
-
-    if len(regex_result) == 1:
-        return True
-
-    return False
-
-
-def get_building_information(sections):
-    information = None
-    if len(sections) == 1:
-        return False
-
-    salon = sections[1]
-
-    salon_splited = re.split('-', salon)
-
-    regex_result = re.findall("^\D+", salon_splited[0])
-
-    if len(regex_result) != 1:
-        return False
-
-    text_part_of_code: str = regex_result[0].lower()
-
-    log.debug(f'avdv {text_part_of_code}')
-
-    if text_part_of_code in _buildings_list:
-        return _buildings_list[text_part_of_code]
-    else:
-        return False

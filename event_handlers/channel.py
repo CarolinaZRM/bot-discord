@@ -9,9 +9,8 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-
-import discord
 import bot
+import discord
 import log
 
 

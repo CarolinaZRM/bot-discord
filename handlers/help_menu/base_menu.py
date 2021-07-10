@@ -1,15 +1,12 @@
-"""
-//
-//  help_menu.py
+'''
+//  /handlers/help_menu/base_menu.py
 //  py-bot-uprm
 //
-//  Created by Fernando Bermudez on 06/10/2019.
-//  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
-//  Copyright © 2020 bermedDev. All rights reserved.
-//  Copyright © 2020 teamMADE. All rights reserved.
-
-"""
-
+//  Created by Gabriel S. Santiago on 06/24/2021
+//  Copyright © 2021 bermedDev. All rights reserved.
+//  Copyright © 2021 agSant01. All rights reserved.
+//  Copyright © 2021 teamMADE. All rights reserved.
+'''
 import discord
 import log
 
@@ -35,7 +32,7 @@ def help_menu_base():
     )
     embed.add_field(
         name='!calendario',
-        value="Provee un enlace rapido al Calendario Academico de UPRM."
+        value="Provee un enlace rapido al Calendario Académico de UPRM."
     )
     embed.add_field(
         name='!contactos',
@@ -51,40 +48,10 @@ def help_menu_base():
     )
     embed.add_field(
         name='!guardia',
-        value='Provee informacion de la guardia universitaria, policia estatal y otros servicios de emergencia regionales.'
+        value='Provee información de la guardia universitaria, policía estatal y otros servicios de emergencia regionales.'
     )
     embed.add_field(
         name='!eo:DEPT',
         value="Provee una lista los usernames (@'s) de los Estudiantes Orientadores de ese DEPT. Puedes escoger entre: INEL, ICOM, INSO o CIIC."
     )
     return embed
-
-
-def help_menu_for_prepa():
-    return help_menu_base()
-
-
-def help_menu_for_counselor():
-    embed = help_menu_base()
-    embed.add_field(
-        name="!user-count",
-        value="Provee la cantidad de mienbros en el canal/grupo actual.\n"
-    )
-    embed.add_field(
-        name='!admin_add_profanity:PALABRA',
-        value='Este comando solo para consejeros permite anadir una palabra nueva a la lista de profanidades. Utilice con cuidado.'
-    )
-    embed.add_field(
-        name='!botstartstream',
-        value="Este comando es para hacer el *MADE Bot* se comporte como si estuviera 'Streaming' esto hara que aparezca un link en su perfil."
-        "Pregunta por nombre de la actividad y el URL del video. Tiene que ser un video publico. Utilice con cuidado"
-    )
-    embed.add_field(
-        name='!botstopstream',
-        value='Este comando Hace que el bot termine de "stream" un video y vuelva a un estado normal. Utilice con cuidado.'
-    )
-    return embed
-
-
-def help_menu_join():
-    return help_menu_base()

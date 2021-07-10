@@ -8,10 +8,10 @@
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
 
-This file is suppossed to contain all the events and commands that are only allowed for prepas
+This file is supposed to contain all the events and commands that are only allowed for prepas
 """
+import config
 import discord
-from bot import _GUILD_ID_NUM as ID
 import log
 
 inel_counselors = set()
@@ -20,7 +20,8 @@ cse_counselors = set()
 
 
 def extract_counselors(client: discord.client):
-    guild = client.get_guild(ID)
+    guild = client.get_guild(config.GUILD_ID_NUM)
+    # @TODO: Check this out and fix
     eo = discord.Role(data={'id': 718625920805765171,
                             'name': "@EstudianteOrientador"}, guild=guild, state=None)
     for member in guild.members:
@@ -49,10 +50,11 @@ async def get_counselor_names(message: discord.Message):
         if split[0].upper() == "!EO":
             if split[1].upper() == "INEL":
                 embed = discord.Embed(title="Estudiantes Orientadores de INEL",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria Electrica como tu!")
+                                      description="Aquí están todos los estudiantes orientadores que están estudiando Ingenieria Electrica como tu!")
                 for counselor in inel_counselors:
                     if counselor is not None:
-                        if counselor.name == "Arianys Martínez Fuentes":  # harcode becasue Ariany's username is her actual name
+                        # @TODO: Fix
+                        if counselor.name == "Arianys Martínez Fuentes":  # hardcode because Ariany's username is her actual name
                             embed.add_field(
                                 name=f"Nombre: {counselor.display_name}", value=f"Username: {counselor.name}")
                         else:
@@ -62,7 +64,7 @@ async def get_counselor_names(message: discord.Message):
 
             elif split[1].upper() == "ICOM":
                 embed = discord.Embed(title="Estudiantes Orientadores de ICOM",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria de Computadora como tu!")
+                                      description="Aquí están todos los estudiantes orientadores que están estudiando Ingenieria de Computadora como tu!")
                 for counselor in icom_counselors:
                     if counselor is not None:
                         embed.add_field(
@@ -71,7 +73,7 @@ async def get_counselor_names(message: discord.Message):
 
             elif split[1].upper() == "INSO" or split[1].upper() == "CIIC":
                 embed = discord.Embed(title="Estudiantes Orientadores de INSO/CIIC",
-                                      description="Aquí estan todos los estudiantes orientadores que estan estudiando Ingenieria de Software/Ciencias e Ingenieria de Computacion como tu!")
+                                      description="Aquí están todos los estudiantes orientadores que están estudiando Ingenieria de Software/Ciencias e Ingenieria de Computacion como tu!")
                 for counselor in cse_counselors:
                     if counselor is not None:
                         embed.add_field(
