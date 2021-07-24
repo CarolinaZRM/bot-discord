@@ -426,51 +426,53 @@ async def resume_audio(client: discord.Client, message: discord.Message):
 
 # Leveling System Methods
 
+LEVEL_PATH = os.path.join(paths.ROOT_PATH, "users.json")
+
+
 # Runs when a member joins the server, adds user to the json with level 1
 async def level_join(member):
-    with open('users.json', 'r') as f:
-        users = json.load(f)
+    with open(LEVEL_PATH, 'r') as levels_file:
+        users = json.load(levels_file)
 
     await update_data(users, member)
 
-    with open('users.json', 'w') as f:
-        json.dump(users, f)
+    with open(LEVEL_PATH, 'w') as levels_file:
+        json.dump(users, levels_file)
 
 
 # Runs on message, the user is given a certain amount of experience for each message and we check for level up
 async def level_on_message(message):
-
-    with open('users.json', 'r') as f:
-        users = json.load(f)
+    with open(LEVEL_PATH, 'r') as levels_file:
+        users = json.load(levels_file)
 
     await update_data(users, message.author)
-    await add_experience(users, message.author, 5)
+    await add_experience(users, message.author, 10)
     await level_up(users, message.author, message.channel)
 
-    with open('users.json', 'w') as f:
-        json.dump(users, f)
+    with open(LEVEL_PATH, 'w') as levels_file:
+        json.dump(users, levels_file)
 
 
-# Add the user to the json file with experience 0 and level 1
+# If not already in the file add the user to the json file with experience 0 and level 1
 async def update_data(users, user):
-    if not user.id in users:
+    if user.id not in users:
         users[user.id] = {}
-        users[user.id]['experience'] = 0
-        user[user.id]['level'] = 1
+        users[user.id]["experience"] = 0
+        users[user.id]["level"] = 1
 
 
 # Add a variable number of exp to the json file for a user
 async def add_experience(users, user, exp):
-    users[user.id]['experience'] += exp
+    users[user.id]["experience"] += exp
 
 
 # Check for level up condition given by lvl_end also send a message on level up
 async def level_up(users, user, channel):
-    experience = users[user.id]['experience']
-    lvl_start = users[user.id]['experience']
-    lvl_end = int(experience/10)
+    experience = users[user.id]["experience"]
+    lvl_start = users[user.id]["experience"]
+    lvl_end = int(experience ** (1/4))
 
     if lvl_start < lvl_end:
         await discord.client.send_message(channel, '{} has leveled up to level {}'.format(user.mention, lvl_end))
-        users[user.id]['level'] = lvl_end
+        users[user.id]["level"] = lvl_end
 
