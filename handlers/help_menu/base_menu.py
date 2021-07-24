@@ -54,4 +54,9 @@ def help_menu_base():
         name='!eo:DEPT',
         value="Provee una lista los usernames (@'s) de los Estudiantes Orientadores de ese DEPT. Puedes escoger entre: INEL, ICOM, INSO o CIIC."
     )
+    embed.add_field(
+        name="!ls_student_orgs:ORG",
+        value= "Provee información sobre organizaciones estudiantiles relacionadas a INEL/ICOM/INSO/CIIC\n"
+               "(IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE)"
+    )
     return embed
