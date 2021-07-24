@@ -428,26 +428,26 @@ async def resume_audio(client: discord.Client, message: discord.Message):
 
 # Runs when a member joins the server, adds user to the json with level 1
 async def level_join(member):
-    with open('user.json', 'r') as f:
+    with open('users.json', 'r') as f:
         users = json.load(f)
 
     await update_data(users, member)
 
-    with open('user.json', 'w') as f:
+    with open('users.json', 'w') as f:
         json.dump(users, f)
 
 
 # Runs on message, the user is given a certain amount of experience for each message and we check for level up
 async def level_on_message(message):
 
-    with open('user.json', 'r') as f:
+    with open('users.json', 'r') as f:
         users = json.load(f)
 
     await update_data(users, message.author)
     await add_experience(users, message.author, 5)
     await level_up(users, message.author, message.channel)
 
-    with open('user.json', 'w') as f:
+    with open('users.json', 'w') as f:
         json.dump(users, f)
 
 
