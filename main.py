@@ -6,6 +6,7 @@
 //  Created by Fernando Bermudez on 06/10/2019.
 //  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
 //  Edited by Gabriel Santiago on June 20, 2021
+//  Edited by Orlando Saldaña on July 23, 2021
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
 
@@ -117,6 +118,9 @@ while True:
 
         await prepa.get_counselor_names(message)
 
+        # On message action for leveling system
+        await bot.level_on_message(message)
+
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
             log.debug('[DEBUG] Entered Counselor Auth Zone')
@@ -134,6 +138,7 @@ while True:
         await bot.verify_if_counselor(member)
         await join.event_greet_new_member(client, member)
         await join.made(member)
+        await bot.level_join(member)
 
     @client.event
     async def on_member_update(before, after):
