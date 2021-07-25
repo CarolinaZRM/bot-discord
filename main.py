@@ -36,8 +36,8 @@ async def task():
 
 def handle_exit():
     log.debug("[DEBUG] Handling")
-    client.loop.run_until_complete(client.logout())
-    for t in asyncio.Task.all_tasks(loop=client.loop):
+    client.loop.run_until_complete(client.close())
+    for t in asyncio.all_tasks(loop=client.loop):
         if t.done():
             t.exception()
             continue
@@ -114,7 +114,7 @@ while True:
         await actions.event_get_calendar(message)
         await actions.generate_server_rules(message)
         await actions.generate_faq(message)
-
+        await actions.get_prj_info(message)
         await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):

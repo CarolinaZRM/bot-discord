@@ -11,7 +11,8 @@
 """
 import csv
 import os
-
+import os.path
+import json
 import bot
 import discord
 import log
@@ -57,7 +58,8 @@ async def event_get_curriculum(message: discord.Message):
         split = user_message.split(":")
         log.debug('[DEBUG] Contains Curriculum')
         if len(split) == 1:
-            await message.author.send("No me dijiste que curriculo necesitas :slight_frown:\nIntenta con: INEL/ICOM/INSO/CIIC")
+            await message.author.send(
+                "No me dijiste que curriculo necesitas :slight_frown:\nIntenta con: INEL/ICOM/INSO/CIIC")
         else:
             if split[1].upper() == "INEL":
                 await message.author.send("Here is the Electrical Engineering Curriculum:")
@@ -119,16 +121,16 @@ async def event_parse_university_building(message: discord.Message):
         information = building_parser.get_building_information(sections)
 
         if information:
-            response_msg = f"Hola {user_name}! Es posible que este salon se encuentre en el edificio: **'{information['name']}'**\n"\
-                f"{information['gmaps_loc']}"
+            response_msg = f"Hola {user_name}! Es posible que este salon se encuentre en el edificio: **'{information['name']}'**\n" \
+                           f"{information['gmaps_loc']}"
 
             await message.channel.send(response_msg)
         else:
             response_msg = f'{user_name}, no sé en que edificio está salón. :('
             await message.channel.send(response_msg)
     elif sections[0] == '!salon':
-        response_msg = 'No me especificaste cual salon quieres buscar.\nIntenta en este formato: !salon:*<código>*\n'\
-            'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
+        response_msg = 'No me especificaste cual salon quieres buscar.\nIntenta en este formato: !salon:*<código>*\n' \
+                       'Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*'
         await message.channel.send(response_msg)
 
 
@@ -157,6 +159,28 @@ async def generate_server_rules(message: discord.Message):
             embed.add_field(name=f"""Regla {ruleCount}""", value=rule)
             ruleCount += 1
         await message.channel.send(content=None, embed=embed)
+
+
+async def get_prj_info(message: discord.Message):
+    log.debug('[DEBUG] Entered Project')
+    user_message = message.content
+    code_dir = os.path.dirname(__file__)
+    project_ds_path = os.path.join(code_dir, '../res/proyectis/proyectos.json')
+    with open(project_ds_path, 'r') as fi:
+        proyectos = json.load(fi)
+        mess = ""
+        for key, value in proyectos.items():
+            mess += key + ", "
+        if "!ls_projects" in user_message.lower():
+            split = user_message.split(":")
+            if len(split) == 1:
+                await message.author.send("No me dijiste el nombre del proyecto que quieres buscar.\nIntenta con: " + mess[:-2])
+            else:
+                key = split[1]
+                if proyectos.get(key) is None:
+                    await message.author.send("No tenemos información de este proyecto.\nIntenta con: " + mess[:-2])
+                else:
+                    await message.author.send("Esta es la información del "+ key + " : " + proyectos[key])
 
 
 async def generate_faq(message: discord.Message):
