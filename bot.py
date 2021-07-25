@@ -441,17 +441,14 @@ async def level_join(member):
 
 
 # Runs on message, the user is given a certain amount of experience for each message and we check for level up
-async def level_on_message(message):
+async def level_on_message(message: discord.Message):
     if not message.author.bot:
         with open(LEVEL_PATH, 'r') as levels_file:
             users = json.load(levels_file)
 
         await update_data(users, message.author)
-        print(users)
         await add_experience(users, message.author, 10)
-        print(users)
         await level_up(users, message.author, message.channel)
-        print(users)
 
         with open(LEVEL_PATH, 'w') as levels_file:
             json.dump(users, levels_file)
@@ -472,14 +469,10 @@ async def add_experience(users, user, exp):
 
 # Check for level up condition given by lvl_end also send a message on level up
 async def level_up(users, user, channel):
-    print('testing')
-    experience = users[f'{user.id}']["level"]
+    experience = users[f'{user.id}']["experience"]
     lvl_start = users[f'{user.id}']["level"]
-    lvl_end = int(experience/100)
-
-    print(f'Starting lvl {lvl_start} and Final lvl {lvl_end}')
+    lvl_end = int(experience / 100)
 
     if lvl_start < lvl_end:
-        await channel.message(channel, '{} has leveled up to level {}'.format(user.mention, lvl_end))
+        await channel.send(f'{user.mention} has leveled up to level {lvl_end}')
         users[f'{user.id}']["level"] = lvl_end
-
