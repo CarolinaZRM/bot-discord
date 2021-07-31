@@ -56,7 +56,12 @@ def help_menu_base():
     )
     embed.add_field(
         name="!ls_student_orgs:ORG",
-        value= "Provee información sobre organizaciones estudiantiles relacionadas a INEL/ICOM/INSO/CIIC\n"
-               "(IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE)"
+        value="Provee información sobre organizaciones estudiantiles relacionadas a INEL/ICOM/INSO/CIIC\n"
+        "(IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE)"
+    )
+    embed.add_field(
+        name="!ls_projects:PROJECT",
+        value="Provee información sobre proyectos e investigaciones relacionadas a INEL/ICOM/INSO/CIIC\n"
+        "(IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE)"
     )
     return embed
