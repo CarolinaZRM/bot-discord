@@ -23,7 +23,14 @@ from event_handlers import actions, channel, fun_games, \
     join, prepa, sanitize
 
 
-client = discord.Client()
+# Enable intents.
+# Documentation: https://discordpy.readthedocs.io/en/latest/intents.html
+enabled_intents: discord.Intents = discord.Intents.default()
+
+enabled_intents.members = True
+enabled_intents.guilds = True
+
+client = discord.Client(intents=enabled_intents)
 
 
 async def task():
@@ -37,7 +44,7 @@ async def task():
 def handle_exit():
     log.debug("[DEBUG] Handling")
     client.loop.run_until_complete(client.close())
-    for t in asyncio.all_tasks(loop=client.loop):
+    for t in asyncio.Task.all_tasks(loop=client.loop):
         if t.done():
             t.exception()
             continue

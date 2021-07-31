@@ -45,7 +45,8 @@ def _extractAdmins(client: discord.Client):
 
     counselor_file_ref.close()
 
-    guild = client.get_guild(config.GUILD_ID_NUM)
+    guild: discord.Guild = client.get_guild(config.GUILD_ID_NUM)
+
     for member in guild.members:
         for role in member.roles:
             if role.name == "@EstudianteOrientador" \
