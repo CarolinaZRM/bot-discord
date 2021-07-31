@@ -17,6 +17,7 @@ import discord
 import log
 from handlers import building_parser, help_menu, telephone_guide
 from constants import paths
+import json
 
 # files
 _RULE_FILE = os.path.join(paths.TEXT_FILES, "rules.txt")
@@ -50,6 +51,52 @@ async def event_get_calendar(message: discord.Message):
         await message.author.send(file=discord.File(_GOOGLE_ADD_CALENDAR))
 
 
+async def get_org_info(message: discord.Message):
+    log.debug('[DEBUG] Entered Student Org')
+    user_message = message.content
+    ORG_ABBREVIATION = "IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE"
+    if "!ls_student_orgs" not in user_message.lower():
+        return
+
+    if "!ls_student_orgs:ORG" == user_message:
+        await message.author.send("Puede que te hayas confundido :sweat_smile:\n"
+                                  "'Org' = Organización\n"
+                                  "Intenta usar el comando ```!ls_student_orgs:ORG``` sustituyendo ORG con una de las siguientes abreviaciones:\n" + ORG_ABBREVIATION)
+        return
+
+    split = user_message.split(":")
+    if len(split) == 1 or "!ls_student_orgs" == user_message or "!ls_student_orgs:" == user_message:
+        await message.author.send("No me dijiste que organización; no está en lista. "
+                                  "Intenta con:\n" + ORG_ABBREVIATION)
+        return
+
+    with open('event_handlers/OrgInfo.json', 'r') as orgInfo:
+        key = split[1].upper()
+        orgInfoDict = json.load(orgInfo)
+        orgDictObj = orgInfoDict.get(key)
+
+        if orgDictObj is None:
+            await message.author.send("Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n" + ORG_ABBREVIATION)
+            return
+
+        embed = discord.Embed.from_dict(orgDictObj)
+        await message.author.send(embed=embed)
+
+
+async def get_prj_info(message: discord.Message):
+    log.debug('[DEBUG] Entered Project')
+    user_message = message.content
+    if "!ls_projects" in user_message.lower():
+        split = user_message.split(":")
+        if len(split) == 1:
+            await message.author.send("No me dijiste que proyecto; no está en lista.\n Intenta con: A, B, C")
+        else:
+            if split[1].upper() == "EMC":
+                await message.author.send("Here's EMC")
+            if split[1].upper() == "IEEE":
+                await message.author.send("Here's IEEE")
+
+
 async def event_get_curriculum(message: discord.Message):
     log.debug('[DEBUG] Entered Curriculum')
     user_message = message.content
@@ -78,6 +125,7 @@ async def event_telephone_guide(message: discord.Message):
     log.debug('[DEBUG] Entered telephone guide')
     client_message: str = message.content
     sections = client_message.split(':')
+    # channel = bot.get_channel(849684995265396766)
 
     if telephone_guide.is_command(sections):
         function_call = telephone_guide.get_guide_handler(sections)
@@ -143,6 +191,8 @@ async def event_help_menu(message: discord.Message):
             help_menu_embed = help_menu.help_menu_base()
         await msg_author.send(content=None, embed=help_menu_embed)
 
+# EMBED EX
+
 
 async def generate_server_rules(message: discord.Message):
     log.debug("[RULE-DBG] Entered Rule Generator")
@@ -150,7 +200,7 @@ async def generate_server_rules(message: discord.Message):
         f"""[RULE-DBG] Command Requested was {message.content.lower()}""")
     if message.content.lower() == "!reglas":
         embed = discord.Embed(title="Reglas del Servidor de Discord Oficial de Team MADE",
-                              description="Aquí están todas las reglas a seguir en el servidor en esta semana de orientación virtual 2020")
+                              description="Aquí están todas las reglas a seguir en el servidor en esta semana de orientación virtual 2021")
         rules = open(_RULE_FILE, "r")
         ruleCount = 1
         for rule in rules:
