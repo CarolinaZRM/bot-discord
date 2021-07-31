@@ -54,37 +54,33 @@ async def event_get_calendar(message: discord.Message):
 async def get_org_info(message: discord.Message):
     log.debug('[DEBUG] Entered Student Org')
     user_message = message.content
-    ORG_ABREVIATION = "IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE"
+    ORG_ABBREVIATION = "IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE"
     if "!ls_student_orgs" not in user_message.lower():
         return
 
     if "!ls_student_orgs:ORG" == user_message:
         await message.author.send("Puede que te hayas confundido :sweat_smile:\n"
                                   "'Org' = Organización\n"
-                                  "Intenta usar el comando ```!ls_student_orgs:ORG``` sustituyendo ORG con una de las siguientes abreviaciones:\n"
-                                  + ORG_ABREVIATION)
+                                  "Intenta usar el comando ```!ls_student_orgs:ORG``` sustituyendo ORG con una de las siguientes abreviaciones:\n" + ORG_ABBREVIATION)
         return
 
     split = user_message.split(":")
     if len(split) == 1 or "!ls_student_orgs" == user_message or "!ls_student_orgs:" == user_message:
         await message.author.send("No me dijiste que organización; no está en lista. "
-                                  "Intenta con:\n" + ORG_ABREVIATION)
+                                  "Intenta con:\n" + ORG_ABBREVIATION)
         return
 
     with open('event_handlers/OrgInfo.json', 'r') as orgInfo:
         key = split[1].upper()
         orgInfoDict = json.load(orgInfo)
-        dicObj = orgInfoDict[key]
-        embeded = discord.Embed.from_dict(dicObj)
+        orgDictObj = orgInfoDict.get(key)
 
-        try:
-            if key in orgInfoDict:
-               # info = orgInfoDict[key]
-               #  msg = f"{dicObj['title']}{dicObj['description']}{dicObj['contactInfo']}"
-                await message.author.send(embed=embeded)
-        except:
-            await message.author.send("Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n"
-                                + ORG_ABREVIATION)
+        if orgDictObj is None:
+            await message.author.send("Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n" + ORG_ABBREVIATION)
+            return
+
+        embed = discord.Embed.from_dict(orgDictObj)
+        await message.author.send(embed=embed)
 
 
 async def get_prj_info(message: discord.Message):
@@ -93,7 +89,7 @@ async def get_prj_info(message: discord.Message):
     if "!ls_projects" in user_message.lower():
         split = user_message.split(":")
         if len(split) == 1:
-            await message.author.send("No me dijiste que projecto; no está en lista.\n Intenta con: A, B, C")
+            await message.author.send("No me dijiste que proyecto; no está en lista.\n Intenta con: A, B, C")
         else:
             if split[1].upper() == "EMC":
                 await message.author.send("Here's EMC")
@@ -130,7 +126,6 @@ async def event_telephone_guide(message: discord.Message):
     client_message: str = message.content
     sections = client_message.split(':')
     # channel = bot.get_channel(849684995265396766)
-
 
     if telephone_guide.is_command(sections):
         function_call = telephone_guide.get_guide_handler(sections)
@@ -196,7 +191,9 @@ async def event_help_menu(message: discord.Message):
             help_menu_embed = help_menu.help_menu_base()
         await msg_author.send(content=None, embed=help_menu_embed)
 
-#EMBED EX
+# EMBED EX
+
+
 async def generate_server_rules(message: discord.Message):
     log.debug("[RULE-DBG] Entered Rule Generator")
     log.debug(
