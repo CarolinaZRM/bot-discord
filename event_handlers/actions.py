@@ -171,10 +171,10 @@ async def get_prj_info(message: discord.Message):
     if "!ls_projects" not in user_message.lower():
         return
 
+    split = user_message.split(":")
+
     with open(_PROJECT_FILE, 'r') as fi:
         proyectos: Dict = json.load(fi)
-
-        split = user_message.split(":")
 
         mess = ", ".join(proyectos.keys())
 
@@ -185,8 +185,10 @@ async def get_prj_info(message: discord.Message):
         key = split[1]
         if proyectos.get(key) is None:
             await message.author.send("No tenemos información de este proyecto.\nIntenta con: " + mess)
-        else:
-            await message.author.send("Esta es la información del " + key + " : " + proyectos[key])
+            return
+
+        embed: discord.Embed = discord.Embed.from_dict(proyectos[key])
+        await message.author.send(content=f'Esta es la información del {key}\n', embed=embed)
 
 
 async def generate_faq(message: discord.Message):
