@@ -1,8 +1,12 @@
+# USed in development environment
 from dotenv import dotenv_values
+# Used in HEROKU Environment
 import os
 
+# Get posible values from .env in root directory
 __config_values = dotenv_values()
 
+# If dict from dotenv is empty fallback to os.environ as default Environment Variable provider
 if len(__config_values) == 0:
     __config_values = os.environ
 
