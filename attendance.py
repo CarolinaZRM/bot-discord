@@ -26,8 +26,12 @@ class AssistanceClient(discord.Client):
         guild: discord.Guild = self.get_guild(config.GUILD_ID_NUM)
         channel = guild.get_channel(CHANNEL_ID)
 
-        members_in_attendance = [(idx + 1, member.nick if member.nick else member.name)
+        print('=> Obteniendo miembros conectados...')
+
+        members_in_attendance = [(idx + 1, member.nick if member.nick else member.name, '|'.join(filter(lambda role: role != '@everyone', [role.name for role in member.roles])))
                                  for idx, member in enumerate(channel.members)]
+
+        print('=> Lista de miembros descargada...')
 
         now = datetime.now()  # current date and time
         formatted_datetime = now.strftime('%Y%m%d%H%M%S')
@@ -40,11 +44,11 @@ class AssistanceClient(discord.Client):
             wtr = csv.writer(attendance_file)
 
             # Create csv header
-            wtr.writerow(['ID', 'Nickname/Account Username'])
+            wtr.writerow(['ID', 'Nickname/Account Username', 'Lista de roles'])
 
             #  Save members list to CSV
             for connected_member in members_in_attendance:
-                wtr.writerow([i for i in connected_member])
+                wtr.writerow([str(i) for i in connected_member])
 
         print(
             f'=> Lista de miembros en el canal "{channel}" fue exitosamente guardada en el archivo:')
