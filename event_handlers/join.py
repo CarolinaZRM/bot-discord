@@ -139,7 +139,7 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     try:
         log.debug('{}'.format(member.guild.roles))
         group_role = utils.get(
-            member.guild.roles, name=student_group.capitalize())
+            member.guild.roles, name=student_group)
         dept_role = utils.get(member.guild.roles,
                               name=student_department.upper())
         prepa_role = utils.get(member.guild.roles, name='prepa')
