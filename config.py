@@ -1,8 +1,12 @@
 from dotenv import dotenv_values
+import os
 
 __config_values = dotenv_values()
 
-print(f'[DEBUG] {__config_values}')
+if len(__config_values) == 0:
+    __config_values = os.environ
+
+print(f'[DEBUG] | Env Variables: {__config_values}')
 
 BOT_TOKEN = __config_values['BOT_TOKEN']
 
