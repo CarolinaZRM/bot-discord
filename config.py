@@ -2,6 +2,8 @@ from dotenv import dotenv_values
 
 __config_values = dotenv_values()
 
+print(f'[DEBUG] {__config_values}')
+
 BOT_TOKEN = __config_values['BOT_TOKEN']
 
 CLIENT_ID_NUM = int(__config_values['CLIENT_ID_NUM'])
