@@ -79,7 +79,7 @@ async def get_org_info(message: discord.Message):
             await message.author.send("Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n" + ORG_ABBREVIATION)
             return
 
-        embed = discord.Embed.from_dict(orgDictObj)
+        embed: discord.Embed = discord.Embed.from_dict(orgDictObj)
         await message.author.send(embed=embed)
 
 
