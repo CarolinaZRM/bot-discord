@@ -19,7 +19,6 @@ import discord
 import log
 from handlers import building_parser, help_menu, telephone_guide
 from constants import paths
-import json
 
 # files
 _RULE_FILE = os.path.join(paths.TEXT_FILES, "rules.txt")
@@ -84,20 +83,6 @@ async def get_org_info(message: discord.Message):
 
         embed: discord.Embed = discord.Embed.from_dict(orgDictObj)
         await message.author.send(embed=embed)
-
-
-async def get_prj_info(message: discord.Message):
-    log.debug('[DEBUG] Entered Project')
-    user_message = message.content
-    if "!ls_projects" in user_message.lower():
-        split = user_message.split(":")
-        if len(split) == 1:
-            await message.author.send("No me dijiste que proyecto; no está en lista.\n Intenta con: A, B, C")
-        else:
-            if split[1].upper() == "EMC":
-                await message.author.send("Here's EMC")
-            if split[1].upper() == "IEEE":
-                await message.author.send("Here's IEEE")
 
 
 async def event_get_curriculum(message: discord.Message):
