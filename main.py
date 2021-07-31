@@ -56,8 +56,7 @@ def handle_exit():
 
 while True:
     @client.event
-    async def on_message(message):
-
+    async def on_message(message: discord.Message):
         if (message.author.bot):
             # Events related to bot response
             return
@@ -100,11 +99,11 @@ while True:
         # to use for response of bot to discord client
         daily_logs.analytics(message)
         await bot.set_streaming(client, message)
-        await bot.join_voice_channel(client, message)
-        await bot.leave_voice_channel(client, message)
-        await bot.play_audio(client, message)
-        await bot.pause_audio(client, message)
-        await bot.resume_audio(client, message)
+        # await bot.join_voice_channel(client, message)
+        # await bot.leave_voice_channel(client, message)
+        # await bot.play_audio(client, message)
+        # await bot.pause_audio(client, message)
+        # await bot.resume_audio(client, message)
         await fun_games.event_ping_pong(message)
         await fun_games.event_guessing_game(message, client)
         await actions.event_get_curriculum(message)
@@ -115,6 +114,8 @@ while True:
         await actions.generate_server_rules(message)
         await actions.generate_faq(message)
         await actions.get_prj_info(message)
+        await actions.get_org_info(message)
+
         await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):
