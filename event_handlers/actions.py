@@ -10,15 +10,16 @@
 
 """
 import csv
+import json
 import os
 import os.path
-import json
 from typing import Dict
+
 import bot
 import discord
 import log
-from handlers import building_parser, help_menu, telephone_guide
 from constants import paths
+from handlers import building_parser, help_menu, telephone_guide
 
 # files
 _RULE_FILE = os.path.join(paths.TEXT_FILES, "rules.txt")
@@ -31,6 +32,22 @@ CURRICULO_INEL = os.path.join(paths.CURRICULOS, "INEL.pdf")
 CURRICULO_INSO = os.path.join(paths.CURRICULOS, "INSO.pdf")
 CURRICULO_CIIC = os.path.join(paths.CURRICULOS, "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(paths.CURRICULOS, "ICOM.pdf")
+
+
+async def event_uprm_map(message: discord.Message):
+    log.debug('[DEBUG] Entered UPRM MAP')
+
+    if '!map' != message.content:
+        return
+
+    embed = discord.Embed(
+        title='Mapa – Recinto Universitario de Mayagüez',
+        description='Enlace al Mapa de RUM con marcas y localizaciones de los edificios principales.',
+        url='https://www.uprm.edu/portales/mapa/',
+        colour=discord.colour.Colour.green(),
+        type='link')
+
+    await message.channel.send(embed=embed)
 
 
 async def event_get_calendar(message: discord.Message):

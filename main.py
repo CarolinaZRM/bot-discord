@@ -122,6 +122,7 @@ while True:
         await actions.generate_faq(message)
         await actions.get_prj_info(message)
         await actions.get_org_info(message)
+        await actions.event_uprm_map(message)
 
         await prepa.get_counselor_names(message)
 
