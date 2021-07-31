@@ -19,6 +19,7 @@ AUDIO = path.join(RESOURCES, 'audio')
 IMAGES = path.join(RESOURCES, 'images')
 TEXT_FILES = path.join(RESOURCES, 'textfiles')
 CURRICULOS = path.join(RESOURCES, 'curriculos')
+PROJECTS = path.join(RESOURCES, 'proyectos')
 
 
 class PREPAS(enum.auto):

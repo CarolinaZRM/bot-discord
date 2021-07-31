@@ -13,6 +13,7 @@ import csv
 import os
 import os.path
 import json
+from typing import Dict
 import bot
 import discord
 import log
@@ -23,6 +24,7 @@ from constants import paths
 _RULE_FILE = os.path.join(paths.TEXT_FILES, "rules.txt")
 _FAQ_FILE = os.path.join(paths.TEXT_FILES, "faq.csv")
 _GOOGLE_ADD_CALENDAR = os.path.join(paths.IMAGES, "google_add_calendar.png")
+_PROJECT_FILE = os.path.join(paths.PROJECTS, 'proyectos.json')
 
 # PDF Files
 CURRICULO_INEL = os.path.join(paths.CURRICULOS, "INEL.pdf")
@@ -163,24 +165,28 @@ async def generate_server_rules(message: discord.Message):
 
 async def get_prj_info(message: discord.Message):
     log.debug('[DEBUG] Entered Project')
+
     user_message = message.content
-    code_dir = os.path.dirname(__file__)
-    project_ds_path = os.path.join(code_dir, '../res/proyectis/proyectos.json')
-    with open(project_ds_path, 'r') as fi:
-        proyectos = json.load(fi)
-        mess = ""
-        for key, value in proyectos.items():
-            mess += key + ", "
-        if "!ls_projects" in user_message.lower():
-            split = user_message.split(":")
-            if len(split) == 1:
-                await message.author.send("No me dijiste el nombre del proyecto que quieres buscar.\nIntenta con: " + mess[:-2])
-            else:
-                key = split[1]
-                if proyectos.get(key) is None:
-                    await message.author.send("No tenemos información de este proyecto.\nIntenta con: " + mess[:-2])
-                else:
-                    await message.author.send("Esta es la información del "+ key + " : " + proyectos[key])
+
+    if "!ls_projects" not in user_message.lower():
+        return
+
+    with open(_PROJECT_FILE, 'r') as fi:
+        proyectos: Dict = json.load(fi)
+
+        split = user_message.split(":")
+
+        mess = ", ".join(proyectos.keys())
+
+        if len(split) == 1:
+            await message.author.send("No me dijiste el nombre del proyecto que quieres buscar.\nIntenta con: " + mess)
+            return
+
+        key = split[1]
+        if proyectos.get(key) is None:
+            await message.author.send("No tenemos información de este proyecto.\nIntenta con: " + mess)
+        else:
+            await message.author.send("Esta es la información del " + key + " : " + proyectos[key])
 
 
 async def generate_faq(message: discord.Message):
