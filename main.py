@@ -24,7 +24,14 @@ from event_handlers import actions, channel, fun_games, \
     join, prepa, sanitize
 
 
-client = discord.Client()
+# Enable intents.
+# Documentation: https://discordpy.readthedocs.io/en/latest/intents.html
+enabled_intents: discord.Intents = discord.Intents.default()
+
+enabled_intents.members = True
+enabled_intents.guilds = True
+
+client = discord.Client(intents=enabled_intents)
 
 
 async def task():
@@ -37,7 +44,7 @@ async def task():
 
 def handle_exit():
     log.debug("[DEBUG] Handling")
-    client.loop.run_until_complete(client.logout())
+    client.loop.run_until_complete(client.close())
     for t in asyncio.Task.all_tasks(loop=client.loop):
         if t.done():
             t.exception()
@@ -57,8 +64,7 @@ def handle_exit():
 
 while True:
     @client.event
-    async def on_message(message):
-
+    async def on_message(message: discord.Message):
         if (message.author.bot):
             # Events related to bot response
             return
@@ -101,22 +107,25 @@ while True:
         # to use for response of bot to discord client
         daily_logs.analytics(message)
         await bot.set_streaming(client, message)
-        await bot.join_voice_channel(client, message)
-        await bot.leave_voice_channel(client, message)
-        await bot.play_audio(client, message)
-        await bot.pause_audio(client, message)
-        await bot.resume_audio(client, message)
-        await fun_games.event_ping_pong(message)
-        await fun_games.event_guessing_game(message, client)
-        await actions.event_get_curriculum(message)
-        await actions.event_telephone_guide(message)
-        await actions.event_parse_university_building(message)
-        await actions.event_help_menu(message)
+        # await bot.join_voice_channel(client, message)
+        # await bot.leave_voice_channel(client, message)
+        # await bot.play_audio(client, message)
+        # await bot.pause_audio(client, message)
+        # await bot.resume_audio(client, message)
         await actions.event_get_calendar(message)
-        await actions.generate_server_rules(message)
+        await actions.event_get_curriculum(message)
+        await actions.event_help_menu(message)
+        await actions.event_parse_university_building(message)
+        await actions.event_telephone_guide(message)
+        await actions.event_uprm_map(message)
         await actions.generate_faq(message)
         await bot.general_leaderboard(message)
 
+        await actions.generate_server_rules(message)
+        await actions.get_org_info(message)
+        await actions.get_prj_info(message)
+        await fun_games.event_guessing_game(message, client)
+        await fun_games.event_ping_pong(message)
         await prepa.get_counselor_names(message)
 
         # On message action for leveling system

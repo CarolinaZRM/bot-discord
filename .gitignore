@@ -1,3 +1,6 @@
+# Attendance CSV
+attendance*.csv
+
 # Editors
 .vscode/
 .idea/
