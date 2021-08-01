@@ -476,3 +476,27 @@ async def level_up(users, user, channel):
     if lvl_start < lvl_end:
         await channel.send(f'{user.mention} has leveled up to level {lvl_end}')
         users[f'{user.id}']["level"] = lvl_end
+
+
+async def general_leaderboard(message: discord.Message):
+    # command = "!leaderboard"
+    if message.content.lower() == "!leaderboard":
+        with open(LEVEL_PATH, 'r') as top10:
+            data = json.load(top10)
+            # embed = discord.Embed.from_dict(data)
+
+        topPeeps = {k: v for k, v in sorted(data.items(), key=lambda item: item[1]['level'], reverse=True)}
+        names = ''
+        for position, user in enumerate(topPeeps):
+            # add 1 to position to make the index start from 1
+            names += f"{position + 1} - <@!{user}>  \t Level: {topPeeps[user]['level']}\n"
+
+            embed = discord.Embed(title=":trophy: Leaderboard :trophy:", color=11901259)
+            embed.add_field(name="Crewmates:", value=names, inline=False)
+            if position+1 > 11:
+                break
+        await message.author.send(embed=embed)
+
+
+
+
