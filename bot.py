@@ -47,10 +47,11 @@ def _extractAdmins(client: discord.Client):
 
     counselor_file_ref.close()
 
-    guild = client.get_guild(config.GUILD_ID_NUM)
+    guild: discord.Guild = client.get_guild(config.GUILD_ID_NUM)
+
     for member in guild.members:
         for role in member.roles:
-            if role.name == "@EstudianteOrientador" \
+            if role.name == "EstudianteOrientador" \
                     or role.name == 'ConsejeraProfesional':
                 counselor_user_handles.add(str(member))
 
@@ -87,7 +88,7 @@ async def verify_if_counselor(member: discord.Member):
         log.debug(f'[DEBUG] Joined Member is Counselor: {member}')
         guild: discord.Guild = member.guild
         for role in guild.roles:
-            if role.name == '@EstudianteOrientador' \
+            if role.name == 'EstudianteOrientador' \
                     or role.name == 'ConsejeraProfesional':
                 log.debug(f'[DEBUG] Role: {role}')
                 try:

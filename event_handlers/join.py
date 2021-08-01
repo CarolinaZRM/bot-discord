@@ -127,7 +127,7 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     student_obj = _get_student(student_email.content)
 
     while student_obj is None:
-        await member.send("No encuentro ese email en mis registros. Intenta de nuevo:")
+        await member.send("No encuentro ese email en mis registros. Intenta de nuevo:\n\n***Si tu email no aparece y estas seguro de que eres un prepa de INEL, ICOM, INSO o CIIC, comunicate con cualquier estudiante orientador del servidor de discord. Tienen el rol de \"EstudianteOrientador\"")
         student_number = await client.wait_for('message', check=check_same_user)
         student_obj = _get_student(student_number.content)
 
@@ -139,7 +139,7 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     try:
         log.debug('{}'.format(member.guild.roles))
         group_role = utils.get(
-            member.guild.roles, name=student_group.capitalize())
+            member.guild.roles, name=student_group)
         dept_role = utils.get(member.guild.roles,
                               name=student_department.upper())
         prepa_role = utils.get(member.guild.roles, name='prepa')
