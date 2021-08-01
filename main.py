@@ -115,6 +115,7 @@ while True:
         await actions.event_get_calendar(message)
         await actions.generate_server_rules(message)
         await actions.generate_faq(message)
+        await bot.general_leaderboard(message)
 
         await prepa.get_counselor_names(message)
 
