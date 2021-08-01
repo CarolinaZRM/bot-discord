@@ -458,9 +458,9 @@ async def level_on_message(message: discord.Message):
         await level_up(users, message.author, message.channel)
 
         # Updates the nickname for the given user
-        users[message.author]['nickname'] = message.author.displayname
+        users[f'{message.author.id}']['nickname'] = message.author.display_name
 
-        users[message.author]['messages'] += 1
+        users[f'{message.author.id}']['messages'] += 1
 
         with open(LEVEL_PATH, 'w') as levels_file:
             json.dump(users, levels_file)
@@ -512,5 +512,36 @@ async def general_leaderboard(message: discord.Message):
         await message.author.send(embed=embed)
 
 
+async def leveling_status(message: discord.Message):
+    # With command "!level"
+    if not message.author.bot and message.content.lower() == "!level":
+        with open(LEVEL_PATH, 'r') as levels_file:
+            users = json.load(levels_file)
 
+        user = message.author
+
+        imagedict = {
+            1: "https://cdn.discordapp.com/attachments/856635443310362624/870329147120058399/image0.png",
+            2: "https://cdn.discordapp.com/attachments/856635443310362624/870329147531079700/image1.png",
+            3: "https://cdn.discordapp.com/attachments/856635443310362624/870329147795316796/image2.png",
+            4: "https://cdn.discordapp.com/attachments/856635443310362624/870329148437069956/image3.png",
+            5: "https://cdn.discordapp.com/attachments/856635443310362624/870329148730650624/image4.png",
+            6: "https://cdn.discordapp.com/attachments/856635443310362624/870329148982296656/image5.png",
+            7: "https://cdn.discordapp.com/attachments/856635443310362624/870329149548556288/image7.jpg",
+            8: "https://cdn.discordapp.com/attachments/856635443310362624/870329149917659146/image8.png",
+            9: "https://cdn.discordapp.com/attachments/856635443310362624/870329150219640892/image9.jpg",
+            10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
+        }
+
+        # userlvl = users[f'{user.id}']["level"]
+        # imageurl = imagedict.get(userlvl)
+
+        embed = discord.Embed(title=f'Character Status: {user.nick or user.name}',
+                              description="Status of you character in the Team Made Leveling System", color=0x4dab03)
+        embed.add_field(name="Level", value=users[f'{user.id}']['level'], inline=True)
+        embed.add_field(name="Experience", value=users[f'{user.id}']['experience'], inline=True)
+        embed.add_field(name="Number of Messages", value=users[f'{user.id}']['messages'], inline=True)
+        # embed.set_image(imageurl)
+
+        await message.channel.send(embed=embed)
 

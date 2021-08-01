@@ -133,6 +133,8 @@ while True:
         # On message action for leveling system
         await bot.level_on_message(message)
 
+        await bot.leveling_status(message)
+
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
             log.debug('[DEBUG] Entered Counselor Auth Zone')
