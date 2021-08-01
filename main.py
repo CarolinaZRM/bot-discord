@@ -19,7 +19,7 @@ import discord
 import bot
 import config
 import log
-from event_handlers import actions, channel, fun_games, easter_eggs, \
+from event_handlers import actions, channel, fun_games, easter_eggs, attendance, \
     join, prepa, sanitize
 
 
@@ -121,6 +121,7 @@ while True:
         await actions.generate_server_rules(message)
         await actions.get_org_info(message)
         await actions.get_prj_info(message)
+        await attendance.subscribe_attendance(message)
         await easter_eggs.is_sheeshed(message)
         await easter_eggs.is_yeeted(message)
         await fun_games.event_guessing_game(message, client)
