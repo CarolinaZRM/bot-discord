@@ -447,9 +447,20 @@ async def level_on_message(message: discord.Message):
         with open(LEVEL_PATH, 'r') as levels_file:
             users = json.load(levels_file)
 
+        messageLength = int(len(message.content))
+        if messageLength < 5:
+            exp = messageLength
+        else:
+            exp = 5
+
         await update_data(users, message.author)
-        await add_experience(users, message.author, 10)
+        await add_experience(users, message.author, exp)
         await level_up(users, message.author, message.channel)
+
+        # Updates the nickname for the given user
+        users[message.author]['nickname'] = message.author.displayname
+
+        users[message.author]['messages'] += 1
 
         with open(LEVEL_PATH, 'w') as levels_file:
             json.dump(users, levels_file)
@@ -459,8 +470,10 @@ async def level_on_message(message: discord.Message):
 async def update_data(users, user):
     if f'{user.id}' not in users:
         users[f'{user.id}'] = {}
+        users[f'{user.id}']['nickname'] = ''
         users[f'{user.id}']['experience'] = 0
         users[f'{user.id}']['level'] = 1
+        users[f'{user.id}']['messages'] = 0
 
 
 # Add a variable number of exp to the json file for a user
@@ -472,7 +485,7 @@ async def add_experience(users, user, exp):
 async def level_up(users, user, channel):
     experience = users[f'{user.id}']["experience"]
     lvl_start = users[f'{user.id}']["level"]
-    lvl_end = int(experience / 100)
+    lvl_end = int(experience / (100 + ((lvl_start - 1) * 15)))
 
     if lvl_start < lvl_end:
         await channel.send(f'{user.mention} has leveled up to level {lvl_end}')
