@@ -1,0 +1,22 @@
+{
+    "title": "Enlaces importantes",
+    "description": "Una lista curada de enlaces importantes",
+    "fields": [
+        {
+            "name": "Accesos a Laboratorios de STEFANI",
+            "value": "Info para pedir tarjetas de laboratorios del edificio Stefani, para solamente INEL/ICOM/INSO/CIIC.  Los nombres de los labs son: INCADEL, CRAI y AMADEUS.\n\u2022 https://ece.uprm.edu/instrucciones-para-solicitar-cuentas-yo-tarjetas/"
+        },
+        {
+            "name": "Oficina de COOP de Ingeniería",
+            "value": "\u2022 https://www.uprm.edu/engineering/coop/"
+        },
+        {
+            "name": "Departamento de Colocaciones RUM",
+            "value": "\u2022 https://www.uprm.edu/placement/home"
+        },
+        {
+            "name": "Consejo General de Estudiantes",
+            "value": "\u2022 Pagina Oficial: http://cge.uprm.edu/\n\u2022 Twitter:  https://twitter.com/cgerum"
+        }
+    ]
+}

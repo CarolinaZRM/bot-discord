@@ -16,10 +16,11 @@ RESOURCES = path.join(ROOT_PATH, 'res')
 
 # Other helpful paths
 AUDIO = path.join(RESOURCES, 'audio')
-IMAGES = path.join(RESOURCES, 'images')
-TEXT_FILES = path.join(RESOURCES, 'textfiles')
 CURRICULOS = path.join(RESOURCES, 'curriculos')
+EMBEDS = path.join(RESOURCES, 'embeds')
+IMAGES = path.join(RESOURCES, 'images')
 PROJECTS = path.join(RESOURCES, 'proyectos')
+TEXT_FILES = path.join(RESOURCES, 'textfiles')
 
 
 class PREPAS(enum.auto):

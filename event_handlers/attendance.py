@@ -42,7 +42,7 @@ async def subscribe_attendance(message: discord.Message):
     response_method = message.author
 
     # if not command ignore
-    if not re.match(f'{COMMAND}:.*', user_message):
+    if not re.fullmatch(f'{COMMAND}:.*', user_message):
         return
 
     server: discord.Guild = message.guild
@@ -140,7 +140,7 @@ def _attendance_list(members_in_attendance, formatted_datetime, server, channel)
     return abs_path
 
 
-def _attendance_stats(members_in_attendance, formatted_datetime,  server, channel):
+def _attendance_stats(members_in_attendance, formatted_datetime, server, channel):
     server_name = str(server).replace(' ', '-').replace('.', '')
     channel_name = str(channel).replace(' ', '-').replace('.', '')
     file_name = f'attendance-stats-{server_name}-{channel_name}-{formatted_datetime}.csv'

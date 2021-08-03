@@ -19,7 +19,7 @@ import discord
 import bot
 import config
 import log
-from event_handlers import actions, channel, fun_games, easter_eggs, attendance, \
+from event_handlers import actions, channel, fun_games, easter_eggs, attendance, links, \
     join, prepa, sanitize
 
 
@@ -126,6 +126,7 @@ while True:
         await easter_eggs.is_yeeted(message)
         await fun_games.event_guessing_game(message, client)
         await fun_games.event_ping_pong(message)
+        await links.event_links(message)
         await prepa.get_counselor_names(message)
 
         if bot.is_sender_counselor(message):

@@ -39,7 +39,7 @@ async def event_guessing_game(message, client):
             user_name = message.author.name
         await message.channel.send("Tengo un numero secreto del 1 al 100 :upside_down: ¿Puedes adivinarlo?\nHint: Es un numero entero :eyes:\n"
                                    "Si te rindes escribe 'MeRindo' y te diré el numero.")
-        correct_answer = random.randint(1, 101)
+        correct_answer = random.randint(1, 100)
 
         while convert_to_int(response) != correct_answer:
             response = await client.wait_for("message", check=lambda response_message: response_message.author == message.author)
