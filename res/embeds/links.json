@@ -17,6 +17,10 @@
         {
             "name": "Consejo General de Estudiantes",
             "value": "\u2022 Pagina Oficial: http://cge.uprm.edu/\n\u2022 Twitter:  https://twitter.com/cgerum"
+        },
+        {
+            "name": "Guía Prepistica",
+            "value": "Y no olvides consultar la Guiá Prepistica para mas enlaces importantes en la sección de _**ENLACES Y CONTACTOS**_. Utiliza el comando \"!guiaPrepistica\""
         }
     ]
 }

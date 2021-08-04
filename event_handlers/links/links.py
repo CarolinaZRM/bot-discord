@@ -25,6 +25,8 @@ _EMBED: discord.Embed = None
 with open(_EMBED_PATH, 'r') as embed_file:
     _EMBED = discord.Embed.from_dict(json.load(embed_file))
 
+_EMBED.colour = discord.Colour.dark_magenta()
+
 
 async def event_links(message: discord.Message):
     CMD = '!links'
