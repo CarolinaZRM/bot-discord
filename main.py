@@ -113,6 +113,7 @@ while True:
         # await bot.resume_audio(client, message)
         await actions.event_get_calendar(message)
         await actions.event_get_curriculum(message)
+        await actions.event_get_freshman_guide(message)
         await actions.event_help_menu(message)
         await actions.event_parse_university_building(message)
         await actions.event_telephone_guide(message)
