@@ -33,6 +33,8 @@ CURRICULO_INSO = os.path.join(paths.CURRICULOS, "INSO.pdf")
 CURRICULO_CIIC = os.path.join(paths.CURRICULOS, "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(paths.CURRICULOS, "ICOM.pdf")
 
+GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "GuiaPrepistica.pdf")
+
 
 async def event_uprm_map(message: discord.Message):
     log.debug('[DEBUG] Entered UPRM MAP')
@@ -126,6 +128,13 @@ async def event_get_curriculum(message: discord.Message):
                 # for when CIIC curriculum is updated
                 await message.author.send(file=discord.File(CURRICULO_CIIC))
 
+async def event_get_freshman_guide(message: discord.Message):
+    log.debug('[DEBUG] Entered Freshman Guide')
+    usr_msg = message.content
+    if usr_msg == "!guiaPrepistica":
+        log.debug(f'[PATH] {GUIA_PREPISTICA}')
+        await message.author.send("Aqui esta la guía prepistica")
+        await message.author.send(file=discord.File(GUIA_PREPISTICA))
 
 async def event_telephone_guide(message: discord.Message):
     log.debug('[DEBUG] Entered telephone guide')
