@@ -20,7 +20,7 @@ import discord
 import bot
 import config
 import log
-from event_handlers import actions, channel, fun_games, easter_eggs, \
+from event_handlers import actions, channel, fun_games, easter_eggs, attendance, links, \
     join, prepa, sanitize
 
 
@@ -114,6 +114,7 @@ while True:
         # await bot.resume_audio(client, message)
         await actions.event_get_calendar(message)
         await actions.event_get_curriculum(message)
+        await actions.event_get_freshman_guide(message)
         await actions.event_help_menu(message)
         await actions.event_parse_university_building(message)
         await actions.event_telephone_guide(message)
@@ -124,10 +125,12 @@ while True:
         await actions.generate_server_rules(message)
         await actions.get_org_info(message)
         await actions.get_prj_info(message)
+        await attendance.subscribe_attendance(message)
         await easter_eggs.is_sheeshed(message)
         await easter_eggs.is_yeeted(message)
         await fun_games.event_guessing_game(message, client)
         await fun_games.event_ping_pong(message)
+        await links.event_links(message)
         await prepa.get_counselor_names(message)
 
         # On message action for leveling system
