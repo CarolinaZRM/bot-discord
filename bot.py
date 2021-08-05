@@ -533,15 +533,16 @@ async def leveling_status(message: discord.Message):
             10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
         }
 
-        # userlvl = users[f'{user.id}']["level"]
-        # imageurl = imagedict.get(userlvl)
+        userlvl = users[f'{user.id}']["level"]
+
+        imageurl = imagedict.get(userlvl) or imagedict.get(10)
 
         embed = discord.Embed(title=f'Character Status: {user.nick or user.name}',
                               description="Status of you character in the Team Made Leveling System", color=0x4dab03)
         embed.add_field(name="Level", value=users[f'{user.id}']['level'], inline=True)
         embed.add_field(name="Experience", value=users[f'{user.id}']['experience'], inline=True)
         embed.add_field(name="Number of Messages", value=users[f'{user.id}']['messages'], inline=True)
-        # embed.set_image(imageurl)
+        embed.set_image(url=imageurl)
 
         await message.channel.send(embed=embed)
 
