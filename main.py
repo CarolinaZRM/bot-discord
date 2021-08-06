@@ -121,7 +121,6 @@ while True:
         await actions.event_uprm_map(message)
         await actions.generate_faq(message)
         await bot.general_leaderboard(message)
-
         await actions.generate_server_rules(message)
         await actions.get_org_info(message)
         await actions.get_prj_info(message)
@@ -132,11 +131,11 @@ while True:
         await fun_games.event_ping_pong(message)
         await links.event_links(message)
         await prepa.get_counselor_names(message)
+        await bot.level_on_message(message)
+        await bot.leveling_status(message)
+        await bot.download_user_level_data(message)
 
         # On message action for leveling system
-        await bot.level_on_message(message)
-
-        await bot.leveling_status(message)
 
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
