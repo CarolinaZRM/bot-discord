@@ -129,6 +129,7 @@ while True:
         await easter_eggs.is_yeeted(message)
         await fun_games.event_guessing_game(message, client)
         await fun_games.event_ping_pong(message)
+        await fun_games.event_rock_paper_scissor(message, client)
         await links.event_links(message)
         await prepa.get_counselor_names(message)
         await bot.level_on_message(message)

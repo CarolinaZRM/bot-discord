@@ -9,8 +9,10 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-import random
+import discord
 import log
+import random
+import re
 
 
 async def event_ping_pong(message: str):
@@ -66,3 +68,32 @@ async def event_guessing_game(message, client):
             await message.channel.send(f"""Lo adivinaste {user_name}! Yey!""")
         else:
             await message.channel.send(f"""Te rendiste tan rapido {user_name}? El numero era {correct_answer}""")
+
+
+async def event_rock_paper_scissor(message: discord.Message, client: discord.Client):
+    CMD = '!rps'
+    user_name = message.author.nick or message.author.name
+
+    if re.fullmatch(CMD, message.content):
+        await message.channel.send(f'Wepa _{user_name}_! Ya hice mi movida, ahora haz la tuya ;)')
+        # play against bot
+        PLAYS = ['scissors', 'paper', 'rock']
+
+        # select random play for bot
+        bot_play: str = random.choice(PLAYS)
+
+        while True:
+            user_answer = await client.wait_for("message", check=lambda response_message: response_message.author == message.author)
+            user_answer = user_answer.content.lower()
+
+            if user_answer not in PLAYS:
+                await message.channel.send(f'Whoops... **Esa jugada no es valida** {user_name}')
+            else:
+                break
+
+        if bot_play == user_answer:
+            await message.channel.send('Empate :tada:')
+        elif (PLAYS.index(user_answer) + 1) % 3 == PLAYS.index(bot_play):
+            await message.channel.send(f'Ganaste _{user_name}_ :)')
+        else:
+            await message.channel.send(f'Perdiste _{user_name}_ :(')
