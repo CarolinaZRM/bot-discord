@@ -6,6 +6,7 @@
 //  Created by Fernando Bermudez on 06/10/2019.
 //  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
 //  Edited by Gabriel Santiago on June 20, 2021
+//  Edited by Orlando Saldaña on July 23, 2021
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
 
@@ -19,6 +20,7 @@ import config
 import log
 import os
 import youtube_dl
+import json
 
 os.makedirs(os.path.join(paths.AUDIO), exist_ok=True)
 
@@ -421,3 +423,155 @@ async def resume_audio(client: discord.Client, message: discord.Message):
         if voice_client.is_paused():
             voice_client.resume()
             await message.author.send(f'Resumido en el canal {voice_channel}')
+
+
+# Leveling System Methods
+LEVEL_PATH = os.path.join(paths.ROOT_PATH, "users.json")
+
+if not os.path.exists(LEVEL_PATH):
+    with open(LEVEL_PATH, 'w') as file:
+        file.write('{}')
+
+# Runs when a member joins the server, adds user to the json with level 1
+
+
+async def level_join(member):
+    with open(LEVEL_PATH, 'r') as levels_file:
+        users = json.load(levels_file)
+
+    await update_data(users, member)
+
+    with open(LEVEL_PATH, 'w') as levels_file:
+        json.dump(users, levels_file, indent=True)
+
+
+# Runs on message, the user is given a certain amount of experience for each message and we check for level up
+async def level_on_message(message: discord.Message):
+    if not message.author.bot:
+        with open(LEVEL_PATH, 'r') as levels_file:
+            users = json.load(levels_file)
+
+        messageLength = int(len(message.content))
+        if messageLength < 5:
+            exp = messageLength
+        else:
+            exp = 5
+
+        await update_data(users, message.author)
+        await add_experience(users, message.author, exp)
+        await level_up(users, message.author, message.channel)
+
+        # Updates the nickname for the given user
+        users[f'{message.author.id}']['nickname'] = message.author.display_name
+
+        users[f'{message.author.id}']['messages'] += 1
+
+        with open(LEVEL_PATH, 'w') as levels_file:
+            json.dump(users, levels_file, indent=True)
+
+
+# If not already in the file add the user to the json file with experience 0 and level 1
+async def update_data(users, user):
+    if f'{user.id}' not in users:
+        users[f'{user.id}'] = {}
+        users[f'{user.id}']['nickname'] = ''
+        users[f'{user.id}']['experience'] = 0
+        users[f'{user.id}']['level'] = 1
+        users[f'{user.id}']['messages'] = 0
+
+
+# Add a variable number of exp to the json file for a user
+async def add_experience(users, user, exp):
+    users[f'{user.id}']["experience"] += exp
+
+
+# Check for level up condition given by lvl_end also send a message on level up
+async def level_up(users, user, channel):
+    experience = users[f'{user.id}']["experience"]
+    lvl_start = users[f'{user.id}']["level"]
+    lvl_end = int(experience / (100 + ((lvl_start - 1) * 15)))
+
+    if lvl_start < lvl_end:
+        await channel.send(f'{user.mention} has leveled up to level {lvl_end}')
+        users[f'{user.id}']["level"] = lvl_end
+
+
+async def general_leaderboard(message: discord.Message):
+    CMD = "!leaderboard"
+
+    if message.content.lower() != CMD:
+        return
+
+    with open(LEVEL_PATH, 'r') as top10:
+        leaderboard_data = json.load(top10)
+
+    top_peeps = [user_id for user_id, _ in sorted(
+        leaderboard_data.items(),
+        key=lambda item: int(item[1]['experience']), reverse=True)[0:10]
+    ]
+
+    top_crewmates = []
+
+    for position, user_id in enumerate(top_peeps):
+        # add 1 to position to make the index start from 1
+        top_crewmates.append(
+            f"{position + 1} - <@!{user_id}>\t|\tLevel: {leaderboard_data[user_id]['level']}")
+
+    embed = discord.Embed(
+        title=":trophy: Leaderboard :trophy:", color=11901259)
+
+    embed.add_field(name="Crewmates", value='\n'.join(
+        top_crewmates), inline=False)
+
+    await message.channel.send(embed=embed)
+
+
+async def leveling_status(message: discord.Message):
+    # With command "!level"
+    if not message.author.bot and message.content.lower() == "!level":
+        with open(LEVEL_PATH, 'r') as levels_file:
+            users = json.load(levels_file)
+
+        user = message.author
+
+        imagedict = {
+            1: "https://cdn.discordapp.com/attachments/856635443310362624/870329147120058399/image0.png",
+            2: "https://cdn.discordapp.com/attachments/856635443310362624/870329147531079700/image1.png",
+            3: "https://cdn.discordapp.com/attachments/856635443310362624/870329147795316796/image2.png",
+            4: "https://cdn.discordapp.com/attachments/856635443310362624/870329148437069956/image3.png",
+            5: "https://cdn.discordapp.com/attachments/856635443310362624/870329148730650624/image4.png",
+            6: "https://cdn.discordapp.com/attachments/856635443310362624/870329148982296656/image5.png",
+            7: "https://cdn.discordapp.com/attachments/856635443310362624/870329149548556288/image7.jpg",
+            8: "https://cdn.discordapp.com/attachments/856635443310362624/870329149917659146/image8.png",
+            9: "https://cdn.discordapp.com/attachments/856635443310362624/870329150219640892/image9.jpg",
+            10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
+        }
+
+        user_level = users[f'{user.id}']["level"]
+
+        imageurl = imagedict.get(user_level) or imagedict.get(10)
+
+        embed = discord.Embed(title=f'Character Status: {user.nick or user.name}',
+                              description="Status of you character in the Team Made Leveling System", color=0x4dab03)
+        embed.add_field(
+            name="Level", value=users[f'{user.id}']['level'], inline=True)
+        embed.add_field(name="Experience",
+                        value=users[f'{user.id}']['experience'], inline=True)
+        embed.add_field(name="Number of Messages",
+                        value=users[f'{user.id}']['messages'], inline=True)
+        embed.set_image(url=imageurl)
+
+        await message.channel.send(embed=embed)
+
+
+async def download_user_level_data(message: discord.Message):
+    CMD = '!get-leaderboard'
+
+    if message.content != CMD:
+        return
+
+    if not is_sender_counselor(message) or not is_sender_admin(message):
+        return  # sad face, not Estudiante Orientador
+
+    # Send leveling data
+    await message.author.send(content='Hola, aquí envió la data del **Leaderboard de Mensajes**', file=discord.File(LEVEL_PATH))

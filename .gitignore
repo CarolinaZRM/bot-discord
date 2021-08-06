@@ -1,6 +1,9 @@
 # Attendance CSV
 attendance*.csv
 
+# Leaderboard
+users.json
+
 # Editors
 .vscode/
 .idea/
