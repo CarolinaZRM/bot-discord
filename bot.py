@@ -11,16 +11,18 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
+import json
+import os
+import time
+
 import discord
+import youtube_dl
 from discord.channel import ChannelType
 from discord.errors import Forbidden
 
-from constants import admins, paths
 import config
 import log
-import os
-import youtube_dl
-import json
+from constants import admins, paths
 
 os.makedirs(os.path.join(paths.AUDIO), exist_ok=True)
 
@@ -452,10 +454,9 @@ async def level_on_message(message: discord.Message):
             users = json.load(levels_file)
 
         messageLength = int(len(message.content))
-        if messageLength < 5:
-            exp = messageLength
-        else:
-            exp = 5
+
+        # give a max Experience of 5
+        exp = min(messageLength, 5)
 
         await update_data(users, message.author)
         await add_experience(users, message.author, exp)
@@ -469,12 +470,13 @@ async def level_on_message(message: discord.Message):
         with open(LEVEL_PATH, 'w') as levels_file:
             json.dump(users, levels_file, indent=True)
 
-
 # If not already in the file add the user to the json file with experience 0 and level 1
+
+
 async def update_data(users, user):
     if f'{user.id}' not in users:
         users[f'{user.id}'] = {}
-        users[f'{user.id}']['nickname'] = ''
+        users[f'{user.id}']['nickname'] = user.nick or user.name
         users[f'{user.id}']['experience'] = 0
         users[f'{user.id}']['level'] = 1
         users[f'{user.id}']['messages'] = 0
@@ -482,7 +484,17 @@ async def update_data(users, user):
 
 # Add a variable number of exp to the json file for a user
 async def add_experience(users, user, exp):
-    users[f'{user.id}']["experience"] += exp
+    BUFFER = 15  # seconds
+    current_time = int(time.time())
+
+    if 'timestamp' in users[f'{user.id}']:
+        if current_time < BUFFER + users[f'{user.id}']['timestamp']:
+            # return if buffer has not been completed
+            return
+
+    users[f'{user.id}']['timestamp'] = int(time.time())
+
+    users[f'{user.id}']['experience'] += exp
 
 
 # Check for level up condition given by lvl_end also send a message on level up
@@ -497,7 +509,7 @@ async def level_up(users, user, channel):
 
 
 async def general_leaderboard(message: discord.Message):
-    CMD = "!leaderboard"
+    CMD = '!leaderboard'
 
     if message.content.lower() != CMD:
         return
@@ -526,6 +538,20 @@ async def general_leaderboard(message: discord.Message):
     await message.channel.send(embed=embed)
 
 
+LEVEL_ICONS = {
+    1: "https://cdn.discordapp.com/attachments/856635443310362624/870329147120058399/image0.png",
+    2: "https://cdn.discordapp.com/attachments/856635443310362624/870329147531079700/image1.png",
+    3: "https://cdn.discordapp.com/attachments/856635443310362624/870329147795316796/image2.png",
+    4: "https://cdn.discordapp.com/attachments/856635443310362624/870329148437069956/image3.png",
+    5: "https://cdn.discordapp.com/attachments/856635443310362624/870329148730650624/image4.png",
+    6: "https://cdn.discordapp.com/attachments/856635443310362624/870329148982296656/image5.png",
+    7: "https://cdn.discordapp.com/attachments/856635443310362624/870329149548556288/image7.jpg",
+    8: "https://cdn.discordapp.com/attachments/856635443310362624/870329149917659146/image8.png",
+    9: "https://cdn.discordapp.com/attachments/856635443310362624/870329150219640892/image9.jpg",
+    10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
+}
+
+
 async def leveling_status(message: discord.Message):
     # With command "!level"
     if not message.author.bot and message.content.lower() == "!level":
@@ -534,22 +560,9 @@ async def leveling_status(message: discord.Message):
 
         user = message.author
 
-        imagedict = {
-            1: "https://cdn.discordapp.com/attachments/856635443310362624/870329147120058399/image0.png",
-            2: "https://cdn.discordapp.com/attachments/856635443310362624/870329147531079700/image1.png",
-            3: "https://cdn.discordapp.com/attachments/856635443310362624/870329147795316796/image2.png",
-            4: "https://cdn.discordapp.com/attachments/856635443310362624/870329148437069956/image3.png",
-            5: "https://cdn.discordapp.com/attachments/856635443310362624/870329148730650624/image4.png",
-            6: "https://cdn.discordapp.com/attachments/856635443310362624/870329148982296656/image5.png",
-            7: "https://cdn.discordapp.com/attachments/856635443310362624/870329149548556288/image7.jpg",
-            8: "https://cdn.discordapp.com/attachments/856635443310362624/870329149917659146/image8.png",
-            9: "https://cdn.discordapp.com/attachments/856635443310362624/870329150219640892/image9.jpg",
-            10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
-        }
-
         user_level = users[f'{user.id}']["level"]
 
-        imageurl = imagedict.get(user_level) or imagedict.get(10)
+        imageurl = LEVEL_ICONS.get(user_level) or LEVEL_ICONS.get(10)
 
         embed = discord.Embed(title=f'Character Status: {user.nick or user.name}',
                               description="Status of you character in the Team Made Leveling System", color=0x4dab03)
