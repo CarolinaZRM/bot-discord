@@ -70,12 +70,16 @@ async def event_guessing_game(message, client):
             await message.channel.send(f"""Te rendiste tan rapido {user_name}? El numero era {correct_answer}""")
 
 
+def make_bold(string: str):
+    return f'**{string}**'
+
+
 async def event_rock_paper_scissor(message: discord.Message, client: discord.Client):
     CMD = '!rps'
     user_name = message.author.nick or message.author.name
 
     if re.fullmatch(CMD, message.content):
-        await message.channel.send(f'Wepa _{user_name}_! Ya hice mi movida, ahora haz la tuya ;)')
+        await message.channel.send(f'Wepa _{user_name}_! Vamos a jugar Rock-Paper-Scissors :grimacing:\nYa hice mi movida, ahora haz la tuya :wink:')
         # play against bot
         PLAYS = ['scissors', 'paper', 'rock']
 
@@ -87,13 +91,14 @@ async def event_rock_paper_scissor(message: discord.Message, client: discord.Cli
             user_answer = user_answer.content.lower()
 
             if user_answer not in PLAYS:
-                await message.channel.send(f'Whoops... **Esa jugada no es valida** {user_name}')
+                bolded_plays = map(make_bold, PLAYS)
+                await message.channel.send(f'Whoops... **Esa jugada no es valida** {user_name}\nPuedes jugar una de: {", ".join(bolded_plays)}')
             else:
                 break
 
         if bot_play == user_answer:
             await message.channel.send('Empate :tada:')
         elif (PLAYS.index(user_answer) + 1) % 3 == PLAYS.index(bot_play):
-            await message.channel.send(f'Ganaste _{user_name}_ :)')
+            await message.channel.send(f'AHH jugué {bot_play.upper()} :worried: ...\nPues Ganaste _{user_name}_, Congrats! :fire: :100:')
         else:
-            await message.channel.send(f'Perdiste _{user_name}_ :(')
+            await message.channel.send(f'Uff, Perdiste _{user_name}_ :pleading_face:\nYo había jugado {bot_play.upper()} :grimacing:')
