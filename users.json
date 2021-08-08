@@ -19,22 +19,24 @@
     },
     "871037860210434080": {
         "nickname": "Jose C Rodriguez Rodriguez",
-        "experience": 54,
+        "experience": 59,
         "level": 1,
-        "messages": 13
+        "messages": 14,
+        "timestamp": 1628394556
     },
     "539112744553676812": {
         "nickname": "Gabriel S Santiago Guzman",
-        "experience": 483,
-        "level": 3,
-        "messages": 155,
-        "timestamp": 1628391105
+        "experience": 631,
+        "level": 4,
+        "messages": 195,
+        "timestamp": 1628449046
     },
     "823781396614873099": {
         "nickname": "Jesus F Montalvo Nazario",
-        "experience": 133,
+        "experience": 147,
         "level": 1,
-        "messages": 30
+        "messages": 43,
+        "timestamp": 1628391337
     },
     "871102484628770876": {
         "nickname": "Samael A Alvarez Alicea",
@@ -57,16 +59,17 @@
     },
     "871530335693852742": {
         "nickname": "Jose R Rivera Rodriguez",
-        "experience": 982,
+        "experience": 1013,
         "level": 6,
-        "messages": 331,
-        "timestamp": 1628389707
+        "messages": 352,
+        "timestamp": 1628448840
     },
     "871074536706175077": {
         "nickname": "Natanael  Batista Alvarez",
-        "experience": 1,
+        "experience": 6,
         "level": 1,
-        "messages": 1
+        "messages": 2,
+        "timestamp": 1628444124
     },
     "475435563537793026": {
         "nickname": "Carolina Z. Rodriguez Maldonado",
@@ -76,24 +79,24 @@
     },
     "871442917007425587": {
         "nickname": "Gabriel E Concepcion Ramirez",
-        "experience": 24,
+        "experience": 29,
         "level": 1,
-        "messages": 7,
-        "timestamp": 1628389691
+        "messages": 8,
+        "timestamp": 1628391315
     },
     "653007227480965161": {
         "nickname": "Jeimy M Santiago Morales",
-        "experience": 85,
+        "experience": 90,
         "level": 1,
-        "messages": 24,
-        "timestamp": 1628389505
+        "messages": 25,
+        "timestamp": 1628448262
     },
     "820791389100441630": {
         "nickname": "Christian A Morales Jones",
-        "experience": 25,
+        "experience": 30,
         "level": 1,
-        "messages": 6,
-        "timestamp": 1628389657
+        "messages": 7,
+        "timestamp": 1628394539
     },
     "709875328864223382": {
         "nickname": "William A Torres Lacourt",
@@ -175,9 +178,10 @@
     },
     "811029809143742545": {
         "nickname": "Jan L Nieves Seda",
-        "experience": 199,
-        "level": 1,
-        "messages": 49
+        "experience": 203,
+        "level": 2,
+        "messages": 50,
+        "timestamp": 1628404051
     },
     "871497474802614312": {
         "nickname": "Adrian G Rodriguez Vega",
@@ -248,15 +252,17 @@
     },
     "541298986535878677": {
         "nickname": "Fernando J. Bermudez Medina",
-        "experience": 183,
-        "level": 1,
-        "messages": 41
+        "experience": 203,
+        "level": 2,
+        "messages": 47,
+        "timestamp": 1628439478
     },
     "756947769448595598": {
         "nickname": "Mariana P\u00e9rez",
-        "experience": 30,
+        "experience": 35,
         "level": 1,
-        "messages": 6
+        "messages": 7,
+        "timestamp": 1628437199
     },
     "871124049495998584": {
         "nickname": "Josue  Colon Lopez",
@@ -302,10 +308,10 @@
     },
     "718626090641522711": {
         "nickname": "Maria Celeste Novoa Garcia",
-        "experience": 333,
-        "level": 2,
-        "messages": 74,
-        "timestamp": 1628389716
+        "experience": 378,
+        "level": 3,
+        "messages": 84,
+        "timestamp": 1628448862
     },
     "872115215276318803": {
         "nickname": "Yeoshua A Rodriguez Banchs",
@@ -556,9 +562,10 @@
     },
     "871528984280719451": {
         "nickname": "Diego A Otero Padilla",
-        "experience": 5,
+        "experience": 10,
         "level": 1,
-        "messages": 2
+        "messages": 3,
+        "timestamp": 1628391695
     },
     "871143285253603359": {
         "nickname": "Derek Y Velez Quinones",
@@ -622,10 +629,10 @@
     },
     "595070096490233869": {
         "nickname": "Jovalier  Ortiz Ramos",
-        "experience": 52,
+        "experience": 117,
         "level": 1,
-        "messages": 21,
-        "timestamp": 1628388513
+        "messages": 75,
+        "timestamp": 1628441588
     },
     "871527458908799016": {
         "nickname": "Francisco R Villafane Gonzalez",
@@ -764,5 +771,12 @@
         "experience": 5,
         "level": 1,
         "messages": 1
+    },
+    "760180582595821574": {
+        "nickname": "Hector D Quinones Hernandez",
+        "experience": 5,
+        "level": 1,
+        "messages": 1,
+        "timestamp": 1628435895
     }
 }
