@@ -19,18 +19,27 @@ SHEESH_REGEX = re.compile('s+h+ee+s+h+s*', re.IGNORECASE)
 YET_REGEX = re.compile('y+ee+t+s*', re.IGNORECASE)
 
 
-async def is_sheeshed(message: discord.Message):
+async def subscribe_easter_eggs(message: discord.Message):
+    await _is_sheeshed(message)
+    await _is_yeeted(message)
+    await _do_parkour(message)
+
+
+async def _is_sheeshed(message: discord.Message):
     log.debug('[DEBUG] Entered Shheeessh')
 
-    RETURN_SHEESH = 'SHEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSHHHHHHHHHH :fire:\nOooppss :sweat_smile: Me emocioné jejeje'
+    RETURN_SHEESH = [
+        'Sheeeshhss :eyes:',
+        'SHEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSHHHHHHHHHH :fire:\nOooppss :sweat_smile: Me emocioné jejeje'
+    ]
 
     has_sheesh = SHEESH_REGEX.search(message.content)
 
     if has_sheesh:
-        await message.channel.send(content=RETURN_SHEESH)
+        await message.reply(content=random.choice(RETURN_SHEESH))
 
 
-async def is_yeeted(message: discord.Message):
+async def _is_yeeted(message: discord.Message):
     log.debug('[DEBUG] Entered Shheeessh')
 
     RETURN_SHEESH = ['SE YEETIÓ!!!', 'UFFF! YEETIAO jajaja']
@@ -38,4 +47,24 @@ async def is_yeeted(message: discord.Message):
     has_yeet = YET_REGEX.search(message.content)
 
     if has_yeet:
-        await message.channel.send(content=random.choice(RETURN_SHEESH))
+        await message.reply(content=random.choice(RETURN_SHEESH))
+
+
+PARKOUR_GIFS = ['https://tenor.com/view/parkour-theoffice-freerunning-gif-5128248',
+                'https://tenor.com/view/parkour-the-office-andy-bernard-gif-11765843']
+
+PARKOUR_RESPONSE = ['YAASSSS', 'Of course!!! :sunglasses:']
+
+
+async def _do_parkour(message: discord.Message):
+    CMD = r'(do)? *you *(do|know) *parkour *\?*'
+
+    user_input = message.content.lower()
+
+    # if does not start with "bot" or contains a BOT Tag, terminate
+    if not (re.match(r'^(bot).*', user_input) or re.search(r'(<@!719199208166522881>).*', user_input)):
+        return
+
+    # if contains the question, return GIF
+    if re.search(CMD, user_input):
+        await message.reply(content=f'{random.choice(PARKOUR_RESPONSE)}\n{random.choice(PARKOUR_GIFS)}')
