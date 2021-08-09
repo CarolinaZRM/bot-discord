@@ -75,7 +75,7 @@ async def event_get_calendar(message: discord.Message):
 async def get_org_info(message: discord.Message):
     log.debug('[DEBUG] Entered Student Org')
     user_message = message.content
-    ORG_ABBREVIATION = "IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE"
+    ORG_ABBREVIATION = "IEEE/EMC/HKN/RAS_CSS/COMP_SOC/CAS/PES/WIE/ACM_CSE/CAHSI/SHPE/ALPHA_AST/EMB/PHOTONICS"
     if "!ls_student_orgs" not in user_message.lower():
         return
 

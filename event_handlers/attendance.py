@@ -62,7 +62,7 @@ async def subscribe_attendance(message: discord.Message):
         member_roles = filter(lambda role: role != '@everyone',
                               [role.name for role in member.roles])
 
-        member_tuple = (idx + 1, member.nick or member.name,
+        member_tuple = (idx + 1, getattr(member, 'nick', member.name),
                         '|'.join(member_roles))
 
         members_in_attendance.append(member_tuple)

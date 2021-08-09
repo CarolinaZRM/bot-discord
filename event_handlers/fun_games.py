@@ -76,7 +76,8 @@ def make_bold(string: str):
 
 async def event_rock_paper_scissor(message: discord.Message, client: discord.Client):
     CMD = '!rps'
-    user_name = message.author.nick or message.author.name
+
+    user_name = getattr(message.author, 'nick', message.author.name)
 
     if re.fullmatch(CMD, message.content):
         await message.channel.send(f'Wepa _{user_name}_! Vamos a jugar Rock-Paper-Scissors :grimacing:\nYa hice mi movida, ahora haz la tuya :wink:')

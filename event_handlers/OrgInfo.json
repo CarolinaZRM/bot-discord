@@ -35,7 +35,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Web page: http://wie.uprm.edu\n\u2022 Facebook page: facebook.com/wie.uprm\n\u2022 Contact: wie@uprm.edu\n\u2022 Phone: (787) 265-5402"
+                "value": "\u2022 Web page: http://wie.uprm.edu\n\u2022 Facebook Page: facebook.com/wie.uprm\n\u2022 Contact: wie@uprm.edu\n\u2022 Phone: (787) 265-5402"
             }
         ]
     },
@@ -55,7 +55,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Emails: ras@uprm.edu; css@uprm.edu\n\u2022 Facebook page: https://www.facebook.com/RAS.UPRM/\n\u2022 Twitter: @ras_uprm"
+                "value": "\u2022 Emails: ras@uprm.edu; css@uprm.edu\n\u2022 Facebook Page: https://www.facebook.com/RAS.UPRM/\n\u2022 Twitter: @ras_uprm"
             }
         ]
     },
@@ -95,7 +95,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Facebook page: https://www.facebook.com/ACM.ECE?fref=ts\n\u2022 Contact: acm.students@ece.uprm.edu"
+                "value": "\u2022 Facebook Page: https://www.facebook.com/ACM.ECE?fref=ts\n\u2022 Contact: acm.students@ece.uprm.edu"
             }
         ]
     },
@@ -106,6 +106,36 @@
             {
                 "name": "Contact Info & Social Media",
                 "value": "\u2022 Website: http://shpe.uprm.edu/\n\u2022 Facebook Page: https://www.facebook.com/SHPEUPRM/"
+            }
+        ]
+    },
+    "ALPHA_AST": {
+        "title": "Here's some information on Alpha Astrum:",
+        "description": "Alpha Astrum is a student-led non-profit organization at the University of Puerto Rico, Mayaguez Campus that designs, builds and launches experimental high-powered rockets. Our ultimate goal is to be the first Latin American team to launch the first-ever student-built rocket to space. Simultaneously, we raise awareness of the rapid growing aerospace industry in Puerto Rico and inspire the next-generation of young rocketeers",
+        "fields": [
+            {
+                "name": "Contact Info & Social Media",
+                "value": "\u2022 Website: http://alphaastrum.com/\n\u2022 Facebook Page: https://www.facebook.com/alphaastrum2018/\n\u2022 Twitter: https://twitter.com/AlphaAstrum\n\u2022 Youtube: https://www.youtube.com/channel/UCTbpnHw6zSzS9lITmuFn0Rg\n\u2022 Instagram: https://www.instagram.com/alphaastrum"
+            }
+        ]
+    },
+    "EMB": {
+        "title": "Here's some information on Engineering in Medicine and Biology Society UPRM Student Chapter (EMB):",
+        "description": "The Engineering in Medicine and Biology Society (EMB) has grown into the largest international, member-based society of biomedical engineers and has made—through its meetings, publications and other activities—invaluable contributions to the advancement of biomedical and healthcare engineering.\nWhat you get by being a student member:\n- Workshops delving in areas ranging from basic cell culture to bio-informatics\n- Events such as conferences/seminars, scholarships, industry tours and more\n- Networking with individuals/professionals interested in the same areas as you!\n- Research and internship opportunities",
+        "fields": [
+            {
+                "name": "Contact Info & Social Media",
+                "value": "\u2022 Email: embs@uprm.edu\n\u2022 Facebook Page: https://www.facebook.com/Engineering-in-Medicine-and-Biology-Society-UPRM-Student-Chapter-EMB-161103697313966\n\u2022 Twitter: https://twitter.com/EMBuprm"
+            }
+        ]
+    },
+    "PHOTONICS": {
+        "title": "Here's IEEE Photonics Society",
+        "description": "The IEEE Photonics Society forms the hub of a vibrant technical community of more than 100,000 professionals dedicated to transforming breakthroughs in quantum physics into the devices, systems and products to revolutionize our daily lives. From ubiquitous and inexpensive global communications via fiber optics, to lasers for medical and other applications, to flat-screen displays, to photovoltaic devices for solar energy, to LEDs for energy-efficient illumination, there are myriad examples of the society’s impact on the world around us.",
+        "fields": [
+            {
+                "name": "Contact Info & Social Media",
+                "value": "\u2022 Emails: yesenia.rivera7@upr.edu - Presidenta | luis.cuba@upr.edu - Vice-Presidente"
             }
         ]
     }

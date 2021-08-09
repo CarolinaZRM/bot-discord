@@ -476,7 +476,7 @@ async def level_on_message(message: discord.Message):
 async def update_data(users, user):
     if f'{user.id}' not in users:
         users[f'{user.id}'] = {}
-        users[f'{user.id}']['nickname'] = user.nick or user.name
+        users[f'{user.id}']['nickname'] = getattr(user, 'nick', user.name)
         users[f'{user.id}']['experience'] = 0
         users[f'{user.id}']['level'] = 1
         users[f'{user.id}']['messages'] = 0
@@ -564,7 +564,7 @@ async def leveling_status(message: discord.Message):
 
         imageurl = LEVEL_ICONS.get(user_level) or LEVEL_ICONS.get(10)
 
-        embed = discord.Embed(title=f'Character Status: {user.nick or user.name}',
+        embed = discord.Embed(title=f'Character Status: {getattr(user, "nick", user.name)}',
                               description="Status of you character in the Team Made Leveling System", color=0x4dab03)
         embed.add_field(
             name="Level", value=users[f'{user.id}']['level'], inline=True)
@@ -583,8 +583,8 @@ async def download_user_level_data(message: discord.Message):
     if message.content != CMD:
         return
 
-    if not is_sender_counselor(message) or not is_sender_admin(message):
-        return  # sad face, not Estudiante Orientador
+    if not (is_sender_counselor(message) or is_sender_admin(message)):
+        return  # sad face, not Estudiante Orientador or ADMIN
 
     # Send leveling data
     await message.author.send(content='Hola, aquí envió la data del **Leaderboard de Mensajes**', file=discord.File(LEVEL_PATH))

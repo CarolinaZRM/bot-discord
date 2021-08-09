@@ -1,782 +1,782 @@
 {
-    "242711388194209793": {
-        "nickname": "Orlando Salda\u00f1a",
-        "experience": 571,
-        "level": 4,
-        "messages": 121
-    },
-    "165999330203795465": {
-        "nickname": "Jose D Cruz Melendez",
-        "experience": 6,
-        "level": 1,
-        "messages": 3
-    },
-    "871175196776730625": {
-        "nickname": "Jahdiel E Montero Alicea",
-        "experience": 2,
-        "level": 1,
-        "messages": 1
-    },
-    "871037860210434080": {
-        "nickname": "Jose C Rodriguez Rodriguez",
-        "experience": 59,
-        "level": 1,
-        "messages": 14,
-        "timestamp": 1628394556
-    },
-    "539112744553676812": {
-        "nickname": "Gabriel S Santiago Guzman",
-        "experience": 631,
-        "level": 4,
-        "messages": 195,
-        "timestamp": 1628449046
-    },
-    "823781396614873099": {
-        "nickname": "Jesus F Montalvo Nazario",
-        "experience": 147,
-        "level": 1,
-        "messages": 43,
-        "timestamp": 1628391337
-    },
-    "871102484628770876": {
-        "nickname": "Samael A Alvarez Alicea",
-        "experience": 18,
-        "level": 1,
-        "messages": 5
-    },
-    "266060319615352833": {
-        "nickname": "Gabriel A Viera Perez",
-        "experience": 373,
-        "level": 3,
-        "messages": 89,
-        "timestamp": 1628388442
-    },
-    "871529628450324511": {
-        "nickname": "Gia  Hernandez Rodriguez",
-        "experience": 104,
-        "level": 1,
-        "messages": 24
-    },
-    "871530335693852742": {
-        "nickname": "Jose R Rivera Rodriguez",
-        "experience": 1013,
-        "level": 6,
-        "messages": 352,
-        "timestamp": 1628448840
-    },
-    "871074536706175077": {
-        "nickname": "Natanael  Batista Alvarez",
-        "experience": 6,
-        "level": 1,
-        "messages": 2,
-        "timestamp": 1628444124
-    },
-    "475435563537793026": {
-        "nickname": "Carolina Z. Rodriguez Maldonado",
-        "experience": 84,
-        "level": 1,
-        "messages": 18
-    },
-    "871442917007425587": {
-        "nickname": "Gabriel E Concepcion Ramirez",
-        "experience": 29,
-        "level": 1,
-        "messages": 8,
-        "timestamp": 1628391315
-    },
-    "653007227480965161": {
-        "nickname": "Jeimy M Santiago Morales",
-        "experience": 90,
-        "level": 1,
-        "messages": 25,
-        "timestamp": 1628448262
-    },
-    "820791389100441630": {
-        "nickname": "Christian A Morales Jones",
-        "experience": 30,
-        "level": 1,
-        "messages": 7,
-        "timestamp": 1628394539
-    },
-    "709875328864223382": {
-        "nickname": "William A Torres Lacourt",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "740360832353042494": {
-        "nickname": "Glorian Serrano",
-        "experience": 122,
-        "level": 1,
-        "messages": 25
-    },
-    "871492668948086936": {
-        "nickname": "Nicole N Davila Perez",
-        "experience": 31,
-        "level": 1,
-        "messages": 7
-    },
-    "801272896811040769": {
-        "nickname": "Christian J Rodriguez Nazario",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "775383720911175711": {
-        "nickname": "Raul M Crespo Fernandez",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "871054970022158338": {
-        "nickname": "Alfredo D Soto Velez",
-        "experience": 52,
-        "level": 1,
-        "messages": 11
-    },
-    "314823877043814410": {
-        "nickname": "Giovanny A Garcia Rivera",
-        "experience": 52,
-        "level": 1,
-        "messages": 12
-    },
-    "871526384961462334": {
-        "nickname": "Adrielisse J Velazquez Burgos",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "862523268173791244": {
-        "nickname": "Fernando  Castro Cancel",
-        "experience": 125,
-        "level": 1,
-        "messages": 25
-    },
-    "871794285140406344": {
-        "nickname": "Javian  Valles Montes",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871075174009684008": {
-        "nickname": "Jonathan  Roman Vazquez",
-        "experience": 40,
-        "level": 1,
-        "messages": 8
-    },
-    "871506164402245653": {
-        "nickname": "Booker A Robinson Swanson",
-        "experience": 51,
-        "level": 1,
-        "messages": 12
-    },
-    "754442533454610533": {
-        "nickname": "Jan K Rivera Reina",
-        "experience": 59,
-        "level": 1,
-        "messages": 14
-    },
-    "811029809143742545": {
-        "nickname": "Jan L Nieves Seda",
-        "experience": 203,
-        "level": 2,
-        "messages": 50,
-        "timestamp": 1628404051
-    },
-    "871497474802614312": {
-        "nickname": "Adrian G Rodriguez Vega",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "752887613458743417": {
-        "nickname": "Hiram R Rodriguez Hernandez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "571902883067592706": {
-        "nickname": "Andrea M Fernandez Vazquez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "185129960292352000": {
-        "nickname": "Juan R Narvaez Perez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "735634703155200070": {
-        "nickname": "Arianys Martinez Fuentes",
-        "experience": 34,
-        "level": 1,
-        "messages": 8
-    },
-    "740304451285418085": {
-        "nickname": "Valentina Ramirez Ramirez",
-        "experience": 84,
-        "level": 1,
-        "messages": 17
-    },
-    "871419539710165003": {
-        "nickname": "Jose H Caro Morales",
-        "experience": 47,
-        "level": 1,
-        "messages": 10,
-        "timestamp": 1628382348
-    },
-    "871492697783947265": {
-        "nickname": "Yamilett  Lozada Castro",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871525666267463741": {
-        "nickname": "Jean A Ruiz Afanador",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "801680755527909438": {
-        "nickname": "Yamil R Fuentes Miro",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "740330876457713736": {
-        "nickname": "Norely Torres",
-        "experience": 311,
-        "level": 2,
-        "messages": 63
-    },
-    "541298986535878677": {
-        "nickname": "Fernando J. Bermudez Medina",
-        "experience": 203,
-        "level": 2,
-        "messages": 47,
-        "timestamp": 1628439478
-    },
-    "756947769448595598": {
-        "nickname": "Mariana P\u00e9rez",
-        "experience": 35,
-        "level": 1,
-        "messages": 7,
-        "timestamp": 1628437199
-    },
-    "871124049495998584": {
-        "nickname": "Josue  Colon Lopez",
-        "experience": 37,
-        "level": 1,
-        "messages": 8
-    },
-    "708414038845030470": {
-        "nickname": "William X Rivera Moret",
-        "experience": 19,
-        "level": 1,
-        "messages": 4
-    },
-    "867569048899682355": {
-        "nickname": "Alejandro A Perez Pabon",
-        "experience": 35,
-        "level": 1,
-        "messages": 8
-    },
-    "203312409207635969": {
-        "nickname": "Pedro A Matos Villanueva",
-        "experience": 50,
-        "level": 1,
-        "messages": 10
-    },
-    "717631428350705766": {
-        "nickname": "Joyce M Tirado Casiano",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871363405091598356": {
-        "nickname": "Paola N Estrada Roman",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "751469791566495878": {
-        "nickname": "Onix C Gonzalez Coreano",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "718626090641522711": {
-        "nickname": "Maria Celeste Novoa Garcia",
-        "experience": 378,
-        "level": 3,
-        "messages": 84,
-        "timestamp": 1628448862
-    },
-    "872115215276318803": {
-        "nickname": "Yeoshua A Rodriguez Banchs",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "871151094414311484": {
-        "nickname": "Alexander M Marquez Ramos",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871816662800793640": {
-        "nickname": "Anthony A Medina Rey",
-        "experience": 25,
-        "level": 1,
-        "messages": 5
-    },
-    "871506330760912926": {
-        "nickname": "Juan C Ortiz Abouomar",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "871038311211364362": {
-        "nickname": "Christopher Y Montalvo Feliu",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "657766447199813665": {
-        "nickname": "Kevin G Figueroa Galarza",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "872099838433591337": {
-        "nickname": "Sebastian  Hernandez Munoz",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "486341287591542794": {
-        "nickname": "Andre J Garcia Suarez",
-        "experience": 27,
-        "level": 1,
-        "messages": 6
-    },
-    "871228485878833212": {
-        "nickname": "Rial A Garcia Maldonado",
-        "experience": 74,
-        "level": 1,
-        "messages": 15
-    },
-    "871066922429587556": {
-        "nickname": "Elian J Graciano Vazquez",
-        "experience": 73,
-        "level": 1,
-        "messages": 16
-    },
-    "871433757448601622": {
-        "nickname": "Jean M Cintron Rosado",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "561303922501877780": {
-        "nickname": "Francisco A Rovira Landron",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "394973059821469696": {
-        "nickname": "Giovanni  Maysonet Rodriguez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "854083892918616095": {
-        "nickname": "Julian A Toro Doval",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871535479479226428": {
-        "nickname": "Edwin J Munoz Acevedo",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "843956363151015977": {
-        "nickname": "Steven  Torres Diaz",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "871545334143270982": {
-        "nickname": "Samarys  Barreiro Melendez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "870161463078174720": {
-        "nickname": "Hiram J Burgos Ramos",
-        "experience": 17,
-        "level": 1,
-        "messages": 4
-    },
-    "633148486266781708": {
-        "nickname": "Yahir  Jeremias Soto",
-        "experience": 105,
-        "level": 1,
-        "messages": 25,
-        "timestamp": 1628388397
-    },
-    "752619579884306493": {
-        "nickname": "Edgard A Diaz Bobe",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "871130997826125874": {
-        "nickname": "Dylan E Ballester Martinez",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "871511738032484362": {
-        "nickname": "Diego A Perez Gandarillas",
-        "experience": 83,
-        "level": 1,
-        "messages": 22
-    },
-    "871207332036640828": {
-        "nickname": "Marcos F Arraiza Aviles",
-        "experience": 27,
-        "level": 1,
-        "messages": 6
-    },
-    "815832988973400104": {
-        "nickname": "David J Batista Diaz",
-        "experience": 48,
-        "level": 1,
-        "messages": 11
-    },
-    "871500183337316363": {
-        "nickname": "Sebastian A Alicea Colon",
-        "experience": 26,
-        "level": 1,
-        "messages": 6
-    },
-    "871040285130494012": {
-        "nickname": "Alanis  Negroni Santiago",
-        "experience": 0,
-        "level": 1,
-        "messages": 1
-    },
-    "871530916198101012": {
-        "nickname": "Jeriel  Diaz Acevedo",
-        "experience": 25,
-        "level": 1,
-        "messages": 5
-    },
-    "759257438472896515": {
-        "nickname": "Jesus E. Hernandez Guerrero",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871446749758251028": {
-        "nickname": "Gabriella A Beniquez Vendrell",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "854205356984238081": {
-        "nickname": "Luis J Ocasio Rotger",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "753426091888345109": {
-        "nickname": "Adhel E Rivera Rodriguez",
-        "experience": 50,
-        "level": 1,
-        "messages": 10
-    },
-    "852406558386421780": {
-        "nickname": "Ricardo A Soto Feliciano",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871806150495064134": {
-        "nickname": "Angelo K Sanchez De Jesus",
-        "experience": 40,
-        "level": 1,
-        "messages": 9
-    },
-    "871414306695159841": {
-        "nickname": "Paola N Perez Santos",
-        "experience": 22,
-        "level": 1,
-        "messages": 5
-    },
-    "871516154781396993": {
-        "nickname": "Angel Y Feliciano Portalatin",
-        "experience": 181,
-        "level": 1,
-        "messages": 43
-    },
-    "871790650381717614": {
-        "nickname": "Mia S Figueroa Lugo",
-        "experience": 15,
-        "level": 1,
-        "messages": 3
-    },
-    "871535135881830421": {
-        "nickname": "Daniel J Febles Bustillo",
-        "experience": 60,
-        "level": 1,
-        "messages": 12
-    },
-    "751832924034433094": {
-        "nickname": "Kiara A Perez Santiago",
-        "experience": 9,
-        "level": 1,
-        "messages": 2
-    },
-    "871150029761577010": {
-        "nickname": "Esteban G Echevarria Perez",
-        "experience": 14,
-        "level": 1,
-        "messages": 3
-    },
-    "871073805995491398": {
-        "nickname": "Cheselyn  Morales Santiago",
-        "experience": 18,
-        "level": 1,
-        "messages": 4
-    },
-    "740349384050606092": {
-        "nickname": "Adhel-Jose Rivera Rodriguez",
-        "experience": 35,
-        "level": 1,
-        "messages": 7
-    },
-    "871528984280719451": {
-        "nickname": "Diego A Otero Padilla",
-        "experience": 10,
-        "level": 1,
-        "messages": 3,
-        "timestamp": 1628391695
-    },
-    "871143285253603359": {
-        "nickname": "Derek Y Velez Quinones",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "820347773664493629": {
-        "nickname": "Martin J Aguilar Lopez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871533359107543092": {
-        "nickname": "Erik O Laciste Eusebio",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "873214890523885618": {
-        "nickname": "JulioCamacho",
-        "experience": 0,
-        "level": 1,
-        "messages": 1
-    },
-    "674425898023387137": {
-        "nickname": "Yandel R Gonzalez Martinez",
-        "experience": 91,
-        "level": 1,
-        "messages": 19
-    },
-    "486257848653971460": {
-        "nickname": "Julian J Ramirez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871417597776785479": {
-        "nickname": "Julian A Rodriguez Rodriguez",
-        "experience": 42,
-        "level": 1,
-        "messages": 9
-    },
-    "871595970977230919": {
-        "nickname": "Marcus F Febles Custodio",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871200873160769546": {
-        "nickname": "Aliana S Santiago Morales",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "839522456619843585": {
-        "nickname": "Marcos G Marcial Guzman",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "595070096490233869": {
-        "nickname": "Jovalier  Ortiz Ramos",
-        "experience": 117,
-        "level": 1,
-        "messages": 75,
-        "timestamp": 1628441588
-    },
-    "871527458908799016": {
-        "nickname": "Francisco R Villafane Gonzalez",
-        "experience": 34,
-        "level": 1,
-        "messages": 8
-    },
-    "701269711211593788": {
-        "nickname": "Karelys Lopez",
-        "experience": 27,
-        "level": 1,
-        "messages": 6
-    },
-    "757681252764483694": {
-        "nickname": "Valeria D Palermo Carmona",
-        "experience": 22,
-        "level": 1,
-        "messages": 5
-    },
-    "459361124824121345": {
-        "nickname": "Pedro I Rivera Velazquez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "762912089966379033": {
-        "nickname": "Leandro L Saliva Morales",
-        "experience": 29,
-        "level": 1,
-        "messages": 9
-    },
-    "650565565986897956": {
-        "nickname": "Ivan Y Arroyo Arroyo",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871039182296973362": {
-        "nickname": "Christian J Rosa Traverso",
-        "experience": 20,
-        "level": 1,
-        "messages": 4
-    },
-    "469122074246381569": {
-        "nickname": "Adrian R Sanchez Gonzalez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "340604373820506114": {
-        "nickname": "Karl G Menuau Lopez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871217039749042216": {
-        "nickname": "Joey O Ortega Mandia",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871529365056389141": {
-        "nickname": "Idaliz K Aviles Velez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871039378011594762": {
-        "nickname": "Francisco Y Pico Barreto",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871127718832508959": {
-        "nickname": "Jadiel E Garcia Jimenez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "285468582912065537": {
-        "nickname": "Yamil G Morales Alvarez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "700040383173754929": {
-        "nickname": "Fernando Agosto Qui\u00f1ones",
-        "experience": 43,
-        "level": 1,
-        "messages": 9
-    },
-    "871122510521991179": {
-        "nickname": "Onel I Vazquez Arocho",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871131180219637760": {
-        "nickname": "Justin O Balbuena Soto",
-        "experience": 35,
-        "level": 1,
-        "messages": 8
-    },
-    "263335918474231809": {
-        "nickname": "Ivan Jackson",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "246649029625118721": {
-        "nickname": "ALEJANDRO M MARTINEZ TORRES",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "871041118819729408": {
-        "nickname": "Javier A Aponte Collazo",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871123132432400445": {
-        "nickname": "Armando L Mercado Hernandez",
-        "experience": 10,
-        "level": 1,
-        "messages": 2
-    },
-    "871574435516284928": {
-        "nickname": "Kiaraliz  Ramos Rivera",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "718625533273047080": {
-        "nickname": "Andrea Rodriguez Astacio",
-        "experience": 5,
-        "level": 1,
-        "messages": 1
-    },
-    "760180582595821574": {
-        "nickname": "Hector D Quinones Hernandez",
-        "experience": 5,
-        "level": 1,
-        "messages": 1,
-        "timestamp": 1628435895
-    }
+ "242711388194209793": {
+  "nickname": "Orlando Salda\u00f1a",
+  "experience": 571,
+  "level": 4,
+  "messages": 121
+ },
+ "165999330203795465": {
+  "nickname": "Jose D Cruz Melendez",
+  "experience": 6,
+  "level": 1,
+  "messages": 3
+ },
+ "871175196776730625": {
+  "nickname": "Jahdiel E Montero Alicea",
+  "experience": 2,
+  "level": 1,
+  "messages": 1
+ },
+ "871037860210434080": {
+  "nickname": "Jose C Rodriguez Rodriguez",
+  "experience": 59,
+  "level": 1,
+  "messages": 14,
+  "timestamp": 1628394556
+ },
+ "539112744553676812": {
+  "nickname": "Gabriel Santiago",
+  "experience": 681,
+  "level": 4,
+  "messages": 212,
+  "timestamp": 1628467253
+ },
+ "823781396614873099": {
+  "nickname": "Jesus F Montalvo Nazario",
+  "experience": 147,
+  "level": 1,
+  "messages": 43,
+  "timestamp": 1628391337
+ },
+ "871102484628770876": {
+  "nickname": "Samael A Alvarez Alicea",
+  "experience": 18,
+  "level": 1,
+  "messages": 5
+ },
+ "266060319615352833": {
+  "nickname": "Gabriel A Viera Perez",
+  "experience": 373,
+  "level": 3,
+  "messages": 89,
+  "timestamp": 1628388442
+ },
+ "871529628450324511": {
+  "nickname": "Gia  Hernandez Rodriguez",
+  "experience": 104,
+  "level": 1,
+  "messages": 24
+ },
+ "871530335693852742": {
+  "nickname": "Jose R Rivera Rodriguez",
+  "experience": 1013,
+  "level": 6,
+  "messages": 352,
+  "timestamp": 1628448840
+ },
+ "871074536706175077": {
+  "nickname": "Natanael  Batista Alvarez",
+  "experience": 6,
+  "level": 1,
+  "messages": 2,
+  "timestamp": 1628444124
+ },
+ "475435563537793026": {
+  "nickname": "Carolina Z. Rodriguez Maldonado",
+  "experience": 84,
+  "level": 1,
+  "messages": 18
+ },
+ "871442917007425587": {
+  "nickname": "Gabriel E Concepcion Ramirez",
+  "experience": 29,
+  "level": 1,
+  "messages": 8,
+  "timestamp": 1628391315
+ },
+ "653007227480965161": {
+  "nickname": "Jeimy M Santiago Morales",
+  "experience": 100,
+  "level": 1,
+  "messages": 28,
+  "timestamp": 1628466541
+ },
+ "820791389100441630": {
+  "nickname": "Christian A Morales Jones",
+  "experience": 30,
+  "level": 1,
+  "messages": 7,
+  "timestamp": 1628394539
+ },
+ "709875328864223382": {
+  "nickname": "William A Torres Lacourt",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "740360832353042494": {
+  "nickname": "Glorian Serrano",
+  "experience": 122,
+  "level": 1,
+  "messages": 25
+ },
+ "871492668948086936": {
+  "nickname": "Nicole N Davila Perez",
+  "experience": 31,
+  "level": 1,
+  "messages": 7
+ },
+ "801272896811040769": {
+  "nickname": "Christian J Rodriguez Nazario",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "775383720911175711": {
+  "nickname": "Raul M Crespo Fernandez",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "871054970022158338": {
+  "nickname": "Alfredo D Soto Velez",
+  "experience": 52,
+  "level": 1,
+  "messages": 11
+ },
+ "314823877043814410": {
+  "nickname": "Giovanny A Garcia Rivera",
+  "experience": 52,
+  "level": 1,
+  "messages": 12
+ },
+ "871526384961462334": {
+  "nickname": "Adrielisse J Velazquez Burgos",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "862523268173791244": {
+  "nickname": "Fernando  Castro Cancel",
+  "experience": 125,
+  "level": 1,
+  "messages": 25
+ },
+ "871794285140406344": {
+  "nickname": "Javian  Valles Montes",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871075174009684008": {
+  "nickname": "Jonathan  Roman Vazquez",
+  "experience": 40,
+  "level": 1,
+  "messages": 8
+ },
+ "871506164402245653": {
+  "nickname": "Booker A Robinson Swanson",
+  "experience": 51,
+  "level": 1,
+  "messages": 12
+ },
+ "754442533454610533": {
+  "nickname": "Jan K Rivera Reina",
+  "experience": 59,
+  "level": 1,
+  "messages": 14
+ },
+ "811029809143742545": {
+  "nickname": "Jan L Nieves Seda",
+  "experience": 203,
+  "level": 2,
+  "messages": 50,
+  "timestamp": 1628404051
+ },
+ "871497474802614312": {
+  "nickname": "Adrian G Rodriguez Vega",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "752887613458743417": {
+  "nickname": "Hiram R Rodriguez Hernandez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "571902883067592706": {
+  "nickname": "Andrea M Fernandez Vazquez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "185129960292352000": {
+  "nickname": "Juan R Narvaez Perez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "735634703155200070": {
+  "nickname": "Arianys Martinez Fuentes",
+  "experience": 34,
+  "level": 1,
+  "messages": 8
+ },
+ "740304451285418085": {
+  "nickname": "Valentina Ramirez Ramirez",
+  "experience": 84,
+  "level": 1,
+  "messages": 17
+ },
+ "871419539710165003": {
+  "nickname": "Jose H Caro Morales",
+  "experience": 47,
+  "level": 1,
+  "messages": 10,
+  "timestamp": 1628382348
+ },
+ "871492697783947265": {
+  "nickname": "Yamilett  Lozada Castro",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871525666267463741": {
+  "nickname": "Jean A Ruiz Afanador",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "801680755527909438": {
+  "nickname": "Yamil R Fuentes Miro",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "740330876457713736": {
+  "nickname": "Norely Torres",
+  "experience": 311,
+  "level": 2,
+  "messages": 63
+ },
+ "541298986535878677": {
+  "nickname": "Fernando J. Bermudez Medina",
+  "experience": 203,
+  "level": 2,
+  "messages": 47,
+  "timestamp": 1628439478
+ },
+ "756947769448595598": {
+  "nickname": "Mariana P\u00e9rez",
+  "experience": 35,
+  "level": 1,
+  "messages": 7,
+  "timestamp": 1628437199
+ },
+ "871124049495998584": {
+  "nickname": "Josue  Colon Lopez",
+  "experience": 37,
+  "level": 1,
+  "messages": 8
+ },
+ "708414038845030470": {
+  "nickname": "William X Rivera Moret",
+  "experience": 19,
+  "level": 1,
+  "messages": 4
+ },
+ "867569048899682355": {
+  "nickname": "Alejandro A Perez Pabon",
+  "experience": 35,
+  "level": 1,
+  "messages": 8
+ },
+ "203312409207635969": {
+  "nickname": "Pedro A Matos Villanueva",
+  "experience": 50,
+  "level": 1,
+  "messages": 10
+ },
+ "717631428350705766": {
+  "nickname": "Joyce M Tirado Casiano",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871363405091598356": {
+  "nickname": "Paola N Estrada Roman",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "751469791566495878": {
+  "nickname": "Onix C Gonzalez Coreano",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "718626090641522711": {
+  "nickname": "Maria Celeste Novoa Garcia",
+  "experience": 378,
+  "level": 3,
+  "messages": 84,
+  "timestamp": 1628448862
+ },
+ "872115215276318803": {
+  "nickname": "Yeoshua A Rodriguez Banchs",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "871151094414311484": {
+  "nickname": "Alexander M Marquez Ramos",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871816662800793640": {
+  "nickname": "Anthony A Medina Rey",
+  "experience": 25,
+  "level": 1,
+  "messages": 5
+ },
+ "871506330760912926": {
+  "nickname": "Juan C Ortiz Abouomar",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "871038311211364362": {
+  "nickname": "Christopher Y Montalvo Feliu",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "657766447199813665": {
+  "nickname": "Kevin G Figueroa Galarza",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "872099838433591337": {
+  "nickname": "Sebastian  Hernandez Munoz",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "486341287591542794": {
+  "nickname": "Andre J Garcia Suarez",
+  "experience": 27,
+  "level": 1,
+  "messages": 6
+ },
+ "871228485878833212": {
+  "nickname": "Rial A Garcia Maldonado",
+  "experience": 74,
+  "level": 1,
+  "messages": 15
+ },
+ "871066922429587556": {
+  "nickname": "Elian J Graciano Vazquez",
+  "experience": 73,
+  "level": 1,
+  "messages": 16
+ },
+ "871433757448601622": {
+  "nickname": "Jean M Cintron Rosado",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "561303922501877780": {
+  "nickname": "Francisco A Rovira Landron",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "394973059821469696": {
+  "nickname": "Giovanni  Maysonet Rodriguez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "854083892918616095": {
+  "nickname": "Julian A Toro Doval",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871535479479226428": {
+  "nickname": "Edwin J Munoz Acevedo",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "843956363151015977": {
+  "nickname": "Steven  Torres Diaz",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "871545334143270982": {
+  "nickname": "Samarys  Barreiro Melendez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "870161463078174720": {
+  "nickname": "Hiram J Burgos Ramos",
+  "experience": 17,
+  "level": 1,
+  "messages": 4
+ },
+ "633148486266781708": {
+  "nickname": "Yahir  Jeremias Soto",
+  "experience": 105,
+  "level": 1,
+  "messages": 25,
+  "timestamp": 1628388397
+ },
+ "752619579884306493": {
+  "nickname": "Edgard A Diaz Bobe",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "871130997826125874": {
+  "nickname": "Dylan E Ballester Martinez",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "871511738032484362": {
+  "nickname": "Diego A Perez Gandarillas",
+  "experience": 83,
+  "level": 1,
+  "messages": 22
+ },
+ "871207332036640828": {
+  "nickname": "Marcos F Arraiza Aviles",
+  "experience": 27,
+  "level": 1,
+  "messages": 6
+ },
+ "815832988973400104": {
+  "nickname": "David J Batista Diaz",
+  "experience": 48,
+  "level": 1,
+  "messages": 11
+ },
+ "871500183337316363": {
+  "nickname": "Sebastian A Alicea Colon",
+  "experience": 26,
+  "level": 1,
+  "messages": 6
+ },
+ "871040285130494012": {
+  "nickname": "Alanis  Negroni Santiago",
+  "experience": 0,
+  "level": 1,
+  "messages": 1
+ },
+ "871530916198101012": {
+  "nickname": "Jeriel  Diaz Acevedo",
+  "experience": 25,
+  "level": 1,
+  "messages": 5
+ },
+ "759257438472896515": {
+  "nickname": "Jesus E. Hernandez Guerrero",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871446749758251028": {
+  "nickname": "Gabriella A Beniquez Vendrell",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "854205356984238081": {
+  "nickname": "Luis J Ocasio Rotger",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "753426091888345109": {
+  "nickname": "Adhel E Rivera Rodriguez",
+  "experience": 50,
+  "level": 1,
+  "messages": 10
+ },
+ "852406558386421780": {
+  "nickname": "Ricardo A Soto Feliciano",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871806150495064134": {
+  "nickname": "Angelo K Sanchez De Jesus",
+  "experience": 40,
+  "level": 1,
+  "messages": 9
+ },
+ "871414306695159841": {
+  "nickname": "Paola N Perez Santos",
+  "experience": 22,
+  "level": 1,
+  "messages": 5
+ },
+ "871516154781396993": {
+  "nickname": "Angel Y Feliciano Portalatin",
+  "experience": 181,
+  "level": 1,
+  "messages": 43
+ },
+ "871790650381717614": {
+  "nickname": "Mia S Figueroa Lugo",
+  "experience": 15,
+  "level": 1,
+  "messages": 3
+ },
+ "871535135881830421": {
+  "nickname": "Daniel J Febles Bustillo",
+  "experience": 60,
+  "level": 1,
+  "messages": 12
+ },
+ "751832924034433094": {
+  "nickname": "Kiara A Perez Santiago",
+  "experience": 9,
+  "level": 1,
+  "messages": 2
+ },
+ "871150029761577010": {
+  "nickname": "Esteban G Echevarria Perez",
+  "experience": 14,
+  "level": 1,
+  "messages": 3
+ },
+ "871073805995491398": {
+  "nickname": "Cheselyn  Morales Santiago",
+  "experience": 18,
+  "level": 1,
+  "messages": 4
+ },
+ "740349384050606092": {
+  "nickname": "Adhel-Jose Rivera Rodriguez",
+  "experience": 35,
+  "level": 1,
+  "messages": 7
+ },
+ "871528984280719451": {
+  "nickname": "Diego A Otero Padilla",
+  "experience": 10,
+  "level": 1,
+  "messages": 3,
+  "timestamp": 1628391695
+ },
+ "871143285253603359": {
+  "nickname": "Derek Y Velez Quinones",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "820347773664493629": {
+  "nickname": "Martin J Aguilar Lopez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871533359107543092": {
+  "nickname": "Erik O Laciste Eusebio",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "873214890523885618": {
+  "nickname": "JulioCamacho",
+  "experience": 0,
+  "level": 1,
+  "messages": 1
+ },
+ "674425898023387137": {
+  "nickname": "Yandel R Gonzalez Martinez",
+  "experience": 91,
+  "level": 1,
+  "messages": 19
+ },
+ "486257848653971460": {
+  "nickname": "Julian J Ramirez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871417597776785479": {
+  "nickname": "Julian A Rodriguez Rodriguez",
+  "experience": 42,
+  "level": 1,
+  "messages": 9
+ },
+ "871595970977230919": {
+  "nickname": "Marcus F Febles Custodio",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871200873160769546": {
+  "nickname": "Aliana S Santiago Morales",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "839522456619843585": {
+  "nickname": "Marcos G Marcial Guzman",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "595070096490233869": {
+  "nickname": "Jovalier  Ortiz Ramos",
+  "experience": 117,
+  "level": 1,
+  "messages": 75,
+  "timestamp": 1628441588
+ },
+ "871527458908799016": {
+  "nickname": "Francisco R Villafane Gonzalez",
+  "experience": 34,
+  "level": 1,
+  "messages": 8
+ },
+ "701269711211593788": {
+  "nickname": "Karelys Lopez",
+  "experience": 27,
+  "level": 1,
+  "messages": 6
+ },
+ "757681252764483694": {
+  "nickname": "Valeria D Palermo Carmona",
+  "experience": 22,
+  "level": 1,
+  "messages": 5
+ },
+ "459361124824121345": {
+  "nickname": "Pedro I Rivera Velazquez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "762912089966379033": {
+  "nickname": "Leandro L Saliva Morales",
+  "experience": 29,
+  "level": 1,
+  "messages": 9
+ },
+ "650565565986897956": {
+  "nickname": "Ivan Y Arroyo Arroyo",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871039182296973362": {
+  "nickname": "Christian J Rosa Traverso",
+  "experience": 20,
+  "level": 1,
+  "messages": 4
+ },
+ "469122074246381569": {
+  "nickname": "Adrian R Sanchez Gonzalez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "340604373820506114": {
+  "nickname": "Karl G Menuau Lopez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871217039749042216": {
+  "nickname": "Joey O Ortega Mandia",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871529365056389141": {
+  "nickname": "Idaliz K Aviles Velez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871039378011594762": {
+  "nickname": "Francisco Y Pico Barreto",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871127718832508959": {
+  "nickname": "Jadiel E Garcia Jimenez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "285468582912065537": {
+  "nickname": "Yamil G Morales Alvarez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "700040383173754929": {
+  "nickname": "Fernando Agosto Qui\u00f1ones",
+  "experience": 43,
+  "level": 1,
+  "messages": 9
+ },
+ "871122510521991179": {
+  "nickname": "Onel I Vazquez Arocho",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871131180219637760": {
+  "nickname": "Justin O Balbuena Soto",
+  "experience": 35,
+  "level": 1,
+  "messages": 8
+ },
+ "263335918474231809": {
+  "nickname": "Ivan Jackson",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "246649029625118721": {
+  "nickname": "ALEJANDRO M MARTINEZ TORRES",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "871041118819729408": {
+  "nickname": "Javier A Aponte Collazo",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871123132432400445": {
+  "nickname": "Armando L Mercado Hernandez",
+  "experience": 10,
+  "level": 1,
+  "messages": 2
+ },
+ "871574435516284928": {
+  "nickname": "Kiaraliz  Ramos Rivera",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "718625533273047080": {
+  "nickname": "Andrea Rodriguez Astacio",
+  "experience": 5,
+  "level": 1,
+  "messages": 1
+ },
+ "760180582595821574": {
+  "nickname": "Hector D Quinones Hernandez",
+  "experience": 5,
+  "level": 1,
+  "messages": 1,
+  "timestamp": 1628435895
+ }
 }
