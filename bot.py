@@ -137,6 +137,7 @@ def is_from_channel(message: discord.Message, channel_name: str) -> bool:
     return False
 
 
+# This is a command method
 async def set_streaming(client: discord.Client, message: discord.Message):
     user_message = message.content
 
@@ -172,6 +173,7 @@ async def set_streaming(client: discord.Client, message: discord.Message):
         await client.change_presence(activity=None)
 
 
+# This is a command method
 async def join_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!join":
         if not is_sender_counselor(message):
@@ -220,6 +222,7 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
         await message.author.send(f'Ya me uni al canal de voz: {voice_channel}')
 
 
+# This is a command method
 async def leave_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!leave":
         if not is_sender_counselor(message):
@@ -271,6 +274,7 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
             await message.author.send(f'Ya me desconecté del canal de voz: {voice_channel}')
 
 
+# This is a command method
 async def play_audio(client: discord.Client, message: discord.Message):
     sections = message.content.split(' ')
 
@@ -360,6 +364,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
     await message.author.send(f"{user_name}, ya **'{name} '** esta en PLAY")
 
 
+# This is a command method
 async def pause_audio(client: discord.Client, message: discord.Message):
     if message.content == "!pause":
 
@@ -394,6 +399,7 @@ async def pause_audio(client: discord.Client, message: discord.Message):
             await message.author.send(f'Pausado en el canal {voice_channel}')
 
 
+# This is a command method
 async def resume_audio(client: discord.Client, message: discord.Message):
     if message.content == "!resume":
         if not is_sender_counselor(message):
