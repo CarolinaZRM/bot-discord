@@ -1,6 +1,6 @@
 <h1> Bot Orientador UPRM </h1>
 <h2> Fully Autonomous Discord Bot for a Server </h2>
-<h3> Creators: Gabriel Santiago & Fernando Bermudez </h3> 
+<h3> Creators: Team MADE </h3> 
 
 <h2> Configuration </h3>
 <p>
