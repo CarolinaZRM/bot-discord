@@ -217,7 +217,7 @@ async def generate_server_rules(message: discord.Message):
         f"""[RULE-DBG] Command Requested was {message.content.lower()}""")
     if message.content.lower() == "!reglas":
         embed = discord.Embed(title="Reglas del Servidor de Discord Oficial de Team MADE",
-                              description="Aquí están todas las reglas a seguir en el servidor en esta semana de orientación virtual 2021")
+                              description="Aquí están todas las reglas a seguir en el servidor en esta semana de orientación virtual 2022")
         rules = open(_RULE_FILE, "r")
         ruleCount = 1
         for rule in rules:
