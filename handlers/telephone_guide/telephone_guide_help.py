@@ -17,12 +17,13 @@ from .dept_info import get_dept_info
 from .faculty import get_faculty
 from .guardia_universitaria import get_guardia_universitaria
 
+#FIXED: Updated !contactos description information
 
 def get_telephone_guide_help(sections):
     embed = discord.Embed(title='Lista de Contactos disponibles')
     embed.add_field(
         name='Uso',
-        value='!<CONTACTO> | Esto mostrara información revelante para el CONTACTO.'
+        value='Estas son las listas de contactos a los varios departamentos y facultades en los cuales podrás orientarte.'
     )
 
     for contact_name in _TELEPHONE_GUIDE_LIST:
