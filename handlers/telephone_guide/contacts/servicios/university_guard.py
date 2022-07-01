@@ -17,10 +17,14 @@ class GuardiaUniversitaria(Contact):
         Contact ([type]): [description]
     # """
 
+    #TODO: Contact description and services provided info updated.
+
     def __init__(self):
         contact_name = "Dpto. De Transito Y Vigilancia"
-        contact_description = "<Add Description>"
-        services_provided = "<Add services provided>"
+        contact_description = """El departamento se compone de la Sección de Vigilancia, Oficina de Retén,
+         Oficina del Director y la Seccion de Trancito."""
+        services_provided = """Se destacan en: Orientación, escolta, vigilancia preventiva peatonal,
+        ciclistas y en vehículos de motor, coordinar el tránsito en diferentes actividades, primeros auxilios, entre otros."""
         phone_number = ["(787) 832-4040"]
         extensions = ["Retén Exts. 3263,3620",
                       "Sección de Tránsito – Exts. 3275,3597",
