@@ -23,8 +23,8 @@ def help_menu_base():
         name="!map", value="Provee un enlace a el Mapa de UPRM")
     embed.add_field(
         name="!links", value="Gives the user a PDF with all the important links of UPRM")
-    embed.add_field(
-        name="!emails", value="Gives user a PDF with some important emails they can use")
+    # embed.add_field(
+    #     name="!emails", value="Gives user a PDF with some important emails they can use")
     embed.add_field(
         name="!salon:SALON", value="Provee información sobre el edificio donde se puede encontrar ese salón.\n"
         "Ejemplo: *!salon:S123*.\tSi el salón comienza con una letra entonces debe dividir la letra que identifica al edificio y el numero del salón con un guión (-).\n"

@@ -171,7 +171,7 @@ def main():
             prepa.extract_counselors(client)
             log.debug('[VERBOSE] On Ready Finished.')
 
-        client.loop.create_task(task())
+        task_instance = client.loop.create_task(task())
         # THIS IS WHERE IT BEGINS
         try:
             client.loop.run_until_complete(
@@ -185,6 +185,12 @@ def main():
             client.loop.close()
             log.debug("[DEBUG] Program ended")
             break
+        finally:
+            task_instance.cancel("Error")
 
         log.debug("[DEBUG] Bot restarting")
         client = discord.Client(loop=client.loop)
+
+
+if __name__ == "__main__":
+    main()
