@@ -757,3 +757,4 @@ async def download_user_level_data(message: discord.Message):
 
     # Send leveling data
     await message.author.send(content='Hola, aquí envió la data del **Leaderboard de Mensajes**', file=discord.File(LEVEL_PATH))
+
