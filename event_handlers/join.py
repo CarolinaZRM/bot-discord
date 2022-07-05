@@ -30,8 +30,10 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
-        f"Ejemplo: bienvenido.velez"
+        #f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
+        #f"Ejemplo: bienvenido.velez"
+        f"**Por favor, dime cual es tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
+        f"Ejemplo: bienvenido.velez@upr.edu"
     )
 
     # checks if message was sent by the user and in the DM
@@ -107,10 +109,11 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
 
     closing = f"{user_name}, eso es todo por hoy. Ya conoces los dos comandos mas importantes: ***'!help'*** y  ***'!contactos'***\n"\
         'Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n' \
-        'Ahora se te asigno un grupo en especifico de un personaje de Super Smash Bros, lo puedes verificar en tu perfil\n' \
+        'Ahora se te asigno un grupo en especifico de un personaje de Star Wars, lo puedes verificar en tu perfil\n' \
         'El grupo que te toco tiene un canal de texto y de voz para que puedas compartir con los otros miembros de tu grupo\n'\
-        'Cualquier inconveniente le puedes escribir a Fernando Bermudez o Gabriel Santiago \n'\
+        'Cualquier inconveniente le puedes escribir a Carolina Z. Rodriguez o Gabriel Santiago \n'\
         '¡Hasta luego! También te digo que los Estudiantes Orientadores de Team MADE están para ayudarte, no dudes en ocuparlos para cualquier duda :grimacing:\n'
+
 
     await member.send(content=closing)
 

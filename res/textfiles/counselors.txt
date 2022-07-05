@@ -19,10 +19,14 @@ Eduardo Novoa#0450
 El_MakiaPR#2260
 Erick M. Negrón#2572
 Gabriel Santiago#4359
+GlerysbethSerrano#9436
 Glorian Serrano#9467
 Glorián M. Serrano Ortiz#9467
 Groovy#7254
 HokeyPokey#5059
+Iris Betan#3767
+Jesmarie Alonso#2154
+Jesus_Colon#2081
 Jose D.#0515
 JoseRivera#4144
 Leonard#4266
@@ -40,12 +44,15 @@ Oniel Plaza#4453
 Rinzler#3587
 SadOnion#2831
 Sergio Rivera#2372
+SumtimesImFunny#7762
 Supurna#1572
 Valentina Ramírez#1857
+Valentina Ram�rez#1857
 Vangolin#9619
 Vic_Barriera#7058
 Wifi42#2372
 Wilfredo#1813
+Yamil Mendez#5458
 andrea.rodriguez#0425
 andrea.rodriguez46#0425
 aristoteles.ts#4359
@@ -62,6 +69,7 @@ leirhab#4359
 lenoy_somar0013#9882
 mari_pm#3613
 mcnovoa#4800
+nicole.davila9#1080
 rlk81#0048
 stc#5716
 synaira#1846
