@@ -25,6 +25,7 @@ Glorián M. Serrano Ortiz#9467
 Groovy#7254
 HokeyPokey#5059
 Iris Betan#3767
+JellyFrost#2154
 Jesmarie Alonso#2154
 Jesus_Colon#2081
 Jose D.#0515
@@ -47,7 +48,6 @@ Sergio Rivera#2372
 SumtimesImFunny#7762
 Supurna#1572
 Valentina Ramírez#1857
-Valentina Ram�rez#1857
 Vangolin#9619
 Vic_Barriera#7058
 Wifi42#2372
