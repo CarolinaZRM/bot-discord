@@ -73,10 +73,10 @@
  },
  "475435563537793026": {
   "nickname": "CarolinaRM",
-  "experience": 114,
+  "experience": 119,
   "level": 1,
-  "messages": 27,
-  "timestamp": 1656220368
+  "messages": 28,
+  "timestamp": 1656468097
  },
  "871442917007425587": {
   "nickname": "Gabriel E Concepcion Ramirez",
@@ -780,11 +780,18 @@
   "messages": 1,
   "timestamp": 1628435895
  },
+ "256886415437070337": {
+  "nickname": "SumtimesImFunny",
+  "experience": 20,
+  "level": 1,
+  "messages": 6,
+  "timestamp": 1656630878
+ },
  "740311256564629604": {
   "nickname": "Oniel Plaza",
-  "experience": 45,
+  "experience": 15,
   "level": 1,
-  "messages": 17,
-  "timestamp": 1656619093
+  "messages": 6,
+  "timestamp": 1657037949
  }
 }
