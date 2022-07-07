@@ -701,23 +701,23 @@ async def general_leaderboard(message: discord.Message):
     embed = discord.Embed(
         title=":trophy: Leaderboard :trophy:", color=11901259)
 
-    embed.add_field(name="Crewmates", value='\n'.join(
+    embed.add_field(name="Members", value='\n'.join(
         top_crewmates), inline=False)
 
     await message.channel.send(embed=embed)
 
 
 LEVEL_ICONS = {
-    1: "https://cdn.discordapp.com/attachments/856635443310362624/870329147120058399/image0.png",
-    2: "https://cdn.discordapp.com/attachments/856635443310362624/870329147531079700/image1.png",
-    3: "https://cdn.discordapp.com/attachments/856635443310362624/870329147795316796/image2.png",
-    4: "https://cdn.discordapp.com/attachments/856635443310362624/870329148437069956/image3.png",
-    5: "https://cdn.discordapp.com/attachments/856635443310362624/870329148730650624/image4.png",
-    6: "https://cdn.discordapp.com/attachments/856635443310362624/870329148982296656/image5.png",
-    7: "https://cdn.discordapp.com/attachments/856635443310362624/870329149548556288/image7.jpg",
-    8: "https://cdn.discordapp.com/attachments/856635443310362624/870329149917659146/image8.png",
-    9: "https://cdn.discordapp.com/attachments/856635443310362624/870329150219640892/image9.jpg",
-    10: "https://cdn.discordapp.com/attachments/856635443310362624/870329146461552701/image1.jpg",
+    1: "https://www.herald.wales/wp-content/uploads/2021/03/millenium-falcon-pembroke.jpg",
+    2: "https://img1.cgtrader.com/items/3028889/de49dc859a/large/star-wars-jedi-starfighter-anakin-skywalker-3d-model-low-poly-animated-max.jpg",
+    3: "https://s3-us-west-2.amazonaws.com/media.brothers-brick.com/2022/05/TieFighter-FukuSaku.jpg",
+    4: "https://c-3d.niceshops.com/upload/image/product/large/default/revell-model-set-imperial-star-destroyer-1-pc-311143-en.jpg",
+    5: "https://static.wikia.nocookie.net/starwars/images/7/74/AnakinsEta2.jpg/revision/latest?cb=20090424014352",
+    6: "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/05/TIE-Fighter-Facts-Interceptor.jpg?q=50&fit=crop&w=963&h=481&dpr=1.5",
+    7: "https://airandspace.si.edu/sites/default/files/styles/body_medium/public/2021-05/Composite_X-wing.jpg?itok=UwDAgRfB",
+    8: "https://static.wikia.nocookie.net/starwars/images/c/c2/TIE_Defender.png/revision/latest?cb=20150801171146",
+    9: "https://static.wikia.nocookie.net/starwars/images/6/66/Nimbus-class_V-wing_TFOWM.png/revision/latest?cb=20190629212809",
+    10: "https://static.wikia.nocookie.net/starwars/images/a/af/Shuttle-CHRON.jpg/revision/latest?cb=20100813150543",
 }
 
 
@@ -734,7 +734,7 @@ async def leveling_status(message: discord.Message):
         imageurl = LEVEL_ICONS.get(user_level) or LEVEL_ICONS.get(10)
 
         embed = discord.Embed(title=f'Character Status: {getattr(user, "nick", user.name)}',
-                              description="Status of you character in the Team Made Leveling System", color=0x4dab03)
+                              description="Status of you character in the Team Made Leveling System", color=11901259)
         embed.add_field(
             name="Level", value=users[f'{user.id}']['level'], inline=True)
         embed.add_field(name="Experience",
