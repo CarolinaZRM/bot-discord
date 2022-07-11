@@ -5,7 +5,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Facebook Page: https://www.facebook.com/emc.uprm\n\u2022 President's Email: guelmary.fernandez@upr.edu\n\u2022 Vice-President's Email: carolina.rodriguez11@upr.edu"
+                "value": "\u2022 Facebook: https://www.facebook.com/emc.uprm\n\u2022 President's Email: guelmary.fernandez@upr.edu\n\u2022 Vice-President's Email: carolina.rodriguez11@upr.edu"
             }
         ]
     },
@@ -25,7 +25,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Facebook: @uprm.cahsi\n\u2022 Twitter: @cahsi_uprm\n\u2022 Instagram: @cahsi_uprm"
+                "value": "\u2022 Facebook: @uprm.cahsi\n\u2022 Twitter: @cahsi_uprm\n\u2022 Instagram: @cahsi_uprm\n\u2022 Email: cahsi@uprm.edu"
             }
         ]
     },
@@ -35,7 +35,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Web page: http://wie.uprm.edu\n\u2022 Facebook Page: facebook.com/wie.uprm\n\u2022 Contact: wie@uprm.edu\n\u2022 Phone: (787) 265-5402"
+                "value": "\u2022 Website: http://wie.uprm.edu\n\u2022 Facebook: facebook.com/wie.uprm\n\u2022 Email: wie@uprm.edu\n\u2022 Phone: (787) 265-5402"
             }
         ]
     },
@@ -45,17 +45,17 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Email: hkn.uprm@gmail.com\n\u2022 Facebook Page: https://www.facebook.com/IEEE.HKN/\n\u2022 Instagram: @hkn_lambdatau"
+                "value": "\u2022 Email: hkn@ece.uprm.edu\n\u2022 Facebook: https://www.facebook.com/hkn.uprm/\n\u2022 Instagram: @hkn_lambdatau"
             }
         ]
     },
     "RAS_CSS": {
         "title": "Here's IEEE Robotics and Automation Society & Control Systems Society",
-        "description": "El joint chapter de la Robotics and Automation Society & Control and Systems Society tienen como misión educar a la comunidad, tanto universitario como la no universitaria, acerca de la robótica, automatización de procesos y los sistemas de control. Esto lo llevamos a cabo mediante nuestros proyectos y talleres que ofrecemos tanto a los estudiantes de la universidad como a estudiante de escuela superior e intermedia a los cuales le llevamos talleres durante el año escolar.",
+        "description": "The joint chapter of the Robotics and Automation Society & Control and Systems Society has as its mission to educate the community, both university and non-university, about robotics, process automation and control systems. We do this through our projects and workshops that we offer to both college students, and high/middle school students, to whom we take workshops during the school year.",
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Emails: ras@uprm.edu; css@uprm.edu\n\u2022 Facebook Page: https://www.facebook.com/RAS.UPRM/\n\u2022 Twitter: @ras_uprm"
+                "value": "\u2022 Emails: ras@uprm.edu; css@uprm.edu\n\u2022 Facebook: https://www.facebook.com/RAS.UPRM/\n\u2022 Twitter: @Ras_Uprm"
             }
         ]
     },
@@ -75,7 +75,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Email: cas@uprm.edu\n\u2022 Facebook Page: https://www.facebook.com/cas.uprm/\n\u2022 Website: http://cas.uprm.edu/"
+                "value": "\u2022 Email: cas@uprm.edu\n\u2022 Facebook: https://www.facebook.com/cas.uprm/\n\u2022 Website: http://cas.uprm.edu/"
             }
         ]
     },
@@ -85,7 +85,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Email: pes.upr@gmail.com\n\u2022 Website: http://ece.uprm.edu/pes/\n\u2022 Facebook Page: https://www.facebook.com/ieepesuprm/"
+                "value": "\u2022 Email: pes.upr@gmail.com\n\u2022 Website: https://pesupr.wixsite.com/website/\n\u2022 Facebook: https://www.facebook.com/ieepesuprm/"
             }
         ]
     },
@@ -95,7 +95,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Facebook Page: https://www.facebook.com/ACM.ECE?fref=ts\n\u2022 Contact: acm.students@ece.uprm.edu"
+                "value": "\u2022 Facebook: https://www.facebook.com/ACM.ECE/\n\u2022 Email: acm@ece.uprm.edu"
             }
         ]
     },
@@ -105,7 +105,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Website: http://shpe.uprm.edu/\n\u2022 Facebook Page: https://www.facebook.com/SHPEUPRM/"
+                "value": "\u2022 Website: http://shpe.uprm.edu/\n\u2022 Facebook: https://www.facebook.com/SHPEUPRM/"
             }
         ]
     },
@@ -115,7 +115,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Website: http://alphaastrum.com/\n\u2022 Facebook Page: https://www.facebook.com/alphaastrum2018/\n\u2022 Twitter: https://twitter.com/AlphaAstrum\n\u2022 Youtube: https://www.youtube.com/channel/UCTbpnHw6zSzS9lITmuFn0Rg\n\u2022 Instagram: https://www.instagram.com/alphaastrum"
+                "value": "\u2022 Website: https://sites.google.com/view/alphaastrum/\n\u2022 Facebook: https://www.facebook.com/alphaastrum2018/\n\u2022 Twitter: https://twitter.com/AlphaAstrum\n\u2022 Youtube: https://www.youtube.com/channel/UCTbpnHw6zSzS9lITmuFn0Rg\n\u2022 Instagram: https://www.instagram.com/alphaastrum"
             }
         ]
     },
@@ -125,7 +125,7 @@
         "fields": [
             {
                 "name": "Contact Info & Social Media",
-                "value": "\u2022 Email: embs@uprm.edu\n\u2022 Facebook Page: https://www.facebook.com/Engineering-in-Medicine-and-Biology-Society-UPRM-Student-Chapter-EMB-161103697313966\n\u2022 Twitter: https://twitter.com/EMBuprm"
+                "value": "\u2022 Email: embs@uprm.edu\n\u2022 Facebook: https://www.facebook.com/Engineering-in-Medicine-and-Biology-Society-UPRM-Student-Chapter-EMB-161103697313966\n\u2022 Twitter: https://twitter.com/EMBuprm"
             }
         ]
     },
