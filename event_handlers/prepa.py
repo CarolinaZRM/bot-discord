@@ -22,7 +22,7 @@ inso_counselors = set()
 
 def extract_counselors(client: discord.client):
     guild = client.get_guild(config.GUILD_ID_NUM)
-    # @TODO: Check this out and fix
+    # @TODO: REMEMBER TO ALWAYS KEEP GUILD ID NUM UPDATED WHEN SWITCHING FROM SERVER TO SERVER
     # 'id' value is EO role id
     eo = discord.Role(data={'id': 989729347004923913,
                             'name': "@EstudianteOrientador"}, guild=guild, state=None)

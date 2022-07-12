@@ -26,6 +26,7 @@ _RULE_FILE = os.path.join(paths.TEXT_FILES, "rules.txt")
 _FAQ_FILE = os.path.join(paths.TEXT_FILES, "faq.csv")
 _GOOGLE_ADD_CALENDAR = os.path.join(paths.IMAGES, "google_add_calendar.png")
 _PROJECT_FILE = os.path.join(paths.PROJECTS, 'proyectos.json')
+_MADE_WEBSITE = os.path.join(paths.IMAGES, "MadeWeb.png")
 
 # PDF Files
 CURRICULO_INEL = os.path.join(paths.CURRICULOS, "INEL.pdf")
@@ -266,3 +267,11 @@ async def generate_faq(message: discord.Message):
                     name=f"{question['num']}) {question['question']}", value=question['answer'])
 
         await message.channel.send(content=None, embed=embed)
+
+async def get_made_website(message: discord.Message):
+    log.debug("[DEBUG] ENTERED MADE'S WEBSITE COMMAND")
+    usr_msg = message.content
+    if usr_msg.lower() == "!madeweb":
+        await message.author.send("Aquí el enlace para la página web de Made! :green_heart: \n "
+                                  "https://sites.google.com/upr.edu/maderodriguez/")
+        #await message.author.send(file=discord.File(_MADE_WEBSITE))     // Image doesnt look good pero por si aca lo dejo
