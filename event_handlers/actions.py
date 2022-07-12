@@ -259,7 +259,7 @@ async def generate_faq(message: discord.Message):
         embed = discord.Embed(title="Frequently Asked Questions",
                               description="Aquí puedes encontrar ciertas preguntas que pueden surgir durante la semana")
         with open(_FAQ_FILE) as faq_file:
-            rows = csv.DictReader(faq_file, delimiter=',')
+            rows = csv.DictReader(faq_file, delimiter=';')
             for row in rows:
                 question = dict(row)
                 embed.add_field(
