@@ -136,7 +136,8 @@ async def event_get_freshman_guide(message: discord.Message):
     if usr_msg == "!guiaPrepistica" or usr_msg == "!guiaprepistica":
         log.debug(f'[PATH] {GUIA_PREPISTICA}')
        # await message.author.send("Aquí esta la guía prepistica")
-       # await message.author.send(file=discord.File(GUIA_PREPISTICA)) GUIDE IS WAY TOO BIG, HENCE THE LINK
+       # await message.author.send(file=discord.File(GUIA_PREPISTICA))
+       # GUIDE IS WAY TOO BIG, HENCE THE LINK.
         embed = discord.Embed(title="Guía Prepística 2022", url="https://sistemaupr-my.sharepoint.com/:b:/g/personal/madelinej_rodriguez_upr_edu/EUd2oNlnIoNGqD0RUuMIk9YBQpaj9U7plbEQ6AWcoNt04w?e=T8qQll",
                               description="Aquí esta la guía prepística! Presione el enlace en azul arriba ^^",
                               color=11901259)
