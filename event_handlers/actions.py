@@ -34,7 +34,7 @@ CURRICULO_INSO = os.path.join(paths.CURRICULOS, "INSO.pdf")
 CURRICULO_CIIC = os.path.join(paths.CURRICULOS, "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(paths.CURRICULOS, "ICOM.pdf")
 
-GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "Guia prepística 2022.pdf")
+GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "GuiaPrepistica.pdf")
 
 
 async def event_uprm_map(message: discord.Message):
