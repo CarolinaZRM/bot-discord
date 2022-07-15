@@ -34,7 +34,7 @@ CURRICULO_INSO = os.path.join(paths.CURRICULOS, "INSO.pdf")
 CURRICULO_CIIC = os.path.join(paths.CURRICULOS, "CIIC.pdf")
 CURRICULO_ICOM = os.path.join(paths.CURRICULOS, "ICOM.pdf")
 
-GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "GuiaPrepistica.pdf")
+GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "Guia prepística 2022.pdf")
 
 
 async def event_uprm_map(message: discord.Message):
@@ -133,10 +133,14 @@ async def event_get_curriculum(message: discord.Message):
 async def event_get_freshman_guide(message: discord.Message):
     log.debug('[DEBUG] Entered Freshman Guide')
     usr_msg = message.content
-    if usr_msg == "!guiaPrepistica":
+    if usr_msg == "!guiaPrepistica" or usr_msg == "!guiaprepistica":
         log.debug(f'[PATH] {GUIA_PREPISTICA}')
-        await message.author.send("Aquí esta la guía prepistica")
-        await message.author.send(file=discord.File(GUIA_PREPISTICA))
+       # await message.author.send("Aquí esta la guía prepistica")
+       # await message.author.send(file=discord.File(GUIA_PREPISTICA)) GUIDE IS WAY TOO BIG, HENCE THE LINK
+        embed = discord.Embed(title="Guía Prepística 2022", url="https://sistemaupr-my.sharepoint.com/:b:/g/personal/madelinej_rodriguez_upr_edu/EUd2oNlnIoNGqD0RUuMIk9YBQpaj9U7plbEQ6AWcoNt04w?e=T8qQll",
+                              description="Aquí esta la guía prepística! Presione el enlace en azul arriba ^^",
+                              color=11901259)
+        await message.author.send(embed=embed)
 
 
 async def event_telephone_guide(message: discord.Message):
