@@ -157,13 +157,16 @@ async def assign_group(client: discord.Client, member: discord.Member, check_sam
     return '{} {} {}'.format(student_obj['first name'], student_obj['middle initial'], student_obj['last names'])
 
 
-def _get_student(student_number: str) -> Dict[str, str]:
+def _get_student(student_email: str) -> Dict[str, str]:
+    student_email_without_domain = student_email.split("@")[0].lower()
     with open(_PREPA_FILE) as teams_list_file:
         rows = csv.DictReader(teams_list_file, delimiter=',')
         for row in rows:
-            if student_number.split("@")[0].lower() == row['student email'].split("@")[0]:
+            if student_email_without_domain == row['student email'].split("@")[0]:
+                student_email = row['student email'].split("@")[0]
+                student_full_name = f'{row["first name"]} {row["middle initial"]} {row["last names"]}'
                 log.debug(
-                    f"""[DEBUG-ASSIGN] Usename found: {row['student email'].split("@")[0]} for student {"{} {} {}".format(row["first name"], row["middle initial"], row["last names"])}""")
+                    f"""[DEBUG-ASSIGN] Username found: {student_email} for student {student_full_name}""")
                 return dict(row)
     return None
 
