@@ -47,7 +47,7 @@ def command():
 
 
 async def _organization_info(interaction: Interaction, student_org: str):
-    log.debug("[DEBUG] Entered Student Org")
+    log.info("Entered Student Org")
 
     if student_org not in _ORGANIZATIONS:
         await interaction.response.send_message(

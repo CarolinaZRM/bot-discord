@@ -1,5 +1,5 @@
 """
-//  /handlers/telephone_guide/contacts/consejeria_profesional/cse.py
+//  /handlers/telephone_guide/contacts/asesoria_academica/cse.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S. Santiago on 06/24/2021
@@ -11,9 +11,9 @@
 from ..contact import Contact
 
 
-class CSEConsejerosProfesional(Contact):
+class CSEAsesoriaAcademica(Contact):
     def __init__(self):
-        contact_name = "Consejeria Académica INSO/CIIC"
+        contact_name = "Asesoria Académica INSO/CIIC"
         contact_description = (
             "Ayudar y dirigir al estudiante en la planificación de su programa académico, "
             "para que cumpla con los requisitos de graduación y pueda así, completar su grado académico."
@@ -45,4 +45,4 @@ class CSEConsejerosProfesional(Contact):
         self.appointment_system_link = "Unavailable"
         self.brochures = ["Website - https://www.uprm.edu/cse/"]
         self.more_info = "https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/"
-        self.consejeria_uprm = "https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/"
+        self.asesoria_uprm = "https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/"

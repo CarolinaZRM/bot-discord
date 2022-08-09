@@ -9,17 +9,16 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-import csv
+
 import json
 import os
 import os.path
 from typing import Dict
 
-import bot
 import discord
 import log
 from constants import paths
-from controllers import building_parser, help_menu, telephone_guide
+from controllers import building_parser
 
 # files
 _PROJECT_FILE = os.path.join(paths.PROJECTS, "proyectos.json")
@@ -32,11 +31,11 @@ CURRICULO_ICOM = os.path.join(paths.CURRICULOS, "ICOM.pdf")
 
 
 async def event_get_curriculum(message: discord.Message):
-    log.debug("[DEBUG] Entered Curriculum")
+    log.info("Entered Curriculum")
     user_message = message.content
     if "!curriculo" in user_message.lower():  # Asked for curriculum
         split = user_message.split(":")
-        log.debug("[DEBUG] Contains Curriculum")
+        log.info("Contains Curriculum")
         if len(split) == 1:
             await message.author.send(
                 "No me dijiste que curriculo necesitas :slight_frown:\nIntenta con: INEL/ICOM/INSO/CIIC"
@@ -63,31 +62,6 @@ async def event_get_curriculum(message: discord.Message):
                 )
                 # for when CIIC curriculum is updated
                 await message.author.send(file=discord.File(CURRICULO_CIIC))
-
-
-async def event_telephone_guide(message: discord.Message):
-    log.debug("[DEBUG] Entered telephone guide")
-    client_message: str = message.content
-    sections = client_message.split(":")
-    # channel = bot.get_channel(849684995265396766)
-
-    if telephone_guide.is_command(sections):
-        function_call = telephone_guide.get_guide_handler(sections)
-        if function_call:
-            response = function_call(sections)
-            if isinstance(response, str):
-                await message.author.send(response)
-            elif isinstance(response, discord.Embed):
-                await message.author.send(content=None, embed=response)
-            elif isinstance(response, dict):
-                if "content_first" in response:
-                    await message.author.send(content=response["content_first"])
-                    await message.author.send(content=None, embed=response["embed"])
-                    return
-                if "embed" in response:
-                    await message.author.send(content=None, embed=response["embed"])
-                if "content" in response:
-                    await message.author.send(content=response["content"])
 
 
 async def event_parse_university_building(message: discord.Message):
@@ -134,7 +108,7 @@ async def event_parse_university_building(message: discord.Message):
 
 
 async def get_prj_info(message: discord.Message):
-    log.debug("[DEBUG] Entered Project")
+    log.info("Entered Project")
 
     user_message = message.content
 

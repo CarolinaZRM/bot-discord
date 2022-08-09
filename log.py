@@ -9,10 +9,28 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
+import logging
+import config
 
-DEBUG = True
+if not config.LOG_LEVEL:
+    config.LOG_LEVEL = "ERROR"
+
+
+logging.basicConfig(
+    level=logging.getLevelName(config.LOG_LEVEL),
+    filename=config.LOG_FILE,
+    format="%(asctime)s - [%(levelname)s][%(name)s] - %(message)s",
+)
+
+
+def info(msg) -> None:
+    logging.info(msg)
 
 
 def debug(msg) -> None:
-    if DEBUG:
-        print(msg)
+    logging.debug(msg)
+
+
+def error(msg) -> None:
+    print(msg)
+    logging.error(msg)

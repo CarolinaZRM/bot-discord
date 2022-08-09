@@ -12,8 +12,8 @@ from . import (
 )
 
 
-async def subscribe_actions(command_tree: CommandTree = None):
-    log.debug("[DEBUG] subscribing...")
+async def subscribe_commands(command_tree: CommandTree = None):
+    log.info("subscribing...")
     try:
         command_tree.add_command(get_academic_calendar.command())
         command_tree.add_command(get_faq.command())
@@ -22,8 +22,7 @@ async def subscribe_actions(command_tree: CommandTree = None):
         command_tree.add_command(get_rules.command())
         command_tree.add_command(get_student_orgs.command())
         command_tree.add_command(get_uprm_map.command())
-        # await command_tree.sync()
     except Exception as e:
         print(e)
 
-    log.debug("[DEBUG] Finished subscribing...")
+    log.info("Finished subscribing...")

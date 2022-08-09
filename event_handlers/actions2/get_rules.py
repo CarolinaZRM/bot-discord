@@ -37,7 +37,7 @@ def command():
 
 
 async def _server_rules(interaction: Interaction):
-    log.debug("[RULE-DBG] Entered Rule Generator")
+    log.info("[RULE-DBG] Entered Rule Generator")
 
     if not _RULES_EMBED:
         __init_rules()

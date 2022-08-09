@@ -31,7 +31,7 @@ except OSError:
 
 
 async def subscribe_attendance(message: discord.Message):
-    log.debug("[DEBUG] Entered attendance")
+    log.info("Entered attendance")
 
     COMMAND = "!attendance"
     DIVIDER = ":"

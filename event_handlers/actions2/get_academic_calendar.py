@@ -5,11 +5,13 @@ from discord import Member, User, Interaction, File
 from discord.app_commands import Command
 from constants import paths
 
+import log
+
 _GOOGLE_ADD_CALENDAR = os.path.join(paths.IMAGES, "google_add_calendar.png")
 
 
 def command():
-    print("CALENDAR MAP SUB")
+    log.info("CALENDAR MAP SUB")
     return Command(
         name="calendario",
         description="Provee un enlace rápido al Calendario Académico de UPRM.",
@@ -18,7 +20,7 @@ def command():
 
 
 async def _get_calendar(interaction: Interaction):
-    print("Entering calendario...")
+    log.info("Entering calendario...")
 
     author: Union[Member, User] = interaction.user
     user_name = None

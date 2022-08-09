@@ -50,7 +50,7 @@ def _extractAdmins(client: discord.Client):
 
     counselor_file_ref.close()
 
-    guild: discord.Guild = client.get_guild(config.GUILD_ID_NUM)
+    guild: discord.Guild = client.get_guild(int(config.GUILD_ID_NUM))
 
     for member in guild.members:
         for role in member.roles:
@@ -84,28 +84,26 @@ def _uploadCounselors():
 async def update_admin_list(client: discord.Client):
     _extractAdmins(client)
     _uploadCounselors()
-    log.debug("[VERBOSE] Updated Admins.")
+    log.info("[VERBOSE] Updated Admins.")
 
 
 async def verify_if_counselor(member: discord.Member):
-    log.debug(f"[DEBUG - bot.py] {_VALIDATED_COUNSELORS}")
+    log.info(f"[ bot.py] {_VALIDATED_COUNSELORS}")
     if str(member) in _VALIDATED_COUNSELORS:
-        log.debug(f"[DEBUG] Joined Member is Counselor: {member}")
+        log.info(f"Joined Member is Counselor: {member}")
         guild: discord.Guild = member.guild
         for role in guild.roles:
             if (
                 role.name == "EstudianteOrientador"
                 or role.name == "ConsejeraProfesional"
             ):
-                log.debug(f"[DEBUG] Role: {role}")
+                log.info(f"Role: {role}")
                 try:
                     await member.add_roles(role)
                 except Forbidden:
-                    log.debug("[ERROR] Bot does not have permision to add roles.")
+                    log.error("Bot does not have permission to add roles.")
     else:
-        log.debug(
-            f"[DEBUG - bot.py | line.55] Joined user member '{member}' is not Counselor"
-        )
+        log.info(f"[bot.py] Joined user member '{member}' is not Counselor")
 
 
 def is_sender_counselor(author: Union[discord.Member, discord.User]):
@@ -123,21 +121,21 @@ def is_sender_admin(message: discord.Message):
 
 def is_from_a_channel(message: discord.Message) -> bool:
     if message.channel.type != ChannelType.private:
-        log.debug("[MESSAGE] Is from a chanel")
+        log.info("[MESSAGE] Is from a chanel")
         return True
     return False
 
 
 def is_from_dm(message: discord.Message) -> bool:
     if message.channel.type == ChannelType.private:
-        log.debug("[MESSAGE] Is from DM")
+        log.info("[MESSAGE] Is from DM")
         return True
     return False
 
 
 def is_from_channel(message: discord.Message, channel_name: str) -> bool:
     if message.channel.name == channel_name:
-        log.debug("[MESSAGE] Is from DM")
+        log.info("[MESSAGE] Is from DM")
         return True
     return False
 
@@ -188,7 +186,7 @@ async def set_streaming(client: discord.Client, message: discord.Message):
 async def join_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!join":
         if not is_sender_counselor(message):
-            log.debug(
+            log.info(
                 f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
             )
             await message.author.send(
@@ -208,7 +206,7 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
             user_name = message.author.name
 
         voice_state: discord.VoiceState = message.author.voice
-        log.debug(f"[DEBUG - Author Voice State] {voice_state}")
+        log.info(f"[ Author Voice State] {voice_state}")
         if not voice_state:
             await message.author.send(
                 f"Hola {user_name}, primero te tienes que conectar tu al canal de voz para yo saber a cual quieres que me conecte"
@@ -245,7 +243,7 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
 async def leave_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!leave":
         if not is_sender_counselor(message):
-            log.debug(
+            log.info(
                 f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
             )
             await message.author.send(
@@ -267,7 +265,7 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
             user_name = message.author.name
 
         voice_state: discord.VoiceState = message.author.voice
-        log.debug(f"[DEBUG - Author Voice State] {voice_state}")
+        log.info(f"[ Author Voice State] {voice_state}")
         if not voice_state:
             await message.author.send(
                 f"Hola {user_name}, primero te tienes que conectar tu al canal de voz"
@@ -277,7 +275,7 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
 
         voice_channel: discord.VoiceChannel = voice_state.channel
 
-        log.debug(f"[DEBUG] {client.voice_clients}")
+        log.info(f"{client.voice_clients}")
 
         voice_client: discord.VoiceClient = discord.utils.get(
             client.voice_clients, guild=message.guild
@@ -318,7 +316,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
             return
 
     if not is_sender_counselor(message):
-        log.debug(
+        log.info(
             f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
         )
         await message.author.send(
@@ -388,7 +386,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
             ydl.download([url])
 
     except youtube_dl.DownloadError as err:
-        print(f"[ERROR] {err}")
+        log.error(f"{err}")
         await message.author.send(
             f"Me econtre con un error descargando el video.\n" f"Error:\n{str(err)}"
         )
@@ -411,7 +409,7 @@ async def pause_audio(client: discord.Client, message: discord.Message):
     if message.content == "!pause":
 
         if not is_sender_counselor(message):
-            log.debug(
+            log.info(
                 f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
             )
             await message.author.send(
@@ -451,7 +449,7 @@ async def pause_audio(client: discord.Client, message: discord.Message):
 async def resume_audio(client: discord.Client, message: discord.Message):
     if message.content == "!resume":
         if not is_sender_counselor(message):
-            log.debug(
+            log.info(
                 f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
             )
             await message.author.send(

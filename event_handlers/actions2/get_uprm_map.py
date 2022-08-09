@@ -14,7 +14,7 @@ def command():
 
 
 async def _get_uprm_map(interaction: discord.Interaction):
-    log.debug("[DEBUG] Entered UPRM MAP")
+    log.info("Entered UPRM MAP")
 
     embed = discord.Embed(
         title="Mapa - Recinto Universitario de Mayagüez",

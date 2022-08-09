@@ -26,6 +26,7 @@ import log
 from event_handlers import (
     actions,
     actions2,
+    telephone_guide,
     attendance,
     channel,
     easter_eggs,
@@ -65,70 +66,67 @@ async def main():
             # Events related to bot response
             return
 
-        log.debug(f"[INFO] [Func: on_message] MessageObj: {message}")
+        log.info(f"[Func: on_message] MessageObj: {message}")
 
         adding_profanity = await sanitize.add_profanity_to_list(message)
 
         if adding_profanity:
-            log.debug(f"[DEBUG] {message.author} added new profanity.")
+            log.info(f"{message.author} added new profanity.")
             return
 
         has_profanity = await sanitize.profanity_filter(message)
         if has_profanity:
-            log.debug("[DEBUG] Has profanity")
+            log.info("Has profanity")
             return
 
-        log.debug(f"[USER] {message.author.name}#{message.author.id}")
+        log.info(f"[USER] {message.author.name}#{message.author.id}")
         if (
             message.content.startswith("!bulk_delete_admin")
             and bot.is_sender_admin(message)
             and not bot.is_from_dm(message)
         ):
             sections = message.content.split(":")
-            log.debug(f"[DEBUG] DELETE COMMAND SECTIONS: {sections}")
-            log.debug(f"[DEBUG] BULK DELETE FILTER PASSED BY ADMIN {message.author}")
+            log.info(f"DELETE COMMAND SECTIONS: {sections}")
+            log.info(f"BULK DELETE FILTER PASSED BY ADMIN {message.author}")
             if len(sections) == 2 and sections[1].isdigit():
                 deleted = await message.channel.purge(limit=int(sections[1]))
-                log.debug(
-                    f'[DEBUG] Deleted {len(deleted)} messages. " \
+                log.info(
+                    f'Deleted {len(deleted)} messages. " \
                     " Selected by user {message.author}'
                 )
             else:
                 while len(await message.channel.purge(limit=1500)) > 0:
-                    log.debug(
-                        f"[DEBUG DLT] BULK DELETE ' \
+                    log.info(
+                        f"BULK DELETE ' \
                             'CALLED BY ADMIN {message.author}"
                     )
 
-        log.debug("[INFO] passed the filter")
+        log.info("passed the filter")
 
         # Created event passed Message object
         # to use for response of bot to discord client
         daily_logs.analytics(message)
 
         await actions.event_get_curriculum(message)
-        await actions.event_help_menu(message)
         await actions.event_parse_university_building(message)
-        await actions.event_telephone_guide(message)
-        await actions.generate_faq(message)
-        await bot.general_leaderboard(message)
         await actions.get_prj_info(message)
         await attendance.subscribe_attendance(message)
+        await bot.download_user_level_data(message)
+        await bot.general_leaderboard(message)
+        await bot.level_on_message(message)
+        await bot.leveling_status(message)
         await easter_eggs.subscribe_easter_eggs(message)
         await fun_games.event_guessing_game(message, client)
         await fun_games.event_ping_pong(message)
         await fun_games.event_rock_paper_scissor(message, client)
         await links.event_links(message)
         await prepa.get_counselor_names(message)
-        await bot.level_on_message(message)
-        await bot.leveling_status(message)
-        await bot.download_user_level_data(message)
 
         # On message action for leveling system
 
         if bot.is_sender_counselor(message):
             # commands for admins and student counselors
-            log.debug("[DEBUG] Entered Counselor Auth Zone")
+            log.info("Entered Counselor Auth Zone")
             await channel.event_user_count(message)
         elif bot.is_sender_prepa(message):
             # commands for prepas
@@ -150,7 +148,7 @@ async def main():
     @client.event
     async def on_member_update(before, after):
         if before.roles != after.roles:
-            log.debug(f"[DEBUG] before: {before} After: {after}")
+            log.info(f"before: {before} After: {after}")
             await bot.update_admin_list(client)
             prepa.extract_counselors(client)
 
@@ -158,14 +156,16 @@ async def main():
     async def on_ready():
         await client.wait_until_ready()
 
-        await actions2.subscribe_actions(command_tree=cm_tree)
+        await actions2.subscribe_commands(command_tree=cm_tree)
+        await telephone_guide.subscribe_commands(command_tree=cm_tree)
 
-        await cm_tree.sync()
-
-        log.debug(f"[DEBUG] Guild Obj: {client.guilds}")
+        log.info(f"Guild Obj: {client}")
+        log.info(f"Guild Obj: {client.guilds}")
         await bot.update_admin_list(client)
         prepa.extract_counselors(client)
-        log.debug("[VERBOSE] On Ready Finished.")
+
+        await cm_tree.sync()
+        log.info("[VERBOSE] On Ready Finished.")
 
     # start the client
     async with client:
@@ -181,12 +181,12 @@ if __name__ == "__main__":
         if coroutine:
             coroutine.close()
     except KeyboardInterrupt:
-        log.debug("[DEBUG] Program ended")
+        log.info("Program ended")
         if coroutine:
             coroutine.close()
     except Exception as error:
-        log.debug(f"[ERROR] Unexpected error {error}")
+        log.error(f"Unexpected error {error}")
     finally:
         if coroutine:
             coroutine.close()
-            log.debug("[EXIT] Closed coroutine...")
+            log.error("[EXIT] Closed coroutine...")

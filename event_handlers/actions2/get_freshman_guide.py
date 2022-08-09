@@ -9,7 +9,7 @@ GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "GuiaPrepistica.pdf")
 
 
 def command():
-    log.debug("Guia prep Sub...")
+    log.info("Guia prep Sub...")
     return Command(
         name="guia_prepistica",
         description="Obtener Guia Prepistica",
@@ -18,7 +18,7 @@ def command():
 
 
 async def _get_freshman_guide(interaction: discord.Interaction):
-    log.debug("[DEBUG] Entered Freshman Guide")
+    log.info("Entered Freshman Guide")
     await interaction.response.send_message(
         "Aquí esta la guía Prepistica:\n\n",
         file=discord.File(GUIA_PREPISTICA),

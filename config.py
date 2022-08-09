@@ -1,31 +1,45 @@
-# USed in development environment
-from dotenv import dotenv_values
 # Used in HEROKU Environment
 import os
+import sys
 
-# Get posible values from .env in root directory
-__config_values = dotenv_values()
+# Used in development environment
+from dotenv import dotenv_values as __dotenv_values
 
-# If dict from dotenv is empty fallback to os.environ as default Environment Variable provider
-if len(__config_values) == 0:
-    __config_values = os.environ
+BOT_TOKEN = None
+CLIENT_ID_NUM = None
+GUILD_ID_NUM = None
+LOG_LEVEL = None
+LOG_FILE = None
 
-print(f'[DEBUG] | Env Variables: {__config_values}')
 
-BOT_TOKEN = __config_values['BOT_TOKEN']
+def __init_config():
+    current_module = sys.modules[__name__]
 
-CLIENT_ID_NUM = int(__config_values['CLIENT_ID_NUM'])
+    # Get posible values from .env in root directory
+    config_values = __dotenv_values()
 
-GUILD_ID_NUM = int(__config_values['GUILD_ID_NUM'])
+    # If dict from dotenv is empty fallback to os.environ as default Environment Variable provider
+    if len(config_values) == 0:
+        config_values = os.environ
 
-__required_variables = [
-    BOT_TOKEN,
-    CLIENT_ID_NUM,
-    GUILD_ID_NUM
-]
+    print(f"| Env Variables: {config_values}")
 
-# Env variables validation
-for value in __required_variables:
-    if value is None or len(str(value)) == 0:
-        raise Exception(
-            'Uninitialized value in .env file on the root of the project.')
+    __required_variables = ("BOT_TOKEN", "CLIENT_ID_NUM", "GUILD_ID_NUM")
+
+    # import config variables from the .env file at the root of the project
+    for key, value in config_values.items():
+        if len(value) == 0 and key in __required_variables:
+            raise Exception(
+                "Uninitialized value in .env file on the root of the project."
+            )
+
+        # set the attributes for the config object
+        setattr(current_module, str(key), str(value) or None)
+
+    # Env variables validation
+    for value in __required_variables:
+        if not hasattr(current_module, value):
+            raise Exception("Missing required config Variable")
+
+
+__init_config()
