@@ -121,6 +121,7 @@ async def main():
         await fun_games.event_rock_paper_scissor(message, client)
         await links.event_links(message)
         await prepa.get_counselor_names(message)
+        await actions.get_made_website(message)
 
         # On message action for leveling system
 
@@ -159,7 +160,6 @@ async def main():
         await actions2.subscribe_commands(command_tree=cm_tree)
         await telephone_guide.subscribe_commands(command_tree=cm_tree)
 
-        log.info(f"Guild Obj: {client}")
         log.info(f"Guild Obj: {client.guilds}")
         await bot.update_admin_list(client)
         prepa.extract_counselors(client)

@@ -63,4 +63,8 @@ def help_menu_base():
         name="!ls_projects:PROJECT",
         value="Provee información sobre proyectos e investigaciones relacionadas a INEL/ICOM/INSO/CIIC"
     )
+    embed.add_field(
+        name="!madeWeb",
+        value="Provee el enlace para accesar a la página web de la consejera de INEL/ICOM/INSO/CIIC, Madeline Rodríguez"
+    )
     return embed

@@ -22,6 +22,7 @@ from controllers import building_parser
 
 # files
 _PROJECT_FILE = os.path.join(paths.PROJECTS, "proyectos.json")
+_MADE_WEBSITE = os.path.join(paths.IMAGES, "MadeWeb.png")
 
 # PDF Files
 CURRICULO_INEL = os.path.join(paths.CURRICULOS, "INEL.pdf")
@@ -140,3 +141,14 @@ async def get_prj_info(message: discord.Message):
         await message.author.send(
             content=f"Esta es la información del {key}\n", embed=embed
         )
+
+
+async def get_made_website(message: discord.Message):
+    log.debug("[DEBUG] ENTERED MADE'S WEBSITE COMMAND")
+    usr_msg = message.content
+    if usr_msg.lower() == "!madeweb":
+        await message.author.send(
+            "Aquí el enlace para la página web de Made! :green_heart: \n "
+            "https://sites.google.com/upr.edu/maderodriguez/"
+        )
+        # await message.author.send(file=discord.File(_MADE_WEBSITE))     // Image doesnt look good pero por si aca lo dejo
