@@ -32,5 +32,4 @@ def debug(msg) -> None:
 
 
 def error(msg) -> None:
-    print(msg)
     logging.error(msg)

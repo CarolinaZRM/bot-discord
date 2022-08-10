@@ -4,7 +4,6 @@ import sys
 
 # Used in development environment
 from dotenv import dotenv_values as __dotenv_values
-import logging
 
 BOT_TOKEN = None
 CLIENT_ID_NUM = None
@@ -25,7 +24,7 @@ def __init_config():
     if len(config_values) == 0:
         config_values = os.environ
 
-    logging.debug(f"| Env Variables: {config_values}")
+    # logging.debug(f"Env Variables: {config_values}")
 
     __required_variables = (
         "MONGO_CONNECTION_STRING",

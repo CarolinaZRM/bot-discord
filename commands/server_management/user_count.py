@@ -25,6 +25,7 @@ def command():
 
 
 async def _user_count(interaction: Interaction):
+    await interaction.response.defer(thinking=False)
     if interaction.channel is not None:
         member_count = len(interaction.channel.members)
         await interaction.response.send_message(

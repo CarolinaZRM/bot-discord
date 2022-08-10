@@ -18,7 +18,6 @@ from typing import Dict
 import discord
 import log
 from constants import paths
-from controllers import building_parser
 
 # files
 _PROJECT_FILE = os.path.join(paths.PROJECTS, "proyectos.json")
@@ -63,46 +62,6 @@ async def event_get_curriculum(message: discord.Message):
                 )
                 # for when CIIC curriculum is updated
                 await message.author.send(file=discord.File(CURRICULO_CIIC))
-
-
-async def event_parse_university_building(message: discord.Message):
-    client_message: str = message.content
-    sections = client_message.split(":")
-
-    user_name = None
-
-    if hasattr(message.author, "nick"):
-        user_name = message.author.nick
-    else:
-        user_name = message.author.name
-
-    # response = f'Hola {user_name}, Es posible que este salon se encuentre en el edificio:\n'
-    if len(sections) > 1 and sections[0] == "!salon" and len(sections[1]) > 0:
-
-        if not building_parser.is_valid_room_number(sections):
-            await message.channel.send(
-                "No entendí el código de ese salon.\nIntenta escribirlo con guión."
-            )
-            return
-
-        information = building_parser.get_building_information(sections)
-
-        if information:
-            response_msg = (
-                f"Hola {user_name}! Es posible que este salon se encuentre en el edificio: **'{information['name']}'**\n"
-                f"{information['gmaps_loc']}"
-            )
-
-            await message.channel.send(response_msg)
-        else:
-            response_msg = f"{user_name}, no sé en que edificio está salón. :("
-            await message.channel.send(response_msg)
-    elif sections[0] == "!salon":
-        response_msg = (
-            "No me especificaste cual salon quieres buscar.\nIntenta en este formato: !salon:*<código>*\n"
-            "Si el salon contiene letras (ej: Fisica B) escribelo con guión. -> *!salon:F-B*"
-        )
-        await message.channel.send(response_msg)
 
 
 # EMBED EX

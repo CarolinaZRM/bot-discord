@@ -31,7 +31,9 @@ def command():
 @checks.has_role("Administrator")
 async def _bulk_delete_admin(interaction: Interaction, messages_to_delete: int):
     author: Union[Member, User] = interaction.user
-    log.info(f"[USER] {author.display_name} #{author.id}")
+    log.debug(f"[USER] {author.display_name} #{author.id}")
+
+    await interaction.response.defer(thinking=False)
 
     if isinstance(author, User):
         log.info(f"Comes from DM {author}")
@@ -51,5 +53,3 @@ async def _bulk_delete_admin(interaction: Interaction, messages_to_delete: int):
     else:
         while len(await interaction.channel.purge(limit=1500)) > 0:
             log.info(f"BULK DELETE CALLED BY ADMIN {author}")
-
-    await interaction.response.defer(thinking=False)
