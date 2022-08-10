@@ -6,6 +6,7 @@ from . import (
     get_faq,
     get_freshman_guide,
     get_help_menu,
+    get_links,
     get_rules,
     get_student_orgs,
     get_uprm_map,
@@ -19,6 +20,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
         command_tree.add_command(get_faq.command())
         command_tree.add_command(get_freshman_guide.command())
         command_tree.add_command(get_help_menu.command())
+        command_tree.add_command(get_links.command())
         command_tree.add_command(get_rules.command())
         command_tree.add_command(get_student_orgs.command())
         command_tree.add_command(get_uprm_map.command())

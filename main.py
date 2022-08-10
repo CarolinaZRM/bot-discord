@@ -29,7 +29,6 @@ from commands import (
     easter_eggs,
     fun_games,
     join,
-    links,
     prepa,
     sanitize,
     subscribe_slash_commands,
@@ -118,20 +117,7 @@ async def main():
         await fun_games.event_guessing_game(message, client)
         await fun_games.event_ping_pong(message)
         await fun_games.event_rock_paper_scissor(message, client)
-        await links.event_links(message)
         await prepa.get_counselor_names(message)
-
-        # On message action for leveling system
-
-        if bot.is_sender_counselor(message):
-            # commands for admins and student counselors
-            log.info("Entered Counselor Auth Zone")
-            await channel.event_user_count(message)
-        elif bot.is_sender_prepa(message):
-            # commands for prepas
-            pass
-
-        # await client.process_commands(message)
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
@@ -156,6 +142,7 @@ async def main():
         await client.wait_until_ready()
 
         await subscribe_slash_commands(cmd_tree)
+        await cmd_tree.sync()
 
         log.info(f"Guild Obj: {client.guilds}")
         await bot.update_admin_list(client)
