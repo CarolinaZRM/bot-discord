@@ -1,9 +1,10 @@
 import json
 from typing import List
-import log
-from discord import Interaction, Embed
 
-from discord.app_commands import Command, Choice
+import log
+from constants import paths
+from discord import Embed, Interaction
+from discord.app_commands import Choice, Command
 
 _ORGANIZATIONS = [
     "IEEE",
@@ -23,6 +24,8 @@ _ORGANIZATIONS = [
 ]
 
 _ORG_AVG = "/".join(_ORGANIZATIONS)
+
+__ORG_EMBEDS = {}
 
 
 def command():
@@ -58,16 +61,19 @@ async def _organization_info(interaction: Interaction, student_org: str):
         )
         return
 
-    with open("event_handlers/OrgInfo.json", "r") as orgInfo:
+    if student_org in __ORG_EMBEDS:
+        return await interaction.response.send_message(embed=__ORG_EMBEDS[student_org])
+
+    with open(f"{paths.RESOURCES}/OrgInfo.json", "r") as orgInfo:
         orgInfoDict = json.load(orgInfo)
         orgDictObj = orgInfoDict.get(student_org.upper())
 
         if orgDictObj is None:
-            await interaction.response.send_message(
+            return await interaction.response.send_message(
                 "Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n"
                 + _ORG_AVG
             )
-            return
 
         embed: Embed = Embed.from_dict(orgDictObj)
+        __ORG_EMBEDS[student_org] = embed
         await interaction.response.send_message(embed=embed)

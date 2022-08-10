@@ -7,8 +7,9 @@
 //  Copyright © 2021 agSant01. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
+from typing import List
 import discord
-from discord.app_commands import Command
+from discord.app_commands import Command, Choice
 
 _CSE_FACULTY = {
     "Bienvenido Velez Rivera": "Acting Dean of Engineering\nFull Time Professor\nbienvenido.velez@upr.edu",
@@ -36,6 +37,9 @@ _ECE_FACULTY = {
 }
 
 
+_PROGRAM = ["icom", "inel", "inso", "ciic"]
+
+
 def help_data():
     return {
         "name": "faculty",
@@ -44,7 +48,17 @@ def help_data():
 
 
 def command():
-    return Command(**help_data(), callback=_faculty_contact_info)
+    cmd = Command(**help_data(), callback=_faculty_contact_info)
+
+    @cmd.autocomplete(name="program")
+    async def autocomplete(_: discord.Interaction, current: str) -> List[Choice[str]]:
+        return [
+            Choice(name=program.upper(), value=program)
+            for program in _PROGRAM
+            if current.lower() in program.lower()
+        ]
+
+    return cmd
 
 
 _ECE_EMBED = None
