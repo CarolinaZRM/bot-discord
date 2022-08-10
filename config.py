@@ -4,10 +4,13 @@ import sys
 
 # Used in development environment
 from dotenv import dotenv_values as __dotenv_values
+import logging
 
 BOT_TOKEN = None
 CLIENT_ID_NUM = None
 GUILD_ID_NUM = None
+MONGO_CONNECTION_STRING = None
+MONGO_DB = None
 LOG_LEVEL = None
 LOG_FILE = None
 
@@ -22,24 +25,35 @@ def __init_config():
     if len(config_values) == 0:
         config_values = os.environ
 
-    print(f"| Env Variables: {config_values}")
+    logging.debug(f"| Env Variables: {config_values}")
 
-    __required_variables = ("BOT_TOKEN", "CLIENT_ID_NUM", "GUILD_ID_NUM")
+    __required_variables = (
+        "MONGO_CONNECTION_STRING",
+        "MONGO_DB",
+        "BOT_TOKEN",
+        "CLIENT_ID_NUM",
+        "GUILD_ID_NUM",
+    )
 
     # import config variables from the .env file at the root of the project
     for key, value in config_values.items():
         if len(value) == 0 and key in __required_variables:
             raise Exception(
-                "Uninitialized value in .env file on the root of the project."
+                f"Uninitialized value for '{key}' in .env file on the root of the project."
             )
 
         # set the attributes for the config object
         setattr(current_module, str(key), str(value) or None)
 
     # Env variables validation
-    for value in __required_variables:
-        if not hasattr(current_module, value):
-            raise Exception("Missing required config Variable")
+    for required in __required_variables:
+        if (
+            not hasattr(current_module, required)
+            or getattr(current_module, required) is None
+        ):
+            raise Exception(
+                f"Missing or Uninitialized value for '{required}' in .env file. Required config Variable."
+            )
 
 
 __init_config()
