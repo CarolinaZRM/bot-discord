@@ -2,15 +2,17 @@ import log
 from discord.app_commands import CommandTree
 
 from . import (
+    find_building,
     get_academic_calendar,
+    get_curriculum,
     get_faq,
     get_freshman_guide,
     get_help_menu,
     get_links,
+    get_made_website,
     get_rules,
     get_student_orgs,
     get_uprm_map,
-    find_building,
 )
 
 
@@ -26,6 +28,8 @@ async def subscribe_commands(command_tree: CommandTree = None):
         command_tree.add_command(get_student_orgs.command())
         command_tree.add_command(get_uprm_map.command())
         command_tree.add_command(find_building.command())
+        command_tree.add_command(get_curriculum.command())
+        command_tree.add_command(get_made_website.command())
     except Exception as e:
         print(e)
 

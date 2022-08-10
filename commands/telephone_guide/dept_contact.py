@@ -13,8 +13,7 @@ from discord.app_commands import Command, Choice
 
 from .append_fields_to_embed import append_fields_to_embed
 from .contacts import departamentos
-
-_PROGRAM = ["icom", "inel", "inso", "ciic"]
+from commands.utils.autocomplete import program_autocomplete
 
 
 def help_data():
@@ -30,13 +29,7 @@ def command():
         callback=_dept_contact,
     )
 
-    @cmd.autocomplete(name="program")
-    async def autocomplete(_: discord.Interaction, current: str) -> List[Choice[str]]:
-        return [
-            Choice(name=program.upper(), value=program)
-            for program in _PROGRAM
-            if current.lower() in program.lower()
-        ]
+    cmd.autocomplete("program")(program_autocomplete)
 
     return cmd
 

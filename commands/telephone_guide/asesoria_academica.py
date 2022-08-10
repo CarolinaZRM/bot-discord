@@ -1,21 +1,21 @@
 """
-//  /handlers/telephone_guide/consejeria_academica.py
+//  /home/gbrl18/bot-discord/commands/telephone_guide/asesoria_academica.py
 //  py-bot-uprm
-//
-//  Created by Gabriel S. Santiago on 06/23/2021
-//  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 agSant01. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  
+//  Created by Gabriel S Santiago on 2021/06/23
+//  
+//  Last Modified: Wednesday, 10th August 2022 7:25:21 pm
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//  
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
-from typing import List
-
 import discord
+from commands.utils.autocomplete import program_autocomplete
 from discord.app_commands import Choice, Command
 
 from .append_fields_to_embed import append_fields_to_embed
 from .contacts import asesoria_academica
-
-_PROGRAM = ["icom", "inel", "inso", "ciic"]
 
 
 def help_data():
@@ -31,13 +31,7 @@ def command():
         callback=_asesoria_academica,
     )
 
-    @cmd.autocomplete(name="program")
-    async def autocomplete(_: discord.Interaction, current: str) -> List[Choice[str]]:
-        return [
-            Choice(name=program.upper(), value=program)
-            for program in _PROGRAM
-            if current.lower() in program.lower()
-        ]
+    cmd.autocomplete(name="program")(program_autocomplete)
 
     return cmd
 

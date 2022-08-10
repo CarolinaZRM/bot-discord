@@ -1,15 +1,19 @@
 """
-//  /handlers/telephone_guide/faculty.py
+//  /home/gbrl18/bot-discord/commands/telephone_guide/faculty.py
 //  py-bot-uprm
-//
-//  Created by Gabriel S. Santiago on 06/23/2021
+//  
+//  Created by Gabriel S Santiago on 2021/06/23
+//  
+//  Last Modified: Wednesday, 10th August 2022 7:27:01 pm
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//  
 //  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 agSant01. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
-from typing import List
 import discord
-from discord.app_commands import Command, Choice
+from commands.utils.autocomplete import program_autocomplete
+from discord.app_commands import Command
 
 _CSE_FACULTY = {
     "Bienvenido Velez Rivera": "Acting Dean of Engineering\nFull Time Professor\nbienvenido.velez@upr.edu",
@@ -37,9 +41,6 @@ _ECE_FACULTY = {
 }
 
 
-_PROGRAM = ["icom", "inel", "inso", "ciic"]
-
-
 def help_data():
     return {
         "name": "faculty",
@@ -50,13 +51,7 @@ def help_data():
 def command():
     cmd = Command(**help_data(), callback=_faculty_contact_info)
 
-    @cmd.autocomplete(name="program")
-    async def autocomplete(_: discord.Interaction, current: str) -> List[Choice[str]]:
-        return [
-            Choice(name=program.upper(), value=program)
-            for program in _PROGRAM
-            if current.lower() in program.lower()
-        ]
+    cmd.autocomplete(name="program")(program_autocomplete)
 
     return cmd
 
