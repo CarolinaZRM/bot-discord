@@ -6,8 +6,6 @@ from discord.app_commands import Command
 
 
 def command(help_list: List[Dict]):
-    log.info(f"{help_list}")
-
     async def _telephone_guide_help(interaction: discord.Interaction):
         embed = discord.Embed(title="Lista de Contactos disponibles")
         embed.add_field(
@@ -28,7 +26,5 @@ def command(help_list: List[Dict]):
         description="Obtener lista completa de contactos disponibles",
         callback=_telephone_guide_help,
     )
-
-    print("h")
 
     return cmd

@@ -29,7 +29,7 @@ def __init_faq_embed():
     )
 
     with open(_FAQ_FILE) as faq_file:
-        rows = csv.DictReader(faq_file, delimiter=",")
+        rows = csv.DictReader(faq_file, delimiter=";")
         for row in rows:
             question = dict(row)
             __FAQ_EMBED.add_field(

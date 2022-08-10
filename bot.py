@@ -23,7 +23,7 @@ from discord.errors import Forbidden
 
 import config
 import log
-from constants import admins, paths
+from constants import paths, roles
 
 os.makedirs(os.path.join(paths.AUDIO), exist_ok=True)
 
@@ -116,7 +116,7 @@ def is_sender_prepa(author: Union[discord.Member, discord.User]):
 
 
 def is_sender_admin(message: discord.Message):
-    return message.author.id in admins.ADMIN_IDS
+    return message.author.id in roles.ADMIN_IDS
 
 
 def is_from_a_channel(message: discord.Message) -> bool:

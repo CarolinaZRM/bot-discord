@@ -1,23 +1,29 @@
 """
-//  /event_handlers/attendance.py
+//  /bot-discord/commands/server_management/attendance.py
 //  py-bot-uprm
-//
-//  Created by Gabriel S. Santiago on 08/01/2021
-//  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 agSant01. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  
+//  Created by Gabriel S Santiago on 2022/07/11
+//  
+//  Last Modified: Tuesday, 9th August 2022 10:16:48 pm
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//  
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
+
+
 import collections
 import csv
+import os
 import re
+import shutil
 from datetime import datetime
 from os import path
-import os
-import shutil
 
 import discord
 import log
 from constants import paths as app_paths
+from discord.app_commands import Command
 
 ATTENDANCE_PATH = path.join(app_paths.TEXT_FILES, "attendance")
 
@@ -30,27 +36,31 @@ except OSError:
     os.mkdir(ATTENDANCE_PATH)
 
 
-async def subscribe_attendance(message: discord.Message):
-    log.info("Entered attendance")
+def command():
+    return Command(
+        name="attendance", description="Get attendance", callback=_get_attendance
+    )
 
-    COMMAND = "!attendance"
-    DIVIDER = ":"
 
-    user_message: str = message.content.lower().strip()
-    response_method = message.author
+async def _get_attendance(interaction: discord.Interaction, channel_id: str):
+    # COMMAND = "!attendance"
+    # DIVIDER = ":"
+
+    # user_message: str = message.content.lower().strip()
+    response_method = interaction.user
 
     # if not command ignore
-    if not re.fullmatch(f"{COMMAND}:.*", user_message):
-        return
+    # if not re.fullmatch(f"{COMMAND}:.*", user_message):
+    #     return
 
-    server: discord.Guild = message.guild
+    server: discord.Guild = interaction.guild
 
     if server is None:
         return await response_method.send(
             "Este medio no pertenece a ningún _**SERVER**_.\nEste commando solo puede ser utilizado desde un servidor, no DM.\n\nDisculpa :confused:"
         )
 
-    target_channel_id = user_message.split(DIVIDER)[1]
+    target_channel_id = channel_id
     target_channel_obj = server.get_channel(int(target_channel_id))
 
     if not target_channel_obj:

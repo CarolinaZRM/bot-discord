@@ -149,6 +149,7 @@ async def get_made_website(message: discord.Message):
     if usr_msg.lower() == "!madeweb":
         await message.author.send(
             "Aquí el enlace para la página web de Made! :green_heart: \n "
-            "https://sites.google.com/upr.edu/maderodriguez/"
+            "https://sites.google.com/upr.edu/maderodriguez/",
+            file=discord.File(_MADE_WEBSITE),
         )
-        # await message.author.send(file=discord.File(_MADE_WEBSITE))     // Image doesnt look good pero por si aca lo dejo
+        # await message.author.send(file=)
