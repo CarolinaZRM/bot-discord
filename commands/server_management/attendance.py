@@ -14,6 +14,7 @@
 
 import collections
 import csv
+from curses.ascii import isdigit
 import os
 import re
 import shutil
@@ -43,15 +44,15 @@ def command():
 
 
 async def _get_attendance(interaction: discord.Interaction, channel_id: str):
-    # COMMAND = "!attendance"
-    # DIVIDER = ":"
+    if not str.isdigit(channel_id):
+        return await interaction.response.send_message(
+            f"El _channel\_id_:<{channel_id}> provisto es invalido",
+            ephemeral=True,
+        )
 
-    # user_message: str = message.content.lower().strip()
+    await interaction.response.defer(thinking=False)
+
     response_method = interaction.user
-
-    # if not command ignore
-    # if not re.fullmatch(f"{COMMAND}:.*", user_message):
-    #     return
 
     server: discord.Guild = interaction.guild
 
@@ -65,7 +66,7 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
 
     if not target_channel_obj:
         return await response_method.send(
-            f'El _CHANNEL ID_ <{target_channel_id}> provisto no es valido para el servidor, _**"{server}"**_.\nIntenta de nuevo con otro ID, o contacta al **BOT DEV TEAM**'
+            f'El _channel\_id_ <{target_channel_id}> provisto no es valido para el servidor, _**"{server}"**_.\nIntenta de nuevo con otro ID, o contacta al **BOT DEV TEAM**'
         )
 
     members_in_attendance = []
@@ -94,7 +95,6 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
 
     stats_embed = _generate_stats_embed(roles_count, server, target_channel_obj)
 
-    # await response_method.send()
     await response_method.send(
         content=f"Hola aca te paso las estadísticas de asistencia para **{target_channel_obj}**",
         embed=stats_embed,

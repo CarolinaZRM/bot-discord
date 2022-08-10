@@ -11,9 +11,9 @@
 import log
 from constants import roles
 from discord import Interaction
-from discord.app_commands import CommandTree, Group, MissingAnyRole
+from discord.app_commands import CommandTree, Group, MissingAnyRole, MissingRole
 
-from . import attendance, user_count
+from . import attendance, user_count, bulk_delete_admin
 
 
 async def subscribe_commands(command_tree: CommandTree = None):
@@ -26,17 +26,25 @@ async def subscribe_commands(command_tree: CommandTree = None):
         description=f"Comandos para EOs y Admin para manejo y metadata del Servidor",
     )
 
-    @server_management_grp.interaction_check
-    def __auth(interaction: Interaction):
+    async def _auth(interaction: Interaction):
+        if not hasattr(interaction.user, "roles"):
+            # call from DM
+            await interaction.response.send_message(
+                "Este commando no se puede utilizar desde el DM"
+            )
+            return False
+
         for role in interaction.user.roles:
             if role.name in roles.ADMINISTRATOR_ROLES:
                 return True
         raise MissingAnyRole(list(roles.ADMINISTRATOR_ROLES))
 
+    server_management_grp.interaction_check = _auth
+
     @server_management_grp.error
-    async def __on_group_error(interaction: Interaction, error: Exception):
+    async def _on_group_error(interaction: Interaction, error: Exception):
         log.info(error)
-        if isinstance(error, MissingAnyRole):
+        if isinstance(error, MissingAnyRole) or isinstance(error, MissingRole):
             await interaction.response.send_message(
                 "No tienes el rol para poder usar este commando", ephemeral=True
             )
@@ -44,6 +52,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
     # Add commands to group
     server_management_grp.add_command(attendance.command())
     server_management_grp.add_command(user_count.command())
+    server_management_grp.add_command(bulk_delete_admin.command())
 
     # Add group to RootTree
     command_tree.add_command(server_management_grp)

@@ -21,21 +21,20 @@ from discord.app_commands import CommandTree
 from discord.ext.commands import Bot, Context
 
 import bot
+
 import config
 import log
-from event_handlers import (
+from commands import (
     actions,
-    actions2,
-    telephone_guide,
-    attendance,
-    channel,
     easter_eggs,
     fun_games,
     join,
     links,
     prepa,
     sanitize,
+    subscribe_slash_commands,
 )
+
 from controllers import daily_logs
 
 # Enable intents.
@@ -54,7 +53,7 @@ enabled_intents.webhooks = True
 
 client = discord.Client(intents=enabled_intents)
 
-cm_tree = CommandTree(client=client)
+cmd_tree = CommandTree(client=client)
 
 
 async def main():
@@ -109,8 +108,8 @@ async def main():
 
         await actions.event_get_curriculum(message)
         await actions.event_parse_university_building(message)
+        await actions.get_made_website(message)
         await actions.get_prj_info(message)
-        await attendance.subscribe_attendance(message)
         await bot.download_user_level_data(message)
         await bot.general_leaderboard(message)
         await bot.level_on_message(message)
@@ -121,7 +120,6 @@ async def main():
         await fun_games.event_rock_paper_scissor(message, client)
         await links.event_links(message)
         await prepa.get_counselor_names(message)
-        await actions.get_made_website(message)
 
         # On message action for leveling system
 
@@ -157,14 +155,12 @@ async def main():
     async def on_ready():
         await client.wait_until_ready()
 
-        await actions2.subscribe_commands(command_tree=cm_tree)
-        await telephone_guide.subscribe_commands(command_tree=cm_tree)
+        await subscribe_slash_commands(cmd_tree)
 
         log.info(f"Guild Obj: {client.guilds}")
         await bot.update_admin_list(client)
         prepa.extract_counselors(client)
 
-        await cm_tree.sync()
         log.info("[VERBOSE] On Ready Finished.")
 
     # start the client

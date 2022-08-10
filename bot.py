@@ -116,7 +116,10 @@ def is_sender_prepa(author: Union[discord.Member, discord.User]):
 
 
 def is_sender_admin(message: discord.Message):
-    return message.author.id in roles.ADMIN_IDS
+    for user_roles in message.author.roles:
+        if user_roles.name in roles.ADMINISTRATOR_ROLES:
+            return True
+    return False
 
 
 def is_from_a_channel(message: discord.Message) -> bool:
