@@ -10,6 +10,7 @@ from . import (
     get_rules,
     get_student_orgs,
     get_uprm_map,
+    find_building,
 )
 
 
@@ -24,6 +25,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
         command_tree.add_command(get_rules.command())
         command_tree.add_command(get_student_orgs.command())
         command_tree.add_command(get_uprm_map.command())
+        command_tree.add_command(find_building.command())
     except Exception as e:
         print(e)
 
