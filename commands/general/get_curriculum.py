@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/commands/general/get_curriculum.py
+// /bot-discord/commands/general/get_curriculum.py
 //  py-bot-uprm
 //  
 //  Created by Gabriel S Santiago on 2022/08/10

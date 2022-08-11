@@ -66,12 +66,10 @@ async def subscribe_commands(command_tree: CommandTree = None):
 
     try:
         command_tree.add_command(grp)
-        # await command_tree.sync()
     except Exception as e:
         log.error(f"{e}")
 
     log.info("Finished subscribing...")
-    # print("shub")
 
 
 __all__ = [

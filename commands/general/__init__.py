@@ -1,3 +1,15 @@
+"""
+//  /bot-discord/commands/general/__init__.py
+//  py-bot-uprm
+//  
+//  Created by Gabriel S Santiago on 2022/08/07
+//  
+//  Last Modified: Thursday, 11th August 2022 3:14:04 pm
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//  
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
+"""
 import log
 from discord.app_commands import CommandTree
 
@@ -13,6 +25,7 @@ from . import (
     get_rules,
     get_student_orgs,
     get_uprm_map,
+    get_project_info,
 )
 
 
@@ -30,6 +43,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
         command_tree.add_command(find_building.command())
         command_tree.add_command(get_curriculum.command())
         command_tree.add_command(get_made_website.command())
+        command_tree.add_command(get_project_info.command())
     except Exception as e:
         print(e)
 

@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/commands/general/_made_website.py
+// /bot-discord/commands/general/_made_website.py
 //  py-bot-uprm
 //  
 //  Created by Gabriel S Santiago on 2022/08/10
@@ -20,7 +20,11 @@ _MADE_WEBSITE = os.path.join(paths.IMAGES, "MadeWeb.png")
 
 
 def command():
-    return Command(name="made-web", description="", callback=_made_website)
+    return Command(
+        name="made-web",
+        description="Enlace a la página web de la consejera de INEL/ICOM/INSO/CIIC, Madeline Rodríguez",
+        callback=_made_website,
+    )
 
 
 async def _made_website(interaction: discord.Interaction):

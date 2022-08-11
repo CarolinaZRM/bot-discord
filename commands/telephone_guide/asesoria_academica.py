@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/commands/telephone_guide/asesoria_academica.py
+// /bot-discord/commands/telephone_guide/asesoria_academica.py
 //  py-bot-uprm
 //  
 //  Created by Gabriel S Santiago on 2021/06/23

@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/commands/utils/__init__.py
+// /bot-discord/commands/utils/__init__.py
 //  py-bot-uprm
 //  
 //  Created by Gabriel S Santiago on 2022/08/10
