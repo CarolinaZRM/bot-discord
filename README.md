@@ -9,7 +9,6 @@
   The application environment variables to be assigned into a `.env` file are in [.env.examples](.env.example)
 </p>
 
-
 <details>
   <summary>Activating Virtual Environments</summary>
 
@@ -37,3 +36,14 @@
  </ul>
   
 </details>
+
+
+## Testing
+
+Run: `python -m unittest discover -s tests -t .` from the top level directory
+
+For mocking the MongoDB Database for testing create a `.env.development` file and change the connection string to any of your choosing. The one I use is  
+
+```env
+MONGO_CONNECTION_STRING=mongodb://test.db
+```

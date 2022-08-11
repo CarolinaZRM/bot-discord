@@ -37,7 +37,6 @@ class ResourceTest(unittest.TestCase):
     }
 
     def test_expirations(self):
-
         for to_verify, is_verified in self.RESOURCE_MAP.items():
             if (self.today.month > 7 or self.today.month < 6) and is_verified is True:
                 raise Exception("Out of verification period. Reset FLAGS to False")

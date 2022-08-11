@@ -6,7 +6,6 @@ from controllers.find_building import get_building_information
 
 class TestStringMethods(unittest.TestCase):
     def test_upper(self):
-        logging.error("hasca")
         self.assertEqual("foo".upper(), "FOO")
 
     def test_all_letter_dash(self):
