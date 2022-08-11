@@ -1,23 +1,35 @@
 import pymongo
 from pymongo.database import Database
 import config
+import log
 
-__all__ = ["database", "close_db"]
+__all__ = ["get_database", "close_db"]
 
-
-def __init_db():
-    mongo_client = pymongo.MongoClient(config.MONGO_CONNECTION_STRING)
-
-    if config.MONGO_DB not in mongo_client.list_database_names():
-        raise Exception(
-            f"BotException: {config.MONGO_DB} database does not exist in Mongo Server"
-        )
-
-    return mongo_client.get_database(config.MONGO_DB)
+__database: Database = None
 
 
-database: Database = __init_db()
+def _init_db(mongo_client: pymongo.MongoClient = None):
+    log.debug("Initing database...")
+
+    global __database
+
+    if mongo_client is None:
+        mongo_client = pymongo.MongoClient(config.MONGO_CONNECTION_STRING)
+
+    __database = mongo_client.get_database(config.MONGO_DB)
+
+    if len(__database.list_collection_names()) == 0:
+        __database.create_collection("empty")
+
+
+def get_database():
+    global __database
+
+    if __database is None:
+        _init_db()
+
+    return __database
 
 
 def close_db():
-    database.client.close()
+    __database.client.close()

@@ -18,14 +18,12 @@ from typing import Coroutine
 
 import discord
 from discord.app_commands import CommandTree
-from discord.ext.commands import Bot, Context
 
 import bot
 
 import config
 import log
 from commands import (
-    actions,
     easter_eggs,
     fun_games,
     join,
@@ -41,13 +39,14 @@ from controllers import daily_logs
 enabled_intents: discord.Intents = discord.Intents.all()
 
 enabled_intents.dm_messages = True
+enabled_intents.guild_messages = True
 enabled_intents.guilds = True
 enabled_intents.members = True
+enabled_intents.message_content = True
 enabled_intents.messages = True
 enabled_intents.reactions = True
 enabled_intents.typing = True
 enabled_intents.presences = True
-enabled_intents.message_content = True
 enabled_intents.webhooks = True
 
 client = discord.Client(intents=enabled_intents)
@@ -105,19 +104,11 @@ async def main():
         # to use for response of bot to discord client
         daily_logs.analytics(message)
 
-        await actions.event_get_curriculum(message)
-        await actions.event_parse_university_building(message)
-        await actions.get_made_website(message)
-        await actions.get_prj_info(message)
-        await bot.download_user_level_data(message)
-        await bot.general_leaderboard(message)
-        await bot.level_on_message(message)
-        await bot.leveling_status(message)
         await easter_eggs.subscribe_easter_eggs(message)
-        await fun_games.event_guessing_game(message, client)
-        await fun_games.event_ping_pong(message)
-        await fun_games.event_rock_paper_scissor(message, client)
-        await prepa.get_counselor_names(message)
+        # await fun_games.event_guessing_game(message, client)
+        # await fun_games.event_ping_pong(message)
+        # await fun_games.event_rock_paper_scissor(message, client)
+        # await prepa.get_counselor_names(message)
 
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):

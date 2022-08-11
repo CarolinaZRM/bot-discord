@@ -22,6 +22,7 @@ import json
 import os
 import sys
 from pathlib import Path
+from typing import Collection, Dict, List, Literal
 
 # getting the name of the directory
 # where the this file is present.
@@ -38,7 +39,7 @@ sys.path.append(parent)
 import config
 
 
-def build_args():
+def build_args(args=None):
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -71,7 +72,45 @@ def build_args():
         help="Procesa file, pero no envía a db. Default es FALSO",
     )
 
-    return parser.parse_args()
+    return parser.parse_args(args)
+
+
+def create_out_files(
+    out_formats: Literal["json", "csv"],
+    prepas_dict_list: List[Dict[str, str]],
+    fieldnames: Collection,
+):
+    print("\n> Exported fiies...")
+    if "json" in out_formats:
+        with open(f"inserted-data.json", "w") as prepas_json:
+            json.dump(prepas_dict_list, prepas_json)
+        print(f"> JSON: {Path(prepas_json.name).absolute()}")
+    if "csv" in out_formats:
+        with open(f"inserted-data.csv", "w") as prepas_csv:
+            writer = csv.DictWriter(
+                prepas_csv,
+                fieldnames=fieldnames,
+            )
+            writer.writeheader()
+            writer.writerows(prepas_dict_list)
+        print(f"> CSV: {Path(prepas_csv.name).absolute()}")
+
+
+def insert_into_db(
+    database_collection: str,
+    prepas_dict_list: List[Dict[str, str]],
+):
+    from db import close_db, get_database
+
+    try:
+        collection = get_database().get_collection(database_collection)
+
+        # for prepa in prepas_dict:
+        collection.insert_many(prepas_dict_list)
+    except Exception as e:
+        print(e)
+    finally:
+        close_db()
 
 
 def main():
@@ -94,38 +133,17 @@ def main():
     if arguments.production is True:
         print(f"> DB: Connecting to: {config.MONGO_CONNECTION_STRING}...")
         print("> DB: Uploading prepa info...")
-
-        from db import close_db, database
-
-        try:
-            collection = database.get_collection(arguments.collection)
-
-            # for prepa in prepas_dict:
-            collection.insert_many(prepas_dict_list)
-        except Exception as e:
-            print(e)
-        finally:
-            close_db()
+        insert_into_db(arguments.collection, prepas_dict_list)
         print("> DB: Success uploading prepa info...")
     else:
         print("> DB: DEBUG Mode. Not connecting to DB")
 
     if arguments.out:
-        prepas_dict_list = list(prepas_csv_rows)
-        print("\n> Exported fiies...")
-        if "json" in arguments.out:
-            with open(f"inserted-data.json", "w") as prepas_json:
-                json.dump(prepas_dict_list, prepas_json)
-            print(f"> JSON: {Path(prepas_json.name).absolute()}")
-        if "csv" in arguments.out:
-            with open(f"inserted-data.csv", "w") as prepas_csv:
-                writer = csv.DictWriter(
-                    prepas_csv,
-                    fieldnames=prepas_csv_rows.fieldnames,
-                )
-                writer.writeheader()
-                writer.writerows(prepas_dict_list)
-            print(f"> CSV: {Path(prepas_csv.name).absolute()}")
+        create_out_files(
+            out_formats=arguments.out,
+            prepas_dict_list=prepas_dict_list,
+            fieldnames=prepas_csv_rows.fieldnames,
+        )
 
     print("Exit: 0")
 

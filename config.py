@@ -17,14 +17,14 @@ LOG_FILE = None
 def __init_config():
     current_module = sys.modules[__name__]
 
-    # Get posible values from .env in root directory
-    config_values = __dotenv_values()
-
+    # Get posible values from any of the .env.* in root directory
     # If dict from dotenv is empty fallback to os.environ as default Environment Variable provider
-    if len(config_values) == 0:
-        config_values = os.environ
-
-    # logging.debug(f"Env Variables: {config_values}")
+    config_values = {
+        **__dotenv_values(".env"),
+        **__dotenv_values(".env.development"),
+        **__dotenv_values(".env.production"),
+        **os.environ,
+    }
 
     __required_variables = (
         "MONGO_CONNECTION_STRING",
