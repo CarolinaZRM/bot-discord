@@ -32,7 +32,7 @@ from commands import (
     subscribe_slash_commands,
 )
 
-from controllers import daily_logs
+from controllers import daily_logs, leveling_system
 
 # Enable intents.
 # Documentation: https://discordpy.readthedocs.io/en/latest/intents.html
@@ -62,8 +62,7 @@ async def main():
         if message.author.bot:
             # Events related to bot response
             return
-
-        log.info(f"[Func: on_message] MessageObj: {message}")
+        log.info(f"[on_message] {message}")
 
         adding_profanity = await sanitize.add_profanity_to_list(message)
 
@@ -99,6 +98,8 @@ async def main():
                     )
 
         log.info("passed the filter")
+
+        await leveling_system.on_message(message)
 
         # Created event passed Message object
         # to use for response of bot to discord client
