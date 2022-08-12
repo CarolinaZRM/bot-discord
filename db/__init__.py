@@ -1,35 +1,43 @@
-import pymongo
-from pymongo.database import Database
 import config
 import log
+import mongomock
+import pymongo
+
+from db import mock_seed
 
 __all__ = ["get_database", "close_db"]
 
-__database: Database = None
+__mongo_client: pymongo.MongoClient = None
 
 
-def _init_db(mongo_client: pymongo.MongoClient = None):
-    log.debug("Initing database...")
+def get_database():
+    global __mongo_client
 
-    global __database
+    if __mongo_client is None:
+        _init_client()
+
+    return __mongo_client.get_database(config.MONGO_DB)
+
+
+def close_db():
+    __mongo_client.close()
+
+
+def _init_client(mongo_client: pymongo.MongoClient = None):
+    log.debug("Initializing MongoDb Client...")
+    global __mongo_client
+
+    if (config.MONGO_MOCK or "").lower() == "true":
+        mongo_client = mongomock.MongoClient(config.MONGO_CONNECTION_STRING)
 
     if mongo_client is None:
         mongo_client = pymongo.MongoClient(config.MONGO_CONNECTION_STRING)
 
-    __database = mongo_client.get_database(config.MONGO_DB)
+    database = mongo_client.get_database(config.MONGO_DB)
+    if (config.MONGO_MOCK or "").lower() == "true":
+        mock_seed.load_mock_data(database)
 
-    if len(__database.list_collection_names()) == 0:
-        __database.create_collection("empty")
+    if len(database.list_collection_names()) == 0:
+        database.create_collection("empty")
 
-
-def get_database():
-    global __database
-
-    if __database is None:
-        _init_db()
-
-    return __database
-
-
-def close_db():
-    __database.client.close()
+    __mongo_client = mongo_client
