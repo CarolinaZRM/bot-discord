@@ -20,17 +20,10 @@ import discord
 from discord.app_commands import CommandTree
 
 import bot
-
 import config
 import log
-from commands import (
-    easter_eggs,
-    fun_games,
-    join,
-    prepa,
-    sanitize,
-    subscribe_slash_commands,
-)
+from commands import easter_eggs, fun_games, prepa, sanitize, subscribe_slash_commands
+from controllers import daily_logs, join_listener, leveling_system
 
 from db import close_db
 
@@ -118,9 +111,7 @@ async def main():
     @client.event
     async def on_member_join(member: discord.Member):
         await bot.verify_if_counselor(member)
-        await join.event_greet_new_member(client, member)
-        await join.made(member)
-        await bot.level_join(member)
+        await join_listener.on_join(member, client)
 
     @client.event
     async def on_member_update(before, after):

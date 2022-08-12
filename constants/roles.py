@@ -13,3 +13,5 @@ ADMINISTRATOR_ROLES = set(
         "EstudianteOrientador",
     ]
 )
+
+MADE_ROLES = set(["Administrator", "DCSP", "ConsejeraProfesional"])

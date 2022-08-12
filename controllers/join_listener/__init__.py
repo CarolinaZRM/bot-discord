@@ -1,37 +1,41 @@
 """
-//
-//  join.py
+//  /home/gbrl18/bot-discord/controllers/join_listener/__init__.py
 //  py-bot-uprm
+//  
+//  Created by Gabriel S Santiago on 2022/08/11
+//  
+//  Last Modified: Thursday, 11th August 2022 9:27:28 pm
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//  
+//  Edited by Fernando Bermudez June 10, 2020
 //
-//  Created by Fernando Bermudez on 06/10/2019.
-//  Edited by Fernando Bermudez and Gabriel Santiago on June 10, 2020
 //  Copyright © 2020 bermedDev. All rights reserved.
-//  Copyright © 2020 teamMADE. All rights reserved.
-This file is supposed to contain all the events and commands that are related to member join
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
-import csv
-from typing import Dict
+from copy import copy
+from typing import Dict, Union
 
 import discord
+from constants import roles
+from db import get_database
 from discord import utils
 from discord.errors import Forbidden
-from constants import paths
 
 try:
     import log
 except Exception:
     pass
 
-# Files
-_PREPA_FILE = paths.PREPAS.PREPA_LIST
-
 
 async def event_greet_new_member(client: discord.Client, member: discord.Member):
+    log.info(
+        f"User joined | ${member} ${member.display_name} ${member.name}${member.discriminator}"
+    )
+
     # Greets you to server
     await member.send(
         f"*Bienvenido a UPRM y al Discord de TEAM MADE, {member.name}!* :tada: :raised_hands_tone3:\n"
-        # f"**Por favor, dime cual es tu username de tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
-        # f"Ejemplo: bienvenido.velez"
         f"**Por favor, dime cual es tu correo institucional para poder asignarte al grupo que Made eligió para ti!**\n"
         f"Ejemplo: bienvenido.velez@upr.edu"
     )
@@ -49,27 +53,39 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
         )
 
     ##################
-    # ask for student number
-    student_name = await assign_group(client, member, check_same_user)
+    # ask for student email
+    student_email: discord.Message = await client.wait_for(
+        "message", check=check_same_user
+    )
 
-    # # Extracts the name of the student from the DM
-    # name = await client.wait_for("message", check=check_same_user)
+    student_info: Union[Dict[str, str], None] = _get_student_info(student_email.content)
 
-    # await member.send("**Gracias!**")
+    while student_info is None:
+        await member.send(
+            'No encuentro ese email en mis registros. Intenta de nuevo:\n\n***Si tu email no aparece y estas seguro de que eres un prepa de INEL, ICOM, INSO o CIIC, comunícate con cualquier estudiante orientador del servidor de discord. Tienen el rol de "EstudianteOrientador"'
+        )
+        student_email = await client.wait_for("message", check=check_same_user)
+        student_info = get_student_info(student_email.content)
+
+    await assign_group(member, student_info["group_id"], student_info["department_id"])
+
+    student_full_name = f"{student_info['first_name']} {student_info['middle_initial'] or ''} {student_info['last_name']}"
+    if student_info["mother_lastname"]:
+        student_full_name += f" {student_info['mother_lastname']}"
 
     # Replaces their old name to the one they provided in the DM to the bot
-    log.info(
-        f"[VERBOSE - join.py | line.20] {member.name}'s nickname was changed to {student_name}"
+    log.debug(
+        f"join_listener.greet {member.name}'s nickname was changed to {student_full_name}"
     )
-    await member.edit(nick=str(student_name))
+
+    await member.edit(nick=str(student_full_name))
     await member.send(
-        f"Ya todos te verán como: '{student_name}'\n"
+        f"Ya todos te verán como: '{student_full_name}'\n"
         f"Que fácil, no?\n"
         "Te digo un secreto :eyes: ... Programar es super divertido y tu también puedes hacerlo! :hugging: "
     )
 
-    user_name = student_name
-
+    user_name = student_full_name
     message_to_send = (
         f"Ahora si me presento formalmente,\n"
         f"Hola {user_name}!\nMe alegra mucho que estes aquí :tada:\n"
@@ -100,7 +116,6 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     # finish waiting block
 
     # starts waiting block for '!contactos'
-    #
     message_to_send = (
         f"Eso es {user_name}! :thumbsup: Ahí está la lista de algunos comandos rápidos.\n"
         "Todavía quedan más comandos con mucha información útil para ti :sweat_smile:"
@@ -124,7 +139,7 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
 
     closing = (
         f"{user_name}, eso es todo por hoy. Ya conoces los dos comandos mas importantes: ***'!help'*** y  ***'!contactos'***\n"
-        "Ya veras que estos te serán muy útiles, despues puedes darme las gracias :sunglasses:\n"
+        "Ya veras que estos te serán muy útiles, después puedes darme las gracias :sunglasses:\n"
         "Ahora se te asigno un grupo en especifico de un personaje de Star Wars, lo puedes verificar en tu perfil\n"
         "El grupo que te toco tiene un canal de texto y de voz para que puedas compartir con los otros miembros de tu grupo\n"
         "Cualquier inconveniente le puedes escribir a Carolina Z. Rodriguez o Gabriel Santiago \n"
@@ -134,75 +149,61 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
     await member.send(content=closing)
 
 
-async def assign_group(client: discord.Client, member: discord.Member, check_same_user):
-    """
-    When a new user enters the server we do the following:
-        1) First we iterate through all text files containing all users in all text files that divide users into groups
-        2) We try to find said user by their name they provided when they were greeted in each file
-        3) If found, we add the role of "prepa" and the role of the group they were assigned
-    """
-    student_email = await client.wait_for("message", check=check_same_user)
-
-    student_obj = _get_student(student_email.content)
-
-    while student_obj is None:
-        await member.send(
-            'No encuentro ese email en mis registros. Intenta de nuevo:\n\n***Si tu email no aparece y estas seguro de que eres un prepa de INEL, ICOM, INSO o CIIC, comunicate con cualquier estudiante orientador del servidor de discord. Tienen el rol de "EstudianteOrientador"'
-        )
-        student_number = await client.wait_for("message", check=check_same_user)
-        student_obj = _get_student(student_number.content)
-
-    # el nombre del grupo esta en:
-    # student_obj['group id'] o student_obj.get('group id')
-    student_group: str = student_obj["group id"]
-    student_department: str = student_obj["department"]
-
+async def assign_group(member: discord.Member, group_name: str, department_name: str):
     try:
-        log.info("{}".format(member.guild.roles))
-        group_role = utils.get(member.guild.roles, name=student_group)
-        dept_role = utils.get(member.guild.roles, name=student_department.upper())
+        log.debug(f"Previous roles for user: {member} | {member.guild.roles}")
+        group_role = utils.get(member.guild.roles, name=group_name)
+        dept_role = utils.get(member.guild.roles, name=department_name.upper())
         prepa_role = utils.get(member.guild.roles, name="prepa")
-        log.info(f"Dept: {dept_role}, Group: {group_role}, Prepa: {prepa_role}")
+        log.debug(f"Dept: {dept_role}, Group: {group_role}, Prepa: {prepa_role}")
         await member.add_roles(group_role, dept_role, prepa_role)
     except Forbidden:
         log.error(
-            f'Bot does not have permission to add roles. Could not add student "{student_obj}" to group.'
+            f'Bot does not have permission to add roles. Could not add student "{member}" to group.'
         )
         await member.send(
             "No pude asignarte a un grupo. Contacta a algún estudiante orientador e informarle de este error."
         )
 
-    return "{} {} {}".format(
-        student_obj["first name"],
-        student_obj["middle initial"],
-        student_obj["last names"],
+    return True
+
+
+def _get_student_info(student_email: str) -> Union[Dict[str, str], None]:
+    internal_email = copy(student_email)
+
+    if not student_email.endswith("@upr.edu"):
+        internal_email = internal_email.split("@")[0]
+        internal_email += "@upr.edu"
+
+    student_data = (
+        get_database().get_collection("prepas").find_one({"email": internal_email})
     )
 
+    if not student_data:
+        log.info(f"_get_student_info: Student UPR EMAIL not found: {student_email}")
+        return None
 
-def _get_student(student_email: str) -> Dict[str, str]:
-    student_email_without_domain = student_email.split("@")[0].lower()
-    with open(_PREPA_FILE) as teams_list_file:
-        rows = csv.DictReader(teams_list_file, delimiter=",")
-        for row in rows:
-            if student_email_without_domain == row["student email"].split("@")[0]:
-                student_email = row["student email"].split("@")[0]
-                student_full_name = (
-                    f'{row["first name"]} {row["middle initial"]} {row["last names"]}'
-                )
-                log.debug(
-                    f"""[ASSIGN] Username found: {student_email} for student {student_full_name}"""
-                )
-                return dict(row)
-    return None
+    return student_data
 
 
-async def made(member: discord.Member):
+async def assign_roles_to_made(member: discord.Member) -> bool:
     if member.id == 719645695484756008:
         log.info("[MADE] Made has joined server")
-        await member.add_roles("ConsejeraProfesional", "admin", "DCSP")
-    else:
-        log.info("[MADE] Made has not joined server")
+        roles_to_add = []
+        for role_name in roles.MADE_ROLES:
+            role_obj = utils.get(member.guild.roles, name=role_name)
+            if not role_obj:
+                role_obj = member.guild.create_role(name=role_name)
+            roles_to_add.append(role_obj)
+        await member.add_roles(*roles_to_add)
+        return True
+    return False
 
 
-if __name__ == "__main__":
-    pass
+async def on_join(member: discord.Member, client: discord.Client):
+    is_made = await assign_roles_to_made(member)
+    if not is_made:
+        await event_greet_new_member(client, member)
+
+
+__all__ = ["on_join"]
