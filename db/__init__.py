@@ -25,20 +25,16 @@ def close_db():
 
 
 def _init_client(mongo_client: pymongo.MongoClient = None):
-    log.debug("Initializing MongoDb Client...")
     global __mongo_client
+    log.debug("Initializing MongoDb Client...")
 
     if (config.MONGO_MOCK or "").lower() == "true":
         mongo_client = mongomock.MongoClient(config.MONGO_CONNECTION_STRING)
-
-    if mongo_client is None:
+        mock_seed.load_mock_data(mongo_client.get_database(config.MONGO_DB))
+    else:
         mongo_client = pymongo.MongoClient(config.MONGO_CONNECTION_STRING)
-
-    database = mongo_client.get_database(config.MONGO_DB)
-    if (config.MONGO_MOCK or "").lower() == "true":
-        mock_seed.load_mock_data(database)
-
-    if len(database.list_collection_names()) == 0:
-        database.create_collection("empty")
+        database = mongo_client.get_database(config.MONGO_DB)
+        if len(database.list_collection_names()) == 0:
+            database.create_collection("empty")
 
     __mongo_client = mongo_client

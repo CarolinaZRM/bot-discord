@@ -5,7 +5,6 @@ attendance*.csv
 users.json
 
 # Editors
-.vscode/
 .idea/
 
 # Vagrant
