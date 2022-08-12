@@ -15,8 +15,9 @@
 #     is_command,
 # )
 
-import log
 from discord.app_commands import CommandTree, Group
+
+import log
 
 from . import (
     asesoria_academica,

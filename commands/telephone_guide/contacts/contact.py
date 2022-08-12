@@ -1,4 +1,4 @@
-class Contact():
+class Contact:
     """
     Anadir los numeros con descripcion de el contacto y/o la oficina
     De aplicar el numero deberia tener la siguiente información:
@@ -9,10 +9,19 @@ class Contact():
     - Persona a la que pertenece esa extension (si aplica)
     """
 
-    def __init__(self, contact_name, contact_description, services_provided,
-                 phone_number, extensions=[],
-                 emails=[], office_number='No disponible',
-                 owner='No disponible', work_hours: str = 'No disponible', gmaps_location='No disponible'):
+    def __init__(
+        self,
+        contact_name,
+        contact_description,
+        services_provided,
+        phone_number,
+        extensions=[],
+        emails=[],
+        office_number="No disponible",
+        owner="No disponible",
+        work_hours: str = "No disponible",
+        gmaps_location="No disponible",
+    ):
         super().__init__()
         self.contact_name = contact_name
         self.phone_number = phone_number
@@ -26,11 +35,11 @@ class Contact():
         self.gmaps_location = gmaps_location
 
     def __str__(self):
-        email_txt = ', '.join(self.emails)
-        phone_txt = ', '.join(self.phone_number)
-        extensions_txt = ' \u2022 '.join(self.extensions)
+        email_txt = ", ".join(self.emails)
+        phone_txt = ", ".join(self.phone_number)
+        extensions_txt = " \u2022 ".join(self.extensions)
 
-        return_string = f'''Contact Name: {self.contact_name}
+        return_string = f"""Contact Name: {self.contact_name}
     \u2022 Contact description: {self.contact_description}
     \u2022 Service Provided: {self.services_provided}
     \u2022 Office: {self.office_number}
@@ -38,5 +47,5 @@ class Contact():
     \u2022 Emails: {email_txt}
     \u2022 Phone Extensions: {extensions_txt}
     \u2022 Work Hours: {self.work_hours}
-    \u2022 Google Maps Location: {self.gmaps_location}'''
+    \u2022 Google Maps Location: {self.gmaps_location}"""
         return return_string

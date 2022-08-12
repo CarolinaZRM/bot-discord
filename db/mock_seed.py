@@ -1,6 +1,7 @@
-from pathlib import Path
-import mongomock
 import json
+from pathlib import Path
+
+import mongomock
 
 from constants import paths
 

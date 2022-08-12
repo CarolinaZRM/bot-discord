@@ -1,4 +1,4 @@
-#in wsgi.py
+# in wsgi.py
 
 from main import main
 

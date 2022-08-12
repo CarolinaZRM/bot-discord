@@ -1,22 +1,22 @@
 """
 // /bot-discord/commands/leveling_system/get_leaderboard.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/11
-//  
+//
 //  Last Modified: Thursday, 11th August 2022 4:35:32 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 from typing import Any, Dict
-from discord.app_commands import Command
-from discord import Interaction, Embed
 
-from controllers.leveling_system import general_leaderboard
+from discord import Embed, Interaction
+from discord.app_commands import Command
 
 import log
+from controllers.leveling_system import general_leaderboard
 
 
 def command():
@@ -35,7 +35,8 @@ async def _leaderboard(interaction: Interaction):
         user_info: Dict[str, Any]
         # add 1 to position to make the index start from 1
         top_peeps_text.append(
-            f"{position + 1} - <@!{user_info.get('user_id')}>\t|\tLevel: {user_info.get('level')}"
+            f"{position + 1} - <@!{user_info.get('user_id')}>\t|\tLevel:"
+            f" {user_info.get('level')}"
         )
 
     print(top_peeps_text)

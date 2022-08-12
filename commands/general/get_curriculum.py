@@ -1,23 +1,22 @@
 """
 // /bot-discord/commands/general/get_curriculum.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/10
-//  
+//
 //  Last Modified: Wednesday, 10th August 2022 7:04:43 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 import os
-from typing import List
 
 import discord
-from constants import paths
-from discord.app_commands import Command, Choice
+from discord.app_commands import Command
 
 from commands.utils.autocomplete import program_autocomplete
+from constants import paths
 
 # PDF Files
 _CURRICULOS_MAP = {
@@ -48,15 +47,16 @@ def command():
 
 
 async def _get_curriculum(interaction: discord.Interaction, program: str):
-
     if not program or len(program) == 0:
         await interaction.response.send_message(
-            "No me dijiste que currículo necesitas :slight_frown:\nIntenta con: INEL/ICOM/INSO/CIIC"
+            "No me dijiste que currículo necesitas :slight_frown:\nIntenta con:"
+            " INEL/ICOM/INSO/CIIC"
         )
     else:
         if program not in _CURRICULOS_MAP:
             return await interaction.response.send_message(
-                f"Disculpa los inconvenientes, pero no tengo el Currículo para el programa de {program}"
+                "Disculpa los inconvenientes, pero no tengo el Currículo para el"
+                f" programa de {program}"
             )
 
         await interaction.response.send_message(

@@ -1,12 +1,12 @@
 """
 // /bot-discord/controllers/leveling_system/__init__.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/11
-//  
+//
 //  Last Modified: Thursday, 11th August 2022 4:08:08 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
@@ -14,9 +14,10 @@ import time
 from typing import Dict, Union
 
 import discord
+from pymongo import DESCENDING as PYMONGO_DESCENDING
+
 import log
 from db import get_database
-from pymongo import DESCENDING as PYMONGO_DESCENDING
 
 
 class ExperienceChangeResult:
@@ -119,7 +120,8 @@ def get_level_info(user_id: str) -> Union[Dict[str, str], None]:
     return lb_collection.find_one({"user_id": str(user_id)})
 
 
-# Runs on message, the user is given a certain amount of experience for each message and we check for level up
+# Runs on message, the user is given a certain amount of experience for each message
+# and we check for level up
 async def on_message(message: discord.Message) -> None:
     log.debug("Running leveling system listener...")
     user_id: str = str(message.author.id)
@@ -132,5 +134,6 @@ async def on_message(message: discord.Message) -> None:
 
     if exp_change_result and exp_change_result.leveled_up():
         await message.channel.send(
-            f"{message.author.mention} has leveled up to level {exp_change_result.new_level}"
+            f"{message.author.mention} has leveled up to level"
+            f" {exp_change_result.new_level}"
         )

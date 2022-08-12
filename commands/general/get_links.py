@@ -1,21 +1,25 @@
 """
-//  /event_handlers/links.py
+//  /home/gbrl18/bot-discord/commands/general/get_links.py
 //  py-bot-uprm
 //
-//  Created by Gabriel S. Santiago on 08/03/2021
-//  Copyright © 2021 agSant01. All rights reserved.
-//  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  Created by Gabriel S Santiago on 2022/08/12
+//
+//  Last Modified: Friday, 12th August 2022 10:39:57 am
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
+
 import json
 import os
 import re
 from datetime import datetime
 
 import discord
-from constants import paths
 from discord.app_commands import Command
 
+from constants import paths
 
 _EMBED: discord.Embed = None
 

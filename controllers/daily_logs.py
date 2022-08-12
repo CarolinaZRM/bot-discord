@@ -14,6 +14,7 @@ import os
 from datetime import datetime, timezone
 
 import discord
+
 from constants import paths
 
 _LOG_DIR = os.path.join(paths.TEXT_FILES, "logs")
@@ -31,21 +32,23 @@ _init_logs()
 
 
 def getRoles(member: discord.Member):
-    if not hasattr(member, 'roles'):
-        return 'Received from DM'
+    if not hasattr(member, "roles"):
+        return "Received from DM"
     return [str(role.name) for role in member.roles]
 
 
 def analytics(message: discord.Message):
     user_message = message.content
-    if len(user_message) > 0 \
-            and user_message[0] in ("/", '!', '?') \
-            and not message.author.bot:
-        with open(_FILE_PATH, 'a+') as log_file:
+    if (
+        len(user_message) > 0
+        and user_message[0] in ("/", "!", "?")
+        and not message.author.bot
+    ):
+        with open(_FILE_PATH, "a+") as log_file:
             log_data = {
-                'timestamp': datetime.now(timezone.utc).isoformat(timespec='seconds'),
-                'command': user_message,
-                'roles': getRoles(message.author),
-                'author': str(message.author)
+                "timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "command": user_message,
+                "roles": getRoles(message.author),
+                "author": str(message.author),
             }
-            log_file.write(f'{json.dumps(log_data)}\n')
+            log_file.write(f"{json.dumps(log_data)}\n")

@@ -25,7 +25,9 @@ def __init_faq_embed():
 
     __FAQ_EMBED = discord.Embed(
         title="Frequently Asked Questions",
-        description="Aquí puedes encontrar ciertas preguntas que pueden surgir durante la semana",
+        description=(
+            "Aquí puedes encontrar ciertas preguntas que pueden surgir durante la semana"
+        ),
     )
 
     with open(_FAQ_FILE) as faq_file:

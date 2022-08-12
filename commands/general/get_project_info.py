@@ -1,12 +1,12 @@
-"""
+"""cdavasdf
 //  /bot-discord/commands/general/get_project_info.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/11
-//  
+//
 //  Last Modified: Thursday, 11th August 2022 2:31:49 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
@@ -14,10 +14,10 @@ import json
 import os
 from typing import Dict, Tuple
 
-from constants import paths
-from discord import Interaction, Embed
-from discord.app_commands import Command, Choice
+from discord import Embed, Interaction
+from discord.app_commands import Choice, Command
 
+from constants import paths
 
 _PROJECT_EMBEDS = {}
 
@@ -29,18 +29,23 @@ _PROJECT_DICT: Dict[str, Dict[str, str]] = None
 """
 Why load the json data file once and store into a global variable?
 
-Because opening a file multiple times is an expensive OS operation and we want the bot 
-to be as smooth as possible. Looking for data already allocated in the process virtual 
+Because opening a file multiple times is an expensive OS operation and we want the bot
+to be as smooth as possible. Looking for data already allocated in the process virtual
 memory is relatively inexpensive compared to opening a file multiple times.
 
 Why save the embeds and not create then on each request?
 
-Caching the embeds saves us CPU cycles in creating and allocating data for an object that is 
+Caching the embeds saves us CPU cycles in creating and allocating data for an object that is
 static and will never change as long as the app is running.
 """
 
 
 def command():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     global _PROJECT_IDS, _PROJECT_DICT
     # Register Command
 
@@ -67,7 +72,10 @@ def command():
     # create Command instance
     command = Command(
         name="ls_projects",
-        description="Provee información sobre proyectos e investigaciones relacionadas a INEL/ICOM/INSO/CIIC",
+        description=(
+            "Provee información sobre proyectos e investigaciones relacionadas a"
+            " INEL/ICOM/INSO/CIIC"
+        ),
         callback=_prj_info,
     )
 
@@ -89,24 +97,27 @@ def command():
 
 async def _prj_info(interaction: Interaction, project_id: str):
     if project_id in _PROJECT_EMBEDS:
-        return await interaction.response.send_message(
-            embed=_PROJECT_EMBEDS[project_id]
-        )
+        return await interaction.response.send_message(embed=_PROJECT_EMBEDS[project_id])
 
     abbreviations = ", ".join(map(lambda project: project[0], _PROJECT_IDS))
 
     if project_id is None:
         return await interaction.response.send_message(
-            f"No me dijiste el nombre del proyecto que quieres buscar.\nIntenta con alguno de: {abbreviations}"
+            "No me dijiste el nombre del proyecto que quieres buscar.\nIntenta con"
+            f" alguno de: {abbreviations}"
         )
 
     if _PROJECT_DICT.get(project_id) is None:
         return await interaction.response.send_message(
-            f"No tenemos información de este proyecto.\nIntenta con alguno de: {abbreviations}"
+            "No tenemos información de este proyecto.\nIntenta con alguno de:"
+            f" {abbreviations}"
         )
 
     embed: Embed = Embed.from_dict(_PROJECT_DICT[project_id])
     await interaction.response.send_message(
-        content=f"Esta es la información del \"{_PROJECT_DICT[project_id].get('title', project_id)}\"\n",
+        content=(
+            "Esta es la información del"
+            f" \"{_PROJECT_DICT[project_id].get('title', project_id)}\"\n"
+        ),
         embed=embed,
     )

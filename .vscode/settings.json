@@ -1,6 +1,40 @@
 {
-    "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "python.linting.flake8Args": ["--max-line-length", "88"],
-    "python.formatting.provider": "black"
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": ["--max-line-length", "89"],
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["--line-length", "89", "--preview"],
+    "isort.args": ["--profile", "black"],
+    // For header inserts
+    "[python]": {
+        "files.trimTrailingWhitespace": true
+    },
+    // "psi-header.variables": [["authoremail", "{put yours}}"]],
+    "psi-header.lang-config": [
+        {
+            "language": "python",
+            "begin": "\"\"\"",
+            "prefix": "//  ",
+            "end": "\"\"\"",
+            "rootDirFileName": "${env:workspaceFolder}"
+        }
+    ],
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "changeLogNaturalOrder": false,
+            "template": [
+                "<<projectpath>>/<<filename>>",
+                "py-bot-uprm",
+                "",
+                "Created by <<author>> on <<filecreated('YYYY/MM/DD')>>",
+                "",
+                "Last Modified: <<dateformat('dddd, Do MMMM YYYY h:mm:ss a')>>",
+                "Modified By: <<author>> (<<authoremail>>)",
+                "",
+                "Copyright © <<filecreated('YYYY')>> agSant01. All rights reserved.",
+                "Copyright © <<filecreated('YYYY')>> teamMADE. All rights reserved."
+            ]
+        }
+    ]
 }

@@ -10,14 +10,16 @@
 import discord
 from discord.app_commands import Command
 
-from .contacts import servicios
 from .append_fields_to_embed import append_fields_to_embed
+from .contacts import servicios
 
 
 def help_data():
     return {
         "name": "dcsp",
-        "description": "Información del Departamento de Consejería y Servicios Psicológicos (DCSP)",
+        "description": (
+            "Información del Departamento de Consejería y Servicios Psicológicos (DCSP)"
+        ),
     }
 
 

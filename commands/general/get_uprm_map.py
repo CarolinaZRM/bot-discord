@@ -1,7 +1,7 @@
 import discord
-import log
-
 from discord.app_commands import Command
+
+import log
 
 
 def command():
@@ -18,7 +18,10 @@ async def _get_uprm_map(interaction: discord.Interaction):
 
     embed = discord.Embed(
         title="Mapa - Recinto Universitario de Mayagüez",
-        description="Enlace al Mapa de RUM con marcas y localizaciones de los edificios principales.",
+        description=(
+            "Enlace al Mapa de RUM con marcas y localizaciones de los edificios"
+            " principales."
+        ),
         url="https://www.uprm.edu/portales/mapa/",
         colour=discord.colour.Colour.green(),
         type="link",

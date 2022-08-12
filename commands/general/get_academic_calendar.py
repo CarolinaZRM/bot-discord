@@ -1,11 +1,11 @@
 import os
 from typing import Union
 
-from discord import Member, User, Interaction, File
+from discord import File, Interaction, Member, User
 from discord.app_commands import Command
-from constants import paths
 
 import log
+from constants import paths
 
 _GOOGLE_ADD_CALENDAR = os.path.join(paths.IMAGES, "google_add_calendar.png")
 

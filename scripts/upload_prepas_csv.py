@@ -1,26 +1,26 @@
 """
 //  bot-discord/scripts/upload_prepas_csv.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/10
-//  
+//
 //  Last Modified: Wednesday, 10th August 2022 10:47:22 am
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 
 
-Este es un script creado para upload la información 
-de los prepas para el signin al bot y no tener la info de nombres 
-y correos electrónicos en el repositorio. 
+Este es un script creado para upload la información
+de los prepas para el signin al bot y no tener la info de nombres
+y correos electrónicos en el repositorio.
 """
 import argparse
-from ast import parse
 import csv
 import json
 import os
 import sys
+from ast import parse
 from pathlib import Path
 from typing import Collection, Dict, List, Literal
 
@@ -36,7 +36,8 @@ parent = os.path.dirname(current)
 # the sys.path.
 sys.path.append(parent)
 
-import config
+# import after so the config can use the top level project directory
+import config  # noqa: E402
 
 
 def build_args(args=None):
@@ -80,13 +81,13 @@ def create_out_files(
     prepas_dict_list: List[Dict[str, str]],
     fieldnames: Collection,
 ):
-    print("\n> Exported fiies...")
+    print("\n> Exported files...")
     if "json" in out_formats:
-        with open(f"inserted-data.json", "w") as prepas_json:
+        with open("inserted-data.json", "w") as prepas_json:
             json.dump(prepas_dict_list, prepas_json)
         print(f"> JSON: {Path(prepas_json.name).absolute()}")
     if "csv" in out_formats:
-        with open(f"inserted-data.csv", "w") as prepas_csv:
+        with open("inserted-data.csv", "w") as prepas_csv:
             writer = csv.DictWriter(
                 prepas_csv,
                 fieldnames=fieldnames,

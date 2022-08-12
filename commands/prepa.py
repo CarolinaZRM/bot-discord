@@ -10,8 +10,9 @@
 
 This file is supposed to contain all the events and commands that are only allowed for prepas
 """
-import config
 import discord
+
+import config
 import log
 
 inel_counselors = set()
@@ -65,7 +66,10 @@ async def get_counselor_names(message: discord.Message):
             if split[1].upper() == "INEL":
                 embed = discord.Embed(
                     title="Estudiantes Orientadores de INEL",
-                    description="Aquí están todos los estudiantes orientadores que están estudiando Ingeniería Electrica como tu!",
+                    description=(
+                        "Aquí están todos los estudiantes orientadores que están"
+                        " estudiando Ingeniería Electrica como tu!"
+                    ),
                 )
                 for counselor in inel_counselors:
                     if counselor is not None:
@@ -87,7 +91,10 @@ async def get_counselor_names(message: discord.Message):
             elif split[1].upper() == "ICOM":
                 embed = discord.Embed(
                     title="Estudiantes Orientadores de ICOM",
-                    description="Aquí están todos los estudiantes orientadores que están estudiando Ingeniería de Computadora como tu!",
+                    description=(
+                        "Aquí están todos los estudiantes orientadores que están"
+                        " estudiando Ingeniería de Computadora como tu!"
+                    ),
                 )
                 for counselor in icom_counselors:
                     if counselor is not None:
@@ -100,7 +107,10 @@ async def get_counselor_names(message: discord.Message):
             elif split[1].upper() == "INSO":
                 embed = discord.Embed(
                     title="Estudiantes Orientadores de INSO",
-                    description="Aquí están todos los estudiantes orientadores que están estudiando Ingeniería de Software como tu!",
+                    description=(
+                        "Aquí están todos los estudiantes orientadores que están"
+                        " estudiando Ingeniería de Software como tu!"
+                    ),
                 )
                 for counselor in inso_counselors:
                     if counselor is not None:
@@ -113,7 +123,10 @@ async def get_counselor_names(message: discord.Message):
             elif split[1].upper() == "CIIC":
                 embed = discord.Embed(
                     title="Estudiantes Orientadores de CIIC",
-                    description="Aquí están todos los estudiantes orientadores que están estudiando Ciencias e Ingeniería de Computación como tu!",
+                    description=(
+                        "Aquí están todos los estudiantes orientadores que están"
+                        " estudiando Ciencias e Ingeniería de Computación como tu!"
+                    ),
                 )
                 for counselor in cse_counselors:
                     if counselor is not None:

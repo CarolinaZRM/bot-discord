@@ -1,32 +1,33 @@
 """
 // /bot-discord/commands/leveling_system/get_level_status.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/08/11
-//  
+//
 //  Last Modified: Thursday, 11th August 2022 8:01:12 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 from typing import Dict, Union
-from discord import Interaction, Embed
+
+from discord import Embed, Interaction
 from discord.app_commands import Command
 
 from controllers.leveling_system import get_level_info
 
 LEVEL_ICONS = {
-    1: "https://www.herald.wales/wp-content/uploads/2021/03/millenium-falcon-pembroke.jpg",
-    2: "https://img1.cgtrader.com/items/3028889/de49dc859a/large/star-wars-jedi-starfighter-anakin-skywalker-3d-model-low-poly-animated-max.jpg",
-    3: "https://s3-us-west-2.amazonaws.com/media.brothers-brick.com/2022/05/TieFighter-FukuSaku.jpg",
-    4: "https://c-3d.niceshops.com/upload/image/product/large/default/revell-model-set-imperial-star-destroyer-1-pc-311143-en.jpg",
-    5: "https://static.wikia.nocookie.net/starwars/images/7/74/AnakinsEta2.jpg/revision/latest?cb=20090424014352",
-    6: "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/05/TIE-Fighter-Facts-Interceptor.jpg?q=50&fit=crop&w=963&h=481&dpr=1.5",
-    7: "https://airandspace.si.edu/sites/default/files/styles/body_medium/public/2021-05/Composite_X-wing.jpg?itok=UwDAgRfB",
-    8: "https://static.wikia.nocookie.net/starwars/images/c/c2/TIE_Defender.png/revision/latest?cb=20150801171146",
-    9: "https://static.wikia.nocookie.net/starwars/images/6/66/Nimbus-class_V-wing_TFOWM.png/revision/latest?cb=20190629212809",
-    10: "https://static.wikia.nocookie.net/starwars/images/a/af/Shuttle-CHRON.jpg/revision/latest?cb=20100813150543",
+    1: "https://www.herald.wales/wp-content/uploads/2021/03/millenium-falcon-pembroke.jpg",  # noqa: E501
+    2: "https://img1.cgtrader.com/items/3028889/de49dc859a/large/star-wars-jedi-starfighter-anakin-skywalker-3d-model-low-poly-animated-max.jpg",  # noqa: E501
+    3: "https://s3-us-west-2.amazonaws.com/media.brothers-brick.com/2022/05/TieFighter-FukuSaku.jpg",  # noqa: E501
+    4: "https://c-3d.niceshops.com/upload/image/product/large/default/revell-model-set-imperial-star-destroyer-1-pc-311143-en.jpg",  # noqa: E501
+    5: "https://static.wikia.nocookie.net/starwars/images/7/74/AnakinsEta2.jpg/revision/latest?cb=20090424014352",  # noqa: E501
+    6: "https://static1.srcdn.com/wordpress/wp-content/uploads/2020/05/TIE-Fighter-Facts-Interceptor.jpg?q=50&fit=crop&w=963&h=481&dpr=1.5",  # noqa: E501
+    7: "https://airandspace.si.edu/sites/default/files/styles/body_medium/public/2021-05/Composite_X-wing.jpg?itok=UwDAgRfB",  # noqa: E501
+    8: "https://static.wikia.nocookie.net/starwars/images/c/c2/TIE_Defender.png/revision/latest?cb=20150801171146",  # noqa: E501
+    9: "https://static.wikia.nocookie.net/starwars/images/6/66/Nimbus-class_V-wing_TFOWM.png/revision/latest?cb=20190629212809",  # noqa: E501
+    10: "https://static.wikia.nocookie.net/starwars/images/a/af/Shuttle-CHRON.jpg/revision/latest?cb=20100813150543",  # noqa: E501
 }
 
 

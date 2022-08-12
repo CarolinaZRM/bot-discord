@@ -1,8 +1,9 @@
 from typing import Dict, List
 
 import discord
-import log
 from discord.app_commands import Command
+
+import log
 
 
 def command(help_list: List[Dict]):
@@ -10,7 +11,10 @@ def command(help_list: List[Dict]):
         embed = discord.Embed(title="Lista de Contactos disponibles")
         embed.add_field(
             name="Uso",
-            value="Estas son las listas de contactos a los varios departamentos y facultades en los cuales podrás orientarte.",
+            value=(
+                "Estas son las listas de contactos a los varios departamentos y"
+                " facultades en los cuales podrás orientarte."
+            ),
         )
 
         for contact in help_list:

@@ -18,7 +18,8 @@ def __init_config():
     current_module = sys.modules[__name__]
 
     # Get posible values from any of the .env.* in root directory
-    # If dict from dotenv is empty fallback to os.environ as default Environment Variable provider
+    # If dict from dotenv is empty fallback to os.environ as default
+    # Environment Variable provider
     config_values = {
         **__dotenv_values(".env"),
         **__dotenv_values(".env.development"),
@@ -38,7 +39,8 @@ def __init_config():
     for key, value in config_values.items():
         if len(value) == 0 and key in __required_variables:
             raise Exception(
-                f"Uninitialized value for '{key}' in .env file on the root of the project."
+                f"Uninitialized value for '{key}' in .env file on the root of the"
+                " project."
             )
 
         # set the attributes for the config object
@@ -51,7 +53,8 @@ def __init_config():
             or getattr(current_module, required) is None
         ):
             raise Exception(
-                f"Missing or Uninitialized value for '{required}' in .env file. Required config Variable."
+                f"Missing or Uninitialized value for '{required}' in .env file. Required"
+                " config Variable."
             )
 
 

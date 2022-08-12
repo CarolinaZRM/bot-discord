@@ -9,6 +9,7 @@
 """
 
 from discord import Embed
+
 from .contacts.contact import Contact
 
 

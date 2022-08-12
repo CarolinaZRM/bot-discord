@@ -1,13 +1,10 @@
-from ast import arguments
+import logging
 import unittest
 
-import config
 import mongomock
 
-import logging
-
-from db import get_database, close_db
-
+import config
+from db import close_db, get_database
 from scripts.upload_prepas_csv import build_args, insert_into_db
 
 

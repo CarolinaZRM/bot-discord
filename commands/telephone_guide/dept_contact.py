@@ -8,18 +8,22 @@
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
 from typing import List
+
 import discord
-from discord.app_commands import Command, Choice
+from discord.app_commands import Choice, Command
+
+from commands.utils.autocomplete import program_autocomplete
 
 from .append_fields_to_embed import append_fields_to_embed
 from .contacts import departamentos
-from commands.utils.autocomplete import program_autocomplete
 
 
 def help_data():
     return {
         "name": "department",
-        "description": "Información de contacto de los departamentos de INEL/ICOM/INSO/CIIC",
+        "description": (
+            "Información de contacto de los departamentos de INEL/ICOM/INSO/CIIC"
+        ),
     }
 
 

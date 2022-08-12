@@ -1,25 +1,33 @@
 """
 // /bot-discord/commands/telephone_guide/faculty.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2021/06/23
-//  
+//
 //  Last Modified: Wednesday, 10th August 2022 7:27:01 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2021 bermedDev. All rights reserved.
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 import discord
-from commands.utils.autocomplete import program_autocomplete
 from discord.app_commands import Command
 
+from commands.utils.autocomplete import program_autocomplete
+
 _CSE_FACULTY = {
-    "Bienvenido Velez Rivera": "Acting Dean of Engineering\nFull Time Professor\nbienvenido.velez@upr.edu",
-    "Emmanuel Arzuaga Cruz": "Associate Director\nFull Time Professor\nearzuaga@ece.uprm.edu",
+    "Bienvenido Velez Rivera": (
+        "Acting Dean of Engineering\nFull Time Professor\nbienvenido.velez@upr.edu"
+    ),
+    "Emmanuel Arzuaga Cruz": (
+        "Associate Director\nFull Time Professor\nearzuaga@ece.uprm.edu"
+    ),
     "Heidy Sierra Gil": "Associate Professor\nheidy.sierra1@upr.edu",
-    "Jose L. Melendez": "Special Assistant to the Chancellor\nFull Time Professor\njose.melendez37@upr.edu",
+    "Jose L. Melendez": (
+        "Special Assistant to the Chancellor\nFull Time"
+        " Professor\njose.melendez37@upr.edu"
+    ),
     "Kejie Lu": "Full Time Professor\nkejie.lu@upr.edu",
     "Manuel Rodriguez Martinez": "Full Time Professor\nmanuel.rodriguez7@upr.edu",
     "Marko Schütz Schmuck": "Full Time Professor\nmarko.schutz@upr.edu",
@@ -44,7 +52,9 @@ _ECE_FACULTY = {
 def help_data():
     return {
         "name": "faculty",
-        "description": "Contacto de la facultad de los departamentos de INEL/ICOM/INSO/CIIC",
+        "description": (
+            "Contacto de la facultad de los departamentos de INEL/ICOM/INSO/CIIC"
+        ),
     }
 
 

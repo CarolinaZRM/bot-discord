@@ -1,8 +1,10 @@
 import collections
-from os import path
-from datetime import datetime
-import discord
 import csv
+from datetime import datetime
+from os import path
+
+import discord
+
 import config
 
 # Enable intents.
@@ -59,13 +61,15 @@ class AssistanceClient(discord.Client):
 
         print()
         print(
-            f'=> Lista de miembros en el canal "{channel}" fue exitosamente guardada en el archivo:'
+            f'=> Lista de miembros en el canal "{channel}" fue exitosamente guardada en'
+            " el archivo:"
         )
         print(f"=> {path.abspath(list_file_path)}")
 
         print()
         print(
-            f'=> Estadisticas de miembros en el canal "{channel}" fue exitosamente guardada en el archivo:'
+            f'=> Estadisticas de miembros en el canal "{channel}" fue exitosamente'
+            " guardada en el archivo:"
         )
         print(f"=> {path.abspath(stats_file_path)}")
         print("*" * 30)

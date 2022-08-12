@@ -15,13 +15,15 @@ class CSEAsesoriaAcademica(Contact):
     def __init__(self):
         contact_name = "Asesoria Académica INSO/CIIC"
         contact_description = (
-            "Ayudar y dirigir al estudiante en la planificación de su programa académico, "
-            "para que cumpla con los requisitos de graduación y pueda así, completar su grado académico."
+            "Ayudar y dirigir al estudiante en la planificación de su programa"
+            " académico, para que cumpla con los requisitos de graduación y pueda así,"
+            " completar su grado académico."
         )
         services_provided = (
-            "Asesoría y evaluación semestral o anual a los estudiantes en "
-            "procesos de: matrícula, admisión, reclasificación, traslado, permiso especial, "
-            "readmisión, transferencias, baja parcial, baja total, bajo aprovechamiento académico (probatorias, suspensiones) y graduación."
+            "Asesoría y evaluación semestral o anual a los estudiantes en procesos de:"
+            " matrícula, admisión, reclasificación, traslado, permiso especial,"
+            " readmisión, transferencias, baja parcial, baja total, bajo aprovechamiento"
+            " académico (probatorias, suspensiones) y graduación."
         )
         phone_number = ["(787) 832-4040"]
         extensions = ["Ext. 5597"]

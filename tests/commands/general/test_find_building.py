@@ -13,9 +13,7 @@ class TestStringMethods(unittest.TestCase):
         info_ = get_building_information(salon)
         logging.debug(info_)
         self.assertEqual(info_.get("name"), "Física")
-        self.assertEqual(
-            info_.get("gmaps_loc"), "https://goo.gl/maps/mTX7tjLDQK8zzc5W6"
-        )
+        self.assertEqual(info_.get("gmaps_loc"), "https://goo.gl/maps/mTX7tjLDQK8zzc5W6")
 
     def test_all_letter_without_dash(self):
         salon = "fa"

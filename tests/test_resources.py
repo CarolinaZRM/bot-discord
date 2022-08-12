@@ -1,12 +1,22 @@
-import unittest
+"""
+//  /home/gbrl18/bot-discord/tests/test_resources.py
+//  py-bot-uprm
+//
+//  Created by Gabriel S Santiago on 2022/08/12
+//
+//  Last Modified: Friday, 12th August 2022 9:38:18 am
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
+"""
 import datetime
+import sys
+import unittest
 
 
 class ExpiredResourceException(Exception):
     pass
-
-
-import sys
 
 
 def get_curr_func():
@@ -43,7 +53,8 @@ class ResourceTest(unittest.TestCase):
 
             if not is_verified and datetime.datetime.now() > self.due_date:
                 raise ExpiredResourceException(
-                    f"\"{to_verify.split('_')[0]}\" are expired verify and change the VERIFIED Flag."
+                    f"\"{to_verify.split('_')[0]}\" are expired verify and change the"
+                    " VERIFIED Flag."
                 )
 
 

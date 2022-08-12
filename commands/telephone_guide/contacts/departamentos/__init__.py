@@ -1,4 +1,4 @@
-'''
+"""
 //  /handlers/telephone_guide/contacts/departamentos/__init__.py
 //  py-bot-uprm
 //
@@ -6,7 +6,7 @@
 //  Copyright © 2021 bermedDev. All rights reserved.
 //  Copyright © 2021 agSant01. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
-'''
+"""
 
 from .cse import CSEDepartment
 from .ece import ECEDepartment

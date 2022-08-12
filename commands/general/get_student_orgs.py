@@ -1,10 +1,11 @@
 import json
 from typing import List
 
-import log
-from constants import paths
 from discord import Embed, Interaction
 from discord.app_commands import Choice, Command
+
+import log
+from constants import paths
 
 _ORGANIZATIONS = [
     "IEEE",
@@ -31,7 +32,10 @@ __ORG_EMBEDS = {}
 def command():
     org_info_cmd = Command(
         name="ls_student_orgs",
-        description="Provee información sobre organizaciones estudiantiles relacionadas a INEL/ICOM/INSO/CIIC",
+        description=(
+            "Provee información sobre organizaciones estudiantiles relacionadas a"
+            " INEL/ICOM/INSO/CIIC"
+        ),
         callback=_organization_info,
     )
 
@@ -54,10 +58,9 @@ async def _organization_info(interaction: Interaction, student_org: str):
 
     if student_org not in _ORGANIZATIONS:
         await interaction.response.send_message(
-            "Puede que te hayas confundido :sweat_smile:\n"
-            "'Org' = Organización\n"
-            "Intenta usar el comando ```ls_student_orgs <org_name>``` sustituyendo <org_name> con una de las siguientes abreviaciones:\n"
-            + _ORG_AVG
+            "Puede que te hayas confundido :sweat_smile:\n'Org' = Organización\nIntenta"
+            " usar el comando ```ls_student_orgs <org_name>``` sustituyendo <org_name>"
+            f" con una de las siguientes abreviaciones:\n {_ORG_AVG}"
         )
         return
 
@@ -70,8 +73,8 @@ async def _organization_info(interaction: Interaction, student_org: str):
 
         if orgDictObj is None:
             return await interaction.response.send_message(
-                "Organización no existe en lista, intenta usar una de las siguientes abreviaciones:\n"
-                + _ORG_AVG
+                "Organización no existe en lista, intenta usar una de las siguientes"
+                f" abreviaciones:\n {_ORG_AVG}"
             )
 
         embed: Embed = Embed.from_dict(orgDictObj)

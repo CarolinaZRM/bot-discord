@@ -9,10 +9,12 @@
 //  Copyright © 2020 teamMADE. All rights reserved.
 
 """
-import discord
-import log
 import random
 import re
+
+import discord
+
+import log
 
 
 # This is a command method
@@ -43,16 +45,16 @@ async def event_guessing_game(message, client):
         if user_name is None:
             user_name = message.author.name
         await message.channel.send(
-            "Tengo un numero secreto del 1 al 100 :upside_down: ¿Puedes adivinarlo?\nHint: Es un numero entero :eyes:\n"
-            "Si te rindes escribe 'MeRindo' y te diré el numero."
+            "Tengo un numero secreto del 1 al 100 :upside_down: ¿Puedes"
+            " adivinarlo?\nHint: Es un numero entero :eyes:\nSi te rindes escribe"
+            " 'MeRindo' y te diré el numero."
         )
         correct_answer = random.randint(1, 100)
 
         while convert_to_int(response) != correct_answer:
             response = await client.wait_for(
                 "message",
-                check=lambda response_message: response_message.author
-                == message.author,
+                check=lambda response_message: response_message.author == message.author,
             )
             response = response.content
 
@@ -94,7 +96,8 @@ async def event_rock_paper_scissor(message: discord.Message, client: discord.Cli
 
     if re.fullmatch(CMD, message.content):
         await message.channel.send(
-            f"Wepa _{user_name}_! Vamos a jugar Rock-Paper-Scissors :grimacing:\nYa hice mi movida, ahora haz la tuya :wink:"
+            f"Wepa _{user_name}_! Vamos a jugar Rock-Paper-Scissors :grimacing:\nYa hice"
+            " mi movida, ahora haz la tuya :wink:"
         )
         # play against bot
         PLAYS = ["scissors", "paper", "rock"]
@@ -105,15 +108,15 @@ async def event_rock_paper_scissor(message: discord.Message, client: discord.Cli
         while True:
             user_answer = await client.wait_for(
                 "message",
-                check=lambda response_message: response_message.author
-                == message.author,
+                check=lambda response_message: response_message.author == message.author,
             )
             user_answer = user_answer.content.lower()
 
             if user_answer not in PLAYS:
                 bolded_plays = map(make_bold, PLAYS)
                 await message.channel.send(
-                    f'Whoops... **Esa jugada no es valida** {user_name}\nPuedes jugar una de: {", ".join(bolded_plays)}'
+                    f"Whoops... **Esa jugada no es valida** {user_name}\nPuedes jugar"
+                    f' una de: {", ".join(bolded_plays)}'
                 )
             else:
                 break
@@ -122,9 +125,11 @@ async def event_rock_paper_scissor(message: discord.Message, client: discord.Cli
             await message.channel.send("Empate :tada:")
         elif (PLAYS.index(user_answer) + 1) % 3 == PLAYS.index(bot_play):
             await message.channel.send(
-                f"AHH jugué {bot_play.upper()} :worried: ...\nPues Ganaste _{user_name}_, Congrats! :fire: :100:"
+                f"AHH jugué {bot_play.upper()} :worried: ...\nPues Ganaste"
+                f" _{user_name}_, Congrats! :fire: :100:"
             )
         else:
             await message.channel.send(
-                f"Uff, Perdiste _{user_name}_ :pleading_face:\nYo había jugado {bot_play.upper()} :grimacing:"
+                f"Uff, Perdiste _{user_name}_ :pleading_face:\nYo había jugado"
+                f" {bot_play.upper()} :grimacing:"
             )

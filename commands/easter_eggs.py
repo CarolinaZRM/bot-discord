@@ -8,10 +8,11 @@
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
 
-import re
 import random
+import re
 
 import discord
+
 import log
 
 SHEESH_REGEX = re.compile("s+h+ee+s+h+s*", re.IGNORECASE)
@@ -31,7 +32,8 @@ async def _is_sheeshed(message: discord.Message):
 
     RETURN_SHEESH = [
         "Sheeeshhss :eyes:",
-        "SHEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSHHHHHHHHHH :fire:\nOooppss :sweat_smile: Me emocioné jejeje",
+        "SHEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSHHHHHHHHHH :fire:\nOooppss :sweat_smile: Me"
+        " emocioné jejeje",
     ]
 
     has_sheesh = SHEESH_REGEX.search(message.content)
@@ -102,8 +104,8 @@ async def _cancion_team_made(message: discord.Message):
         _TM_SONG_REGEX_EN, user_input
     ):
         await message.reply(
-            "La canción/himno de _Team MADE_ es **Grita por Jarabe de Palo**. "
-            "El mensaje de esta canción es uno muy bonito y representa uno de nuestros pilares. "
-            "El que siempre estaremos ahí el uno para el otro, sin importar la situacion. :relieved: :green_heart: "
-            f"\n{_TM_SONG_LINK}"
+            "La canción/himno de _Team MADE_ es **Grita por Jarabe de Palo**. El"
+            " mensaje de esta canción es uno muy bonito y representa uno de nuestros"
+            " pilares. El que siempre estaremos ahí el uno para el otro, sin importar"
+            f" la situacion. :relieved: :green_heart: \n{_TM_SONG_LINK}"
         )

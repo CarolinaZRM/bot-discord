@@ -13,8 +13,9 @@
 import os
 
 import discord
-import log
 from better_profanity import profanity
+
+import log
 from bot import is_from_a_channel, is_sender_counselor
 from constants import paths
 

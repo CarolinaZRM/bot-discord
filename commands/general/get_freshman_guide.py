@@ -1,9 +1,10 @@
 import os
 
 import discord
+from discord.app_commands import Command
+
 import log
 from constants import paths
-from discord.app_commands import Command
 
 GUIA_PREPISTICA = os.path.join(paths.RESOURCES, "GuiaPrepistica.pdf")
 

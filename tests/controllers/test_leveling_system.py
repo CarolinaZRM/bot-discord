@@ -1,16 +1,27 @@
-from ctypes import Union
+"""
+//  /home/gbrl18/bot-discord/tests/controllers/test_leveling_system.py
+//  py-bot-uprm
+//
+//  Created by Gabriel S Santiago on 2022/08/12
+//
+//  Last Modified: Friday, 12th August 2022 10:31:48 am
+//  Modified By: Gabriel S Santiago ({put yours}})
+//
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
+"""
 import logging
 import math
 import sys
-from typing import Any, Dict
 import unittest
+from ctypes import Union
+from typing import Any, Dict
+
 import mongomock
+
 import config
-
-
+from controllers.leveling_system import add_experience, general_leaderboard, level_join
 from db import close_db, get_database
-
-from controllers.leveling_system import general_leaderboard, add_experience, level_join
 
 
 class TestLevelingSystem(unittest.TestCase):

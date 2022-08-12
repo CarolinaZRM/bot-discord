@@ -1,8 +1,8 @@
-import config
-import log
 import mongomock
 import pymongo
 
+import config
+import log
 from db import mock_seed
 
 __all__ = ["get_database", "close_db"]

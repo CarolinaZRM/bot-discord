@@ -15,13 +15,15 @@ class ECEAsesoriaAcademica(Contact):
     def __init__(self):
         contact_name = "Asesoria Académica INEL/ICOM"
         contact_description = (
-            "Ayudar y dirigir al estudiante en la planificación de su programa académico, "
-            "para que cumpla con los requisitos de graduación y pueda así, completar su grado académico."
+            "Ayudar y dirigir al estudiante en la planificación de su programa"
+            " académico, para que cumpla con los requisitos de graduación y pueda así,"
+            " completar su grado académico."
         )
         services_provided = (
-            "Asesoría y evaluación semestral o anual a los estudiantes en "
-            "procesos de: matrícula, admisión, reclasificación, traslado, permiso especial, "
-            "readmisión, transferencias, baja parcial, baja total, bajo aprovechamiento académico (probatorias, suspensiones) y graduación."
+            "Asesoría y evaluación semestral o anual a los estudiantes en procesos de:"
+            " matrícula, admisión, reclasificación, traslado, permiso especial,"
+            " readmisión, transferencias, baja parcial, baja total, bajo aprovechamiento"
+            " académico (probatorias, suspensiones) y graduación."
         )
         phone_number = ["(787) 832-4040", "FAX: (787) 831-7564"]
         extensions = ["Ext. 3182"]
@@ -44,8 +46,10 @@ class ECEAsesoriaAcademica(Contact):
         )
         self.appointment_system_link = "https://appointments.ece.uprm.edu/"
         self.brochures = [
-            "Español - https://ece.uprm.edu/wp-content/uploads/Brochure-INEL-ICOM-Spanish-Rev.-2015.pdf",
-            "English - https://ece.uprm.edu/wp-content/uploads/Brochure-INEL-ICOM-English-Rev.-2014.pdf",
+            "Español -"
+            " https://ece.uprm.edu/wp-content/uploads/Brochure-INEL-ICOM-Spanish-Rev.-2015.pdf",
+            "English -"
+            " https://ece.uprm.edu/wp-content/uploads/Brochure-INEL-ICOM-English-Rev.-2014.pdf",
         ]
         self.more_info = "https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/"
         self.asesoria_uprm = "https://www.uprm.edu/asuntosacademicos/orientacion-academica-y-consejeria-profesional/"

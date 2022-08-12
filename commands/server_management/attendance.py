@@ -1,12 +1,12 @@
 """
 //  /bot-discord/commands/server_management/attendance.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2022/07/11
-//  
+//
 //  Last Modified: Tuesday, 9th August 2022 10:16:48 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
@@ -14,17 +14,18 @@
 
 import collections
 import csv
-from curses.ascii import isdigit
 import os
 import re
 import shutil
+from curses.ascii import isdigit
 from datetime import datetime
 from os import path
 
 import discord
+from discord.app_commands import Command
+
 import log
 from constants import paths as app_paths
-from discord.app_commands import Command
 
 ATTENDANCE_PATH = path.join(app_paths.TEXT_FILES, "attendance")
 
@@ -46,7 +47,7 @@ def command():
 async def _get_attendance(interaction: discord.Interaction, channel_id: str):
     if not str.isdigit(channel_id):
         return await interaction.response.send_message(
-            f"El _channel\_id_:<{channel_id}> provisto es invalido",
+            f"El *channel_id*:<{channel_id}> provisto es invalido",
             ephemeral=True,
         )
 
@@ -58,7 +59,8 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
 
     if server is None:
         return await response_method.send(
-            "Este medio no pertenece a ningún _**SERVER**_.\nEste commando solo puede ser utilizado desde un servidor, no DM.\n\nDisculpa :confused:"
+            "Este medio no pertenece a ningún ***SERVER***.\nEste commando solo puede"
+            " ser utilizado desde un servidor, no DM.\n\nDisculpa :confused:"
         )
 
     target_channel_id = channel_id
@@ -66,7 +68,9 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
 
     if not target_channel_obj:
         return await response_method.send(
-            f'El _channel\_id_ <{target_channel_id}> provisto no es valido para el servidor, _**"{server}"**_.\nIntenta de nuevo con otro ID, o contacta al **BOT DEV TEAM**'
+            f"El *channel_id* <{target_channel_id}> provisto no es valido para el"
+            f' servidor, ***"{server}"***.\nIntenta de nuevo con otro ID, o contacta al'
+            " **BOT DEV TEAM**"
         )
 
     members_in_attendance = []
@@ -96,7 +100,10 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
     stats_embed = _generate_stats_embed(roles_count, server, target_channel_obj)
 
     await response_method.send(
-        content=f"Hola aca te paso las estadísticas de asistencia para **{target_channel_obj}**",
+        content=(
+            "Hola aca te paso las estadísticas de asistencia para"
+            f" **{target_channel_obj}**"
+        ),
         embed=stats_embed,
     )
     await response_method.send(
@@ -104,7 +111,9 @@ async def _get_attendance(interaction: discord.Interaction, channel_id: str):
         file=discord.File(list_file_path),
     )
     await response_method.send(
-        content=f'**Archivo con las estadísticas de asistencia para "{target_channel_obj}"**',
+        content=(
+            f'**Archivo con las estadísticas de asistencia para "{target_channel_obj}"**'
+        ),
         file=discord.File(stats_file_path),
     )
 
@@ -164,9 +173,7 @@ def _attendance_list(members_in_attendance, formatted_datetime, server, channel)
 def _attendance_stats(members_in_attendance, formatted_datetime, server, channel):
     server_name = str(server).replace(" ", "-").replace(".", "")
     channel_name = str(channel).replace(" ", "-").replace(".", "")
-    file_name = (
-        f"attendance-stats-{server_name}-{channel_name}-{formatted_datetime}.csv"
-    )
+    file_name = f"attendance-stats-{server_name}-{channel_name}-{formatted_datetime}.csv"
 
     member_roles_count = collections.defaultdict(int)
 

@@ -1,11 +1,19 @@
 """
-//  buildings.py
+//  /home/gbrl18/bot-discord/controllers/find_building/building_list.py
 //  py-bot-uprm
 //
-//  Created by Gabriel S. Santiago on 06/23/2021.
-//  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  Created by Gabriel S Santiago on 2022/08/12
+//
+//  Last Modified: Friday, 12th August 2022 11:22:12 am
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
+# Disable Flake linting for file
+# Disable Formatter for file
+# flake8: noqa
+# fmt:off
 
 buildings_list = dict(
     {

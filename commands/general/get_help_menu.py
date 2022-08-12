@@ -1,7 +1,8 @@
-import bot
-from controllers import help_menu
 from discord import Embed, Interaction
 from discord.app_commands import Command
+
+import bot
+from controllers import help_menu
 
 
 def command():

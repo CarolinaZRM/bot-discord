@@ -12,6 +12,7 @@
 
 """
 import asyncio
+import sys
 from calendar import c
 from datetime import datetime
 from typing import Coroutine
@@ -24,7 +25,6 @@ import config
 import log
 from commands import easter_eggs, fun_games, prepa, sanitize, subscribe_slash_commands
 from controllers import daily_logs, join_listener, leveling_system
-
 from db import close_db
 
 # Enable intents.
@@ -80,14 +80,14 @@ async def main():
             if len(sections) == 2 and sections[1].isdigit():
                 deleted = await message.channel.purge(limit=int(sections[1]))
                 log.info(
-                    f'Deleted {len(deleted)} messages. " \
-                    " Selected by user {message.author}'
+                    f'Deleted {len(deleted)} messages. "                     " Selected'
+                    f" by user {message.author}"
                 )
             else:
                 while len(await message.channel.purge(limit=1500)) > 0:
                     log.info(
-                        f"BULK DELETE ' \
-                            'CALLED BY ADMIN {message.author}"
+                        "BULK DELETE '                             'CALLED BY ADMIN"
+                        f" {message.author}"
                     )
 
         log.info("passed the filter")

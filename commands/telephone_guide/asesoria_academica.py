@@ -1,18 +1,19 @@
 """
 // /bot-discord/commands/telephone_guide/asesoria_academica.py
 //  py-bot-uprm
-//  
+//
 //  Created by Gabriel S Santiago on 2021/06/23
-//  
+//
 //  Last Modified: Wednesday, 10th August 2022 7:25:21 pm
 //  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
-//  
+//
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 import discord
+from discord.app_commands import Command
+
 from commands.utils.autocomplete import program_autocomplete
-from discord.app_commands import Choice, Command
 
 from .append_fields_to_embed import append_fields_to_embed
 from .contacts import asesoria_academica
@@ -21,7 +22,10 @@ from .contacts import asesoria_academica
 def help_data():
     return {
         "name": "asesoria-academica",
-        "description": "Contacto de Asesores Académicos y Consejería Profesional para INEL/ICOM/INSO/CIIC",
+        "description": (
+            "Contacto de Asesores Académicos y Consejería Profesional para"
+            " INEL/ICOM/INSO/CIIC"
+        ),
     }
 
 
@@ -69,7 +73,10 @@ async def _asesoria_academica(interaction: discord.Interaction, program: str):
 
         embed.add_field(
             name="Cuando Puedo Ir al Departamento?",
-            value="Cuando quieras! Siempre y cuando Celines o uno de los directores este para atenderte y no estén ocupados",
+            value=(
+                "Cuando quieras! Siempre y cuando Celines o uno de los directores este"
+                " para atenderte y no estén ocupados"
+            ),
         )
         divisor = "\n\u2022 "
         # CSE DOESN'T HAVE BROCHURES

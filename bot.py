@@ -190,7 +190,8 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!join":
         if not is_sender_counselor(message):
             log.info(
-                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command"
+                f" {message.content}"
             )
             await message.author.send(
                 f"{message.author.nick}, no tienes los permisos para usar este comando"
@@ -212,7 +213,8 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
         log.info(f"[ Author Voice State] {voice_state}")
         if not voice_state:
             await message.author.send(
-                f"Hola {user_name}, primero te tienes que conectar tu al canal de voz para yo saber a cual quieres que me conecte"
+                f"Hola {user_name}, primero te tienes que conectar tu al canal de voz"
+                " para yo saber a cual quieres que me conecte"
             )
             return
 
@@ -229,7 +231,9 @@ async def join_voice_channel(client: discord.Client, message: discord.Message):
         elif __MusicPlayerState.USER_PLAYING_MUSIC != user_name:
             # no eres quien hizo el join original
             await message.author.send(
-                f"Hola {user_name}, no tienes la autorización para unirme a el canal **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}** tiene control del bot streamer."
+                f"Hola {user_name}, no tienes la autorización para unirme a el canal"
+                f" **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}**"
+                " tiene control del bot streamer."
             )
             return
 
@@ -247,7 +251,8 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
     if message.content == "!leave":
         if not is_sender_counselor(message):
             log.info(
-                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command"
+                f" {message.content}"
             )
             await message.author.send(
                 f"{message.author.nick}, no tienes los permisos para usar este comando"
@@ -255,9 +260,7 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
             return
 
         if not hasattr(message.author, "voice"):
-            await message.author.send(
-                "No me puedes sacar a un canal de voz desde el DM"
-            )
+            await message.author.send("No me puedes sacar a un canal de voz desde el DM")
             return
 
         user_name = None
@@ -292,7 +295,9 @@ async def leave_voice_channel(client: discord.Client, message: discord.Message):
         if __MusicPlayerState.USER_PLAYING_MUSIC != user_name:
             # no eres quien hizo el join original
             await message.author.send(
-                f"Hola {user_name}, no tienes la autorización para removerme del canal **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}** tiene control del bot streamer."
+                f"Hola {user_name}, no tienes la autorización para removerme del canal"
+                f" **'{voice_channel}'**. **{__MusicPlayerState.USER_PLAYING_MUSIC}**"
+                " tiene control del bot streamer."
             )
             return
         else:
@@ -315,12 +320,12 @@ async def play_audio(client: discord.Client, message: discord.Message):
 
     if __MusicPlayerState.PLAYING:
         if __MusicPlayerState.CURRENT_USER_PLAYING_MUSIC != message.author:
-
             return
 
     if not is_sender_counselor(message):
         log.info(
-            f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
+            f"[PREPA_BREACH] user {message.author.nick} tried to to command"
+            f" {message.content}"
         )
         await message.author.send(
             f"{message.author.nick}, no tienes los permisos para usar este comando"
@@ -340,7 +345,8 @@ async def play_audio(client: discord.Client, message: discord.Message):
 
     if len(sections) < 2:
         await message.author.send(
-            f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier website publico. (Youtube, Soundcloud, etc.)"
+            f"{user_name}, te falto el URL del video o cancion. Puede ser de cualquier"
+            " website publico. (Youtube, Soundcloud, etc.)"
         )
         return
 
@@ -367,7 +373,8 @@ async def play_audio(client: discord.Client, message: discord.Message):
 
     if voice_client.is_playing():
         await message.author.send(
-            "No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el audio primero"
+            "No puedo darle PLAY a un audio mientras uno esta en PLAY. Intenta pausar el"
+            " audio primero"
         )
         return
 
@@ -391,7 +398,7 @@ async def play_audio(client: discord.Client, message: discord.Message):
     except youtube_dl.DownloadError as err:
         log.error(f"{err}")
         await message.author.send(
-            f"Me econtre con un error descargando el video.\n" f"Error:\n{str(err)}"
+            f"Me econtre con un error descargando el video.\nError:\n{str(err)}"
         )
         return
 
@@ -410,10 +417,10 @@ async def play_audio(client: discord.Client, message: discord.Message):
 # This is a command method
 async def pause_audio(client: discord.Client, message: discord.Message):
     if message.content == "!pause":
-
         if not is_sender_counselor(message):
             log.info(
-                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command"
+                f" {message.content}"
             )
             await message.author.send(
                 f"{message.author.nick}, no tienes los permisos para usar este comando"
@@ -453,7 +460,8 @@ async def resume_audio(client: discord.Client, message: discord.Message):
     if message.content == "!resume":
         if not is_sender_counselor(message):
             log.info(
-                f"[PREPA_BREACH] user {message.author.nick} tried to to command {message.content}"
+                f"[PREPA_BREACH] user {message.author.nick} tried to to command"
+                f" {message.content}"
             )
             await message.author.send(
                 f"{message.author.nick}, no tienes los permisos para usar este comando"
