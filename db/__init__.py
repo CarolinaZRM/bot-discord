@@ -1,11 +1,12 @@
 import mongomock
 import pymongo
+from pymongo.cursor import Cursor
 
 import config
 import log
 from db import mock_seed
 
-__all__ = ["get_database", "close_db"]
+__all__ = ["get_database", "close_db", "Cursor"]
 
 __mongo_client: pymongo.MongoClient = None
 

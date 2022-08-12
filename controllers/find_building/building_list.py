@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/controllers/find_building/building_list.py
+//  /bot-discord/controllers/find_building/building_list.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/12

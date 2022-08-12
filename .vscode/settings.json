@@ -1,4 +1,13 @@
 {
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/__pycache__": true
+    },
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.linting.flake8Args": ["--max-line-length", "89"],
@@ -38,5 +47,6 @@
                 "Copyright © <<filecreated('YYYY')>> teamMADE. All rights reserved."
             ]
         }
-    ]
+    ],
+    "cSpell.words": ["INSO"]
 }

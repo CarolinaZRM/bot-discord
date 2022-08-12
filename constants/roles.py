@@ -7,11 +7,13 @@
 //  Copyright © 2021 bermedDev. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
-ADMINISTRATOR_ROLES = set(
-    [
-        "Administrator",
-        "EstudianteOrientador",
-    ]
-)
 
-MADE_ROLES = set(["Administrator", "DCSP", "ConsejeraProfesional"])
+ESTUDIANTE_ORIENTADOR = "EstudianteOrientador"
+
+ADMINISTRATOR = "Administrator"
+
+ADMINISTRATOR_ROLES = set([ADMINISTRATOR, ESTUDIANTE_ORIENTADOR])
+
+MADE_ROLES = set([ADMINISTRATOR, "DCSP", "ConsejeraProfesional"])
+
+PROGRAM_ROLES = set(["INEL", "ICOM", "INSO", "CIIC"])

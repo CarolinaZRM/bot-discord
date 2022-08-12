@@ -18,6 +18,7 @@ from . import (
     find_building,
     get_academic_calendar,
     get_curriculum,
+    get_eo_names,
     get_faq,
     get_freshman_guide,
     get_help_menu,
@@ -45,6 +46,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
         command_tree.add_command(get_curriculum.command())
         command_tree.add_command(get_made_website.command())
         command_tree.add_command(get_project_info.command())
+        command_tree.add_command(get_eo_names.command())
     except Exception as e:
         print(e)
 

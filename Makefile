@@ -1,5 +1,5 @@
 ###
-# /home/gbrl18/bot-discord/Makefile
+# /bot-discord/Makefile
 # py-bot-uprm
 # 
 # Created by Gabriel S Santiago on 2022/08/12

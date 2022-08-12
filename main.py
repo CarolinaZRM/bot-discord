@@ -20,8 +20,8 @@ from discord.app_commands import CommandTree
 import bot
 import config
 import log
-from commands import easter_eggs, prepa, sanitize, subscribe_slash_commands
-from controllers import daily_logs, join_listener, leveling_system
+from commands import easter_eggs, sanitize, subscribe_slash_commands
+from controllers import daily_logs, eo_monitor, join_listener, leveling_system
 from db import close_db
 
 # Enable intents.
@@ -107,27 +107,19 @@ async def main():
 
     @client.event
     async def on_member_join(member: discord.Member):
-        await bot.verify_if_counselor(member)
         await join_listener.on_join(member, client)
+        await eo_monitor.listeners.on_member_join(member)
 
     @client.event
-    async def on_member_update(before, after):
-        if before.roles != after.roles:
-            log.info(f"before: {before} After: {after}")
-            await bot.update_admin_list(client)
-            prepa.extract_counselors(client)
+    async def on_member_update(before: discord.Member, after: discord.Member):
+        await eo_monitor.listeners.on_member_update(before, after)
 
     @client.event
     async def on_ready():
         await client.wait_until_ready()
-
         await subscribe_slash_commands(cmd_tree)
         await cmd_tree.sync()
-
-        log.info(f"Guild Obj: {client.guilds}")
-        await bot.update_admin_list(client)
-        prepa.extract_counselors(client)
-
+        await eo_monitor.listeners.on_ready(client)
         log.info("[VERBOSE] On Ready Finished.")
 
     # start the client

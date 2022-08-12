@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/commands/general/get_links.py
+//  /bot-discord/commands/general/get_links.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/12

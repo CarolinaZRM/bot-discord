@@ -16,3 +16,7 @@ def load_mock_data(database: mongomock.Database):
     with open(DATA_PATH / "prepas.json", "r") as prepa_data_file:
         prepas_data = json.load(prepa_data_file)
         database.get_collection("prepas").insert_many(prepas_data)
+
+    with open(DATA_PATH / "eo_list.json", "r") as eo_data_file:
+        eo_data = json.load(eo_data_file)
+        database.get_collection("student_orientators").insert_many(eo_data)

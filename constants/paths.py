@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/constants/paths.py
+//  /bot-discord/constants/paths.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/12

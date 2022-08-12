@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/tests/controllers/test_leveling_system.py
+//  /bot-discord/tests/controllers/test_leveling_system.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/12

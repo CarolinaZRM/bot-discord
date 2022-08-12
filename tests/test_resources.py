@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/tests/test_resources.py
+//  /bot-discord/tests/test_resources.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/12

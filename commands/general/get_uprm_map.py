@@ -5,7 +5,6 @@ import log
 
 
 def command():
-    print("UPRM MAP SUB")
     return Command(
         name="map",
         description="Provee un enlace a el Mapa de UPRM",

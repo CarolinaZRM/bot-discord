@@ -1,5 +1,5 @@
 """
-//  /home/gbrl18/bot-discord/controllers/join_listener/__init__.py
+//  /bot-discord/controllers/join_listener/__init__.py
 //  py-bot-uprm
 //
 //  Created by Gabriel S Santiago on 2022/08/11
