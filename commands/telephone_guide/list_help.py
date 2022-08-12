@@ -3,8 +3,6 @@ from typing import Dict, List
 import discord
 from discord.app_commands import Command
 
-import log
-
 
 def command(help_list: List[Dict]):
     async def _telephone_guide_help(interaction: discord.Interaction):

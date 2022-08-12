@@ -7,7 +7,6 @@
 //  Copyright © 2021 agSant01. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
-from code import interact
 
 import discord
 from discord.app_commands import Command

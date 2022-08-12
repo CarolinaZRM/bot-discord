@@ -7,10 +7,9 @@
 //  Copyright © 2021 agSant01. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
-from typing import List
 
 import discord
-from discord.app_commands import Choice, Command
+from discord.app_commands import Command
 
 from commands.utils.autocomplete import program_autocomplete
 

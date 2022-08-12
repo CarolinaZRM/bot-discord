@@ -15,16 +15,13 @@
 import collections
 import csv
 import os
-import re
 import shutil
-from curses.ascii import isdigit
 from datetime import datetime
 from os import path
 
 import discord
 from discord.app_commands import Command
 
-import log
 from constants import paths as app_paths
 
 ATTENDANCE_PATH = path.join(app_paths.TEXT_FILES, "attendance")

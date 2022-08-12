@@ -20,7 +20,6 @@ import csv
 import json
 import os
 import sys
-from ast import parse
 from pathlib import Path
 from typing import Collection, Dict, List, Literal
 

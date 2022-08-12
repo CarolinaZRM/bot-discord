@@ -1,4 +1,4 @@
-from discord import Embed, Interaction
+from discord import Interaction
 from discord.app_commands import Command
 
 import bot

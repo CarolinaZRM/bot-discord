@@ -15,7 +15,6 @@ from typing import Any, Dict
 from discord import Embed, Interaction
 from discord.app_commands import Command
 
-import log
 from controllers.leveling_system import general_leaderboard
 
 

@@ -13,7 +13,7 @@
 
 
 from discord import Interaction
-from discord.app_commands import CommandTree, Group, MissingAnyRole, MissingRole
+from discord.app_commands import CommandTree, MissingAnyRole, MissingRole
 
 import log
 from commands.utils.command_group import InteractionCheckedGroup

@@ -11,7 +11,6 @@
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 import logging
-import math
 import sys
 import unittest
 from ctypes import Union
@@ -21,7 +20,7 @@ import mongomock
 
 import config
 from controllers.leveling_system import add_experience, general_leaderboard, level_join
-from db import close_db, get_database
+from db import get_database
 
 
 class TestLevelingSystem(unittest.TestCase):

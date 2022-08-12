@@ -12,9 +12,6 @@
 
 """
 import asyncio
-import sys
-from calendar import c
-from datetime import datetime
 from typing import Coroutine
 
 import discord
@@ -23,7 +20,7 @@ from discord.app_commands import CommandTree
 import bot
 import config
 import log
-from commands import easter_eggs, fun_games, prepa, sanitize, subscribe_slash_commands
+from commands import easter_eggs, prepa, sanitize, subscribe_slash_commands
 from controllers import daily_logs, join_listener, leveling_system
 from db import close_db
 

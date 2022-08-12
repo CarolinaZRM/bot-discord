@@ -13,7 +13,6 @@
 
 import json
 import os
-import re
 from datetime import datetime
 
 import discord
