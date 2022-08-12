@@ -19,30 +19,33 @@ from discord.app_commands import CommandTree, Group, MissingAnyRole, MissingRole
 
 from . import attendance, user_count, bulk_delete_admin
 
+from commands.utils.command_group import InteractionCheckedGroup
+
 
 async def subscribe_commands(command_tree: CommandTree = None):
     log.info("subscribing Server Management Commands...")
 
     COMMAND_NAME = "server_management"
 
-    class MyGroup(Group):
-        async def interaction_check(self, interaction: Interaction) -> bool:
-            if not hasattr(interaction.user, "roles"):
-                # call from DM
-                await interaction.response.send_message(
-                    "Este commando no se puede utilizar desde el DM"
-                )
-                return False
+    async def dm_interaction_check(self, interaction: Interaction) -> bool:
+        if not hasattr(interaction.user, "roles"):
+            # call from DM
+            await interaction.response.send_message(
+                "Este commando no se puede utilizar desde el DM"
+            )
+            return False
 
-            for role in interaction.user.roles:
-                if role.name in roles.ADMINISTRATOR_ROLES:
-                    return True
-            raise MissingAnyRole(list(roles.ADMINISTRATOR_ROLES))
+        for role in interaction.user.roles:
+            if role.name in roles.ADMINISTRATOR_ROLES:
+                return True
+        raise MissingAnyRole(list(roles.ADMINISTRATOR_ROLES))
 
-    server_management_grp = MyGroup(
+    server_management_grp = InteractionCheckedGroup(
         name=COMMAND_NAME,
         description=f"Comandos para EOs y Admin para manejo y metadata del Servidor",
     )
+
+    server_management_grp.set_interaction_check(dm_interaction_check)
 
     @server_management_grp.error
     async def on_group_error(interaction: Interaction, error: Exception):
