@@ -1,0 +1,182 @@
+[
+    {
+        "first_name": "Reagen",
+        "last_name": "MacVay",
+        "mother_lastname": "Buxam",
+        "email": "reagen.macvay@upr.edu",
+        "department_id": "INSO",
+        "group_id": "Group3",
+        "middle_initial": "B"
+    },
+    {
+        "first_name": "Any",
+        "last_name": "Roddy",
+        "mother_lastname": "",
+        "email": "any.roddy@upr.edu",
+        "department_id": "INSO",
+        "group_id": "Group1",
+        "middle_initial": "A"
+    },
+    {
+        "first_name": "Gwenni",
+        "last_name": "Kender",
+        "mother_lastname": "Peek",
+        "email": "gwenni.kender@upr.edu",
+        "department_id": "INSO",
+        "group_id": "Group1",
+        "middle_initial": "D"
+    },
+    {
+        "first_name": "Mariann",
+        "last_name": "O'Fihillie",
+        "mother_lastname": "",
+        "email": "mariann.o'fihillie@upr.edu",
+        "department_id": "CIIC",
+        "group_id": "Group2",
+        "middle_initial": "D"
+    },
+    {
+        "first_name": "Gawen",
+        "last_name": "Moan",
+        "mother_lastname": "Maisey",
+        "email": "gawen.moan@upr.edu",
+        "department_id": "ICOM",
+        "group_id": "Group1",
+        "middle_initial": "A"
+    },
+    {
+        "first_name": "Connor",
+        "last_name": "Beckworth",
+        "mother_lastname": "",
+        "email": "connor.beckworth@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group2",
+        "middle_initial": "A"
+    },
+    {
+        "first_name": "Tomasine",
+        "last_name": "Szymczyk",
+        "mother_lastname": "",
+        "email": "tomasine.szymczyk@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group3",
+        "middle_initial": "B"
+    },
+    {
+        "first_name": "Cherish",
+        "last_name": "Florio",
+        "mother_lastname": "",
+        "email": "cherish.florio@upr.edu",
+        "department_id": "INSO",
+        "group_id": "Group2",
+        "middle_initial": "J"
+    },
+    {
+        "first_name": "Claire",
+        "last_name": "Di Carlo",
+        "mother_lastname": "Kwietak",
+        "email": "claire.di carlo@upr.edu",
+        "department_id": "CIIC",
+        "group_id": "Group1",
+        "middle_initial": "A"
+    },
+    {
+        "first_name": "Tracy",
+        "last_name": "Pierse",
+        "mother_lastname": "Biskupek",
+        "email": "tracy.pierse@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group3",
+        "middle_initial": "D"
+    },
+    {
+        "first_name": "Caddric",
+        "last_name": "Janaszewski",
+        "mother_lastname": "Shephard",
+        "email": "caddric.janaszewski@upr.edu",
+        "department_id": "ICOM",
+        "group_id": "Group3",
+        "middle_initial": "B"
+    },
+    {
+        "first_name": "Winnifred",
+        "last_name": "Grimsdike",
+        "mother_lastname": "",
+        "email": "winnifred.grimsdike@upr.edu",
+        "department_id": "CIIC",
+        "group_id": "Group1",
+        "middle_initial": "C"
+    },
+    {
+        "first_name": "Desiree",
+        "last_name": "Selcraig",
+        "mother_lastname": "",
+        "email": "desiree.selcraig@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group2",
+        "middle_initial": "J"
+    },
+    {
+        "first_name": "Sallyann",
+        "last_name": "Gartland",
+        "mother_lastname": "",
+        "email": "sallyann.gartland@upr.edu",
+        "department_id": "CIIC",
+        "group_id": "Group2",
+        "middle_initial": "B"
+    },
+    {
+        "first_name": "Hebert",
+        "last_name": "Crutchley",
+        "mother_lastname": "Irvine",
+        "email": "hebert.crutchley@upr.edu",
+        "department_id": "ICOM",
+        "group_id": "Group3",
+        "middle_initial": "C"
+    },
+    {
+        "first_name": "Zollie",
+        "last_name": "Vigne",
+        "mother_lastname": "McDowell",
+        "email": "zollie.vigne@upr.edu",
+        "department_id": "INSO",
+        "group_id": "Group1",
+        "middle_initial": "D"
+    },
+    {
+        "first_name": "Hilton",
+        "last_name": "Steuart",
+        "mother_lastname": "Leggen",
+        "email": "hilton.steuart@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group3",
+        "middle_initial": "C"
+    },
+    {
+        "first_name": "Jo",
+        "last_name": "Olsen",
+        "mother_lastname": "",
+        "email": "jo.olsen@upr.edu",
+        "department_id": "ICOM",
+        "group_id": "Group3",
+        "middle_initial": "C"
+    },
+    {
+        "first_name": "Lind",
+        "last_name": "Marcq",
+        "mother_lastname": "Iskowicz",
+        "email": "lind.marcq@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group3",
+        "middle_initial": "J"
+    },
+    {
+        "first_name": "Udale",
+        "last_name": "Fallows",
+        "mother_lastname": "",
+        "email": "udale.fallows@upr.edu",
+        "department_id": "INEL",
+        "group_id": "Group2",
+        "middle_initial": "J"
+    }
+]

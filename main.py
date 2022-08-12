@@ -32,7 +32,7 @@ from commands import (
     subscribe_slash_commands,
 )
 
-from controllers import daily_logs, leveling_system
+from db import close_db
 
 # Enable intents.
 # Documentation: https://discordpy.readthedocs.io/en/latest/intents.html
@@ -165,3 +165,5 @@ if __name__ == "__main__":
         if coroutine:
             coroutine.close()
             log.error("[EXIT] Closed coroutine...")
+
+        close_db()

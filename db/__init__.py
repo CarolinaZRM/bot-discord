@@ -20,7 +20,8 @@ def get_database():
 
 
 def close_db():
-    __mongo_client.close()
+    if __mongo_client:
+        __mongo_client.close()
 
 
 def _init_client(mongo_client: pymongo.MongoClient = None):
