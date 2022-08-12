@@ -65,7 +65,7 @@ async def event_greet_new_member(client: discord.Client, member: discord.Member)
             'No encuentro ese email en mis registros. Intenta de nuevo:\n\n***Si tu email no aparece y estas seguro de que eres un prepa de INEL, ICOM, INSO o CIIC, comunícate con cualquier estudiante orientador del servidor de discord. Tienen el rol de "EstudianteOrientador"'
         )
         student_email = await client.wait_for("message", check=check_same_user)
-        student_info = get_student_info(student_email.content)
+        student_info = _get_student_info(student_email.content)
 
     await assign_group(member, student_info["group_id"], student_info["department_id"])
 
