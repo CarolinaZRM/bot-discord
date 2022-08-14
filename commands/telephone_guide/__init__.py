@@ -7,14 +7,6 @@
 //  Copyright © 2021 agSant01. All rights reserved.
 //  Copyright © 2021 teamMADE. All rights reserved.
 """
-
-# from .telephone_guide_help import (
-#     get_contact_list,
-#     get_guide_handler,
-#     get_telephone_guide_help,
-#     is_command,
-# )
-
 from discord.app_commands import CommandTree, Group
 
 import log

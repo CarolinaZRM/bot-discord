@@ -21,8 +21,8 @@ from . import leveling_system, server_management, telephone_guide
 async def subscribe_slash_commands(cmd_tree: CommandTree):
     try:
         await general_commands.subscribe_commands(cmd_tree)
-        await telephone_guide.subscribe_commands(cmd_tree)
-        await server_management.subscribe_commands(cmd_tree)
         await leveling_system.subscribe_commands(cmd_tree)
+        await server_management.subscribe_commands(cmd_tree)
+        await telephone_guide.subscribe_commands(cmd_tree)
     except Exception as err:
         log.error(err)

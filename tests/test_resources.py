@@ -33,6 +33,7 @@ class ResourceTest(unittest.TestCase):
         else:
             self.due_date = datetime.datetime(self.today.year + 1, 6, 1, 0, 0, 0)
 
+    # FORCED TODO LIST FOR EACH PREPA WEEK
     RESOURCE_MAP = {
         "Curriculos_verified": False,
         "Embeds_verified": False,

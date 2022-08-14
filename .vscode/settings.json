@@ -6,7 +6,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "**/__pycache__": true
+        "**/__pycache__": true,
+        "**/*.pyc": true
     },
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
@@ -48,5 +49,6 @@
             ]
         }
     ],
-    "cSpell.words": ["INSO"]
+    "cSpell.words": ["INSO"],
+    "discord.enabled": false
 }

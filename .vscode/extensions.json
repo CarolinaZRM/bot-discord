@@ -5,7 +5,7 @@
     // List of extensions which should be recommended for users of this workspace.
     "recommendations": [
         "ms-python.python",
-        "njpwerner.autodocst",
+        "njpwerner.autodocstring",
         "ms-python.isort",
         "esbenp.prettier-vscode",
         "psioniq.psi-header",

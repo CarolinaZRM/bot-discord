@@ -30,7 +30,9 @@ def _init_client(mongo_client: pymongo.MongoClient = None):
     log.debug("Initializing MongoDb Client...")
 
     if (config.MONGO_MOCK or "").lower() == "true":
-        mongo_client = mongomock.MongoClient(config.MONGO_CONNECTION_STRING)
+        mongo_client = mongomock.MongoClient(
+            config.MONGO_CONNECTION_STRING
+        )  # fake Server
         mock_seed.load_mock_data(mongo_client.get_database(config.MONGO_DB))
     else:
         mongo_client = pymongo.MongoClient(config.MONGO_CONNECTION_STRING)

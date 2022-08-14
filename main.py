@@ -9,7 +9,6 @@
 //  Edited by Orlando Saldaña on July 23, 2021
 //  Copyright © 2020 bermedDev. All rights reserved.
 //  Copyright © 2020 teamMADE. All rights reserved.
-
 """
 import asyncio
 from typing import Coroutine
@@ -19,6 +18,7 @@ from discord.app_commands import CommandTree
 
 import bot
 import config
+import event_listeners
 import log
 from commands import easter_eggs, sanitize, subscribe_slash_commands
 from controllers import daily_logs, eo_monitor, join_listener, leveling_system
@@ -90,6 +90,7 @@ async def main():
         log.info("passed the filter")
 
         await leveling_system.on_message(message)
+        await event_listeners.on_message(message, client)
 
         # Created event passed Message object
         # to use for response of bot to discord client

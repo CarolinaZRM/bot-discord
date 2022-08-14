@@ -55,8 +55,6 @@ def level_join(user_id: str, display_name: str):
 def add_experience(
     user_id: str, display_name: str, exp_to_add: int
 ) -> Union[ExperienceChangeResult, None]:
-    log.debug(f"Add exp for #{user_id} | {display_name} | Adding: #{exp_to_add}")
-
     leaderboard_collection = get_database().get_collection("leaderboard")
     user_id = str(user_id)
 
@@ -87,6 +85,7 @@ def add_experience(
 
     old_level = user_info["level"]
     new_level = calculate_level(old_level, user_info["experience"])
+    log.debug(f"Add exp for #{user_id} | {display_name} | Adding: #{exp_to_add}")
 
     result = leaderboard_collection.update_one(
         {"user_id": user_id},

@@ -31,4 +31,3 @@ lint:
 	black --preview --line-length 89 .
 	autoflake --exclude */venv/* --recursive --in-place --remove-unused-variables --remove-all-unused-imports .
 	isort --profile=black .
-
