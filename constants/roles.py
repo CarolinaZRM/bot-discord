@@ -12,6 +12,8 @@ ESTUDIANTE_ORIENTADOR = "EstudianteOrientador"
 
 ADMINISTRATOR = "Administrator"
 
+PREPA = "prepa"
+
 ADMINISTRATOR_ROLES = set([ADMINISTRATOR, ESTUDIANTE_ORIENTADOR])
 
 MADE_ROLES = set([ADMINISTRATOR, "DCSP", "ConsejeraProfesional"])

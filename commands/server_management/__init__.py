@@ -10,8 +10,6 @@
 //  Copyright © 2022 agSant01. All rights reserved.
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
-
-
 from discord import Interaction
 from discord.app_commands import CommandTree, MissingAnyRole, MissingRole
 
@@ -19,7 +17,7 @@ import log
 from commands.utils.command_group import InteractionCheckedGroup
 from constants import roles
 
-from . import attendance, bulk_delete_admin, user_count
+from . import add_word_to_censor, attendance, bulk_delete_admin, user_count
 
 
 async def subscribe_commands(command_tree: CommandTree = None):
@@ -27,7 +25,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
 
     COMMAND_NAME = "server_management"
 
-    async def dm_interaction_check(self, interaction: Interaction) -> bool:
+    async def dm_interaction_check(interaction: Interaction) -> bool:
         if not hasattr(interaction.user, "roles"):
             # call from DM
             await interaction.response.send_message(
@@ -42,7 +40,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
 
     server_management_grp = InteractionCheckedGroup(
         name=COMMAND_NAME,
-        description=f"Comandos para EOs y Admin para manejo y metadata del Servidor",
+        description="Comandos para EOs y Admin para manejo y metadata del Servidor",
     )
 
     server_management_grp.set_interaction_check(dm_interaction_check)
@@ -59,6 +57,7 @@ async def subscribe_commands(command_tree: CommandTree = None):
     server_management_grp.add_command(attendance.command())
     server_management_grp.add_command(user_count.command())
     server_management_grp.add_command(bulk_delete_admin.command())
+    server_management_grp.add_command(add_word_to_censor.command())
 
     # Add group to RootTree
     command_tree.add_command(server_management_grp)

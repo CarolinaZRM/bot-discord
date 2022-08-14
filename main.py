@@ -16,13 +16,13 @@ from typing import Coroutine
 import discord
 from discord.app_commands import CommandTree
 
-import bot
 import config
 import event_listeners
 import log
-from commands import easter_eggs, sanitize, subscribe_slash_commands
+from commands import subscribe_slash_commands
 from controllers import daily_logs, eo_monitor, join_listener, leveling_system
 from db import close_db
+from event_listeners import profanity_filter
 
 # Enable intents.
 # Documentation: https://discordpy.readthedocs.io/en/latest/intents.html
@@ -54,40 +54,11 @@ async def main():
             return
         log.info(f"[on_message] {message}")
 
-        adding_profanity = await sanitize.add_profanity_to_list(message)
-
-        if adding_profanity:
-            log.info(f"{message.author} added new profanity.")
-            return
-
-        has_profanity = await sanitize.profanity_filter(message)
+        has_profanity = await profanity_filter.on_message(message)
         if has_profanity:
-            log.info("Has profanity")
             return
 
-        log.info(f"[USER] {message.author.name}#{message.author.id}")
-        if (
-            message.content.startswith("!bulk_delete_admin")
-            and bot.is_sender_admin(message)
-            and not bot.is_from_dm(message)
-        ):
-            sections = message.content.split(":")
-            log.info(f"DELETE COMMAND SECTIONS: {sections}")
-            log.info(f"BULK DELETE FILTER PASSED BY ADMIN {message.author}")
-            if len(sections) == 2 and sections[1].isdigit():
-                deleted = await message.channel.purge(limit=int(sections[1]))
-                log.info(
-                    f'Deleted {len(deleted)} messages. "                     " Selected'
-                    f" by user {message.author}"
-                )
-            else:
-                while len(await message.channel.purge(limit=1500)) > 0:
-                    log.info(
-                        "BULK DELETE '                             'CALLED BY ADMIN"
-                        f" {message.author}"
-                    )
-
-        log.info("passed the filter")
+        log.info(f"[USER] {message.author.name}#{message.author.discriminator}")
 
         await leveling_system.on_message(message)
         await event_listeners.on_message(message, client)
@@ -96,15 +67,9 @@ async def main():
         # to use for response of bot to discord client
         daily_logs.analytics(message)
 
-        await easter_eggs.subscribe_easter_eggs(message)
-        # await fun_games.event_guessing_game(message, client)
-        # await fun_games.event_ping_pong(message)
-        # await fun_games.event_rock_paper_scissor(message, client)
-        # await prepa.get_counselor_names(message)
-
     @client.event
     async def on_message_edit(before: discord.Message, after: discord.Message):
-        _ = await sanitize.profanity_filter(after)
+        await profanity_filter.on_message(after)
 
     @client.event
     async def on_member_join(member: discord.Member):

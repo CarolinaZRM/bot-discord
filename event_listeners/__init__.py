@@ -13,8 +13,9 @@
 
 from discord import Client, Message
 
-from . import games
+from . import easter_eggs, games
 
 
 async def on_message(message: Message, client: Client):
+    await easter_eggs.on_message(message)
     await games.on_message(message, client)

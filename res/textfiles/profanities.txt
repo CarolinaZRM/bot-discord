@@ -38,3 +38,4 @@ jode
 palte bicho
 mamabicho
 mamabicha
+tu mai

@@ -17,17 +17,12 @@ from typing import Union
 import discord
 import youtube_dl
 from discord.channel import ChannelType
-from discord.errors import Forbidden
 
-import config
 import log
 from constants import paths, roles
 
 os.makedirs(os.path.join(paths.AUDIO), exist_ok=True)
 
-_COUNSELOR_USERS_FILE = os.path.join(paths.TEXT_FILES, "counselors.txt")
-
-_VALIDATED_COUNSELORS = []
 
 _TMP_AUDIO_FILE = os.path.join(paths.AUDIO, "song.mp3")
 
@@ -39,85 +34,33 @@ class __MusicPlayerState(object):
     CURRENT_USER_PLAYING_MUSIC = None
 
 
-def _extractAdmins(client: discord.Client):
-    counselor_file_ref = open(_COUNSELOR_USERS_FILE, "r")
-
-    counselor_user_handles = set(
-        map(lambda x: x.strip(), counselor_file_ref.readlines())
-    )
-
-    counselor_file_ref.close()
-
-    guild: discord.Guild = client.get_guild(int(config.GUILD_ID_NUM))
-
-    for member in guild.members:
-        for role in member.roles:
-            if (
-                role.name == "EstudianteOrientador"
-                or role.name == "ConsejeraProfesional"
-            ):
-                counselor_user_handles.add(str(member))
-
-    counselor_user_handles.discard(" ")
-    counselor_user_handles.discard("")
-
-    current_counselors = list(counselor_user_handles)
-    current_counselors.sort()
-
-    updated_handle_list = "\n".join(current_counselors)
-
-    file2 = open(_COUNSELOR_USERS_FILE, "w")
-    file2.writelines(updated_handle_list)
-    file2.close()
-
-
-def _uploadCounselors():
-    global _VALIDATED_COUNSELORS
-    f = open(_COUNSELOR_USERS_FILE, "r")
-    for counselor in f:
-        _VALIDATED_COUNSELORS.append(counselor.strip())
-    f.close()
-
-
-async def update_admin_list(client: discord.Client):
-    _extractAdmins(client)
-    _uploadCounselors()
-    log.info("[VERBOSE] Updated Admins.")
-
-
-async def verify_if_counselor(member: discord.Member):
-    log.info(f"[ bot.py] {_VALIDATED_COUNSELORS}")
-    if str(member) in _VALIDATED_COUNSELORS:
-        log.info(f"Joined Member is Counselor: {member}")
-        guild: discord.Guild = member.guild
-        for role in guild.roles:
-            if (
-                role.name == "EstudianteOrientador"
-                or role.name == "ConsejeraProfesional"
-            ):
-                log.info(f"Role: {role}")
-                try:
-                    await member.add_roles(role)
-                except Forbidden:
-                    log.error("Bot does not have permission to add roles.")
-    else:
-        log.info(f"[bot.py] Joined user member '{member}' is not Counselor")
-
-
 def is_sender_counselor(author: Union[discord.Member, discord.User]):
-    global _VALIDATED_COUNSELORS
-    return str(author) in _VALIDATED_COUNSELORS
+    if isinstance(author, discord.User):
+        return False
+
+    eo_role = discord.utils.get(author.roles, name=roles.ESTUDIANTE_ORIENTADOR)
+
+    return eo_role is not None
 
 
 def is_sender_prepa(author: Union[discord.Member, discord.User]):
-    return str(author) not in _VALIDATED_COUNSELORS
+    if isinstance(author, discord.User):
+        return False
+
+    prepa_role = discord.utils.get(author.roles, name=roles.PREPA)
+
+    return prepa_role is not None
 
 
-def is_sender_admin(message: discord.Message):
-    for user_roles in message.author.roles:
-        if user_roles.name in roles.ADMINISTRATOR_ROLES:
-            return True
-    return False
+def is_sender_admin(author: Union[discord.Member, discord.User]):
+    if isinstance(author, discord.User):
+        return False
+
+    admin_role = discord.utils.find(
+        lambda role: role.name in roles.ADMINISTRATOR_ROLES, author.roles
+    )
+
+    return admin_role is not None
 
 
 def is_from_a_channel(message: discord.Message) -> bool:

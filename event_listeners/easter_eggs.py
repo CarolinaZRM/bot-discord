@@ -20,7 +20,7 @@ SHEESH_REGEX = re.compile("s+h+ee+s+h+s*", re.IGNORECASE)
 YET_REGEX = re.compile("y+ee+t+s*", re.IGNORECASE)
 
 
-async def subscribe_easter_eggs(message: discord.Message):
+async def on_message(message: discord.Message):
     await _cancion_team_made(message)
     await _do_parkour(message)
     await _is_sheeshed(message)

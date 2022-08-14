@@ -28,7 +28,7 @@ def check_same_user(author: Union[Member, User]):
     return _check_equal
 
 
-CMD = "?rps"
+CMD = "!rps"
 
 # play against bot
 BOT_PLAYS = ["piedra", "papel", "tijera"]
