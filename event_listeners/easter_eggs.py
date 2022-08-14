@@ -1,12 +1,16 @@
 """
-//  /event_handlers/easter_eggs.py
+//  /bot-discord/event_listeners/easter_eggs.py
 //  py-bot-uprm
 //
-//  Created by Gabriel S. Santiago on 07/31/2021
-//  Copyright © 2021 bermedDev. All rights reserved.
-//  Copyright © 2021 agSant01. All rights reserved.
-//  Copyright © 2021 teamMADE. All rights reserved.
+//  Created by Gabriel S Santiago on 2022/08/12
+//
+//  Last Modified: Sunday, 14th August 2022 10:40:12 am
+//  Modified By: Gabriel S Santiago (gabriel.santiago16@upr.edu)
+//
+//  Copyright © 2022 agSant01. All rights reserved.
+//  Copyright © 2022 teamMADE. All rights reserved.
 """
+
 
 import random
 import re
@@ -71,6 +75,7 @@ def is_directed_to_bot(user_input):
 async def _do_parkour(message: discord.Message):
     CMD_ES = r" *(tu)? *haces *parkour *\?*"
     CMD_EN = r"(do)? *you *(do|know) *parkour *\?*"
+    CMD_LETS = r" *hace(r|mos)? *parkour"
 
     user_input = message.content.lower()
 
@@ -82,6 +87,14 @@ async def _do_parkour(message: discord.Message):
     if re.search(CMD_EN, user_input) or re.search(CMD_ES, user_input):
         await message.reply(
             content=f"{random.choice(PARKOUR_RESPONSE)}\n{random.choice(PARKOUR_GIFS)}"
+        )
+
+    if re.search(CMD_LETS, user_input):
+        await message.reply(
+            content=(
+                "PUEESSS CLAAAROOOO, Indica donde y cuando"
+                f" :sunglasses:\n{random.choice(PARKOUR_GIFS)}"
+            )
         )
 
 
