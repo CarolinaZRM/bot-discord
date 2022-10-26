@@ -11,10 +11,13 @@
 //  Copyright © 2022 teamMADE. All rights reserved.
 """
 
+import re
+
 from discord import Interaction
 from discord.app_commands import Command
 
-from controllers.find_building import get_building_information, is_valid_room_number
+import log
+from controllers.find_building import get_building_information
 
 
 def command():
@@ -27,27 +30,38 @@ def command():
     )
 
 
+def _format_classroom(salon: str):
+    internal_ = salon.replace("-", "")
+    letters = re.findall("^\D+", internal_)
+    numbers = re.findall("\d+$", internal_)
+    if numbers and letters:
+        return str(letters[0]).upper() + "-" + numbers[0]
+
+    if letters:
+        return str(letters[0]).upper()
+
+    return salon
+
+
 async def _find_building(interaction: Interaction, salon: str):
     user_name = interaction.user.display_name
-
+    log.debug("enrty: " + salon + str(len(salon)))
+    formatted_salon = _format_classroom(salon)
     if len(salon):
-        if not is_valid_room_number(salon):
-            await interaction.response.send_message(
-                "No entendí el código de ese salon.\nIntenta escribirlo con guión."
-            )
-            return
-
         information = get_building_information(salon)
-
         if information:
             response_msg = (
-                f"Hola {user_name}! Es posible que este salon se encuentre en el"
-                f" edificio: **'{information['name']}'**\n{information['gmaps_loc']}"
+                f'Hola {user_name}! Es posible que el salón "{formatted_salon}" se'
+                " encuentre en el edificio:"
+                f" **'{information['name']}'**\n{information['gmaps_loc']}"
             )
-
             await interaction.response.send_message(response_msg)
         else:
-            response_msg = f"{user_name}, no sé en que edificio está salón. :("
+            response_msg = (
+                f"{user_name}, no sé en que edificio está el salón"
+                f' "{formatted_salon}". :('
+            )
+            log.debug(response_msg)
             await interaction.response.send_message(response_msg)
     else:
         response_msg = (
@@ -55,4 +69,5 @@ async def _find_building(interaction: Interaction, salon: str):
             " !salon:*<código>*\nSi el salon contiene letras (ej: Fisica B) escribelo"
             " con guión. -> *!salon:F-B*"
         )
+        log.debug(response_msg)
         await interaction.response.send_message(response_msg)

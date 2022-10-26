@@ -14,7 +14,7 @@ from .building_list import buildings_list
 
 
 def get_building_information(salon: str) -> Union[Dict[str, str], None]:
-    salon_splited = re.split("-", salon)
+    salon_splited = re.split("-", salon)  # case 1, s-123, ch-123
 
     regex_result = re.findall("^\D+", salon_splited[0])
 
@@ -22,5 +22,6 @@ def get_building_information(salon: str) -> Union[Dict[str, str], None]:
         return False
 
     text_part_of_code: str = regex_result[0].lower()
+    building_info = buildings_list.get(text_part_of_code, None)
 
-    return buildings_list.get(text_part_of_code, None)
+    return building_info
